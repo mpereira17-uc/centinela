@@ -35,7 +35,7 @@ backend/
   tests/
 datos/guiones/         guiones de llamadas simuladas (legítimas y de riesgo)
 docs/                  requisitos, diagramas y guía de anotación
-frontend/              interfaz de la llamada simulada (WebRTC)
+frontend/              interfaz web (HTML, CSS y JavaScript sin dependencias)
 notebooks/             entrenamiento y análisis
 ```
 
@@ -52,7 +52,9 @@ cd backend
 uvicorn app.main:app --reload
 ```
 
-Abre http://127.0.0.1:8000/docs para probar la API desde el navegador.
+Abre http://127.0.0.1:8000/ para usar la interfaz, o http://127.0.0.1:8000/docs para probar la API directamente.
+
+![Centinela en el celular](docs/capturas/movil-estafa.png)
 
 Para las pruebas:
 

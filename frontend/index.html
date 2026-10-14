@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Centinela</title>
+  <meta name="description" content="Analiza una conversación y te avisa si tiene señales de estafa.">
+  <link rel="stylesheet" href="/estilos.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#principal">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="marca">
+      <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3Z"/></svg>
+      <span>Centinela</span>
+    </div>
+    <p class="aviso-beta">Versión de prueba para el trabajo de grado</p>
+  </header>
+
+  <main id="principal">
+    <section class="intro">
+      <h1>¿Esta conversación parece una estafa?</h1>
+      <p>Escribe lo que te dicen en la llamada, frase por frase. Centinela revisa lo que se pide y te dice qué tan riesgoso parece y qué hacer.</p>
+    </section>
+
+    <!-- Aviso principal: se anuncia una sola vez por conversación -->
+    <section id="alerta" class="alerta oculto" role="alert" aria-live="assertive" tabindex="-1">
+      <span class="alerta-icono" aria-hidden="true"></span>
+      <div>
+        <p class="alerta-titulo"></p>
+        <p class="alerta-texto"></p>
+      </div>
+      <button type="button" id="cerrar-alerta" class="boton-secundario">Entendido</button>
+    </section>
+
+    <section class="estado" aria-labelledby="estado-titulo">
+      <h2 id="estado-titulo" class="visualmente-oculto">Nivel de riesgo actual</h2>
+      <div id="nivel" class="nivel" data-nivel="bajo" aria-live="polite">
+        <span class="nivel-icono" aria-hidden="true"></span>
+        <span class="nivel-texto"><span class="nivel-etiqueta">Nivel de riesgo:</span> <strong id="nivel-valor">Sin analizar</strong></span>
+      </div>
+      <p id="nivel-mensaje" class="nivel-mensaje">Agrega la primera frase para empezar.</p>
+    </section>
+
+    <section class="tarjeta" aria-labelledby="form-titulo">
+      <h2 id="form-titulo">Agregar una frase</h2>
+      <form id="formulario" novalidate>
+        <fieldset class="hablante">
+          <legend>¿Quién lo dijo?</legend>
+          <label><input type="radio" name="hablante" value="llamante" checked> La persona que llama</label>
+          <label><input type="radio" name="hablante" value="usuario"> Yo</label>
+        </fieldset>
+
+        <label for="texto" class="etiqueta">Frase</label>
+        <textarea id="texto" name="texto" rows="3" maxlength="2000" required
+          aria-describedby="texto-ayuda texto-error"
+          placeholder="Por ejemplo: Le hablamos del banco, necesito el código que le llegó."></textarea>
+        <p id="texto-ayuda" class="ayuda">No escribas tus claves ni números de tarjeta reales.</p>
+        <p id="texto-error" class="error" role="status"></p>
+
+        <div class="acciones">
+          <button type="submit" id="analizar" class="boton-principal">Analizar frase</button>
+          <button type="button" id="nueva" class="boton-secundario">Nueva conversación</button>
+        </div>
+      </form>
+
+      <details class="ejemplos">
+        <summary>Probar con una conversación de ejemplo</summary>
+        <p>Los ejemplos son guiones inventados para ver cómo funciona Centinela.</p>
+        <div class="acciones">
+          <button type="button" class="boton-secundario" data-ejemplo="estafa">Ejemplo de estafa</button>
+          <button type="button" class="boton-secundario" data-ejemplo="legitima">Ejemplo de llamada legítima</button>
+        </div>
+      </details>
+    </section>
+
+    <section class="tarjeta" aria-labelledby="conv-titulo">
+      <h2 id="conv-titulo">Conversación</h2>
+      <p id="conv-vacia" class="ayuda">Todavía no hay frases.</p>
+      <ol id="conversacion" class="conversacion"></ol>
+    </section>
+
+    <section class="tarjeta" aria-labelledby="como-titulo">
+      <h2 id="como-titulo">¿Cómo decide Centinela?</h2>
+      <p>Centinela busca señales en <strong>lo que se pide</strong>, no en la voz, el acento ni quién habla. Con esas señales calcula un nivel:</p>
+      <ul class="niveles">
+        <li data-nivel="bajo"><span class="nivel-icono" aria-hidden="true"></span><span><strong>Bajo:</strong> no encontró señales.</span></li>
+        <li data-nivel="moderado"><span class="nivel-icono" aria-hidden="true"></span><span><strong>Moderado:</strong> hay algo que pide precaución, como decir que llaman de un banco.</span></li>
+        <li data-nivel="alto"><span class="nivel-icono" aria-hidden="true"></span><span><strong>Alto:</strong> te piden un código, datos de la tarjeta, dinero o instalar una aplicación.</span></li>
+        <li data-nivel="critico"><span class="nivel-icono" aria-hidden="true"></span><span><strong>Crítico:</strong> te piden algo de eso y además te presionan o amenazan.</span></li>
+      </ul>
+      <details>
+        <summary>Ver todas las señales que revisa</summary>
+        <ul id="catalogo" class="catalogo"></ul>
+      </details>
+      <p class="ayuda">Centinela puede equivocarse. Un nivel bajo no garantiza que la llamada sea segura. Si dudas, cuelga y llama tú a la entidad por su número oficial.</p>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>Centinela no escucha tus llamadas: solo analiza el texto que escribes aquí, y no lo guarda al cerrar el servidor.</p>
+  </footer>
+</body>
+</html>

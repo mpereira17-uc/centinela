@@ -1,0 +1,243 @@
+"use strict";
+
+// Todo el texto del usuario se inserta con textContent, nunca como HTML (modelo de amenazas, A5).
+
+const ETIQUETAS = { bajo: "Bajo", moderado: "Moderado", alto: "Alto", critico: "Crítico" };
+const HABLANTES = { llamante: "La persona que llama", usuario: "Yo" };
+
+const EJEMPLOS = {
+  estafa: [
+    ["llamante", "Buenas tardes, le hablamos del área de seguridad del banco."],
+    ["usuario", "Sí, ¿qué pasó?"],
+    ["llamante", "Detectamos un movimiento extraño y su cuenta va a quedar bloqueada."],
+    ["llamante", "Para evitarlo necesito que me dicte el código que le acaba de llegar por mensaje."],
+    ["llamante", "Es urgente y no cuelgue, por favor."],
+  ],
+  legitima: [
+    ["llamante", "Hola, te habla Laura de la tienda, tu pedido ya está listo."],
+    ["usuario", "Qué bien, ¿hasta qué hora puedo pasar?"],
+    ["llamante", "Hasta las siete. Recuerda que nunca te pediremos claves ni códigos por teléfono."],
+  ],
+};
+
+const $ = (sel) => document.querySelector(sel);
+const estado = { llamadaId: null, inicio: 0, ultimoFin: 0, ocupado: false };
+
+async function api(ruta, opciones = {}) {
+  let r;
+  try {
+    r = await fetch(ruta, { headers: { "Content-Type": "application/json" }, ...opciones });
+  } catch {
+    throw new Error("No pudimos conectar con Centinela. Revisa que el servidor esté encendido.");
+  }
+  if (!r.ok) {
+    const error = new Error(mensajeDeError(r.status));
+    error.status = r.status;
+    throw error;
+  }
+  return r.json();
+}
+
+function mensajeDeError(status) {
+  switch (status) {
+    case 404: return "La conversación ya no existe en el servidor. Empezamos una nueva.";
+    case 413: return "Esta conversación llegó al máximo de frases. Empieza una nueva.";
+    case 422: return "La frase está vacía o es demasiado larga (máximo 2000 caracteres).";
+    case 429: return "El servidor está ocupado. Intenta de nuevo en un momento.";
+    default: return "Algo salió mal al analizar la frase. Intenta de nuevo.";
+  }
+}
+
+async function nuevaConversacion() {
+  const llamada = await api("/llamadas", { method: "POST" });
+  estado.llamadaId = llamada.id;
+  estado.inicio = performance.now();
+  estado.ultimoFin = 0;
+  $("#conversacion").replaceChildren();
+  $("#conv-vacia").classList.remove("oculto");
+  $("#alerta").classList.add("oculto");
+  mostrarNivel(null);
+}
+
+async function enviarFrase(texto, hablante) {
+  // Marcas de tiempo relativas al inicio de la conversación, en segundos
+  const fin = Math.max(estado.ultimoFin, (performance.now() - estado.inicio) / 1000);
+  const cuerpo = JSON.stringify({ texto, hablante, inicio: estado.ultimoFin, fin });
+  if (!estado.llamadaId) await nuevaConversacion();
+  try {
+    const r = await api(`/llamadas/${estado.llamadaId}/fragmentos`, { method: "POST", body: cuerpo });
+    estado.ultimoFin = fin;
+    return r;
+  } catch (e) {
+    if (e.status !== 404) throw e;
+    // El servidor se reinició y perdió la conversación: se crea otra y se reintenta una vez
+    await nuevaConversacion();
+    mostrarError(e.message);
+    return api(`/llamadas/${estado.llamadaId}/fragmentos`, { method: "POST", body: cuerpo });
+  }
+}
+
+function mostrarNivel(decision) {
+  const caja = $("#nivel");
+  if (!decision) {
+    caja.classList.add("sin-datos");
+    caja.dataset.nivel = "bajo";
+    $("#nivel-valor").textContent = "Sin analizar";
+    $("#nivel-mensaje").textContent = "Agrega la primera frase para empezar.";
+    return;
+  }
+  caja.classList.remove("sin-datos");
+  caja.dataset.nivel = decision.nivel;
+  $("#nivel-valor").textContent = ETIQUETAS[decision.nivel];
+  $("#nivel-mensaje").textContent = decision.mensaje;
+}
+
+function mostrarAlerta(decision) {
+  const alerta = $("#alerta");
+  const [titulo, ...resto] = decision.mensaje.split(". ");
+  alerta.dataset.nivel = decision.nivel;
+  alerta.querySelector(".alerta-titulo").textContent = titulo;
+  alerta.querySelector(".alerta-texto").textContent = resto.join(". ");
+  alerta.classList.remove("oculto");
+  alerta.focus();
+}
+
+function agregarFrase(texto, hablante, respuesta) {
+  const visible = respuesta.decision_visible;
+  const li = document.createElement("li");
+  li.className = "frase";
+  li.dataset.nivel = visible.nivel;
+
+  const quien = document.createElement("p");
+  quien.className = "frase-quien";
+  quien.textContent = HABLANTES[hablante];
+
+  const p = document.createElement("p");
+  p.className = "frase-texto";
+  p.textContent = texto;
+
+  const nivel = document.createElement("span");
+  nivel.className = "frase-nivel";
+  const icono = document.createElement("span");
+  icono.className = "nivel-icono";
+  icono.setAttribute("aria-hidden", "true");
+  nivel.append(icono, `Nivel tras esta frase: ${ETIQUETAS[visible.nivel]}`);
+
+  li.append(quien, p, nivel);
+
+  if (visible.senales.length) {
+    const det = document.createElement("details");
+    const sum = document.createElement("summary");
+    sum.textContent = "¿Por qué?";
+    const ul = document.createElement("ul");
+    for (const s of visible.senales) {
+      const item = document.createElement("li");
+      item.textContent = s.descripcion;
+      ul.append(item);
+    }
+    const nota = document.createElement("p");
+    nota.className = "ayuda";
+    nota.textContent = "El nivel tiene en cuenta también las frases anteriores de la conversación.";
+    det.append(sum, ul, nota);
+    li.append(det);
+  }
+
+  $("#conversacion").append(li);
+  $("#conv-vacia").classList.add("oculto");
+}
+
+function mostrarError(texto) {
+  $("#texto-error").textContent = texto || "";
+}
+
+function ocupado(si) {
+  estado.ocupado = si;
+  for (const b of document.querySelectorAll("button")) b.disabled = si;
+  $("#analizar").textContent = si ? "Analizando…" : "Analizar frase";
+}
+
+async function procesar(texto, hablante) {
+  const r = await enviarFrase(texto, hablante);
+  agregarFrase(texto, hablante, r);
+  mostrarNivel(r.decision_visible);
+  if (r.mostrar_aviso) mostrarAlerta(r.decision_visible);
+}
+
+async function alEnviar(evento) {
+  evento.preventDefault();
+  if (estado.ocupado) return;
+  const campo = $("#texto");
+  const texto = campo.value.trim();
+  mostrarError("");
+  if (!texto) {
+    mostrarError("Escribe una frase antes de analizar.");
+    campo.focus();
+    return;
+  }
+  const hablante = document.querySelector('input[name="hablante"]:checked').value;
+  ocupado(true);
+  try {
+    await procesar(texto, hablante);
+    campo.value = "";
+  } catch (e) {
+    mostrarError(e.message);
+  } finally {
+    ocupado(false);
+    if ($("#alerta").classList.contains("oculto")) campo.focus();
+  }
+}
+
+async function correrEjemplo(nombre) {
+  if (estado.ocupado) return;
+  mostrarError("");
+  ocupado(true);
+  try {
+    await nuevaConversacion();
+    for (const [hablante, texto] of EJEMPLOS[nombre]) {
+      await procesar(texto, hablante);
+      await new Promise((ok) => setTimeout(ok, 500));
+    }
+  } catch (e) {
+    mostrarError(e.message);
+  } finally {
+    ocupado(false);
+  }
+}
+
+async function cargarCatalogo() {
+  try {
+    const senales = await api("/senales");
+    const lista = $("#catalogo");
+    for (const s of senales) {
+      const li = document.createElement("li");
+      li.textContent = s.descripcion;
+      lista.append(li);
+    }
+  } catch {
+    $("#catalogo").textContent = "No se pudo cargar la lista de señales.";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  mostrarNivel(null);
+  $("#formulario").addEventListener("submit", alEnviar);
+  $("#texto").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      $("#formulario").requestSubmit();
+    }
+  });
+  $("#nueva").addEventListener("click", async () => {
+    mostrarError("");
+    try { await nuevaConversacion(); } catch (e) { mostrarError(e.message); }
+    $("#texto").focus();
+  });
+  $("#cerrar-alerta").addEventListener("click", () => {
+    $("#alerta").classList.add("oculto");
+    $("#texto").focus();
+  });
+  for (const b of document.querySelectorAll("[data-ejemplo]")) {
+    b.addEventListener("click", () => correrEjemplo(b.dataset.ejemplo));
+  }
+  cargarCatalogo();
+});

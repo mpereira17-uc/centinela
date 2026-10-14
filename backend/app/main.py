@@ -1,6 +1,8 @@
 import logging
+from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.staticfiles import StaticFiles
 
 from .config import ajustes
 from .estrategias import Acumulacion, PorFragmento
@@ -21,6 +23,27 @@ estrategias = [
     PorFragmento(_nivel_alerta),
     Acumulacion(_nivel_alerta, ajustes.limite_contexto),
 ]
+
+FRONTEND = Path(__file__).resolve().parents[2] / "frontend"
+
+# Cabeceras de seguridad para la interfaz (modelo de amenazas, A5)
+CABECERAS_SEGURIDAD = {
+    "Content-Security-Policy": (
+        "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; "
+        "connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+    ),
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "no-referrer",
+    "Permissions-Policy": "camera=(), geolocation=(), microphone=()",
+}
+
+
+@app.middleware("http")
+async def cabeceras_de_seguridad(request: Request, call_next):
+    respuesta = await call_next(request)
+    respuesta.headers.update(CABECERAS_SEGURIDAD)
+    return respuesta
+
 
 # Registro en memoria; pasará a SQLite en el paso 7 de la hoja de ruta
 MAX_LLAMADAS = 1000
@@ -83,3 +106,7 @@ def _buscar(llamada_id: str) -> Llamada:
     if llamada_id not in llamadas:
         raise HTTPException(status_code=404, detail="Llamada no encontrada")
     return llamadas[llamada_id]
+
+
+# La interfaz se sirve al final para que las rutas de la API tengan prioridad
+app.mount("/", StaticFiles(directory=FRONTEND, html=True), name="interfaz")

@@ -1,13 +1,13 @@
 # Hoja de ruta
 
-Cada paso llega como un PR independiente hacia `main`, con criterios de aceptación, pruebas y documentación. El siguiente paso empieza solo cuando el anterior está fusionado. El alcance sale de [viabilidad.md](viabilidad.md).
+Cada paso llega como un commit directo a `main`, con criterios de aceptación, pruebas y documentación, y solo se sube si todas las pruebas pasan. Los pasos 1 y 2 llegaron como PR; desde el paso 3 se suben directo, a pedido de pepe. El alcance sale de [viabilidad.md](viabilidad.md).
 
 | Paso | Qué entrega | Criterios de aceptación | Estado |
 |---|---|---|---|
 | 0 | Esqueleto: backend FastAPI y dos estrategias de alerta | El backend arranca y pasan las pruebas | Hecho |
 | 1 | Viabilidad técnica, modelo de amenazas y esta hoja de ruta | Cada función de la especificación tiene decisión; cada amenaza tiene mitigación y paso | Hecho |
-| 2 | Motor de señales v1 | Catálogo de señales de la sección 2.1 con explicación; niveles bajo, moderado, alto y crítico con reglas verificables y sin porcentajes; mensaje de alerta accionable por nivel; límites de tamaño de entrada; logs sin texto de la conversación | En revisión |
-| 3 | Interfaz web accesible | Pantalla para analizar una conversación por fragmentos; alerta con ícono, texto y color; lectura correcta con lector de pantalla; texto insertado sin HTML | Pendiente |
+| 2 | Motor de señales v1 | Catálogo de señales de la sección 2.1 con explicación; niveles bajo, moderado, alto y crítico con reglas verificables y sin porcentajes; mensaje de alerta accionable por nivel; límites de tamaño de entrada; logs sin texto de la conversación | Hecho |
+| 3 | Interfaz web accesible | Pantalla para analizar una conversación por fragmentos; alerta con ícono, texto y color; lectura correcta con lector de pantalla; texto insertado sin HTML | Hecho |
 | 4 | Transcripción de audio | Subir o grabar audio con consentimiento visible; transcripción local con faster-whisper; el audio no se guarda | Pendiente |
 | 5 | Asistente por voz | Comandos cerrados ("¿parece estafa?", "explícame la alerta"); respuesta hablada con Piper y en pantalla; la voz nunca ejecuta acciones sensibles | Pendiente |
 | 6 | Registro seguro | Passkeys con PIN alternativo (Argon2); límite de intentos; sesiones revocables; consentimientos separados | Pendiente |
