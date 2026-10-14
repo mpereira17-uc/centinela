@@ -5,7 +5,7 @@ from fastapi import FastAPI, File, Form, HTTPException, Request, Response, Uploa
 from fastapi.concurrency import run_in_threadpool
 from fastapi.staticfiles import StaticFiles
 
-from . import asistente, voz
+from . import asistente, cuentas, voz
 from .config import ajustes
 from .estrategias import Acumulacion, PorFragmento
 from .modelos import MAX_FRAGMENTOS_POR_LLAMADA, ConsultaAsistente, Fragmento, FragmentoEntrada, Llamada, TextoParaVoz
@@ -18,7 +18,7 @@ log = logging.getLogger("centinela")
 app = FastAPI(
     title="Centinela",
     description="Prototipo de alertas de posible fraude conversacional en llamadas simuladas.",
-    version="0.5.0",
+    version="0.6.0",
 )
 
 _nivel_alerta = Nivel[ajustes.nivel_alerta.upper()]
@@ -213,6 +213,9 @@ def _buscar(llamada_id: str) -> Llamada:
     if llamada_id not in llamadas:
         raise HTTPException(status_code=404, detail="Llamada no encontrada")
     return llamadas[llamada_id]
+
+
+app.include_router(cuentas.router)
 
 
 # La interfaz se sirve al final para que las rutas de la API tengan prioridad

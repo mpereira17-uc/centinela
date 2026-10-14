@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi cuenta · Centinela</title>
+  <meta name="description" content="Entra a Centinela, administra tus passkeys, tus dispositivos y tus permisos.">
+  <link rel="stylesheet" href="/estilos.css">
+  <script src="/cuenta.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#principal">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <a class="marca" href="/">
+      <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3Z"/></svg>
+      <span>Centinela</span>
+    </a>
+    <a class="enlace-cabecera" href="/">Volver al análisis</a>
+  </header>
+
+  <main id="principal">
+    <p id="mensaje" class="mensaje oculto" role="status" aria-live="polite" tabindex="-1"></p>
+
+    <!-- Sin sesión -->
+    <div id="vista-entrar" class="oculto">
+      <section class="intro">
+        <h1>Mi cuenta</h1>
+        <p>Con una cuenta, Centinela recuerda tus permisos y te deja ver y cerrar las sesiones abiertas en otros dispositivos. Analizar una conversación no requiere cuenta.</p>
+      </section>
+
+      <section class="tarjeta" aria-labelledby="entrar-titulo">
+        <h2 id="entrar-titulo">Entrar</h2>
+        <button type="button" id="entrar-passkey" class="boton-principal">Entrar con passkey</button>
+        <p class="ayuda">Una passkey usa la huella, el rostro o el bloqueo de pantalla de tu dispositivo. Es la forma más segura de entrar.</p>
+        <form id="form-entrar" class="formulario" novalidate>
+          <p class="separador">o con tu alias y PIN</p>
+          <label for="entrar-alias" class="etiqueta">Alias</label>
+          <input id="entrar-alias" autocomplete="username" maxlength="30" required>
+          <label for="entrar-pin" class="etiqueta">PIN</label>
+          <input id="entrar-pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="12" required>
+          <p id="entrar-error" class="error" role="status"></p>
+          <div class="acciones"><button type="submit" class="boton-secundario">Entrar con PIN</button></div>
+        </form>
+      </section>
+
+      <section class="tarjeta" aria-labelledby="crear-titulo">
+        <h2 id="crear-titulo">Crear una cuenta</h2>
+        <p>No pedimos tu nombre, correo ni teléfono. Solo un alias y un PIN.</p>
+        <form id="form-crear" class="formulario" novalidate>
+          <label for="crear-alias" class="etiqueta">Alias</label>
+          <input id="crear-alias" autocomplete="username" maxlength="30" required aria-describedby="crear-alias-ayuda">
+          <p id="crear-alias-ayuda" class="ayuda">De 3 a 30 letras, números, puntos o guiones. No uses tu nombre completo.</p>
+          <label for="crear-pin" class="etiqueta">PIN</label>
+          <input id="crear-pin" type="password" inputmode="numeric" autocomplete="new-password" maxlength="12" required aria-describedby="crear-pin-ayuda">
+          <p id="crear-pin-ayuda" class="ayuda">De 6 a 12 números. Evita repetidos (111111) y secuencias (123456). No uses el PIN de tu banco.</p>
+          <label for="crear-pin2" class="etiqueta">Repite el PIN</label>
+          <input id="crear-pin2" type="password" inputmode="numeric" autocomplete="new-password" maxlength="12" required>
+          <p id="crear-error" class="error" role="status"></p>
+          <div class="acciones"><button type="submit" class="boton-principal">Crear cuenta</button></div>
+        </form>
+      </section>
+    </div>
+
+    <!-- Con sesión -->
+    <div id="vista-cuenta" class="oculto">
+      <section class="intro">
+        <h1>Hola, <span id="alias"></span></h1>
+        <div class="acciones"><button type="button" id="salir" class="boton-secundario">Salir</button></div>
+      </section>
+
+      <section class="tarjeta" aria-labelledby="passkeys-titulo">
+        <h2 id="passkeys-titulo">Passkeys</h2>
+        <p>Entra sin escribir el PIN, con la huella, el rostro o el bloqueo de pantalla de este dispositivo.</p>
+        <ul id="passkeys" class="lista"></ul>
+        <p id="passkeys-vacia" class="ayuda">Todavía no tienes passkeys.</p>
+        <form id="form-passkey" class="formulario" novalidate>
+          <label for="passkey-nombre" class="etiqueta">Nombre para reconocerla</label>
+          <div class="fila">
+            <input id="passkey-nombre" maxlength="40" value="Este dispositivo">
+            <button type="submit" class="boton-principal">Agregar passkey</button>
+          </div>
+        </form>
+        <p id="passkey-no-soportada" class="ayuda oculto">Este navegador no admite passkeys. Puedes seguir entrando con tu PIN.</p>
+      </section>
+
+      <section class="tarjeta" aria-labelledby="sesiones-titulo">
+        <h2 id="sesiones-titulo">Dispositivos y sesiones</h2>
+        <p>Si no reconoces un dispositivo, cierra su sesión y cambia tu PIN.</p>
+        <ul id="sesiones" class="lista"></ul>
+        <div class="acciones"><button type="button" id="cerrar-otras" class="boton-secundario">Cerrar las demás sesiones</button></div>
+      </section>
+
+      <section class="tarjeta" aria-labelledby="permisos-titulo">
+        <h2 id="permisos-titulo">Permisos</h2>
+        <p>Cada permiso es independiente y puedes quitarlo cuando quieras. Todos empiezan apagados.</p>
+        <ul id="permisos" class="lista permisos"></ul>
+        <p class="ayuda">Por ahora estos permisos solo quedan registrados en tu cuenta. Centinela todavía no guarda tus conversaciones.</p>
+      </section>
+
+      <section class="tarjeta peligro" aria-labelledby="eliminar-titulo">
+        <h2 id="eliminar-titulo">Eliminar mi cuenta</h2>
+        <details>
+          <summary>Quiero eliminar mi cuenta</summary>
+          <p>Se borran tu alias, tu PIN, tus passkeys, tus sesiones y tus permisos. No se puede deshacer.</p>
+          <form id="form-eliminar" class="formulario" novalidate>
+            <label for="eliminar-pin" class="etiqueta">Escribe tu PIN para confirmar</label>
+            <div class="fila">
+              <input id="eliminar-pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="12">
+              <button type="submit" class="boton-peligro">Eliminar para siempre</button>
+            </div>
+            <p id="eliminar-error" class="error" role="status"></p>
+          </form>
+        </details>
+      </section>
+    </div>
+
+    <p id="cargando" class="ayuda">Cargando…</p>
+  </main>
+
+  <footer class="pie">
+    <p>Tu PIN se guarda cifrado con Argon2 y nunca se muestra. Centinela no usa tu voz para identificarte.</p>
+  </footer>
+</body>
+</html>

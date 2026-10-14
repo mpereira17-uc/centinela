@@ -192,3 +192,29 @@ summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; al
 .respuesta { margin-top: 1rem; padding: 1rem; border-radius: 8px; background: var(--fondo); border-left: 6px solid var(--primario); }
 .respuesta p:last-child { margin-bottom: 0; }
 #respuesta-texto { font-size: 1.15rem; font-weight: 600; }
+
+/* Cuenta */
+a.marca { color: var(--texto); text-decoration: none; }
+.enlace-cabecera { color: var(--primario); font-weight: 600; min-height: 44px; display: inline-flex; align-items: center; }
+.cabecera .enlace-cabecera { margin-left: auto; }
+.mensaje { margin-top: 1rem; padding: .75rem 1rem; border-radius: 8px; border-left: 6px solid var(--bajo); background: var(--bajo-fondo); }
+.mensaje[data-tipo="error"] { border-left-color: var(--critico); background: var(--critico-fondo); }
+.formulario input:not([type="checkbox"]) { width: 100%; min-height: 44px; font: inherit; color: var(--texto); background: var(--fondo);
+  border: 2px solid var(--borde); border-radius: 8px; padding: .5rem .75rem; }
+.formulario .fila input { width: auto; }
+.formulario input:focus { border-color: var(--primario); }
+.formulario .etiqueta { margin-top: .75rem; }
+.separador { margin: 1.25rem 0 0; color: var(--texto-suave); font-size: .95rem; }
+.lista { list-style: none; padding: 0; margin: 0 0 .5rem; display: grid; gap: .5rem; }
+.lista > li { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; justify-content: space-between;
+  padding: .6rem .8rem; border: 1px solid var(--borde); border-radius: 8px; background: var(--fondo); }
+.lista > li > div { flex: 1 1 12rem; overflow-wrap: anywhere; }
+.lista details { margin: 0; }
+.lista details form { margin-top: .5rem; }
+.lista .fila input { min-height: 44px; font: inherit; color: var(--texto); background: var(--superficie);
+  border: 2px solid var(--borde); border-radius: 8px; padding: .4rem .6rem; width: 9rem; }
+.permisos > li { display: block; }
+.permisos .consentimiento { margin: 0; }
+.permisos input:disabled + span { color: var(--texto-suave); }
+.boton-peligro { background: var(--critico); color: var(--superficie); border: 2px solid var(--critico); font-weight: 700; }
+.peligro { border-color: var(--critico); }

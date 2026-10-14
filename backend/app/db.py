@@ -1,0 +1,73 @@
+"""Base de datos SQLite local. Todas las consultas usan parámetros (modelo de amenazas, A4)."""
+import sqlite3
+import threading
+from contextlib import contextmanager
+
+from .config import ajustes
+
+ESQUEMA = """
+PRAGMA foreign_keys = ON;
+CREATE TABLE IF NOT EXISTS usuarios (
+    id TEXT PRIMARY KEY,
+    alias TEXT NOT NULL UNIQUE COLLATE NOCASE,
+    pin_hash TEXT NOT NULL,
+    intentos_fallidos INTEGER NOT NULL DEFAULT 0,
+    bloqueado_hasta REAL NOT NULL DEFAULT 0,
+    creado REAL NOT NULL
+);
+CREATE TABLE IF NOT EXISTS sesiones (
+    id TEXT PRIMARY KEY,
+    usuario_id TEXT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+    token_hash TEXT NOT NULL UNIQUE,
+    dispositivo TEXT NOT NULL,
+    creada REAL NOT NULL,
+    expira REAL NOT NULL,
+    ultimo_uso REAL NOT NULL
+);
+CREATE TABLE IF NOT EXISTS credenciales (
+    id TEXT PRIMARY KEY,
+    usuario_id TEXT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+    clave_publica BLOB NOT NULL,
+    contador INTEGER NOT NULL,
+    nombre TEXT NOT NULL,
+    creada REAL NOT NULL
+);
+CREATE TABLE IF NOT EXISTS consentimientos (
+    usuario_id TEXT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+    finalidad TEXT NOT NULL,
+    otorgado INTEGER NOT NULL,
+    actualizado REAL NOT NULL,
+    PRIMARY KEY (usuario_id, finalidad)
+);
+CREATE TABLE IF NOT EXISTS retos (
+    id TEXT PRIMARY KEY,
+    usuario_id TEXT REFERENCES usuarios(id) ON DELETE CASCADE,
+    tipo TEXT NOT NULL,
+    reto BLOB NOT NULL,
+    expira REAL NOT NULL
+);
+"""
+
+_lock = threading.Lock()
+_inicializada: set[str] = set()
+
+
+@contextmanager
+def conexion():
+    """Abre una conexión con claves foráneas activas y confirma al salir sin errores."""
+    ruta = ajustes.base_datos
+    con = sqlite3.connect(ruta)
+    con.row_factory = sqlite3.Row
+    try:
+        con.execute("PRAGMA foreign_keys = ON")
+        if ruta not in _inicializada:
+            with _lock:
+                con.executescript(ESQUEMA)
+                _inicializada.add(ruta)
+        yield con
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    finally:
+        con.close()

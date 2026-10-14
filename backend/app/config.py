@@ -20,5 +20,14 @@ class Ajustes(BaseSettings):
     # Ruta al archivo .onnx de una voz de Piper en español; vacío usa la voz del navegador
     voz_piper: str = ""
 
+    # Base de datos local con cuentas, sesiones y consentimientos
+    base_datos: str = "centinela.db"
+    # Passkeys: el dominio y el origen exactos desde donde se abre la interfaz
+    rp_id: str = "localhost"
+    origen: str = "http://localhost:8000"
+    # Activar cuando la interfaz se sirva por HTTPS
+    cookie_segura: bool = False
+    duracion_sesion_horas: int = Field(default=12, ge=1, le=168)
+
 
 ajustes = Ajustes()

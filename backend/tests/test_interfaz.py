@@ -41,3 +41,16 @@ def test_el_texto_del_usuario_nunca_se_inserta_como_html():
 def test_la_api_sigue_respondiendo_con_la_interfaz_montada():
     assert cliente.get("/salud").json()["estado"] == "ok"
     assert cliente.get("/senales").status_code == 200
+
+
+def test_pantalla_de_cuenta_sin_html_dinamico():
+    html = cliente.get("/cuenta.html").text
+    assert "<script>" not in html and "onclick=" not in html and "style=" not in html
+    js = cliente.get("/cuenta.js").text
+    assert "innerHTML" not in js and "insertAdjacentHTML" not in js and "document.write" not in js
+    # Sin ventanas emergentes: las confirmaciones se hacen con el PIN en pantalla
+    assert "confirm(" not in js and "alert(" not in js
+
+
+def test_la_pagina_principal_enlaza_a_la_cuenta():
+    assert 'href="/cuenta.html"' in cliente.get("/").text

@@ -20,7 +20,7 @@ Las respuestas solo prometen lo que Centinela hace de verdad.
 
 ## La voz nunca ejecuta acciones sensibles
 
-Si la frase pide desactivar, borrar, cambiar una clave o PIN, compartir, transferir o pagar, el asistente responde que eso no se hace por voz y marca `requiere_confirmacion`. Esas acciones se confirmarán en pantalla con PIN o passkey cuando exista el registro (paso 6). Esta regla se revisa antes que cualquier otro comando, para que una orden peligrosa nunca se confunda con una consulta.
+Si la frase pide desactivar, borrar, cambiar una clave o PIN, compartir, transferir o pagar, el asistente responde que eso no se hace por voz y marca `requiere_confirmacion`. Esas acciones se hacen en pantalla: quitar una passkey o eliminar la cuenta pide el PIN ([registro.md](registro.md)). Esta regla se revisa antes que cualquier otro comando, para que una orden peligrosa nunca se confunda con una consulta.
 
 ## Cómo funciona la voz
 

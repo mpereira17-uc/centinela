@@ -27,6 +27,8 @@ Ambas decisiones quedan registradas. La interfaz muestra solo el aviso de la est
 backend/
   app/
     main.py            API: llamadas, fragmentos y decisiones
+    cuentas.py         registro con passkey o PIN, sesiones y permisos
+    db.py              base de datos SQLite local
     config.py          nivel de alerta, límite de contexto, estrategia visible
     senales.py         catálogo de señales y niveles de riesgo
     modelos.py         llamada, fragmento y decisión
@@ -52,7 +54,7 @@ cd backend
 uvicorn app.main:app --reload
 ```
 
-Abre http://127.0.0.1:8000/ para usar la interfaz, o http://127.0.0.1:8000/docs para probar la API directamente.
+Abre http://localhost:8000/ para usar la interfaz, o http://localhost:8000/docs para probar la API directamente. Usa `localhost` y no `127.0.0.1`: las passkeys solo funcionan en el dominio configurado ([docs/registro.md](docs/registro.md)).
 
 ![Centinela en el celular](docs/capturas/movil-estafa.png)
 
@@ -80,6 +82,11 @@ Se cambia con variables de entorno o un archivo `.env` en `backend/`:
 | `CENTINELA_ESTRATEGIA_VISIBLE` | `acumulacion` | Estrategia cuyo aviso se muestra |
 | `CENTINELA_MODELO_WHISPER` | `base` | Tamaño del modelo de transcripción |
 | `CENTINELA_VOZ_PIPER` | vacío | Ruta a una voz `.onnx` de Piper; vacío usa la voz del navegador |
+| `CENTINELA_BASE_DATOS` | `centinela.db` | Archivo SQLite con cuentas, sesiones y permisos |
+| `CENTINELA_RP_ID` | `localhost` | Dominio para las passkeys |
+| `CENTINELA_ORIGEN` | `http://localhost:8000` | Dirección exacta desde donde se abre la interfaz |
+| `CENTINELA_COOKIE_SEGURA` | `false` | Ponlo en `true` cuando sirvas la interfaz por HTTPS |
+| `CENTINELA_DURACION_SESION_HORAS` | `12` | Horas que dura una sesión (de 1 a 168) |
 
 ## Documentación
 

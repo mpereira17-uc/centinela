@@ -10,7 +10,7 @@ Cada paso llega como un commit directo a `main`, con criterios de aceptación, p
 | 3 | Interfaz web accesible | Pantalla para analizar una conversación por fragmentos; alerta con ícono, texto y color; lectura correcta con lector de pantalla; texto insertado sin HTML | Hecho |
 | 4 | Transcripción de audio | Subir o grabar audio con consentimiento visible; transcripción local con faster-whisper; el audio no se guarda | Hecho |
 | 5 | Asistente por voz | Comandos cerrados ("¿parece estafa?", "explícame la alerta"); respuesta hablada con Piper y en pantalla; la voz nunca ejecuta acciones sensibles | Hecho |
-| 6 | Registro seguro | Passkeys con PIN alternativo (Argon2); límite de intentos; sesiones revocables; consentimientos separados | Pendiente |
+| 6 | Registro seguro | Passkeys con PIN alternativo (Argon2); límite de intentos; sesiones revocables; consentimientos separados | Hecho |
 | 7 | Historial y datos personales | Historial de alertas en SQLite; retención limitada; exportar y borrar todos los datos | Pendiente |
 | 8 | Reporte de números | Reportes seudónimos con límite por cuenta; la reputación pesa como una señal más | Pendiente |
 | 9 | Llamada simulada por WebRTC | Dos navegadores en llamada con análisis en vivo y un solo aviso visible | Pendiente |
