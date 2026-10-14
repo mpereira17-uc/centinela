@@ -3,7 +3,7 @@
 // Todo el texto del usuario se inserta con textContent, nunca como HTML (modelo de amenazas, A5).
 
 const ETIQUETAS = { bajo: "Bajo", moderado: "Moderado", alto: "Alto", critico: "Crítico" };
-const HABLANTES = { llamante: "La persona que llama", usuario: "Yo" };
+const HABLANTES = { llamante: "La persona que llama", usuario: "Yo", audio: "Del audio" };
 
 const EJEMPLOS = {
   estafa: [
@@ -204,6 +204,104 @@ async function correrEjemplo(nombre) {
   }
 }
 
+// ---- Audio: grabación con el micrófono o archivo, transcrito en el servidor local ----
+
+const MAX_AUDIO = 10 * 1024 * 1024;
+const grabacion = { recorder: null, partes: [], reloj: null, inicio: 0 };
+
+function estadoAudio(texto, grabando = false) {
+  const p = $("#audio-estado");
+  p.textContent = texto;
+  p.classList.toggle("grabando", grabando);
+}
+
+function hayConsentimiento() {
+  if ($("#consentimiento").checked) return true;
+  estadoAudio("Marca la casilla de consentimiento antes de grabar o subir un audio.");
+  $("#consentimiento").focus();
+  return false;
+}
+
+async function enviarAudio(blob, nombre) {
+  if (blob.size > MAX_AUDIO) {
+    estadoAudio("El audio supera los 10 MB. Prueba con uno más corto.");
+    return;
+  }
+  ocupado(true);
+  estadoAudio("Transcribiendo en este equipo… puede tardar un poco.");
+  try {
+    if (!estado.llamadaId) await nuevaConversacion();
+    const datos = new FormData();
+    datos.append("audio", blob, nombre);
+    datos.append("consentimiento", "true");
+    let r;
+    try {
+      r = await fetch(`/llamadas/${estado.llamadaId}/audio`, { method: "POST", body: datos });
+    } catch {
+      throw new Error("No pudimos conectar con Centinela. Revisa que el servidor esté encendido.");
+    }
+    if (!r.ok) {
+      const cuerpo = await r.json().catch(() => ({}));
+      const detalle = typeof cuerpo.detail === "string" ? cuerpo.detail : mensajeDeError(r.status);
+      throw new Error(detalle);
+    }
+    const res = await r.json();
+    if (!res.resultados.length) {
+      estadoAudio("No encontramos voz en el audio.");
+      return;
+    }
+    for (const item of res.resultados) {
+      agregarFrase(item.fragmento.texto, "audio", item);
+      mostrarNivel(item.decision_visible);
+      if (item.mostrar_aviso) mostrarAlerta(item.decision_visible);
+    }
+    estado.ultimoFin = res.resultados.at(-1).fragmento.fin;
+    estadoAudio(`Listo: se analizaron ${res.resultados.length} fragmentos del audio. El audio ya se descartó.`);
+  } catch (e) {
+    estadoAudio(e.message);
+  } finally {
+    ocupado(false);
+  }
+}
+
+async function empezarGrabacion() {
+  if (!hayConsentimiento()) return;
+  if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
+    estadoAudio("Este navegador no permite grabar. Sube un archivo de audio en su lugar.");
+    return;
+  }
+  let flujo;
+  try {
+    flujo = await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch {
+    estadoAudio("No se pudo usar el micrófono. Revisa el permiso del navegador o sube un archivo.");
+    return;
+  }
+  grabacion.partes = [];
+  grabacion.recorder = new MediaRecorder(flujo);
+  grabacion.recorder.addEventListener("dataavailable", (e) => e.data.size && grabacion.partes.push(e.data));
+  grabacion.recorder.addEventListener("stop", () => {
+    flujo.getTracks().forEach((t) => t.stop());
+    clearInterval(grabacion.reloj);
+    $("#detener").classList.add("oculto");
+    $("#grabar").classList.remove("oculto");
+    const blob = new Blob(grabacion.partes, { type: grabacion.recorder.mimeType || "audio/webm" });
+    grabacion.partes = [];
+    enviarAudio(blob, "grabacion.webm");
+  });
+  grabacion.recorder.start();
+  grabacion.inicio = Date.now();
+  $("#grabar").classList.add("oculto");
+  $("#detener").classList.remove("oculto");
+  $("#detener").focus();
+  const tic = () => {
+    const s = Math.floor((Date.now() - grabacion.inicio) / 1000);
+    estadoAudio(`Grabando ${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`, true);
+  };
+  tic();
+  grabacion.reloj = setInterval(tic, 1000);
+}
+
 async function cargarCatalogo() {
   try {
     const senales = await api("/senales");
@@ -239,5 +337,12 @@ document.addEventListener("DOMContentLoaded", () => {
   for (const b of document.querySelectorAll("[data-ejemplo]")) {
     b.addEventListener("click", () => correrEjemplo(b.dataset.ejemplo));
   }
+  $("#grabar").addEventListener("click", empezarGrabacion);
+  $("#detener").addEventListener("click", () => grabacion.recorder?.stop());
+  $("#archivo").addEventListener("change", (e) => {
+    const archivo = e.target.files[0];
+    e.target.value = "";
+    if (archivo && !estado.ocupado && hayConsentimiento()) enviarAudio(archivo, archivo.name);
+  });
   cargarCatalogo();
 });

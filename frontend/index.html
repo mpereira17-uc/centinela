@@ -76,6 +76,23 @@
       </details>
     </section>
 
+    <section class="tarjeta" aria-labelledby="audio-titulo">
+      <h2 id="audio-titulo">Analizar un audio</h2>
+      <p>Graba una conversación o sube un archivo. Centinela lo convierte en texto <strong>en este equipo</strong> y lo descarta apenas termina; el audio no se guarda.</p>
+      <label class="consentimiento">
+        <input type="checkbox" id="consentimiento">
+        <span>Todas las personas que se escuchan en el audio saben que se está analizando y están de acuerdo.</span>
+      </label>
+      <div class="acciones">
+        <button type="button" id="grabar" class="boton-secundario">Grabar con el micrófono</button>
+        <button type="button" id="detener" class="boton-principal oculto">Detener y analizar</button>
+        <input type="file" id="archivo" accept="audio/*,video/webm" class="visualmente-oculto">
+        <label class="boton-secundario boton-archivo" for="archivo">Subir un archivo de audio</label>
+      </div>
+      <p id="audio-estado" class="ayuda" role="status" aria-live="polite"></p>
+      <p class="ayuda">Formatos: WAV, MP3, M4A, OGG o WebM, hasta 10 MB. La primera transcripción tarda más porque carga el modelo.</p>
+    </section>
+
     <section class="tarjeta" aria-labelledby="conv-titulo">
       <h2 id="conv-titulo">Conversación</h2>
       <p id="conv-vacia" class="ayuda">Todavía no hay frases.</p>
@@ -100,7 +117,7 @@
   </main>
 
   <footer class="pie">
-    <p>Centinela no escucha tus llamadas: solo analiza el texto que escribes aquí, y no lo guarda al cerrar el servidor.</p>
+    <p>Centinela no escucha tus llamadas: solo analiza el texto que escribes o el audio que tú le das, y no guarda nada al cerrar el servidor.</p>
   </footer>
 </body>
 </html>

@@ -174,3 +174,9 @@ summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; al
   .alerta:not(.oculto) { animation: entrar .25s ease-out; }
   @keyframes entrar { from { transform: translateY(-6px); opacity: 0; } to { transform: none; opacity: 1; } }
 }
+
+.consentimiento { display: flex; gap: .6rem; align-items: flex-start; margin: .5rem 0; }
+.consentimiento input { width: 1.25rem; height: 1.25rem; margin-top: .3rem; flex: none; }
+.boton-archivo { display: inline-flex; align-items: center; cursor: pointer; min-height: 44px; border-radius: 8px; padding: .55rem 1.1rem; }
+#archivo:focus-visible + .boton-archivo { outline: 3px solid var(--foco); outline-offset: 2px; }
+.grabando::before { content: "●"; color: var(--critico); margin-right: .4rem; }

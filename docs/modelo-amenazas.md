@@ -41,10 +41,10 @@ Las fronteras de confianza son el navegador frente a la API (todo lo que llega d
 | A3 | Repetición de solicitudes sensibles | Manipulación | API | Retos de un solo uso en WebAuthn; tokens CSRF en formularios | Paso 6 |
 | A4 | Inyección SQL | Manipulación | Base de datos | Solo consultas parametrizadas mediante el ORM | Paso 7 |
 | A5 | XSS al mostrar una transcripción en la interfaz | Manipulación | Navegador | Insertar el texto con `textContent`, nunca como HTML; política CSP estricta | Hecho (paso 3) |
-| A6 | Entradas enormes o malformadas que tumban el servicio | Denegación de servicio | API | Validación con Pydantic, límites de tamaño de texto y audio, límite de solicitudes por cliente | Hecho para texto (paso 2); audio en el paso 4 |
+| A6 | Entradas enormes o malformadas que tumban el servicio | Denegación de servicio | API | Validación con Pydantic, límites de tamaño de texto y audio, límite de solicitudes por cliente | Límites de tamaño hechos (pasos 2 y 4); límite por cliente en el paso 6 |
 | A7 | Acceso a llamadas o alertas de otro usuario | Elevación de privilegios | API | Autorización en el servidor en cada consulta, por dueño del recurso | Paso 6 |
 | A8 | Fuga de transcripciones o códigos en los logs | Divulgación | API | No registrar texto de conversaciones, PIN, tokens ni audio; registrar solo identificadores y decisiones | Hecho (paso 2) |
-| A9 | Audio guardado sin que el usuario lo sepa | Divulgación | Transcripción | El audio se procesa en memoria y se descarta; guardarlo exige consentimiento explícito | Paso 4 |
+| A9 | Audio guardado sin que el usuario lo sepa | Divulgación | Transcripción | El audio se procesa en memoria y se descarta; guardarlo exige consentimiento explícito | Hecho (paso 4) |
 | A10 | Datos que quedan después de que el usuario pide borrarlos | Divulgación | Base de datos | Borrado real en cascada; retención limitada del historial | Paso 7 |
 | A11 | Estafador que reformula su guion para evadir las reglas | Manipulación | Motor | Acumular indicios a lo largo de la llamada; clasificador entrenado con variaciones; evaluar con guiones nuevos | Acumulación hecha (paso 2); clasificador en el paso 11 |
 | A12 | Inyección de instrucciones en el texto analizado ("ignora lo anterior...") | Manipulación | Motor | El motor no usa un modelo de lenguaje que siga instrucciones; el texto solo se clasifica | Por diseño |

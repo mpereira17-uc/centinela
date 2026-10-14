@@ -24,6 +24,7 @@ def test_cabeceras_de_seguridad():
     assert "script-src 'self'" in csp
     assert "frame-ancestors 'none'" in csp
     assert r.headers["x-content-type-options"] == "nosniff"
+    assert "microphone=(self)" in r.headers["permissions-policy"]
 
 
 def test_la_interfaz_no_usa_scripts_ni_estilos_en_linea():

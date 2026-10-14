@@ -63,7 +63,7 @@ cd backend
 pytest
 ```
 
-Las dependencias de voz y clasificación pesan más y se instalan aparte, cuando se necesiten:
+Las dependencias de voz y clasificación pesan más y se instalan aparte. Hacen falta para analizar audio ([docs/transcripcion.md](docs/transcripcion.md)):
 
 ```bash
 pip install -r requirements-ml.txt
