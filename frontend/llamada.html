@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Llamada de prueba · Centinela</title>
+  <meta name="description" content="Llamada simulada entre dos navegadores con análisis de Centinela en vivo.">
+  <link rel="stylesheet" href="/estilos.css">
+  <script src="/llamada.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#principal">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <a class="marca" href="/">
+      <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3Z"/></svg>
+      <span>Centinela</span>
+    </a>
+    <a class="enlace-cabecera" href="/">Volver al análisis</a>
+  </header>
+
+  <main id="principal">
+    <section class="intro">
+      <h1>Llamada de prueba</h1>
+      <p>Dos personas se llaman desde dos navegadores. Una hace el papel de quien llama y la otra recibe la llamada; Centinela analiza en vivo lo que dice quien llama y avisa a quien recibe.</p>
+      <p class="ayuda">No es una llamada telefónica real. La voz viaja directo entre los dos navegadores y no se guarda.</p>
+    </section>
+
+    <!-- Paso 1: preparar -->
+    <section id="preparar" class="tarjeta" aria-labelledby="preparar-titulo">
+      <h2 id="preparar-titulo">Empezar</h2>
+      <fieldset class="hablante">
+        <legend>¿Qué papel haces?</legend>
+        <label><input type="radio" name="rol" value="recibe" checked> Recibo la llamada (Centinela me protege)</label>
+        <label><input type="radio" name="rol" value="llama"> Hago la llamada (actúo el guion)</label>
+      </fieldset>
+      <label class="consentimiento">
+        <input type="checkbox" id="consentimiento">
+        <span>Las dos personas saben que esta llamada de prueba se analiza y están de acuerdo. No usaremos datos reales.</span>
+      </label>
+      <div class="acciones">
+        <button type="button" id="crear" class="boton-principal">Crear llamada</button>
+      </div>
+      <form id="form-unirse" class="formulario" novalidate>
+        <p class="separador">o únete a una que ya existe</p>
+        <label for="codigo" class="etiqueta">Código de la llamada</label>
+        <div class="fila">
+          <input id="codigo" maxlength="12" autocomplete="off" autocapitalize="characters" placeholder="Ej. K7P2QX">
+          <button type="submit" class="boton-secundario">Unirme</button>
+        </div>
+      </form>
+      <p id="preparar-error" class="error" role="status"></p>
+    </section>
+
+    <!-- Paso 2: en llamada -->
+    <section id="en-llamada" class="oculto" aria-labelledby="llamada-titulo">
+      <div class="tarjeta">
+        <h2 id="llamada-titulo">Llamada <span id="codigo-sala"></span></h2>
+        <p id="estado-llamada" role="status" aria-live="polite">Conectando…</p>
+        <p id="compartir" class="ayuda"></p>
+        <audio id="audio-remoto" autoplay></audio>
+        <div class="acciones">
+          <button type="button" id="colgar" class="boton-peligro">Colgar</button>
+        </div>
+      </div>
+
+      <!-- Solo quien llama -->
+      <div id="vista-llama" class="tarjeta oculto">
+        <h2>Tu papel: quien llama</h2>
+        <p>Habla al micrófono o escribe tus frases. Quien recibe ve las alertas; tú no.</p>
+        <form id="form-texto" novalidate>
+          <label for="frase" class="etiqueta">Escribir una frase</label>
+          <div class="fila">
+            <input id="frase" maxlength="2000" autocomplete="off" placeholder="Le hablamos del banco…">
+            <button type="submit" class="boton-secundario">Enviar</button>
+          </div>
+        </form>
+        <ol id="enviadas" class="conversacion"></ol>
+      </div>
+
+      <!-- Solo quien recibe -->
+      <div id="vista-recibe" class="oculto">
+        <section id="alerta" class="alerta oculto" role="alert" aria-live="assertive" tabindex="-1">
+          <span class="alerta-icono" aria-hidden="true"></span>
+          <div>
+            <p class="alerta-titulo"></p>
+            <p class="alerta-texto"></p>
+          </div>
+          <button type="button" id="cerrar-alerta" class="boton-secundario">Entendido</button>
+        </section>
+        <section class="estado">
+          <div id="nivel" class="nivel sin-datos" data-nivel="bajo" aria-live="polite">
+            <span class="nivel-icono" aria-hidden="true"></span>
+            <span class="nivel-texto"><span class="nivel-etiqueta">Nivel de riesgo:</span> <strong id="nivel-valor">Sin analizar</strong></span>
+          </div>
+          <p id="nivel-mensaje" class="nivel-mensaje"></p>
+          <p id="escucha" class="ayuda" role="status"></p>
+        </section>
+        <section class="tarjeta" aria-labelledby="dicho-titulo">
+          <h2 id="dicho-titulo">Lo que dijo quien llama</h2>
+          <p id="dicho-vacio" class="ayuda">Todavía nada.</p>
+          <ol id="conversacion" class="conversacion"></ol>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>Funciona entre navegadores del mismo equipo o de la misma red. Centinela no puede analizar llamadas telefónicas reales.</p>
+  </footer>
+</body>
+</html>

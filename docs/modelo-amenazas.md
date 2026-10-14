@@ -44,7 +44,7 @@ Las fronteras de confianza son el navegador frente a la API (todo lo que llega d
 | A6 | Entradas enormes o malformadas que tumban el servicio | Denegación de servicio | API | Validación con Pydantic, límites de tamaño de texto y audio, límite de solicitudes por cliente | Hecho: límites de tamaño (pasos 2 y 4) y 20 intentos de entrada por minuto por IP (paso 6) |
 | A7 | Acceso a llamadas o alertas de otro usuario | Elevación de privilegios | API | Autorización en el servidor en cada consulta, por dueño del recurso | Hecho: cuenta, sesiones y passkeys (paso 6); llamadas con dueño e historial responden 404 a cualquier otra persona (paso 7) |
 | A8 | Fuga de transcripciones o códigos en los logs | Divulgación | API | No registrar texto de conversaciones, PIN, tokens ni audio; registrar solo identificadores y decisiones | Hecho (paso 2) |
-| A9 | Audio guardado sin que el usuario lo sepa | Divulgación | Transcripción | El audio se procesa en memoria y se descarta; guardarlo exige consentimiento explícito | Hecho (paso 4) |
+| A9 | Audio guardado sin que el usuario lo sepa | Divulgación | Transcripción | El audio se procesa en memoria y se descarta; guardarlo exige consentimiento explícito | Hecho (paso 4); en la llamada simulada el audio va directo entre navegadores y la sala exige el consentimiento de ambos (paso 9) |
 | A10 | Datos que quedan después de que el usuario pide borrarlos | Divulgación | Base de datos | Borrado real en cascada; retención limitada del historial | Hecho (paso 7): 30 días por defecto, borrar una o todas, retirar el permiso borra lo guardado |
 | A11 | Estafador que reformula su guion para evadir las reglas | Manipulación | Motor | Acumular indicios a lo largo de la llamada; clasificador entrenado con variaciones; evaluar con guiones nuevos | Acumulación hecha (paso 2); clasificador en el paso 11 |
 | A12 | Inyección de instrucciones en el texto analizado ("ignora lo anterior...") | Manipulación | Motor | El motor no usa un modelo de lenguaje que siga instrucciones; el texto solo se clasifica | Por diseño |
@@ -56,6 +56,7 @@ Las fronteras de confianza son el navegador frente a la API (todo lo que llega d
 | A18 | Orden de voz que desactiva la protección o revela datos | Elevación de privilegios | Asistente | La voz solo consulta; las acciones sensibles piden confirmación en pantalla con passkey o PIN | Bloqueo por voz hecho (paso 5); quitar una passkey o borrar la cuenta pide el PIN (paso 6) |
 | A19 | Dependencia o modelo descargado comprometido | Manipulación | Servidor | Versiones fijadas; modelos solo de fuentes oficiales; revisión de dependencias con `pip-audit` | Hecho (paso 2) |
 | A20 | Afirmar que se bloqueó algo que la app no puede bloquear | — | Interfaz | Los textos solo prometen lo que el sistema hace; revisión de mensajes en cada paso | Todos |
+| A21 | Otra página abre la llamada simulada a nombre del usuario o inunda la señalización | Suplantación / Denegación de servicio | Señalización | Verificar el origen del WebSocket; códigos aleatorios; máximo 100 salas, 64 KB por mensaje y 600 mensajes por minuto | Hecho (paso 9) |
 
 ## 5. Riesgos aceptados en la beta
 

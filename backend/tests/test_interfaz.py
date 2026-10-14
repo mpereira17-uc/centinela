@@ -54,3 +54,12 @@ def test_pantalla_de_cuenta_sin_html_dinamico():
 
 def test_la_pagina_principal_enlaza_a_la_cuenta():
     assert 'href="/cuenta.html"' in cliente.get("/").text
+
+
+def test_pantalla_de_llamada_sin_html_dinamico():
+    html = cliente.get("/llamada.html").text
+    assert "<script>" not in html and "onclick=" not in html and "style=" not in html
+    js = cliente.get("/llamada.js").text
+    assert "innerHTML" not in js and "insertAdjacentHTML" not in js and "document.write" not in js
+    # Sin servidores STUN o TURN de terceros
+    assert "iceServers: []" in js and "stun:" not in js

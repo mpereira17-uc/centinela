@@ -13,7 +13,7 @@ Cada paso llega como un commit directo a `main`, con criterios de aceptación, p
 | 6 | Registro seguro | Passkeys con PIN alternativo (Argon2); límite de intentos; sesiones revocables; consentimientos separados | Hecho |
 | 7 | Historial y datos personales | Historial de alertas en SQLite; retención limitada; exportar y borrar todos los datos | Hecho |
 | 8 | Reporte de números | Reportes seudónimos con límite por cuenta; la reputación pesa como una señal más | Hecho |
-| 9 | Llamada simulada por WebRTC | Dos navegadores en llamada con análisis en vivo y un solo aviso visible | Pendiente |
+| 9 | Llamada simulada por WebRTC | Dos navegadores en llamada con análisis en vivo y un solo aviso visible | Hecho |
 | 10 | Conjunto simulado y evaluación | Guiones legítimos y de riesgo con voces de Piper; script que mide detección, falsas alertas, error de transcripción y tiempo de aviso | Pendiente |
 | 11 | Clasificador entrenado | TF-IDF y regresión logística comparados con las reglas en llamadas reservadas | Pendiente |
 

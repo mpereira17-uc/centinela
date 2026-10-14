@@ -31,6 +31,7 @@ backend/
     db.py              base de datos SQLite local
     historial.py       historial con retención, exportar y borrar
     reportes.py        reporte de números y reputación
+    senalizacion.py    salas y señalización WebRTC de la llamada simulada
     config.py          nivel de alerta, límite de contexto, estrategia visible
     senales.py         catálogo de señales y niveles de riesgo
     modelos.py         llamada, fragmento y decisión

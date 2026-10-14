@@ -11,3 +11,4 @@
 - [Registro seguro](registro.md): passkeys, PIN, sesiones y permisos.
 - [Historial y datos personales](historial.md): qué se guarda, cuánto tiempo, cómo exportarlo y borrarlo.
 - [Reporte de números](reportes.md): reportes seudónimos y reputación como señal.
+- [Llamada simulada](llamada.md): dos navegadores en llamada por WebRTC con análisis en vivo.
