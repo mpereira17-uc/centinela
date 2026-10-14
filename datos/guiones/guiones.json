@@ -1,0 +1,399 @@
+[
+  {
+    "id": "r01", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "desarrollo",
+    "descripcion": "Falso empleado del banco pide el código de verificación",
+    "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Buenas tardes, ¿hablo con el titular de la cuenta de ahorros?"],
+      ["usuario", "Sí, con él. ¿Quién habla?"],
+      ["llamante", "Le hablamos del área de seguridad de su banco. Detectamos una compra extraña por un millón doscientos."],
+      ["llamante", "Para cancelarla le va a llegar un código por mensaje de texto. Me lo confirma, por favor."],
+      ["usuario", "Ah, ya me llegó. ¿Se lo leo?"],
+      ["llamante", "Sí, rápido, que la transacción se aprueba en dos minutos."]
+    ]
+  },
+  {
+    "id": "r02", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "desarrollo",
+    "descripcion": "Pide número de tarjeta y CVV para 'actualizar datos'",
+    "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Muy buenos días, le saluda Andrea de la entidad financiera."],
+      ["llamante", "Estamos actualizando los datos de nuestros clientes por la nueva norma."],
+      ["llamante", "Me regala el número de su tarjeta de crédito, la fecha de vencimiento y los tres números de atrás."],
+      ["usuario", "¿Y eso para qué?"],
+      ["llamante", "Es solo para verificar que la tarjeta siga activa, si no se bloquea hoy mismo."]
+    ]
+  },
+  {
+    "id": "r03", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "desarrollo",
+    "descripcion": "Supuesto hijo en problemas pide una transferencia urgente",
+    "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Mami, soy yo. Estoy en un problema muy grave."],
+      ["usuario", "¿Juan? Te escucho raro."],
+      ["llamante", "Es que me golpeé la boca. Tuve un choque y el señor dice que si no le pago me denuncia."],
+      ["llamante", "Necesito que me consignes ochocientos mil a esta cuenta ya, por favor, y no le digas a mi papá."],
+      ["usuario", "¿Pero estás bien?"],
+      ["llamante", "Sí, pero hazlo rápido antes de que llegue la policía."]
+    ]
+  },
+  {
+    "id": "r04", "etiqueta": "riesgo", "categoria": "soporte_falso", "particion": "desarrollo",
+    "descripcion": "Soporte técnico falso pide instalar AnyDesk",
+    "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Hola, le llamamos del soporte técnico de su proveedor de internet."],
+      ["llamante", "Su computador está enviando virus a nuestra red y vamos a tener que suspender el servicio."],
+      ["llamante", "Para arreglarlo, descargue la aplicación AnyDesk y me dicta el número que le aparece."],
+      ["usuario", "No sé hacer eso muy bien."],
+      ["llamante", "Tranquilo, yo le voy guiando paso a paso."]
+    ]
+  },
+  {
+    "id": "r05", "etiqueta": "riesgo", "categoria": "premio_falso", "particion": "desarrollo",
+    "descripcion": "Premio de un sorteo que exige pagar el envío",
+    "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "¡Felicitaciones! Usted fue el ganador de una moto en el sorteo de aniversario del almacén."],
+      ["usuario", "¿En serio? No recuerdo haber participado."],
+      ["llamante", "Participó automáticamente con su última compra."],
+      ["llamante", "Solo debe pagar el impuesto de envío de trescientos mil pesos por Nequi a este número."],
+      ["usuario", "¿Y cuándo me la entregan?"],
+      ["llamante", "Apenas confirme el pago. La oferta vence hoy."]
+    ]
+  },
+  {
+    "id": "r06", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "desarrollo",
+    "descripcion": "Extorsión con amenaza contra la familia",
+    "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Escúcheme bien, sabemos dónde vive y a qué colegio van sus hijos."],
+      ["usuario", "¿Quién es usted?"],
+      ["llamante", "Si no nos manda dos millones antes de las seis, algo les va a pasar."],
+      ["llamante", "Y no se le ocurra llamar a la policía ni contarle a nadie."]
+    ]
+  },
+  {
+    "id": "r07", "etiqueta": "riesgo", "categoria": "suplanta_entidad", "particion": "desarrollo",
+    "descripcion": "Falsa entidad de subsidios pide datos y clave",
+    "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, le hablamos del programa de subsidios del gobierno."],
+      ["llamante", "Usted salió beneficiado con un subsidio de quinientos mil pesos."],
+      ["llamante", "Para consignárselo necesito su número de cédula y la clave de su cuenta de ahorros."],
+      ["usuario", "¿La clave también?"],
+      ["llamante", "Sí señora, es para que el sistema le deposite directamente."]
+    ]
+  },
+  {
+    "id": "r08", "etiqueta": "riesgo", "categoria": "inversion_falsa", "particion": "desarrollo",
+    "descripcion": "Inversión en criptomonedas con ganancias garantizadas",
+    "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Hola, le hablo de una plataforma de inversión en criptomonedas."],
+      ["llamante", "Nuestros clientes están duplicando su plata en un mes, ganancia garantizada."],
+      ["usuario", "Suena interesante, ¿cómo funciona?"],
+      ["llamante", "Usted transfiere un millón a la billetera que le envío y en treinta días recibe dos."],
+      ["llamante", "Pero tiene que decidir hoy porque los cupos se acaban."]
+    ]
+  },
+  {
+    "id": "r09", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "desarrollo",
+    "descripcion": "Guion evasivo: no dice 'código', pide 'los números que le llegaron'",
+    "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas tardes, le habla Carlos, del departamento de fraudes."],
+      ["llamante", "Vimos un movimiento que usted no reconoce, así que lo vamos a reversar."],
+      ["llamante", "Usted solo léame los seis números que le acaban de llegar al celular."],
+      ["usuario", "¿Los del mensaje?"],
+      ["llamante", "Exacto, esos mismos, así el sistema sabe que es usted."]
+    ]
+  },
+  {
+    "id": "r10", "etiqueta": "riesgo", "categoria": "envio_falso", "particion": "desarrollo",
+    "descripcion": "Paquete retenido en aduana que exige pagar",
+    "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, le llamo de la transportadora. Tenemos un paquete a su nombre retenido en la aduana."],
+      ["usuario", "No estoy esperando nada."],
+      ["llamante", "Debe pagar ciento cincuenta mil de impuestos por transferencia para liberarlo, si no se devuelve."],
+      ["llamante", "Le paso el número de cuenta para que consigne ahora."]
+    ]
+  },
+  {
+    "id": "r11", "etiqueta": "riesgo", "categoria": "empleo_falso", "particion": "desarrollo",
+    "descripcion": "Oferta de empleo que pide pagar un curso previo",
+    "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Hola, vimos su hoja de vida y quedó seleccionado para el cargo de auxiliar."],
+      ["usuario", "Qué bueno, ¿cuándo empiezo?"],
+      ["llamante", "El lunes, pero antes debe hacer el curso de inducción obligatorio."],
+      ["llamante", "El curso cuesta doscientos mil y lo paga por Daviplata a este número para reservar su cupo."]
+    ]
+  },
+  {
+    "id": "r12", "etiqueta": "riesgo", "categoria": "suplanta_entidad", "particion": "desarrollo",
+    "descripcion": "Falsa Fiscalía amenaza con orden de captura",
+    "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Le hablamos de la Fiscalía. Hay una orden de captura en su contra por lavado de activos."],
+      ["usuario", "¡Eso es imposible!"],
+      ["llamante", "Para evitar que lo detengan hoy, debe consignar una fianza de tres millones."],
+      ["llamante", "No cuelgue y no hable con nadie, esta llamada es confidencial."]
+    ]
+  },
+  {
+    "id": "r13", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "reservada",
+    "descripcion": "Pide desactivar las notificaciones del banco",
+    "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas noches, le habla el asesor de seguridad de su banco."],
+      ["llamante", "Estamos migrando su cuenta a una plataforma más segura."],
+      ["llamante", "Mientras tanto, desactive las notificaciones de la aplicación del banco y la verificación en dos pasos."],
+      ["usuario", "¿Por qué tengo que quitar eso?"],
+      ["llamante", "Porque si no, la migración falla y su cuenta queda bloqueada."]
+    ]
+  },
+  {
+    "id": "r14", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "reservada",
+    "descripcion": "Supuesto sobrino con número nuevo pide un préstamo",
+    "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Tía, ¿cómo está? Es que cambié de número, guárdeme este."],
+      ["usuario", "¿Andrés? Hola mijo."],
+      ["llamante", "Tía, me da pena, pero estoy varado y se me bloqueó la tarjeta."],
+      ["llamante", "¿Me puede prestar cuatrocientos mil? Se los mando a una cuenta de un amigo y mañana se los devuelvo."],
+      ["usuario", "Bueno, déjame ver."],
+      ["llamante", "Pero que sea ya, porque el amigo se va."]
+    ]
+  },
+  {
+    "id": "r15", "etiqueta": "riesgo", "categoria": "soporte_falso", "particion": "reservada",
+    "descripcion": "Falso técnico de la compañía de celular pide código de WhatsApp",
+    "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Hola, le hablamos de su operador de celular, vamos a mejorar su señal."],
+      ["llamante", "Le va a llegar un mensaje con un número de verificación de WhatsApp."],
+      ["llamante", "Me lo dice para terminar la configuración."],
+      ["usuario", "Ok, espere lo busco."]
+    ]
+  },
+  {
+    "id": "r16", "etiqueta": "riesgo", "categoria": "premio_falso", "particion": "reservada",
+    "descripcion": "Bono de la billetera digital que pide la clave dinámica",
+    "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Hola, ¿usted tiene cuenta en la billetera digital? Ganó un bono de cien mil."],
+      ["usuario", "Sí, tengo cuenta."],
+      ["llamante", "Para cargarle el bono necesito la clave dinámica que le aparece en la aplicación."],
+      ["llamante", "Es rapidito, son solo seis dígitos."]
+    ]
+  },
+  {
+    "id": "r17", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "reservada",
+    "descripcion": "Supuesto secuestro de un familiar",
+    "turno_riesgo": 1,
+    "turnos": [
+      ["llamante", "Tenemos a su hija. Si quiere volver a verla, haga exactamente lo que le digo."],
+      ["llamante", "Vaya a un corresponsal y gire un millón quinientos a nombre de la persona que le voy a decir."],
+      ["usuario", "Por favor, no le hagan nada."],
+      ["llamante", "No cuelgue el teléfono en ningún momento y no le cuente a nadie."]
+    ]
+  },
+  {
+    "id": "r18", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "reservada",
+    "descripcion": "Guion evasivo sin palabras típicas: pide 'confirmar la operación' leyendo el mensaje",
+    "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buen día, le llamo para confirmar una operación de su cuenta."],
+      ["llamante", "Usted no hizo ninguna compra en línea esta mañana, ¿cierto?"],
+      ["llamante", "Listo, entonces para anularla léame por favor el mensaje que le acaba de entrar."],
+      ["usuario", "Dice que es confidencial y que no lo comparta."],
+      ["llamante", "Eso es normal, a nosotros sí nos lo puede decir."]
+    ]
+  },
+  {
+    "id": "l01", "etiqueta": "legitima", "categoria": "banco_real", "particion": "desarrollo",
+    "descripcion": "El banco confirma una compra sin pedir datos",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Buenas tardes, le hablamos de su banco para confirmar una compra de ochenta mil en un supermercado."],
+      ["usuario", "Sí, esa la hice yo."],
+      ["llamante", "Perfecto, queda confirmada. Recuerde que nunca le pediremos claves ni códigos por teléfono."]
+    ]
+  },
+  {
+    "id": "l02", "etiqueta": "legitima", "categoria": "cita_medica", "particion": "desarrollo",
+    "descripcion": "Recordatorio de una cita médica",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Hola, le llamamos de la clínica para recordarle su cita de medicina general mañana a las ocho."],
+      ["usuario", "Gracias, ahí estaré."],
+      ["llamante", "Recuerde llegar quince minutos antes con su documento."]
+    ]
+  },
+  {
+    "id": "l03", "etiqueta": "legitima", "categoria": "domicilio", "particion": "desarrollo",
+    "descripcion": "Domiciliario que confirma la dirección",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Buenas, le traigo el pedido del restaurante, ¿me confirma la dirección?"],
+      ["usuario", "Calle 45 número 12 30, apartamento 502."],
+      ["llamante", "Listo, llego en cinco minutos."]
+    ]
+  },
+  {
+    "id": "l04", "etiqueta": "legitima", "categoria": "familia", "particion": "desarrollo",
+    "descripcion": "Llamada familiar normal",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Hola mamá, ¿cómo estás? Te llamo para saber si vienes el domingo al almuerzo."],
+      ["usuario", "Sí, claro. ¿Llevo algo?"],
+      ["llamante", "Un postre, si quieres. Te esperamos a la una."]
+    ]
+  },
+  {
+    "id": "l05", "etiqueta": "legitima", "categoria": "telefonia", "particion": "desarrollo",
+    "descripcion": "Oferta comercial del operador sin pedir datos sensibles",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Hola, le hablamos de su operador. Tenemos un plan con más datos al mismo precio."],
+      ["usuario", "Por ahora no me interesa."],
+      ["llamante", "Entendido, gracias por su tiempo. Que tenga buen día."]
+    ]
+  },
+  {
+    "id": "l06", "etiqueta": "legitima", "categoria": "banco_real", "particion": "desarrollo",
+    "descripcion": "Caso difícil: el banco habla de seguridad y bloqueo, pero no pide nada",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Buenas tardes, le hablamos del área de seguridad del banco."],
+      ["llamante", "Por precaución bloqueamos su tarjeta porque detectamos un intento de compra en el exterior."],
+      ["usuario", "¿Y qué tengo que hacer?"],
+      ["llamante", "Acérquese a una oficina con su cédula para recibir una nueva. No le vamos a pedir datos por esta llamada."]
+    ]
+  },
+  {
+    "id": "l07", "etiqueta": "legitima", "categoria": "trabajo", "particion": "desarrollo",
+    "descripcion": "Jefe que pide adelantar una reunión",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Hola, ¿podemos pasar la reunión de mañana para hoy a las cuatro?"],
+      ["usuario", "Sí, me queda bien."],
+      ["llamante", "Perfecto, te envío la invitación por correo."]
+    ]
+  },
+  {
+    "id": "l08", "etiqueta": "legitima", "categoria": "encuesta", "particion": "desarrollo",
+    "descripcion": "Encuesta de satisfacción",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Buenos días, estamos haciendo una encuesta de satisfacción sobre el servicio de energía."],
+      ["llamante", "De uno a cinco, ¿qué tan satisfecho está con el servicio?"],
+      ["usuario", "Un cuatro."],
+      ["llamante", "Muchas gracias por responder."]
+    ]
+  },
+  {
+    "id": "l09", "etiqueta": "legitima", "categoria": "colegio", "particion": "desarrollo",
+    "descripcion": "El colegio avisa de una reunión de padres",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Hola, le hablamos del colegio. El viernes hay reunión de padres a las siete de la mañana."],
+      ["usuario", "Listo, ahí estaré."],
+      ["llamante", "Gracias, la entrega de boletines es ese mismo día."]
+    ]
+  },
+  {
+    "id": "l10", "etiqueta": "legitima", "categoria": "domicilio", "particion": "desarrollo",
+    "descripcion": "Caso difícil: tienda pide pagar contra entrega un pedido real",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Buenas, le llamamos de la tienda para confirmar su pedido de la licuadora."],
+      ["usuario", "Sí, la pedí ayer."],
+      ["llamante", "Llega mañana y la paga en efectivo cuando la reciba, ¿le parece?"],
+      ["usuario", "Perfecto."]
+    ]
+  },
+  {
+    "id": "l11", "etiqueta": "legitima", "categoria": "amistad", "particion": "desarrollo",
+    "descripcion": "Amigo que pide devolver un libro",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Quiubo, ¿todavía tienes el libro que te presté?"],
+      ["usuario", "Sí, te lo llevo el sábado."],
+      ["llamante", "Listo, sin afán."]
+    ]
+  },
+  {
+    "id": "l12", "etiqueta": "legitima", "categoria": "salud", "particion": "desarrollo",
+    "descripcion": "Caso difícil: la EPS pide confirmar la fecha de nacimiento",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Hola, le hablamos de su EPS para programar la vacuna de refuerzo."],
+      ["llamante", "¿Me confirma su fecha de nacimiento para buscarla en el sistema?"],
+      ["usuario", "Tres de marzo de mil novecientos sesenta."],
+      ["llamante", "Gracias. Le quedó la cita el martes a las diez."]
+    ]
+  },
+  {
+    "id": "l13", "etiqueta": "legitima", "categoria": "banco_real", "particion": "reservada",
+    "descripcion": "Caso difícil: el banco dice que le llegará un código, pero que no lo comparta",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Buenas, le hablamos del banco por la solicitud de crédito que usted hizo en la aplicación."],
+      ["llamante", "En un momento le llegará un código para firmar en la aplicación. No lo comparta con nadie, ni siquiera con nosotros."],
+      ["usuario", "Listo, entendido."]
+    ]
+  },
+  {
+    "id": "l14", "etiqueta": "legitima", "categoria": "familia", "particion": "reservada",
+    "descripcion": "Caso difícil: familiar con urgencia real pero sin pedir dinero",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Papá, es urgente, estoy en la clínica con la abuela, se cayó."],
+      ["usuario", "¿Cómo está? Voy para allá."],
+      ["llamante", "Está bien, ya la atendieron. Ven tranquilo, estamos en urgencias."]
+    ]
+  },
+  {
+    "id": "l15", "etiqueta": "legitima", "categoria": "servicios", "particion": "reservada",
+    "descripcion": "Técnico confirma visita para revisar el internet",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Hola, soy el técnico del internet. Voy mañana entre ocho y doce a revisar el módem."],
+      ["usuario", "Perfecto, ¿necesito algo?"],
+      ["llamante", "No, solo que haya alguien en la casa."]
+    ]
+  },
+  {
+    "id": "l16", "etiqueta": "legitima", "categoria": "comercio", "particion": "reservada",
+    "descripcion": "Caso difícil: una tienda ofrece un premio real de fidelización sin cobrar",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Hola, le hablamos del supermercado. Usted ganó un bono de cincuenta mil en la rifa de clientes."],
+      ["usuario", "¡Qué bien! ¿Qué debo hacer?"],
+      ["llamante", "Solo acérquese a la caja con su cédula y se lo descuentan en la próxima compra. No tiene costo."]
+    ]
+  },
+  {
+    "id": "l17", "etiqueta": "legitima", "categoria": "trabajo", "particion": "reservada",
+    "descripcion": "Recursos humanos cita a entrevista",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Buenos días, le llamamos de recursos humanos por su postulación."],
+      ["llamante", "Quisiéramos citarlo a entrevista el jueves a las nueve en nuestras oficinas."],
+      ["usuario", "Claro, ahí estaré."]
+    ]
+  },
+  {
+    "id": "l18", "etiqueta": "legitima", "categoria": "vecinos", "particion": "reservada",
+    "descripcion": "Administración del edificio avisa corte de agua",
+    "turno_riesgo": null,
+    "turnos": [
+      ["llamante", "Buenas, le habla la administración del edificio. Mañana cortan el agua de nueve a tres por mantenimiento."],
+      ["usuario", "Gracias por avisar."],
+      ["llamante", "Con gusto, que tenga buena tarde."]
+    ]
+  }
+]

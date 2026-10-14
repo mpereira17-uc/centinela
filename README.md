@@ -37,8 +37,10 @@ backend/
     modelos.py         llamada, fragmento y decisión
     estrategias/       por_fragmento.py y acumulacion.py
     transcripcion/     faster-whisper
+  evaluacion/          generar audio de los guiones y medir las alertas
   tests/
 datos/guiones/         guiones de llamadas simuladas (legítimas y de riesgo)
+datos/resultados/      informes de la evaluación
 docs/                  requisitos, diagramas y guía de anotación
 frontend/              interfaz web (HTML, CSS y JavaScript sin dependencias)
 notebooks/             entrenamiento y análisis
