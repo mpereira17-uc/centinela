@@ -1,0 +1,18 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+*.db
+*.sqlite3
+
+# Audio y modelos pesados: no se versionan
+datos/audio/
+modelos/
+*.wav
+*.mp3
+*.onnx
+
+.ipynb_checkpoints/
+.DS_Store
