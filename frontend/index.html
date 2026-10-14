@@ -73,6 +73,28 @@
       </div>
     </section>
 
+    <section class="tarjeta" aria-labelledby="numero-titulo">
+      <h2 id="numero-titulo">¿Quién te llama?</h2>
+      <p>Opcional. Si escribes el número, Centinela revisa si otras personas lo han reportado y lo tiene en cuenta como una señal más.</p>
+      <label for="numero" class="etiqueta">Número que te llama</label>
+      <div class="fila">
+        <input type="tel" id="numero" maxlength="25" autocomplete="off" placeholder="300 123 4567" aria-describedby="numero-aviso">
+        <button type="button" id="consultar-numero" class="boton-secundario">Consultar reportes</button>
+      </div>
+      <p id="numero-aviso" class="error" role="status"></p>
+      <p id="numero-resultado" class="reputacion oculto" role="status" aria-live="polite"></p>
+      <details>
+        <summary>Reportar este número</summary>
+        <form id="form-reporte" novalidate>
+          <label for="categoria" class="etiqueta">¿Qué hizo?</label>
+          <select id="categoria"></select>
+          <div class="acciones"><button type="submit" class="boton-secundario">Enviar reporte</button></div>
+          <p id="reporte-estado" class="ayuda" role="status" aria-live="polite"></p>
+          <p class="ayuda">Necesitas una cuenta. Nadie más verá que fuiste tú, y un reporte solo no hace que Centinela alerte.</p>
+        </form>
+      </details>
+    </section>
+
     <section class="tarjeta" aria-labelledby="form-titulo">
       <h2 id="form-titulo">Agregar una frase</h2>
       <form id="formulario" novalidate>

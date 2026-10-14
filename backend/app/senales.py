@@ -139,6 +139,17 @@ def detectar(texto: str) -> list[Senal]:
     return encontradas
 
 
+# Señal que no sale del texto sino de los reportes de otras personas (paso 8).
+# Es de contexto: sola llega como máximo a moderado y nunca decide sola (modelo de amenazas, A15).
+NUMERO_REPORTADO = Senal(
+    "numero_reportado",
+    Tipo.CONTEXTO,
+    "El número que llama tiene reportes de varias personas en Centinela (no confirmados)",
+    "este número tiene reportes de otras personas",
+    _p(r"(?!)"),
+)
+
+
 class Nivel(IntEnum):
     BAJO = 0
     MODERADO = 1

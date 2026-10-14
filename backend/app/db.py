@@ -55,6 +55,20 @@ CREATE TABLE IF NOT EXISTS fragmentos_guardados (
     datos TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS fragmentos_por_llamada ON fragmentos_guardados (llamada_id, orden);
+CREATE TABLE IF NOT EXISTS secretos (
+    nombre TEXT PRIMARY KEY,
+    valor BLOB NOT NULL
+);
+CREATE TABLE IF NOT EXISTS reportes (
+    id TEXT PRIMARY KEY,
+    usuario_id TEXT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+    numero_ref TEXT NOT NULL,
+    terminacion TEXT NOT NULL,
+    categoria TEXT NOT NULL,
+    creado REAL NOT NULL,
+    UNIQUE (usuario_id, numero_ref)
+);
+CREATE INDEX IF NOT EXISTS reportes_por_numero ON reportes (numero_ref, creado);
 CREATE TABLE IF NOT EXISTS retos (
     id TEXT PRIMARY KEY,
     usuario_id TEXT REFERENCES usuarios(id) ON DELETE CASCADE,

@@ -1,5 +1,7 @@
+from collections.abc import Sequence
+
 from ..modelos import Decision
-from ..senales import detectar
+from ..senales import Senal, detectar
 from .base import Estrategia
 
 
@@ -8,5 +10,5 @@ class PorFragmento(Estrategia):
 
     nombre = "por_fragmento"
 
-    def decidir(self, historial: list[str], texto: str) -> Decision:
-        return self._decision(detectar(texto))
+    def decidir(self, historial: list[str], texto: str, externas: Sequence[Senal] = ()) -> Decision:
+        return self._decision(detectar(texto), externas)

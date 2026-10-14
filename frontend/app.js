@@ -55,9 +55,18 @@ function mostrarGuardado(guardada) {
 }
 
 async function nuevaConversacion() {
-  const llamada = await api("/llamadas", { method: "POST" });
+  const numero = $("#numero").value.trim();
+  let llamada;
+  try {
+    llamada = await api("/llamadas", { method: "POST", body: JSON.stringify(numero ? { numero } : {}) });
+  } catch (e) {
+    if (e.status === 422) throw new Error("Revisa el número que te llama, o déjalo vacío. Ejemplo: 300 123 4567.");
+    throw e;
+  }
   estado.llamadaId = llamada.id;
+  estado.numeroAplicado = numero;
   mostrarGuardado(llamada.guardada);
+  $("#numero-aviso").textContent = "";
   estado.inicio = performance.now();
   estado.ultimoFin = 0;
   $("#conversacion").replaceChildren();
@@ -418,6 +427,79 @@ async function cargarSugerencias() {
   } catch { /* las sugerencias son opcionales */ }
 }
 
+// ---- Número que llama: consulta y reporte ----
+
+function pintarReputacion(r) {
+  const caja = $("#numero-resultado");
+  caja.textContent = r.mensaje;
+  caja.dataset.estado = r.estado;
+  caja.classList.remove("oculto");
+}
+
+async function consultarNumero() {
+  const numero = $("#numero").value.trim();
+  const boton = $("#consultar-numero");
+  if (!numero) { $("#numero-aviso").textContent = "Escribe el número que te llama."; $("#numero").focus(); return; }
+  boton.disabled = true;
+  try {
+    const r = await fetch("/numeros/consulta", {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ numero }),
+    });
+    const datos = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(typeof datos.detail === "string" ? datos.detail : "Escribe un número válido, por ejemplo 300 123 4567.");
+    $("#numero-aviso").textContent = "";
+    pintarReputacion(datos);
+  } catch (e) {
+    $("#numero-aviso").textContent = e instanceof TypeError ? "No pudimos conectar con Centinela." : e.message;
+  } finally {
+    boton.disabled = false;
+  }
+}
+
+async function enviarReporte(ev) {
+  ev.preventDefault();
+  const numero = $("#numero").value.trim();
+  const estadoReporte = $("#reporte-estado");
+  if (!numero) { estadoReporte.textContent = "Primero escribe el número que quieres reportar."; $("#numero").focus(); return; }
+  const boton = ev.submitter || ev.target.querySelector("button");
+  boton.disabled = true;
+  estadoReporte.replaceChildren();
+  try {
+    const r = await fetch("/reportes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Centinela": "1" },
+      body: JSON.stringify({ numero, categoria: $("#categoria").value }),
+    });
+    const datos = await r.json().catch(() => ({}));
+    if (r.status === 401) {
+      const enlace = document.createElement("a");
+      enlace.href = "/cuenta.html";
+      enlace.textContent = "Entra a tu cuenta";
+      estadoReporte.append(enlace, " para reportar. Así evitamos reportes falsos en masa.");
+      return;
+    }
+    if (!r.ok) throw new Error(typeof datos.detail === "string" ? datos.detail : "Revisa el número y el motivo.");
+    estadoReporte.textContent = "Gracias. Tu reporte quedó guardado; nadie más verá que fuiste tú.";
+    pintarReputacion(datos);
+  } catch (e) {
+    estadoReporte.textContent = e instanceof TypeError ? "No pudimos conectar con Centinela." : e.message;
+  } finally {
+    boton.disabled = false;
+  }
+}
+
+async function cargarCategorias() {
+  try {
+    const categorias = await api("/reportes/categorias");
+    for (const c of categorias) {
+      const op = document.createElement("option");
+      op.value = c.id;
+      op.textContent = c.descripcion;
+      $("#categoria").append(op);
+    }
+  } catch { /* sin categorías no se puede reportar; la consulta sigue funcionando */ }
+}
+
 async function cargarCatalogo() {
   try {
     const senales = await api("/senales");
@@ -453,6 +535,18 @@ document.addEventListener("DOMContentLoaded", () => {
   for (const b of document.querySelectorAll("[data-ejemplo]")) {
     b.addEventListener("click", () => correrEjemplo(b.dataset.ejemplo));
   }
+  $("#consultar-numero").addEventListener("click", consultarNumero);
+  $("#form-reporte").addEventListener("submit", enviarReporte);
+  $("#numero").addEventListener("change", () => {
+    $("#numero-resultado").classList.add("oculto");
+    if (!estado.llamadaId || $("#numero").value.trim() === estado.numeroAplicado) return;
+    if ($("#conversacion").childElementCount === 0) {
+      estado.llamadaId = null; // la próxima frase empieza la conversación con este número
+    } else {
+      $("#numero-aviso").textContent = "Para que Centinela tenga en cuenta este número, empieza una nueva conversación.";
+    }
+  });
+  cargarCategorias();
   $("#grabar").addEventListener("click", empezarGrabacion);
   $("#detener").addEventListener("click", () => grabacion.recorder?.stop());
   $("#archivo").addEventListener("change", (e) => {

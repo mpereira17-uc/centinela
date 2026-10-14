@@ -42,9 +42,9 @@ class Decision(BaseModel):
     alerta: bool
     mensaje: str
     senales: list[SenalDetectada]
-    # De dónde sale la sospecha: por ahora solo del contenido de la conversación.
-    # No es una identidad confirmada ni un número reportado.
-    fuente: Literal["contenido"] = "contenido"
+    # De dónde sale la sospecha: del contenido, o del contenido más los reportes del número.
+    # Nunca es una identidad confirmada.
+    fuente: Literal["contenido", "contenido_y_reputacion"] = "contenido"
 
 
 class Fragmento(FragmentoEntrada):
@@ -62,6 +62,12 @@ class Llamada(BaseModel):
     # Solo se guarda si la persona entró a su cuenta y permitió guardar el historial
     guardada: bool = False
     dueno: str | None = Field(default=None, exclude=True)
+    # Personas distintas que reportaron el número que llama; el número en sí no se guarda aquí
+    numero_reportes: int = 0
+
+
+class NuevaLlamada(BaseModel):
+    numero: str | None = Field(default=None, max_length=25)
 
 
 class ConsultaAsistente(BaseModel):

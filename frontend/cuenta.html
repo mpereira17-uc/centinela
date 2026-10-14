@@ -85,6 +85,13 @@
         </div>
       </section>
 
+      <section class="tarjeta" aria-labelledby="reportes-titulo">
+        <h2 id="reportes-titulo">Números que reportaste</h2>
+        <p>Solo tú ves esta lista. Los demás ven cuántas personas reportaron un número, nunca quiénes.</p>
+        <ul id="reportes" class="lista"></ul>
+        <p id="reportes-vacia" class="ayuda">No has reportado números. Puedes hacerlo desde la página principal.</p>
+      </section>
+
       <section class="tarjeta" aria-labelledby="passkeys-titulo">
         <h2 id="passkeys-titulo">Passkeys</h2>
         <p>Entra sin escribir el PIN, con la huella, el rostro o el bloqueo de pantalla de este dispositivo.</p>
@@ -116,7 +123,7 @@
 
       <section class="tarjeta" aria-labelledby="datos-titulo">
         <h2 id="datos-titulo">Tus datos</h2>
-        <p>Descarga en un archivo todo lo que Centinela guarda de ti: cuenta, permisos, dispositivos e historial. Tu PIN y tus claves no se incluyen porque el servidor nunca los guarda en claro.</p>
+        <p>Descarga en un archivo todo lo que Centinela guarda de ti: cuenta, permisos, dispositivos, reportes e historial. Tu PIN y tus claves no se incluyen porque el servidor nunca los guarda en claro.</p>
         <div class="acciones"><button type="button" id="exportar" class="boton-secundario">Descargar mis datos</button></div>
       </section>
 
@@ -124,7 +131,7 @@
         <h2 id="eliminar-titulo">Eliminar mi cuenta</h2>
         <details>
           <summary>Quiero eliminar mi cuenta</summary>
-          <p>Se borran tu alias, tu PIN, tus passkeys, tus sesiones, tus permisos y tu historial. No se puede deshacer.</p>
+          <p>Se borran tu alias, tu PIN, tus passkeys, tus sesiones, tus permisos, tu historial y tus reportes. No se puede deshacer.</p>
           <form id="form-eliminar" class="formulario" novalidate>
             <label for="eliminar-pin" class="etiqueta">Escribe tu PIN para confirmar</label>
             <div class="fila">

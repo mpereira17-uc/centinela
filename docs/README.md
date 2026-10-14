@@ -10,3 +10,4 @@
 - [Asistente por voz](asistente.md): comandos, respuesta hablada y límites de la voz.
 - [Registro seguro](registro.md): passkeys, PIN, sesiones y permisos.
 - [Historial y datos personales](historial.md): qué se guarda, cuánto tiempo, cómo exportarlo y borrarlo.
+- [Reporte de números](reportes.md): reportes seudónimos y reputación como señal.

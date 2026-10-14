@@ -222,3 +222,10 @@ a.marca { color: var(--texto); text-decoration: none; }
 .historial .conversacion { margin-top: .5rem; }
 .historial .frase-nivel { margin: .2rem 0; }
 .confirmar { margin-top: 1rem; padding: 1rem; border-radius: 8px; border: 2px solid var(--critico); background: var(--critico-fondo); }
+
+/* Número que llama */
+select { font: inherit; color: var(--texto); background: var(--fondo); border: 2px solid var(--borde);
+  border-radius: 8px; min-height: 44px; padding: .4rem .6rem; width: 100%; max-width: 32rem; }
+.reputacion { margin-top: .75rem; padding: .75rem 1rem; border-radius: 8px; border-left: 6px solid var(--borde); background: var(--fondo); }
+.reputacion[data-estado="reportado"] { border-left-color: var(--moderado); background: var(--moderado-fondo); }
+.reputacion[data-estado="varios_reportes"] { border-left-color: var(--alto); background: var(--alto-fondo); }

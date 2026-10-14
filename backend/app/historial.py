@@ -15,6 +15,7 @@ from .config import ajustes
 from .cuentas import Sesion, exigir_cabecera, usuario_actual
 from .db import conexion
 from .modelos import Fragmento, Llamada
+from .reportes import mis_reportes
 from .senales import Nivel
 
 log = logging.getLogger("centinela")
@@ -164,10 +165,14 @@ def exportar(sesion: Sesion = Depends(usuario_actual)):
                 {"dispositivo": s["dispositivo"], "creada": _iso(s["creada"]), "ultimo_uso": _iso(s["ultimo_uso"])}
                 for s in con.execute("SELECT * FROM sesiones WHERE usuario_id = ? ORDER BY creada", (uid,))
             ],
+            "reportes": [
+                {"terminacion": r["terminacion"], "categoria": r["categoria"], "creado": _iso(r["creado"])}
+                for r in mis_reportes(con, uid)
+            ],
             "historial": [
                 {**r, "fragmentos": _fragmentos(con, r["id"])} for r in _listar(con, uid)
             ],
-            "nota": "El PIN, los tokens de sesión y las claves de las passkeys no se exportan: el servidor solo guarda su hash o su parte pública.",
+            "nota": "El PIN, los tokens de sesión, las claves de las passkeys y los números reportados completos no se exportan: el servidor solo guarda su hash o su parte pública.",
         }
     log.info("cuenta=%s datos_exportados", uid)
     return Response(

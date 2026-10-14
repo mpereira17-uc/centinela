@@ -148,6 +148,7 @@ async function mostrarCuenta(cuenta) {
   pintarPermisos(cuenta.consentimientos);
   guardaHistorial = cuenta.consentimientos.some((c) => c.finalidad === "guardar_historial" && c.otorgado);
   await cargarHistorial();
+  await cargarReportes();
   if (!hayPasskeys()) {
     $("#form-passkey").classList.add("oculto");
     $("#passkey-no-soportada").classList.remove("oculto");
@@ -339,6 +340,43 @@ function itemDeHistorial(l) {
   });
   li.append(info, borrar, detalles);
   return li;
+}
+
+// ---- Reportes ----
+
+async function cargarReportes() {
+  const reportes = await api("/reportes/mios");
+  const lista = $("#reportes");
+  lista.replaceChildren();
+  $("#reportes-vacia").classList.toggle("oculto", reportes.length > 0);
+  for (const r of reportes) {
+    const li = document.createElement("li");
+    const info = document.createElement("div");
+    const numero = document.createElement("strong");
+    numero.textContent = `Número terminado en ${r.terminacion}`;
+    const datos = document.createElement("p");
+    datos.className = "ayuda";
+    datos.textContent = `${r.descripcion} · ${FECHA.format(r.creado * 1000)}`;
+    info.append(numero, datos);
+    const boton = document.createElement("button");
+    boton.type = "button";
+    boton.className = "boton-secundario";
+    boton.textContent = "Retirar";
+    boton.setAttribute("aria-label", `Retirar el reporte del número terminado en ${r.terminacion}`);
+    boton.addEventListener("click", async () => {
+      ocupado(boton, true);
+      try {
+        await api(`/reportes/${encodeURIComponent(r.id)}`, { metodo: "DELETE" });
+        avisar("Retiramos tu reporte.");
+        await cargarReportes();
+      } catch (e) {
+        avisar(e.message, "error");
+        ocupado(boton, false);
+      }
+    });
+    li.append(info, boton);
+    lista.append(li);
+  }
 }
 
 function nombreDeDispositivo(ua) {

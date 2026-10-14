@@ -5,12 +5,20 @@ from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, Respon
 from fastapi.concurrency import run_in_threadpool
 from fastapi.staticfiles import StaticFiles
 
-from . import asistente, cuentas, historial, voz
+from . import asistente, cuentas, historial, reportes, voz
 from .cuentas import Sesion, sesion_opcional
 from .config import ajustes
 from .estrategias import Acumulacion, PorFragmento
-from .modelos import MAX_FRAGMENTOS_POR_LLAMADA, ConsultaAsistente, Fragmento, FragmentoEntrada, Llamada, TextoParaVoz
-from .senales import CATALOGO, Nivel
+from .modelos import (
+    MAX_FRAGMENTOS_POR_LLAMADA,
+    ConsultaAsistente,
+    Fragmento,
+    FragmentoEntrada,
+    Llamada,
+    NuevaLlamada,
+    TextoParaVoz,
+)
+from .senales import CATALOGO, NUMERO_REPORTADO, Nivel
 from .transcripcion import whisper
 
 # Nunca se registra el texto de la conversación (modelo de amenazas, A8)
@@ -19,7 +27,7 @@ log = logging.getLogger("centinela")
 app = FastAPI(
     title="Centinela",
     description="Prototipo de alertas de posible fraude conversacional en llamadas simuladas.",
-    version="0.7.0",
+    version="0.8.0",
 )
 
 _nivel_alerta = Nivel[ajustes.nivel_alerta.upper()]
@@ -62,14 +70,20 @@ def salud():
 @app.get("/senales")
 def catalogo_de_senales():
     """Lista pública de las señales que el motor revisa, para explicar las alertas."""
-    return [{"id": s.id, "tipo": s.tipo, "descripcion": s.descripcion} for s in CATALOGO]
+    return [{"id": s.id, "tipo": s.tipo, "descripcion": s.descripcion} for s in [*CATALOGO, NUMERO_REPORTADO]]
 
 
 @app.post("/llamadas", response_model=Llamada, status_code=201)
-def crear_llamada(sesion: Sesion | None = Depends(sesion_opcional)):
+def crear_llamada(entrada: NuevaLlamada | None = None, sesion: Sesion | None = Depends(sesion_opcional)):
     if len(llamadas) >= MAX_LLAMADAS:
         raise HTTPException(status_code=429, detail="Se alcanzó el máximo de llamadas en memoria")
     llamada = Llamada()
+    if entrada and entrada.numero and entrada.numero.strip():
+        # Solo se conserva cuántas personas reportaron el número, no el número
+        try:
+            llamada.numero_reportes = reportes.reputacion(entrada.numero)
+        except reportes.NumeroInvalido as e:
+            raise HTTPException(status_code=422, detail=str(e))
     if sesion and cuentas.tiene_permiso(sesion.usuario_id, "guardar_historial"):
         llamada.dueno, llamada.guardada = sesion.usuario_id, True
         historial.guardar_llamada(llamada)
@@ -197,7 +211,8 @@ def _procesar(llamada: Llamada, entrada: FragmentoEntrada) -> dict:
     previas = [f.texto for f in llamada.fragmentos]
     fragmento = Fragmento(**entrada.model_dump())
     # Ambas estrategias deciden sobre el mismo diálogo; el registro guarda las dos
-    fragmento.decisiones = [e.decidir(previas, entrada.texto) for e in estrategias]
+    externas = [NUMERO_REPORTADO] if llamada.numero_reportes >= reportes.UMBRAL_SENAL else []
+    fragmento.decisiones = [e.decidir(previas, entrada.texto, externas) for e in estrategias]
     llamada.fragmentos.append(fragmento)
 
     visible = next(d for d in fragmento.decisiones if d.estrategia == ajustes.estrategia_visible)
@@ -227,6 +242,7 @@ def _buscar(llamada_id: str, sesion: Sesion | None) -> Llamada:
 
 app.include_router(cuentas.router)
 app.include_router(historial.router)
+app.include_router(reportes.router)
 
 
 # La interfaz se sirve al final para que las rutas de la API tengan prioridad
