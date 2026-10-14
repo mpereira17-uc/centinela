@@ -1,7 +1,14 @@
 from datetime import datetime, timezone
+from typing import Literal
 from uuid import uuid4
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
+
+# Límites de entrada para evitar abusos (modelo de amenazas, A6)
+MAX_TEXTO = 2000
+MAX_FRAGMENTOS_POR_LLAMADA = 500
+
+NivelRiesgo = Literal["bajo", "moderado", "alto", "critico"]
 
 
 def _ahora() -> datetime:
@@ -11,17 +18,33 @@ def _ahora() -> datetime:
 class FragmentoEntrada(BaseModel):
     """Texto de un fragmento de la llamada con sus marcas de tiempo (segundos)."""
 
-    texto: str
+    texto: str = Field(min_length=1, max_length=MAX_TEXTO)
     inicio: float = Field(ge=0)
     fin: float = Field(ge=0)
-    hablante: str | None = None
+    hablante: str | None = Field(default=None, max_length=50)
+
+    @model_validator(mode="after")
+    def _fin_despues_de_inicio(self):
+        if self.fin < self.inicio:
+            raise ValueError("fin debe ser mayor o igual que inicio")
+        return self
+
+
+class SenalDetectada(BaseModel):
+    id: str
+    tipo: str
+    descripcion: str
 
 
 class Decision(BaseModel):
     estrategia: str
-    puntaje: float
+    nivel: NivelRiesgo
     alerta: bool
-    indicios: list[str]
+    mensaje: str
+    senales: list[SenalDetectada]
+    # De dónde sale la sospecha: por ahora solo del contenido de la conversación.
+    # No es una identidad confirmada ni un número reportado.
+    fuente: Literal["contenido"] = "contenido"
 
 
 class Fragmento(FragmentoEntrada):

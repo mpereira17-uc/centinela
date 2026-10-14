@@ -41,20 +41,20 @@ Las fronteras de confianza son el navegador frente a la API (todo lo que llega d
 | A3 | Repetición de solicitudes sensibles | Manipulación | API | Retos de un solo uso en WebAuthn; tokens CSRF en formularios | Paso 6 |
 | A4 | Inyección SQL | Manipulación | Base de datos | Solo consultas parametrizadas mediante el ORM | Paso 7 |
 | A5 | XSS al mostrar una transcripción en la interfaz | Manipulación | Navegador | Insertar el texto con `textContent`, nunca como HTML; política CSP estricta | Paso 3 |
-| A6 | Entradas enormes o malformadas que tumban el servicio | Denegación de servicio | API | Validación con Pydantic, límites de tamaño de texto y audio, límite de solicitudes por cliente | Paso 2 (texto), paso 4 (audio) |
+| A6 | Entradas enormes o malformadas que tumban el servicio | Denegación de servicio | API | Validación con Pydantic, límites de tamaño de texto y audio, límite de solicitudes por cliente | Hecho para texto (paso 2); audio en el paso 4 |
 | A7 | Acceso a llamadas o alertas de otro usuario | Elevación de privilegios | API | Autorización en el servidor en cada consulta, por dueño del recurso | Paso 6 |
-| A8 | Fuga de transcripciones o códigos en los logs | Divulgación | API | No registrar texto de conversaciones, PIN, tokens ni audio; registrar solo identificadores y decisiones | Paso 2 |
+| A8 | Fuga de transcripciones o códigos en los logs | Divulgación | API | No registrar texto de conversaciones, PIN, tokens ni audio; registrar solo identificadores y decisiones | Hecho (paso 2) |
 | A9 | Audio guardado sin que el usuario lo sepa | Divulgación | Transcripción | El audio se procesa en memoria y se descarta; guardarlo exige consentimiento explícito | Paso 4 |
 | A10 | Datos que quedan después de que el usuario pide borrarlos | Divulgación | Base de datos | Borrado real en cascada; retención limitada del historial | Paso 7 |
-| A11 | Estafador que reformula su guion para evadir las reglas | Manipulación | Motor | Acumular indicios a lo largo de la llamada; clasificador entrenado con variaciones; evaluar con guiones nuevos | Paso 2, paso 11 |
+| A11 | Estafador que reformula su guion para evadir las reglas | Manipulación | Motor | Acumular indicios a lo largo de la llamada; clasificador entrenado con variaciones; evaluar con guiones nuevos | Acumulación hecha (paso 2); clasificador en el paso 11 |
 | A12 | Inyección de instrucciones en el texto analizado ("ignora lo anterior...") | Manipulación | Motor | El motor no usa un modelo de lenguaje que siga instrucciones; el texto solo se clasifica | Por diseño |
-| A13 | Falsa alerta en una llamada legítima | — | Motor | Niveles con razones visibles; sin porcentajes no calibrados; un solo aviso por llamada; medir falsas alertas | Paso 2 |
+| A13 | Falsa alerta en una llamada legítima | — | Motor | Niveles con razones visibles; sin porcentajes no calibrados; un solo aviso por llamada; medir falsas alertas | Hecho (paso 2); medición en el paso 10 |
 | A14 | Sesgo por acento, género o edad de quien habla | — | Motor | El motor decide sobre el contenido, no sobre la voz; revisar errores de transcripción por grupo en la evaluación | Por diseño, paso 10 |
 | A15 | Reportes falsos o coordinados contra un número | Manipulación | Reportes | Límite de reportes por cuenta; la reputación pesa como señal y nunca decide sola; separar "reportado" de "confirmado" | Paso 8 |
 | A16 | Exposición de quién reportó | Divulgación | Reportes | Reportes seudónimos; no se publican datos del denunciante | Paso 8 |
 | A17 | Voz clonada que imita a un familiar | Suplantación | Usuario | La app nunca confirma una identidad por la voz; recomienda verificar por un canal independiente | Paso 5 (mensajes) |
 | A18 | Orden de voz que desactiva la protección o revela datos | Elevación de privilegios | Asistente | La voz solo consulta; las acciones sensibles piden confirmación en pantalla con passkey o PIN | Paso 5 |
-| A19 | Dependencia o modelo descargado comprometido | Manipulación | Servidor | Versiones fijadas; modelos solo de fuentes oficiales; revisión de dependencias con `pip-audit` | Paso 2 |
+| A19 | Dependencia o modelo descargado comprometido | Manipulación | Servidor | Versiones fijadas; modelos solo de fuentes oficiales; revisión de dependencias con `pip-audit` | Hecho (paso 2) |
 | A20 | Afirmar que se bloqueó algo que la app no puede bloquear | — | Interfaz | Los textos solo prometen lo que el sistema hace; revisión de mensajes en cada paso | Todos |
 
 ## 5. Riesgos aceptados en la beta
