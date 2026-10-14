@@ -1,0 +1,10 @@
+# Dependencias de voz y clasificación (instalar aparte, pesan más)
+-r requirements.txt
+faster-whisper>=1.0
+scikit-learn>=1.5
+numpy>=1.26
+pandas>=2.2
+piper-tts>=1.2
+# Opcional, para probar BETO:
+# transformers>=4.44
+# torch>=2.3
