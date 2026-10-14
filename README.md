@@ -27,7 +27,8 @@ Ambas decisiones quedan registradas. La interfaz muestra solo el aviso de la est
 backend/
   app/
     main.py            API: llamadas, fragmentos y decisiones
-    config.py          umbral, límite de contexto, estrategia visible
+    config.py          nivel de alerta, límite de contexto, estrategia visible
+    senales.py         catálogo de señales y niveles de riesgo
     modelos.py         llamada, fragmento y decisión
     estrategias/       por_fragmento.py y acumulacion.py
     transcripcion/     faster-whisper
@@ -72,7 +73,7 @@ Se cambia con variables de entorno o un archivo `.env` en `backend/`:
 
 | Variable | Por defecto | Uso |
 |---|---|---|
-| `CENTINELA_UMBRAL` | `0.6` | Umbral común de ambas estrategias |
+| `CENTINELA_NIVEL_ALERTA` | `alto` | Nivel desde el que alertan ambas estrategias (`moderado`, `alto` o `critico`) |
 | `CENTINELA_LIMITE_CONTEXTO` | `5` | Fragmentos que recuerda la acumulación |
 | `CENTINELA_ESTRATEGIA_VISIBLE` | `acumulacion` | Estrategia cuyo aviso se muestra |
 | `CENTINELA_MODELO_WHISPER` | `base` | Tamaño del modelo de transcripción |
@@ -83,4 +84,4 @@ El alcance, las amenazas y el orden de trabajo están en [docs/](docs/README.md)
 
 ## Estado
 
-Avance por pasos según la [hoja de ruta](docs/hoja-de-ruta.md). Las señales de riesgo actuales son reglas de referencia provisionales en `backend/app/estrategias/base.py`; el clasificador entrenado las complementará.
+Avance por pasos según la [hoja de ruta](docs/hoja-de-ruta.md). El motor de señales está descrito en [docs/motor-de-senales.md](docs/motor-de-senales.md); el clasificador entrenado lo complementará en el paso 11.

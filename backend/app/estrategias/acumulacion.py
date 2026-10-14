@@ -1,5 +1,6 @@
 from ..modelos import Decision
-from .base import Estrategia, detectar_senales
+from ..senales import Nivel, detectar
+from .base import Estrategia
 
 
 class Acumulacion(Estrategia):
@@ -7,22 +8,15 @@ class Acumulacion(Estrategia):
 
     nombre = "acumulacion"
 
-    def __init__(self, umbral: float, limite_contexto: int):
-        super().__init__(umbral)
+    def __init__(self, nivel_alerta: Nivel, limite_contexto: int):
+        super().__init__(nivel_alerta)
         self.limite_contexto = limite_contexto
 
     def decidir(self, historial: list[str], texto: str) -> Decision:
         ventana = historial[-(self.limite_contexto - 1):] if self.limite_contexto > 1 else []
-        indicios: list[str] = []
+        senales = []
         for t in [*ventana, texto]:
-            for s in detectar_senales(t):
-                if s not in indicios:
-                    indicios.append(s)
-        # Exige más señales que la estrategia por fragmento, pero las suma en el tiempo
-        puntaje = min(1.0, len(indicios) / 3)
-        return Decision(
-            estrategia=self.nombre,
-            puntaje=round(puntaje, 3),
-            alerta=puntaje >= self.umbral,
-            indicios=indicios,
-        )
+            for s in detectar(t):
+                if s not in senales:
+                    senales.append(s)
+        return self._decision(senales)
