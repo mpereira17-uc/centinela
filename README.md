@@ -29,6 +29,7 @@ backend/
     main.py            API: llamadas, fragmentos y decisiones
     cuentas.py         registro con passkey o PIN, sesiones y permisos
     db.py              base de datos SQLite local
+    historial.py       historial con retención, exportar y borrar
     config.py          nivel de alerta, límite de contexto, estrategia visible
     senales.py         catálogo de señales y niveles de riesgo
     modelos.py         llamada, fragmento y decisión
@@ -87,6 +88,7 @@ Se cambia con variables de entorno o un archivo `.env` en `backend/`:
 | `CENTINELA_ORIGEN` | `http://localhost:8000` | Dirección exacta desde donde se abre la interfaz |
 | `CENTINELA_COOKIE_SEGURA` | `false` | Ponlo en `true` cuando sirvas la interfaz por HTTPS |
 | `CENTINELA_DURACION_SESION_HORAS` | `12` | Horas que dura una sesión (de 1 a 168) |
+| `CENTINELA_DIAS_RETENCION` | `30` | Días que se conserva el historial antes de borrarse solo (de 1 a 365) |
 
 ## Documentación
 

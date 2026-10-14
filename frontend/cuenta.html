@@ -69,6 +69,22 @@
         <div class="acciones"><button type="button" id="salir" class="boton-secundario">Salir</button></div>
       </section>
 
+      <section class="tarjeta" aria-labelledby="historial-titulo">
+        <h2 id="historial-titulo">Historial</h2>
+        <p id="historial-estado"></p>
+        <ul id="historial" class="lista historial"></ul>
+        <div class="acciones">
+          <button type="button" id="borrar-historial" class="boton-secundario oculto">Borrar todo el historial</button>
+        </div>
+        <div id="confirmar-borrado" class="confirmar oculto" role="group" aria-labelledby="confirmar-texto">
+          <p id="confirmar-texto">¿Borrar todas las conversaciones guardadas? No se puede deshacer.</p>
+          <div class="acciones">
+            <button type="button" id="si-borrar" class="boton-peligro">Sí, borrar todo</button>
+            <button type="button" id="no-borrar" class="boton-secundario">Cancelar</button>
+          </div>
+        </div>
+      </section>
+
       <section class="tarjeta" aria-labelledby="passkeys-titulo">
         <h2 id="passkeys-titulo">Passkeys</h2>
         <p>Entra sin escribir el PIN, con la huella, el rostro o el bloqueo de pantalla de este dispositivo.</p>
@@ -95,14 +111,20 @@
         <h2 id="permisos-titulo">Permisos</h2>
         <p>Cada permiso es independiente y puedes quitarlo cuando quieras. Todos empiezan apagados.</p>
         <ul id="permisos" class="lista permisos"></ul>
-        <p class="ayuda">Por ahora estos permisos solo quedan registrados en tu cuenta. Centinela todavía no guarda tus conversaciones.</p>
+        <p class="ayuda">Si retiras el permiso de guardar el historial, borramos enseguida lo que estaba guardado. Los demás permisos por ahora solo quedan registrados.</p>
+      </section>
+
+      <section class="tarjeta" aria-labelledby="datos-titulo">
+        <h2 id="datos-titulo">Tus datos</h2>
+        <p>Descarga en un archivo todo lo que Centinela guarda de ti: cuenta, permisos, dispositivos e historial. Tu PIN y tus claves no se incluyen porque el servidor nunca los guarda en claro.</p>
+        <div class="acciones"><button type="button" id="exportar" class="boton-secundario">Descargar mis datos</button></div>
       </section>
 
       <section class="tarjeta peligro" aria-labelledby="eliminar-titulo">
         <h2 id="eliminar-titulo">Eliminar mi cuenta</h2>
         <details>
           <summary>Quiero eliminar mi cuenta</summary>
-          <p>Se borran tu alias, tu PIN, tus passkeys, tus sesiones y tus permisos. No se puede deshacer.</p>
+          <p>Se borran tu alias, tu PIN, tus passkeys, tus sesiones, tus permisos y tu historial. No se puede deshacer.</p>
           <form id="form-eliminar" class="formulario" novalidate>
             <label for="eliminar-pin" class="etiqueta">Escribe tu PIN para confirmar</label>
             <div class="fila">

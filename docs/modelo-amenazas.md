@@ -39,13 +39,13 @@ Las fronteras de confianza son el navegador frente a la API (todo lo que llega d
 | A1 | Fuerza bruta o *credential stuffing* contra el PIN | Suplantación | API | Límite de intentos con bloqueo temporal; PIN guardado con Argon2; passkeys como opción preferida | Hecho (paso 6): bloqueo de 15 minutos tras 5 fallos, Argon2id, PIN trivial rechazado |
 | A2 | Robo o reutilización del token de sesión | Suplantación | API, navegador | Cookie `HttpOnly`, `Secure` y `SameSite=Strict`; expiración corta; revocación desde "Dispositivos y sesiones" | Hecho (paso 6): token aleatorio guardado como hash SHA-256, sesión de 12 horas |
 | A3 | Repetición de solicitudes sensibles | Manipulación | API | Retos de un solo uso en WebAuthn; cabecera obligatoria contra CSRF | Hecho (paso 6): retos de 5 minutos que se borran al usarse; `SameSite=Strict` y cabecera `X-Centinela` |
-| A4 | Inyección SQL | Manipulación | Base de datos | Solo consultas parametrizadas | Cuentas hecho (paso 6); historial en el paso 7 |
+| A4 | Inyección SQL | Manipulación | Base de datos | Solo consultas parametrizadas | Hecho (pasos 6 y 7) |
 | A5 | XSS al mostrar una transcripción en la interfaz | Manipulación | Navegador | Insertar el texto con `textContent`, nunca como HTML; política CSP estricta | Hecho (paso 3) |
 | A6 | Entradas enormes o malformadas que tumban el servicio | Denegación de servicio | API | Validación con Pydantic, límites de tamaño de texto y audio, límite de solicitudes por cliente | Hecho: límites de tamaño (pasos 2 y 4) y 20 intentos de entrada por minuto por IP (paso 6) |
-| A7 | Acceso a llamadas o alertas de otro usuario | Elevación de privilegios | API | Autorización en el servidor en cada consulta, por dueño del recurso | Cuenta, sesiones y passkeys hecho (paso 6); llamadas e historial en el paso 7 |
+| A7 | Acceso a llamadas o alertas de otro usuario | Elevación de privilegios | API | Autorización en el servidor en cada consulta, por dueño del recurso | Hecho: cuenta, sesiones y passkeys (paso 6); llamadas con dueño e historial responden 404 a cualquier otra persona (paso 7) |
 | A8 | Fuga de transcripciones o códigos en los logs | Divulgación | API | No registrar texto de conversaciones, PIN, tokens ni audio; registrar solo identificadores y decisiones | Hecho (paso 2) |
 | A9 | Audio guardado sin que el usuario lo sepa | Divulgación | Transcripción | El audio se procesa en memoria y se descarta; guardarlo exige consentimiento explícito | Hecho (paso 4) |
-| A10 | Datos que quedan después de que el usuario pide borrarlos | Divulgación | Base de datos | Borrado real en cascada; retención limitada del historial | Paso 7 |
+| A10 | Datos que quedan después de que el usuario pide borrarlos | Divulgación | Base de datos | Borrado real en cascada; retención limitada del historial | Hecho (paso 7): 30 días por defecto, borrar una o todas, retirar el permiso borra lo guardado |
 | A11 | Estafador que reformula su guion para evadir las reglas | Manipulación | Motor | Acumular indicios a lo largo de la llamada; clasificador entrenado con variaciones; evaluar con guiones nuevos | Acumulación hecha (paso 2); clasificador en el paso 11 |
 | A12 | Inyección de instrucciones en el texto analizado ("ignora lo anterior...") | Manipulación | Motor | El motor no usa un modelo de lenguaje que siga instrucciones; el texto solo se clasifica | Por diseño |
 | A13 | Falsa alerta en una llamada legítima | — | Motor | Niveles con razones visibles; sin porcentajes no calibrados; un solo aviso por llamada; medir falsas alertas | Hecho (paso 2); medición en el paso 10 |
@@ -60,6 +60,7 @@ Las fronteras de confianza son el navegador frente a la API (todo lo que llega d
 ## 5. Riesgos aceptados en la beta
 
 - La beta corre en un portátil, sin copias de seguridad cifradas ni separación de ambientes de producción. Es aceptable porque solo maneja datos de prueba de voluntarios con consentimiento.
+- El historial (paso 7) guarda el texto de las frases sin cifrar dentro de SQLite. Se compensa con el permiso explícito, la retención de 30 días y el borrado real; en un servidor real habría que cifrar el disco o la base.
 - No hay pruebas de penetración independientes; se compensa con las pruebas automatizadas de cada paso y la revisión con OWASP ASVS nivel 1.
 - La biometría vocal y la detección de clonación no se implementan, así que sus amenazas (muestras manipuladas, ataques de repetición de voz) quedan para cuando se evalúe su viabilidad.
 

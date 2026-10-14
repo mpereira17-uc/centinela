@@ -6,6 +6,10 @@
 const $ = (sel) => document.querySelector(sel);
 
 const FECHA = new Intl.DateTimeFormat("es-CO", { dateStyle: "medium", timeStyle: "short" });
+const DIA = new Intl.DateTimeFormat("es-CO", { dateStyle: "long" });
+const NIVELES = { bajo: "Bajo", moderado: "Moderado", alto: "Alto", critico: "Crítico" };
+const HABLANTES = { llamante: "La persona que llama", usuario: "Yo" };
+let guardaHistorial = false;
 
 async function api(ruta, { metodo = "GET", datos } = {}) {
   const opciones = { method: metodo, headers: {}, credentials: "same-origin" };
@@ -142,6 +146,8 @@ async function mostrarCuenta(cuenta) {
   $("#alias").textContent = cuenta.alias;
   pintarPasskeys(cuenta.passkeys);
   pintarPermisos(cuenta.consentimientos);
+  guardaHistorial = cuenta.consentimientos.some((c) => c.finalidad === "guardar_historial" && c.otorgado);
+  await cargarHistorial();
   if (!hayPasskeys()) {
     $("#form-passkey").classList.add("oculto");
     $("#passkey-no-soportada").classList.remove("oculto");
@@ -222,7 +228,15 @@ function pintarPermisos(consentimientos) {
       caja.disabled = true;
       try {
         await api("/cuenta/consentimientos", { metodo: "PUT", datos: { finalidad: c.finalidad, otorgado: caja.checked } });
-        avisar(caja.checked ? "Permiso concedido." : "Permiso retirado.");
+        if (c.finalidad === "guardar_historial") {
+          guardaHistorial = caja.checked;
+          await cargarHistorial();
+          avisar(caja.checked
+            ? "Desde ahora guardamos tus conversaciones nuevas."
+            : "Permiso retirado. Borramos tu historial guardado.");
+        } else {
+          avisar(caja.checked ? "Permiso concedido." : "Permiso retirado.");
+        }
       } catch (e) {
         caja.checked = !caja.checked;
         avisar(e.message, "error");
@@ -232,6 +246,99 @@ function pintarPermisos(consentimientos) {
     });
     lista.append(li);
   }
+}
+
+// ---- Historial ----
+
+function insignia(nivel, prefijo) {
+  const s = document.createElement("span");
+  s.className = "frase-nivel";
+  s.dataset.nivel = nivel;
+  const icono = document.createElement("span");
+  icono.className = "nivel-icono";
+  icono.setAttribute("aria-hidden", "true");
+  const texto = document.createElement("span");
+  texto.textContent = `${prefijo}: ${NIVELES[nivel] || nivel}`;
+  s.append(icono, texto);
+  return s;
+}
+
+async function cargarHistorial() {
+  const { dias_retencion, llamadas } = await api("/historial");
+  $("#historial-estado").textContent = guardaHistorial
+    ? `Guardamos tus conversaciones durante ${dias_retencion} días y luego se borran solas.`
+    : "No estamos guardando tus conversaciones. Si quieres conservarlas, activa \"Guardar el historial\" en Permisos.";
+  const lista = $("#historial");
+  lista.replaceChildren();
+  for (const l of llamadas) lista.append(itemDeHistorial(l));
+  if (!llamadas.length && guardaHistorial) {
+    const li = document.createElement("li");
+    li.className = "ayuda";
+    li.textContent = "Todavía no hay conversaciones guardadas. Analiza una en la página principal.";
+    lista.append(li);
+  }
+  $("#borrar-historial").classList.toggle("oculto", llamadas.length === 0);
+  $("#confirmar-borrado").classList.add("oculto");
+}
+
+function itemDeHistorial(l) {
+  const li = document.createElement("li");
+  const info = document.createElement("div");
+  const fecha = document.createElement("strong");
+  fecha.textContent = FECHA.format(new Date(l.creada));
+  const datos = document.createElement("p");
+  datos.className = "ayuda";
+  datos.textContent = `${l.frases === 1 ? "1 frase" : `${l.frases} frases`}${l.aviso_visible ? " · se mostró una alerta" : ""}`
+    + ` · se borra el ${DIA.format(new Date(l.borrar_el))}`;
+  info.append(fecha, document.createElement("br"), insignia(l.nivel_max, "Nivel más alto"), datos);
+
+  const detalles = document.createElement("details");
+  const resumen = document.createElement("summary");
+  resumen.textContent = "Ver conversación";
+  const frases = document.createElement("ol");
+  frases.className = "conversacion";
+  detalles.append(resumen, frases);
+  detalles.addEventListener("toggle", async () => {
+    if (!detalles.open || frases.childElementCount) return;
+    try {
+      const d = await api(`/historial/${encodeURIComponent(l.id)}`);
+      for (const f of d.fragmentos) {
+        const visible = f.decisiones.find((x) => x.estrategia === "acumulacion") || f.decisiones[0];
+        const item = document.createElement("li");
+        item.className = "frase";
+        item.dataset.nivel = visible.nivel;
+        const quien = document.createElement("p");
+        quien.className = "frase-quien";
+        quien.textContent = HABLANTES[f.hablante] || "Del audio";
+        const texto = document.createElement("p");
+        texto.className = "frase-texto";
+        texto.textContent = f.texto;
+        item.append(quien, texto, insignia(visible.nivel, "Nivel tras esta frase"));
+        frases.append(item);
+      }
+    } catch (e) {
+      avisar(e.message, "error");
+    }
+  });
+
+  const borrar = document.createElement("button");
+  borrar.type = "button";
+  borrar.className = "boton-secundario";
+  borrar.textContent = "Borrar";
+  borrar.setAttribute("aria-label", `Borrar la conversación del ${FECHA.format(new Date(l.creada))}`);
+  borrar.addEventListener("click", async () => {
+    ocupado(borrar, true);
+    try {
+      await api(`/historial/${encodeURIComponent(l.id)}`, { metodo: "DELETE" });
+      avisar("Borramos esa conversación.");
+      await cargarHistorial();
+    } catch (e) {
+      avisar(e.message, "error");
+      ocupado(borrar, false);
+    }
+  });
+  li.append(info, borrar, detalles);
+  return li;
 }
 
 function nombreDeDispositivo(ua) {
@@ -394,6 +501,50 @@ $("#form-eliminar").addEventListener("submit", async (ev) => {
     avisar("Eliminamos tu cuenta y todos sus datos.");
   } catch (e) {
     error.textContent = e.message;
+  } finally {
+    ocupado(boton, false);
+  }
+});
+
+$("#borrar-historial").addEventListener("click", () => {
+  $("#confirmar-borrado").classList.remove("oculto");
+  $("#no-borrar").focus();
+});
+$("#no-borrar").addEventListener("click", () => {
+  $("#confirmar-borrado").classList.add("oculto");
+  $("#borrar-historial").focus();
+});
+$("#si-borrar").addEventListener("click", async (ev) => {
+  const boton = ev.currentTarget;
+  ocupado(boton, true);
+  try {
+    const { borradas } = await api("/historial", { metodo: "DELETE" });
+    await cargarHistorial();
+    avisar(borradas === 1 ? "Borramos 1 conversación." : `Borramos ${borradas} conversaciones.`);
+  } catch (e) {
+    avisar(e.message, "error");
+  } finally {
+    ocupado(boton, false);
+  }
+});
+
+$("#exportar").addEventListener("click", async (ev) => {
+  const boton = ev.currentTarget;
+  ocupado(boton, true);
+  try {
+    const r = await fetch("/cuenta/exportar", { credentials: "same-origin" });
+    if (!r.ok) throw new Error(r.status === 401 ? "Tu sesión terminó. Vuelve a entrar." : "No pudimos preparar el archivo.");
+    const url = URL.createObjectURL(await r.blob());
+    const enlace = document.createElement("a");
+    enlace.href = url;
+    enlace.download = "centinela-mis-datos.json";
+    document.body.append(enlace);
+    enlace.click();
+    enlace.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    avisar("Descargamos tus datos en el archivo centinela-mis-datos.json.");
+  } catch (e) {
+    avisar(e.message, "error");
   } finally {
     ocupado(boton, false);
   }

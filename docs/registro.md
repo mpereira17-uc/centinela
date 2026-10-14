@@ -1,6 +1,6 @@
 # Registro seguro
 
-Paso 6 de la [hoja de ruta](hoja-de-ruta.md). La cuenta es opcional: analizar una conversación no la necesita. Sirve para guardar permisos y controlar las sesiones abiertas, y será la base del historial del paso 7.
+Paso 6 de la [hoja de ruta](hoja-de-ruta.md). La cuenta es opcional: analizar una conversación no la necesita. Sirve para guardar permisos, controlar las sesiones abiertas y, si se permite, conservar el [historial](historial.md).
 
 ![Pantalla de cuenta en el celular](capturas/cuenta-movil.png)
 
@@ -35,14 +35,15 @@ Cada finalidad se acepta o retira por separado y todas empiezan apagadas:
 
 | Finalidad | Estado en la beta |
 |---|---|
-| Analizar las conversaciones que escribo o subo | Se registra; se aplicará al historial del paso 7 |
+| Guardar el historial de mis conversaciones y alertas | Activo: ver [historial.md](historial.md). Retirarlo borra lo guardado |
+| Analizar las conversaciones que escribo o subo | Se registra; el análisis sin cuenta sigue disponible |
 | Convertir en texto el audio que grabo o subo | Se registra; la pantalla de audio sigue pidiendo su propio consentimiento cada vez |
 | Usar mis conversaciones, sin datos personales, para mejorar el detector | Se registra; se aplicará en los pasos 10 y 11 |
 | Reconocer mi voz para entrar | **No disponible.** La API rechaza activarla (422) porque la autenticación vocal no existe en la beta |
 
 ## Acciones que piden el PIN
 
-Quitar una passkey y eliminar la cuenta piden el PIN en pantalla, con el mismo límite de intentos. El asistente por voz nunca las ejecuta. Eliminar la cuenta borra en cascada sesiones, passkeys, permisos y retos pendientes.
+Quitar una passkey y eliminar la cuenta piden el PIN en pantalla, con el mismo límite de intentos. El asistente por voz nunca las ejecuta. Eliminar la cuenta borra en cascada sesiones, passkeys, permisos, retos pendientes e historial.
 
 ## API
 

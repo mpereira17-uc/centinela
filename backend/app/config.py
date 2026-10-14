@@ -28,6 +28,8 @@ class Ajustes(BaseSettings):
     # Activar cuando la interfaz se sirva por HTTPS
     cookie_segura: bool = False
     duracion_sesion_horas: int = Field(default=12, ge=1, le=168)
+    # Días que se conserva el historial antes de borrarse solo
+    dias_retencion: int = Field(default=30, ge=1, le=365)
 
 
 ajustes = Ajustes()

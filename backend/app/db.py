@@ -39,6 +39,22 @@ CREATE TABLE IF NOT EXISTS consentimientos (
     actualizado REAL NOT NULL,
     PRIMARY KEY (usuario_id, finalidad)
 );
+CREATE TABLE IF NOT EXISTS llamadas_guardadas (
+    id TEXT PRIMARY KEY,
+    usuario_id TEXT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+    creada REAL NOT NULL,
+    actualizada REAL NOT NULL,
+    nivel_max TEXT NOT NULL DEFAULT 'bajo',
+    aviso_visible INTEGER NOT NULL DEFAULT 0
+);
+CREATE INDEX IF NOT EXISTS llamadas_por_usuario ON llamadas_guardadas (usuario_id, creada);
+CREATE TABLE IF NOT EXISTS fragmentos_guardados (
+    id TEXT PRIMARY KEY,
+    llamada_id TEXT NOT NULL REFERENCES llamadas_guardadas(id) ON DELETE CASCADE,
+    orden INTEGER NOT NULL,
+    datos TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS fragmentos_por_llamada ON fragmentos_guardados (llamada_id, orden);
 CREATE TABLE IF NOT EXISTS retos (
     id TEXT PRIMARY KEY,
     usuario_id TEXT REFERENCES usuarios(id) ON DELETE CASCADE,

@@ -218,3 +218,7 @@ a.marca { color: var(--texto); text-decoration: none; }
 .permisos input:disabled + span { color: var(--texto-suave); }
 .boton-peligro { background: var(--critico); color: var(--superficie); border: 2px solid var(--critico); font-weight: 700; }
 .peligro { border-color: var(--critico); }
+.historial > li > details { flex: 1 1 100%; }
+.historial .conversacion { margin-top: .5rem; }
+.historial .frase-nivel { margin: .2rem 0; }
+.confirmar { margin-top: 1rem; padding: 1rem; border-radius: 8px; border: 2px solid var(--critico); background: var(--critico-fondo); }

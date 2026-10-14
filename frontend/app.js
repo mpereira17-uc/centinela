@@ -48,9 +48,16 @@ function mensajeDeError(status) {
   }
 }
 
+function mostrarGuardado(guardada) {
+  $("#guardado").textContent = guardada
+    ? "Esta conversación se guarda en tu historial. Puedes verla o borrarla en Mi cuenta."
+    : "Esta conversación no se guarda.";
+}
+
 async function nuevaConversacion() {
   const llamada = await api("/llamadas", { method: "POST" });
   estado.llamadaId = llamada.id;
+  mostrarGuardado(llamada.guardada);
   estado.inicio = performance.now();
   estado.ultimoFin = 0;
   $("#conversacion").replaceChildren();

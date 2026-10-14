@@ -9,3 +9,4 @@
 - [Transcripción de audio](transcripcion.md): grabar o subir audio y transcribirlo en local.
 - [Asistente por voz](asistente.md): comandos, respuesta hablada y límites de la voz.
 - [Registro seguro](registro.md): passkeys, PIN, sesiones y permisos.
+- [Historial y datos personales](historial.md): qué se guarda, cuánto tiempo, cómo exportarlo y borrarlo.

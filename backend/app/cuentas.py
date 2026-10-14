@@ -46,12 +46,13 @@ MAX_PASSKEYS_POR_USUARIO = 10
 MAX_RETOS = 1000
 
 FINALIDADES = {
+    "guardar_historial": "Guardar el historial de mis conversaciones y alertas en este equipo",
     "analisis_conversaciones": "Analizar las conversaciones que escribo o subo",
     "transcripcion_audio": "Convertir en texto el audio que grabo o subo",
     "entrenamiento_modelos": "Usar mis conversaciones, sin datos personales, para mejorar el detector",
     "autenticacion_vocal": "Reconocer mi voz para entrar (no disponible en la beta)",
 }
-Finalidad = Literal["analisis_conversaciones", "transcripcion_audio", "entrenamiento_modelos", "autenticacion_vocal"]
+Finalidad = Literal["guardar_historial", "analisis_conversaciones", "transcripcion_audio", "entrenamiento_modelos", "autenticacion_vocal"]
 NO_DISPONIBLES = {"autenticacion_vocal"}
 
 _hasher = PasswordHasher()
@@ -127,6 +128,24 @@ def usuario_actual(centinela_sesion: Annotated[str | None, Cookie()] = None) -> 
             raise HTTPException(status_code=401, detail="Tu sesión terminó. Vuelve a entrar.")
         con.execute("UPDATE sesiones SET ultimo_uso = ? WHERE id = ?", (ahora, fila["id"]))
     return Sesion(usuario_id=fila["usuario_id"], sesion_id=fila["id"])
+
+
+def sesion_opcional(centinela_sesion: Annotated[str | None, Cookie()] = None) -> Sesion | None:
+    """Como usuario_actual, pero sin exigir sesión: las rutas de análisis funcionan sin cuenta."""
+    if not centinela_sesion:
+        return None
+    try:
+        return usuario_actual(centinela_sesion)
+    except HTTPException:
+        return None
+
+
+def tiene_permiso(usuario_id: str, finalidad: str) -> bool:
+    with conexion() as con:
+        fila = con.execute(
+            "SELECT otorgado FROM consentimientos WHERE usuario_id = ? AND finalidad = ?", (usuario_id, finalidad)
+        ).fetchone()
+    return bool(fila and fila["otorgado"])
 
 
 def _crear_sesion(con, usuario_id: str, request: Request, response: Response) -> str:
@@ -355,13 +374,16 @@ def cambiar_consentimiento(cambio: CambioConsentimiento, sesion: Sesion = Depend
             "ON CONFLICT (usuario_id, finalidad) DO UPDATE SET otorgado = excluded.otorgado, actualizado = excluded.actualizado",
             (sesion.usuario_id, cambio.finalidad, int(cambio.otorgado), time.time()),
         )
+        # Retirar el permiso de guardar borra lo que ya estaba guardado
+        if cambio.finalidad == "guardar_historial" and not cambio.otorgado:
+            con.execute("DELETE FROM llamadas_guardadas WHERE usuario_id = ?", (sesion.usuario_id,))
     log.info("cuenta=%s consentimiento=%s otorgado=%s", sesion.usuario_id, cambio.finalidad, cambio.otorgado)
     return {"finalidad": cambio.finalidad, "otorgado": cambio.otorgado}
 
 
 @router.post("/eliminar", dependencies=cambia)
 def eliminar_cuenta(datos: ConfirmarPin, response: Response, sesion: Sesion = Depends(usuario_actual)):
-    """Borra la cuenta y, en cascada, sus sesiones, passkeys y consentimientos. Pide el PIN (A18)."""
+    """Borra la cuenta y, en cascada, sus sesiones, passkeys, permisos e historial. Pide el PIN (A18)."""
     with conexion() as con:
         _confirmar_pin(con, sesion.usuario_id, datos.pin)
         con.execute("DELETE FROM usuarios WHERE id = ?", (sesion.usuario_id,))

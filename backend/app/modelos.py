@@ -59,6 +59,9 @@ class Llamada(BaseModel):
     fragmentos: list[Fragmento] = []
     # Una vez se muestra el aviso no se repite, aunque el transcriptor corrija
     aviso_visible: bool = False
+    # Solo se guarda si la persona entró a su cuenta y permitió guardar el historial
+    guardada: bool = False
+    dueno: str | None = Field(default=None, exclude=True)
 
 
 class ConsultaAsistente(BaseModel):
