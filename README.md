@@ -77,6 +77,10 @@ Se cambia con variables de entorno o un archivo `.env` en `backend/`:
 | `CENTINELA_ESTRATEGIA_VISIBLE` | `acumulacion` | Estrategia cuyo aviso se muestra |
 | `CENTINELA_MODELO_WHISPER` | `base` | Tamaño del modelo de transcripción |
 
+## Documentación
+
+El alcance, las amenazas y el orden de trabajo están en [docs/](docs/README.md), empezando por la [viabilidad técnica](docs/viabilidad.md).
+
 ## Estado
 
-Fase 3 en preparación. Las señales de riesgo actuales son reglas de referencia provisionales en `backend/app/estrategias/base.py`; el clasificador entrenado las complementará.
+Avance por pasos según la [hoja de ruta](docs/hoja-de-ruta.md). Las señales de riesgo actuales son reglas de referencia provisionales en `backend/app/estrategias/base.py`; el clasificador entrenado las complementará.
