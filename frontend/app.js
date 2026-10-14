@@ -302,6 +302,115 @@ async function empezarGrabacion() {
   grabacion.reloj = setInterval(tic, 1000);
 }
 
+// ---- Asistente por voz ----
+
+const asistente = { recorder: null, partes: [], audio: null };
+
+function mostrarRespuesta(r, dijiste) {
+  $("#respuesta").classList.remove("oculto");
+  $("#dijiste").textContent = dijiste ? `Dijiste: «${dijiste}»` : "";
+  $("#respuesta-texto").textContent = r.respuesta;
+  $("#respuesta-nota").textContent = r.requiere_confirmacion
+    ? "Por seguridad, la voz no puede cambiar tu cuenta ni tu protección."
+    : "";
+  if ($("#en-voz-alta").checked) leerEnVozAlta(r.respuesta);
+}
+
+async function leerEnVozAlta(texto) {
+  // Primero la voz de Piper en este equipo; si no está instalada, la del navegador
+  try {
+    const r = await fetch("/voz", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ texto }) });
+    if (r.ok) {
+      const url = URL.createObjectURL(await r.blob());
+      asistente.audio?.pause();
+      asistente.audio = new Audio(url);
+      asistente.audio.addEventListener("ended", () => URL.revokeObjectURL(url));
+      await asistente.audio.play();
+      return;
+    }
+  } catch { /* se intenta con la voz del navegador */ }
+  if ("speechSynthesis" in window) {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(texto);
+    u.lang = "es-CO";
+    speechSynthesis.speak(u);
+  }
+}
+
+async function preguntar(texto) {
+  const cuerpo = { texto };
+  if (estado.llamadaId) cuerpo.llamada_id = estado.llamadaId;
+  try {
+    const r = await api("/asistente", { method: "POST", body: JSON.stringify(cuerpo) });
+    mostrarRespuesta(r, null);
+  } catch (e) {
+    mostrarRespuesta({ respuesta: e.message }, null);
+  }
+}
+
+async function empezarAHablar() {
+  if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
+    mostrarRespuesta({ respuesta: "Este navegador no permite usar el micrófono. Escribe tu pregunta." }, null);
+    return;
+  }
+  let flujo;
+  try {
+    flujo = await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch {
+    mostrarRespuesta({ respuesta: "No se pudo usar el micrófono. Revisa el permiso del navegador o escribe tu pregunta." }, null);
+    return;
+  }
+  asistente.partes = [];
+  asistente.recorder = new MediaRecorder(flujo);
+  asistente.recorder.addEventListener("dataavailable", (e) => e.data.size && asistente.partes.push(e.data));
+  asistente.recorder.addEventListener("stop", async () => {
+    flujo.getTracks().forEach((t) => t.stop());
+    $("#dejar-hablar").classList.add("oculto");
+    $("#hablar").classList.remove("oculto");
+    $("#hablar").focus();
+    const blob = new Blob(asistente.partes, { type: asistente.recorder.mimeType || "audio/webm" });
+    asistente.partes = [];
+    $("#respuesta").classList.remove("oculto");
+    $("#dijiste").textContent = "";
+    $("#respuesta-texto").textContent = "Escuchando lo que dijiste…";
+    $("#respuesta-nota").textContent = "";
+    const datos = new FormData();
+    datos.append("audio", blob, "orden.webm");
+    // Quien pulsa el botón consiente grabar su propia voz para esta orden
+    datos.append("consentimiento", "true");
+    if (estado.llamadaId) datos.append("llamada_id", estado.llamadaId);
+    try {
+      const r = await fetch("/asistente/voz", { method: "POST", body: datos });
+      const cuerpo = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(typeof cuerpo.detail === "string" ? cuerpo.detail : mensajeDeError(r.status));
+      mostrarRespuesta(cuerpo, cuerpo.transcripcion);
+    } catch (e) {
+      const texto = e instanceof TypeError ? "No pudimos conectar con Centinela." : e.message;
+      mostrarRespuesta({ respuesta: `${texto} Mientras tanto, puedes escribir tu pregunta.` }, null);
+    }
+  });
+  asistente.recorder.start();
+  $("#hablar").classList.add("oculto");
+  $("#dejar-hablar").classList.remove("oculto");
+  $("#dejar-hablar").focus();
+}
+
+async function cargarSugerencias() {
+  try {
+    const comandos = await api("/asistente/comandos");
+    const caja = $("#sugerencias");
+    const orden = ["parece_estafa", "explicar_alerta", "verificar_identidad", "ayuda"];
+    const elegidos = orden.map((id) => comandos.find((c) => c.id === id)).filter(Boolean);
+    for (const c of elegidos) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = c.ejemplo;
+      b.addEventListener("click", () => preguntar(c.ejemplo));
+      caja.append(b);
+    }
+  } catch { /* las sugerencias son opcionales */ }
+}
+
 async function cargarCatalogo() {
   try {
     const senales = await api("/senales");
@@ -344,5 +453,18 @@ document.addEventListener("DOMContentLoaded", () => {
     e.target.value = "";
     if (archivo && !estado.ocupado && hayConsentimiento()) enviarAudio(archivo, archivo.name);
   });
+  $("#hablar").addEventListener("click", empezarAHablar);
+  $("#dejar-hablar").addEventListener("click", () => asistente.recorder?.stop());
+  $("#form-pregunta").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const texto = $("#pregunta").value.trim();
+    if (!texto) {
+      $("#pregunta").focus();
+      return;
+    }
+    $("#pregunta").value = "";
+    preguntar(texto);
+  });
+  cargarSugerencias();
   cargarCatalogo();
 });

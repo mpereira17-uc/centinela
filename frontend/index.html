@@ -44,6 +44,33 @@
       <p id="nivel-mensaje" class="nivel-mensaje">Agrega la primera frase para empezar.</p>
     </section>
 
+    <section class="tarjeta asistente" aria-labelledby="asistente-titulo">
+      <h2 id="asistente-titulo">Pregúntale a Centinela</h2>
+      <p>Habla o escribe una pregunta. Te respondo en pantalla y en voz alta.</p>
+      <div class="acciones">
+        <button type="button" id="hablar" class="boton-principal">Hablar</button>
+        <button type="button" id="dejar-hablar" class="boton-principal oculto">Listo, ya hablé</button>
+      </div>
+      <p class="ayuda">Tu voz se convierte en texto en este equipo y se descarta enseguida.</p>
+      <form id="form-pregunta" class="pregunta" novalidate>
+        <label for="pregunta" class="etiqueta">O escribe tu pregunta</label>
+        <div class="fila">
+          <input type="text" id="pregunta" maxlength="500" autocomplete="off" placeholder="¿Esta llamada parece una estafa?">
+          <button type="submit" class="boton-secundario">Preguntar</button>
+        </div>
+      </form>
+      <div id="sugerencias" class="sugerencias" aria-label="Preguntas sugeridas"></div>
+      <label class="consentimiento">
+        <input type="checkbox" id="en-voz-alta" checked>
+        <span>Responder en voz alta</span>
+      </label>
+      <div id="respuesta" class="respuesta oculto" aria-live="polite">
+        <p id="dijiste" class="ayuda"></p>
+        <p id="respuesta-texto"></p>
+        <p id="respuesta-nota" class="ayuda"></p>
+      </div>
+    </section>
+
     <section class="tarjeta" aria-labelledby="form-titulo">
       <h2 id="form-titulo">Agregar una frase</h2>
       <form id="formulario" novalidate>

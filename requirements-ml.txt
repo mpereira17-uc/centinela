@@ -4,7 +4,7 @@ faster-whisper==1.1.1
 scikit-learn>=1.5
 numpy>=1.26
 pandas>=2.2
-piper-tts>=1.2
+piper-tts==1.8.0
 # Opcional, para probar BETO:
 # transformers>=4.44
 # torch>=2.3

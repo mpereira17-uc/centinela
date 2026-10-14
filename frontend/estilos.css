@@ -180,3 +180,15 @@ summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; al
 .boton-archivo { display: inline-flex; align-items: center; cursor: pointer; min-height: 44px; border-radius: 8px; padding: .55rem 1.1rem; }
 #archivo:focus-visible + .boton-archivo { outline: 3px solid var(--foco); outline-offset: 2px; }
 .grabando::before { content: "●"; color: var(--critico); margin-right: .4rem; }
+
+.fila { display: flex; gap: .5rem; flex-wrap: wrap; }
+.fila input { flex: 1 1 14rem; min-height: 44px; font: inherit; color: var(--texto); background: var(--fondo);
+  border: 2px solid var(--borde); border-radius: 8px; padding: .5rem .75rem; }
+.fila input:focus { border-color: var(--primario); }
+.pregunta { margin-top: 1rem; }
+.sugerencias { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+.sugerencias button { min-height: 40px; padding: .35rem .8rem; border-radius: 999px; border: 2px solid var(--borde);
+  background: transparent; color: var(--texto); font-size: .95rem; }
+.respuesta { margin-top: 1rem; padding: 1rem; border-radius: 8px; background: var(--fondo); border-left: 6px solid var(--primario); }
+.respuesta p:last-child { margin-bottom: 0; }
+#respuesta-texto { font-size: 1.15rem; font-weight: 600; }

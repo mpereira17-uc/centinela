@@ -7,3 +7,4 @@
 - [Motor de señales](motor-de-senales.md): señales, niveles de riesgo y mensajes de alerta.
 - [Interfaz web](interfaz.md): pantallas, accesibilidad y manejo de errores.
 - [Transcripción de audio](transcripcion.md): grabar o subir audio y transcribirlo en local.
+- [Asistente por voz](asistente.md): comandos, respuesta hablada y límites de la voz.

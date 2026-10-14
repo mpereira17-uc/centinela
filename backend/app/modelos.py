@@ -59,3 +59,12 @@ class Llamada(BaseModel):
     fragmentos: list[Fragmento] = []
     # Una vez se muestra el aviso no se repite, aunque el transcriptor corrija
     aviso_visible: bool = False
+
+
+class ConsultaAsistente(BaseModel):
+    texto: str = Field(min_length=1, max_length=500)
+    llamada_id: str | None = Field(default=None, max_length=64)
+
+
+class TextoParaVoz(BaseModel):
+    texto: str = Field(min_length=1, max_length=1000)

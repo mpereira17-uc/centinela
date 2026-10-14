@@ -79,6 +79,7 @@ Se cambia con variables de entorno o un archivo `.env` en `backend/`:
 | `CENTINELA_LIMITE_CONTEXTO` | `5` | Fragmentos que recuerda la acumulación |
 | `CENTINELA_ESTRATEGIA_VISIBLE` | `acumulacion` | Estrategia cuyo aviso se muestra |
 | `CENTINELA_MODELO_WHISPER` | `base` | Tamaño del modelo de transcripción |
+| `CENTINELA_VOZ_PIPER` | vacío | Ruta a una voz `.onnx` de Piper; vacío usa la voz del navegador |
 
 ## Documentación
 

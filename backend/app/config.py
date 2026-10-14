@@ -17,6 +17,8 @@ class Ajustes(BaseSettings):
     estrategia_visible: Literal["por_fragmento", "acumulacion"] = "acumulacion"
     # Modelo de faster-whisper (tiny, base, small...) para correr en CPU
     modelo_whisper: str = "base"
+    # Ruta al archivo .onnx de una voz de Piper en español; vacío usa la voz del navegador
+    voz_piper: str = ""
 
 
 ajustes = Ajustes()

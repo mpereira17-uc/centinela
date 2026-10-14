@@ -52,8 +52,8 @@ Las fronteras de confianza son el navegador frente a la API (todo lo que llega d
 | A14 | Sesgo por acento, género o edad de quien habla | — | Motor | El motor decide sobre el contenido, no sobre la voz; revisar errores de transcripción por grupo en la evaluación | Por diseño, paso 10 |
 | A15 | Reportes falsos o coordinados contra un número | Manipulación | Reportes | Límite de reportes por cuenta; la reputación pesa como señal y nunca decide sola; separar "reportado" de "confirmado" | Paso 8 |
 | A16 | Exposición de quién reportó | Divulgación | Reportes | Reportes seudónimos; no se publican datos del denunciante | Paso 8 |
-| A17 | Voz clonada que imita a un familiar | Suplantación | Usuario | La app nunca confirma una identidad por la voz; recomienda verificar por un canal independiente | Paso 5 (mensajes) |
-| A18 | Orden de voz que desactiva la protección o revela datos | Elevación de privilegios | Asistente | La voz solo consulta; las acciones sensibles piden confirmación en pantalla con passkey o PIN | Paso 5 |
+| A17 | Voz clonada que imita a un familiar | Suplantación | Usuario | La app nunca confirma una identidad por la voz; recomienda verificar por un canal independiente | Hecho (paso 5) |
+| A18 | Orden de voz que desactiva la protección o revela datos | Elevación de privilegios | Asistente | La voz solo consulta; las acciones sensibles piden confirmación en pantalla con passkey o PIN | Bloqueo por voz hecho (paso 5); confirmación con PIN en el paso 6 |
 | A19 | Dependencia o modelo descargado comprometido | Manipulación | Servidor | Versiones fijadas; modelos solo de fuentes oficiales; revisión de dependencias con `pip-audit` | Hecho (paso 2) |
 | A20 | Afirmar que se bloqueó algo que la app no puede bloquear | — | Interfaz | Los textos solo prometen lo que el sistema hace; revisión de mensajes en cada paso | Todos |
 
