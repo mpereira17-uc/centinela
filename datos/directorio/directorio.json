@@ -1,0 +1,33 @@
+{
+  "descripcion": "Canales oficiales para verificar una llamada o un mensaje llamando o entrando tú. Solo se ponen teléfonos confirmados en fuentes oficiales (ver docs/directorio.md); para los bancos, el número correcto es el del respaldo de la tarjeta o el de la aplicación oficial.",
+  "actualizado": "2026-10-15",
+  "entradas": [
+    {"nombre": "Policía: emergencias", "tipo": "emergencia", "telefono": "123", "para": "Si estás en peligro o quieres reportar un delito en curso."},
+    {"nombre": "GAULA: extorsión y secuestro", "tipo": "emergencia", "telefono": "165", "para": "Si te amenazan, te piden una 'vacuna' o dicen tener a un familiar.", "web": "https://www.policia.gov.co"},
+    {"nombre": "Fiscalía: denuncias", "tipo": "emergencia", "telefono": "122", "para": "Para denunciar una estafa o una extorsión.", "web": "https://www.fiscalia.gov.co"},
+    {"nombre": "Denuncia virtual de la Policía", "tipo": "emergencia", "para": "Denuncia por internet, sin ir a una estación.", "web": "https://adenunciar.policia.gov.co/"},
+    {"nombre": "CAI Virtual", "tipo": "emergencia", "para": "Delitos informáticos: enlaces falsos, cuentas robadas, suplantación.", "web": "https://caivirtual.policia.gov.co/"},
+    {"nombre": "Superintendencia Financiera: entidades vigiladas", "tipo": "gobierno", "para": "Antes de invertir o pedir un crédito, revisa si la empresa está vigilada.", "web": "https://www.superfinanciera.gov.co/jsp/13067"},
+    {"nombre": "DIAN", "tipo": "gobierno", "para": "La DIAN no cobra por teléfono ni pide pagos a cuentas personales.", "web": "https://www.dian.gov.co"},
+    {"nombre": "Registraduría", "tipo": "gobierno", "web": "https://www.registraduria.gov.co"},
+    {"nombre": "SIMIT: multas de tránsito", "tipo": "gobierno", "para": "Consulta tus multas tú mismo antes de pagar algo que te cobren por teléfono.", "web": "https://www.fcm.org.co/simit/"},
+    {"nombre": "Bancolombia", "tipo": "banco", "web": "https://www.bancolombia.com"},
+    {"nombre": "Davivienda", "tipo": "banco", "web": "https://www.davivienda.com"},
+    {"nombre": "Banco de Bogotá", "tipo": "banco", "web": "https://www.bancodebogota.com"},
+    {"nombre": "BBVA", "tipo": "banco", "web": "https://www.bbva.com.co"},
+    {"nombre": "Scotiabank Colpatria", "tipo": "banco", "web": "https://www.scotiabankcolpatria.com"},
+    {"nombre": "Banco Popular", "tipo": "banco", "web": "https://www.bancopopular.com.co"},
+    {"nombre": "Banco AV Villas", "tipo": "banco", "web": "https://www.avvillas.com.co"},
+    {"nombre": "Banco Caja Social", "tipo": "banco", "web": "https://www.bancocajasocial.com"},
+    {"nombre": "Banco Falabella", "tipo": "banco", "web": "https://www.bancofalabella.com.co"},
+    {"nombre": "Nu", "tipo": "banco", "web": "https://nu.com.co"},
+    {"nombre": "Nequi", "tipo": "billetera", "para": "Nequi te atiende desde su aplicación; nadie de Nequi te pide la clave.", "web": "https://www.nequi.com.co"},
+    {"nombre": "Daviplata", "tipo": "billetera", "web": "https://www.daviplata.com"},
+    {"nombre": "Servientrega", "tipo": "mensajeria", "para": "Rastrea tu envío en su página con el número de guía; no pagues por enlaces que te lleguen.", "web": "https://www.servientrega.com"},
+    {"nombre": "Interrapidísimo", "tipo": "mensajeria", "web": "https://www.interrapidisimo.com"},
+    {"nombre": "Coordinadora", "tipo": "mensajeria", "web": "https://www.coordinadora.com"},
+    {"nombre": "Claro", "tipo": "operador", "web": "https://www.claro.com.co"},
+    {"nombre": "Movistar", "tipo": "operador", "web": "https://www.movistar.co"},
+    {"nombre": "Tigo", "tipo": "operador", "web": "https://www.tigo.com.co"}
+  ]
+}
