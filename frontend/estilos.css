@@ -626,3 +626,7 @@ input[type="search"]:focus { border-color: var(--primario); background: var(--su
 #caja-numero-llamada input { width: 100%; min-height: 48px; font: inherit; color: var(--texto); background: var(--campo); border: 2px solid transparent; border-radius: 16px; padding: .65rem .9rem; }
 .desenlace-boton { justify-content: flex-start; }
 .desenlace-boton.elegido:disabled, .enlace-boton.elegido:disabled { opacity: 1; }
+
+/* Palabra clave familiar */
+.alerta-clave { margin: .55rem 0 0; padding: .6rem .8rem; border-radius: 14px; background: var(--cf); color: var(--texto); font-weight: 700; }
+.consejos { padding-left: 1.2rem; display: grid; gap: .45rem; margin: .6rem 0 1rem; }

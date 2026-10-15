@@ -113,6 +113,13 @@ CATALOGO: list[Senal] = [
         _p(r"\bfinge ser conocido\b"),
     ),
     Senal(
+        "emergencia_familiar",
+        Tipo.CONTEXTO,
+        "Cuenta una emergencia de un familiar o propia (accidente, detención, robo, clínica) que suele venir antes de pedir plata.",
+        "te cuentan una emergencia de un familiar",
+        _p(r"\b(esta|estoy|quedo|quede) (detenid[oa]|pres[oa]|capturad[oa]|en la (carcel|clinica|estacion|fiscalia|uri)|varad[oa])\b|\b(tuvo|tuve) un accidente\b|\bme (robaron|atracaron)\b|\b(su|tu) (hijo|hija|nieto|nieta|sobrino|sobrina|esposo|esposa) (tuvo|esta|quedo)\b"),
+    ),
+    Senal(
         "pide_datos_personales",
         Tipo.CONTEXTO,
         "Pide número de cédula, fecha de nacimiento, dirección u otros datos personales.",

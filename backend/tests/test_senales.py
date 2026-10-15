@@ -22,6 +22,7 @@ def ids(texto):
         ("Usted es el ganador de un sorteo", "premio_inversion"),
         ("Confírmeme su fecha de nacimiento", "pide_datos_personales"),
         ("Quiubo, ¿adivine quién le habla?", "finge_conocido"),
+        ("Su hijo tuvo un accidente y está en la clínica", "emergencia_familiar"),
     ],
 )
 def test_cada_senal_del_catalogo_se_detecta(texto, esperada):
@@ -32,7 +33,7 @@ def test_todas_las_senales_tienen_un_caso_de_prueba():
     probadas = {
         "pide_codigo", "pide_datos_bancarios", "pide_transferencia", "acceso_remoto",
         "desactivar_seguridad", "urgencia", "amenaza", "aislamiento",
-        "suplanta_entidad", "premio_inversion", "pide_datos_personales", "finge_conocido",
+        "suplanta_entidad", "premio_inversion", "pide_datos_personales", "finge_conocido", "emergencia_familiar",
     }
     assert probadas == {s.id for s in CATALOGO}
 
@@ -80,3 +81,13 @@ def test_mensaje_nombra_la_razon_mas_grave_y_no_da_porcentajes():
 def test_mensaje_de_riesgo_bajo_no_promete_seguridad():
     texto = mensaje(Nivel.BAJO, [])
     assert "no garantiza" in texto
+
+
+
+def test_emergencia_familiar_es_contexto_y_sola_no_alerta():
+    from app.senales import Nivel, calcular_nivel, detectar
+    for texto in ("Su hijo tuvo un accidente", "Mamá, estoy detenido en la estación", "Quedé varado en la vía"):
+        ids = [s.id for s in detectar(texto)]
+        assert "emergencia_familiar" in ids, texto
+    assert calcular_nivel(detectar("Su hijo tuvo un accidente")) == Nivel.MODERADO
+    assert calcular_nivel(detectar("Su hijo tuvo un accidente, consígneme ya mismo")) == Nivel.CRITICO

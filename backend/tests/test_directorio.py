@@ -58,3 +58,16 @@ def test_la_guia_me_estafaron_cubre_cada_situacion():
         assert f'"{s}"' in js
     assert "tel:165" in js and "/#denuncia" in js
     assert 'href="/ayuda.html#me-estafaron"' in cliente.get("/").text
+
+
+def test_palabra_clave_familiar_nunca_pide_la_palabra():
+    html = cliente.get("/ayuda.html").text
+    assert 'id="palabra-acordada"' in html and 'type="checkbox" id="palabra-acordada"' in html
+    i = html.index('id="palabra-clave"')
+    seccion = html[i:html.index("</section>", i)]
+    assert 'type="text"' not in seccion and "<input" in seccion and seccion.count("<input") == 1
+    comun = cliente.get("/comun.js").text
+    assert "consejoFamiliar" in comun and "emergencia_familiar" in comun
+    for pagina, js in (("/", "/app.js"), ("/llamada.html", "/llamada.js")):
+        assert 'class="alerta-clave' in cliente.get(pagina).text
+        assert "consejoFamiliar" in cliente.get(js).text

@@ -13,6 +13,7 @@
 - [Revisar un mensaje](mensajes.md): SMS, WhatsApp o correo con enlaces, sin abrirlos.
 - [Directorio de canales oficiales](directorio.md): verificar una llamada llamando tú a la entidad.
 - [Me estafaron, ¿qué hago?](me-estafaron.md): pasos en orden según lo que pasó.
+- [Palabra clave familiar](palabra-clave.md): defensa contra la voz clonada que no depende de un detector.
 - [Reporte de números](reportes.md): reportes seudónimos y reputación como señal.
 - [Llamada simulada](llamada.md): dos navegadores en llamada por WebRTC con análisis en vivo.
 - [¿Cómo terminó?](como-termino.md): feedback de un toque al colgar y reporte respaldado.

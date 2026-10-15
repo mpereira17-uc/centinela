@@ -16,6 +16,8 @@ El motor revisa el **contenido** de lo que se dice en la llamada y decide un niv
 | `aislamiento` | presión | "No cuelgue", "no le diga a nadie" |
 | `suplanta_entidad` | contexto | Dice llamar de un banco, la Fiscalía, la DIAN, un operador o una mensajería |
 | `premio_inversion` | contexto | Premios, sorteos, inversiones garantizadas, créditos, devoluciones |
+| `finge_conocido` | contexto | "Adivine quién le habla", "este es mi número nuevo" ([modismos](modismos.md)) |
+| `emergencia_familiar` | contexto | Accidente, detención, robo o clínica de un familiar; suele venir antes de pedir plata ([palabra clave](palabra-clave.md)) |
 | `pide_datos_personales` | contexto | Cédula, fecha de nacimiento, dirección |
 
 `GET /senales` devuelve esta misma lista para que la interfaz pueda explicar cada alerta.

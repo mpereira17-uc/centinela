@@ -128,7 +128,43 @@
     }
   }
 
+  // ---- Palabra clave familiar ----
+  // Solo se recuerda SI la persona acordó una palabra con su familia; la palabra nunca se escribe en la app.
+  const CLAVE_FAMILIAR = "centinela-palabra-clave";
+  const SENALES_FAMILIA = ["finge_conocido", "emergencia_familiar", "voz_dudosa"];
+
+  function tienePalabraClave() {
+    return guardado.leer(CLAVE_FAMILIAR) === "acordada";
+  }
+
+  // Consejo extra para el aviso cuando alguien dice ser de la familia o cuenta una emergencia
+  function consejoFamiliar(senales = []) {
+    if (!senales.some((s) => SENALES_FAMILIA.includes(s.id || s))) return null;
+    return tienePalabraClave()
+      ? "Pregúntale la palabra clave que acordaron en familia. Si no la sabe, cuelga, aunque la voz suene igual."
+      : "Cuelga y llama tú al número de siempre de esa persona. La voz se puede imitar con inteligencia artificial.";
+  }
+
+  function iniciarPalabraClave() {
+    const casilla = $("#palabra-acordada");
+    if (!casilla) return;
+    casilla.checked = tienePalabraClave();
+    const pintar = () => {
+      $("#palabra-estado").textContent = casilla.checked
+        ? "Listo. Cuando alguien diga ser de tu familia y pida plata, Centinela te recordará preguntarla."
+        : "";
+    };
+    pintar();
+    casilla.addEventListener("change", () => {
+      guardado.escribir(CLAVE_FAMILIAR, casilla.checked ? "acordada" : "no");
+      pintar();
+    });
+  }
+
+  window.Centinela = { consejoFamiliar };
+
   document.addEventListener("DOMContentLoaded", () => {
+    iniciarPalabraClave();
     iniciarLetra();
     iniciarBienvenida();
     iniciarAlerta();
