@@ -24,7 +24,9 @@ En los guiones de riesgo se toma como positiva la frase anotada en `turno_riesgo
 
 ## Umbral
 
-Se elige con validación cruzada de 5 partes sobre los datos de entrenamiento: el umbral que más frases de riesgo detecta sin pasar de 3 % de falsas alertas por frase. Las versiones regionales de una misma plantilla quedan siempre en la misma parte, y la tasa se mide sobre las frases escritas a mano ([por qué](base-guiones.md#cambios-en-el-clasificador)). Quedó en **0,63**, con 76 % de detección y 2 % de falsas alertas por frase fuera de muestra. Por llamada la detección es mayor, porque basta con que una frase supere el umbral.
+Se elige con validación cruzada de 5 partes sobre los datos de entrenamiento: el umbral que más frases de riesgo detecta sin pasar de 3 % de falsas alertas por frase. Las versiones regionales de una misma plantilla quedan siempre en la misma parte, y la tasa se mide sobre las frases escritas a mano ([por qué](base-guiones.md#cambios-en-el-clasificador)). Quedó en **0,61**, con 81 % de detección y 3 % de falsas alertas por frase fuera de muestra. Por llamada la detección es mayor, porque basta con que una frase supere el umbral.
+
+**Respuestas cortas (15 de octubre de 2026).** Al probar la interfaz, "Sí, dígame" daba riesgo alto: el modelo la asociaba con "dígame el código". Se corrigió de dos formas: el modelo no juzga frases de menos de 4 palabras (`MIN_PALABRAS`; ahí deciden solo las reglas), y se agregaron 12 frases legítimas de atención y respuestas comunes ("dígame en qué le puedo ayudar", "claro que sí, con mucho gusto") al entrenamiento. El umbral pasó de 0,63 a 0,61 y las cifras por llamada de todas las particiones quedaron iguales. En la misma revisión, la regla de entidades dejó de tomar la palabra "claro" como el operador: ahora necesita "de Claro", "desde Claro" u "operador Claro".
 
 ## Estrategia híbrida
 

@@ -33,7 +33,7 @@ Generado por `python -m evaluacion.evaluar` el 2026-10-15. 264 guiones de [datos
 | r11 | riesgo | empleo_falso | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s |
 | r12 | riesgo | suplanta_entidad | aviso en turno 2, 5,2 s | aviso en turno 2, 5,2 s | aviso en turno 2, 5,2 s | aviso en turno 2, 5,2 s |
 | r13 | riesgo | suplanta_banco | aviso en turno 2, 6,4 s | aviso en turno 2, 6,4 s | aviso en turno 2, 6,4 s | aviso en turno 2, 6,4 s |
-| r14 | riesgo | familiar_falso | sin aviso | sin aviso | aviso en turno 2, 0,0 s | aviso en turno 2, 0,0 s |
+| r14 | riesgo | familiar_falso | sin aviso | sin aviso | aviso en turno 0, 0,0 s | aviso en turno 0, 0,0 s |
 | r15 | riesgo | soporte_falso | sin aviso | sin aviso | aviso en turno 1, 0,0 s | aviso en turno 1, 0,0 s |
 | r16 | riesgo | premio_falso | aviso en turno 2, 5,6 s | aviso en turno 2, 5,6 s | aviso en turno 0, 0,0 s | aviso en turno 0, 0,0 s |
 | r17 | riesgo | extorsion | aviso en turno 1, 7,6 s | aviso en turno 1, 7,6 s | aviso en turno 1, 7,6 s | aviso en turno 1, 7,6 s |

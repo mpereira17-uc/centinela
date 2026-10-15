@@ -21,6 +21,8 @@ from .estrategias.base import Estrategia
 log = logging.getLogger("centinela")
 
 RUTA_MODELO = Path(__file__).with_name("modelo_clasificador.json")
+# Frases más cortas que esto no tienen con qué pedir algo; el modelo no las juzga
+MIN_PALABRAS = 4
 
 # Señal que agrega el clasificador cuando una frase se parece a las solicitudes de riesgo del entrenamiento
 PATRON_APRENDIDO = Senal(
@@ -56,6 +58,14 @@ class Modelo:
         self.umbral: float = datos["umbral"]
         self.version: str = datos.get("version", "")
 
+    def sospechosa(self, texto: str) -> bool:
+        """Supera el umbral y es lo bastante larga para pedir algo.
+
+        Una respuesta corta como "Sí, dígame" se parece por una sola palabra a "dígame el código";
+        con menos de MIN_PALABRAS palabras el modelo no decide y quedan solo las reglas.
+        """
+        return len(re.findall(r"[a-z0-9]+", normalizar(texto))) >= MIN_PALABRAS and self.probabilidad(texto) >= self.umbral
+
     def probabilidad(self, texto: str) -> float:
         """Probabilidad de que la frase sea una solicitud de riesgo, igual que predict_proba de scikit-learn."""
         conteos = Counter(i for f in caracteristicas(texto) if (i := self.vocabulario.get(f)) is not None)
@@ -86,7 +96,7 @@ class Clasificador(Estrategia):
         self.modelo = modelo
 
     def decidir(self, historial: list[str], texto: str, externas: Sequence[Senal] = ()) -> Decision:
-        senales = [PATRON_APRENDIDO] if self.modelo.probabilidad(texto) >= self.modelo.umbral else []
+        senales = [PATRON_APRENDIDO] if self.modelo.sospechosa(texto) else []
         return self._decision(senales, externas)
 
 
@@ -110,6 +120,6 @@ class Hibrida(Estrategia):
             for s in detectar(t):
                 if s not in senales:
                     senales.append(s)
-        if any(self.modelo.probabilidad(t) >= self.modelo.umbral for t in [*ventana, texto]):
+        if any(self.modelo.sospechosa(t) for t in [*ventana, texto]):
             senales.append(PATRON_APRENDIDO)
         return self._decision(senales, externas)

@@ -194,11 +194,11 @@
         },
         "clasificador": {
           "alerta": true,
-          "turno_alerta": 2,
+          "turno_alerta": 0,
           "anticipada": true,
           "segundos_hasta_aviso": 0.0,
           "niveles": [
-            "bajo",
+            "alto",
             "alto",
             "alto",
             "bajo"
@@ -206,11 +206,11 @@
         },
         "hibrida": {
           "alerta": true,
-          "turno_alerta": 2,
+          "turno_alerta": 0,
           "anticipada": true,
           "segundos_hasta_aviso": 0.0,
           "niveles": [
-            "bajo",
+            "alto",
             "critico",
             "critico",
             "critico"

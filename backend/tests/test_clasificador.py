@@ -71,3 +71,18 @@ def test_la_inferencia_sin_scikit_learn_coincide_con_scikit_learn():
     prueba = ["Dígame el código", "Hola mamá", "zzz", "Consigne ya a la cuenta que le digo"]
     for texto, esperado in zip(prueba, reg.predict_proba(vec.transform(prueba))[:, 1]):
         assert propio.probabilidad(texto) == pytest.approx(esperado, abs=1e-9)
+
+
+def test_respuestas_cortas_y_de_atencion_no_alertan():
+    # "Sí, dígame" se parecía a "dígame el código" (hallado al probar la interfaz el 15 de octubre)
+    from app.analisis import estrategias
+    hibrida = next(e for e in estrategias if e.nombre == "hibrida")
+    for texto in ("Sí, dígame.", "Dígame", "Sí, señor, dígame en qué le ayudo", "Sí, claro.", "Claro que sí, con mucho gusto"):
+        assert hibrida.decidir([], texto).nivel == "bajo", texto
+    assert hibrida.decidir([], "Dígame el código que le llegó").nivel in ("alto", "critico")
+
+
+def test_claro_solo_cuenta_como_operador_con_contexto():
+    from app.senales import detectar
+    assert "suplanta_entidad" not in [s.id for s in detectar("Claro que sí, ya le digo")]
+    assert "suplanta_entidad" in [s.id for s in detectar("Le hablamos de Claro, su plan venció")]

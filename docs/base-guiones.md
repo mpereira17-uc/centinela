@@ -54,7 +54,7 @@ Lee los mismos archivos que el entrenamiento y la evaluación, así que lo que d
 
 - **Entrena también con las plantillas de entrenamiento:** 63 frases de riesgo y 297 sin riesgo más.
 - **Validación cruzada por grupos.** Las nueve versiones regionales de una plantilla caen siempre en la misma parte. Si unas entrenaran y otras validaran, la validación saldría casi perfecta y el umbral, muy bajo (0,54 en lugar de 0,63).
-- **El umbral se mide sobre las frases escritas a mano.** Las sintéticas entrenan, pero no cuentan al medir, porque cada frase dudosa aparecería nueve veces. Quedó en 0,63, con 76 % de detección y 2 % de falsas alertas por frase fuera de muestra (antes 0,68, con 64 % y 2 %).
+- **El umbral se mide sobre las frases escritas a mano.** Las sintéticas entrenan, pero no cuentan al medir, porque cada frase dudosa aparecería nueve veces. Quedó en 0,63, con 76 % de detección y 2 % de falsas alertas por frase fuera de muestra (antes 0,68, con 64 % y 2 %). Después se ajustó a 0,61 al sumar respuestas cortas legítimas ([clasificador](clasificador.md)).
 
 ## Resultados
 

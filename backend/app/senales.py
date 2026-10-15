@@ -96,7 +96,7 @@ CATALOGO: list[Senal] = [
         Tipo.CONTEXTO,
         "Dice llamar de un banco, entidad pública, operador, mensajería o soporte técnico.",
         "dicen llamar de una entidad",
-        _p(r"\b(banco|bancolombia|davivienda|fiscalia|policia|dian|gaula|soporte tecnico|servientrega|interrapidisimo|claro|movistar|tigo|superintendencia|bbva|colpatria|av villas|banco de bogota|caja social|nu ?bank|sijin|dijin|registraduria|cobro juridico|eps)\b"),
+        _p(r"\b(banco|bancolombia|davivienda|fiscalia|policia|dian|gaula|soporte tecnico|servientrega|interrapidisimo|(de|desde|operador) claro|movistar|tigo|superintendencia|bbva|colpatria|av villas|banco de bogota|caja social|nu ?bank|sijin|dijin|registraduria|cobro juridico|eps)\b"),
     ),
     Senal(
         "premio_inversion",
