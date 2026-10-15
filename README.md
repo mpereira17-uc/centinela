@@ -31,6 +31,7 @@ backend/
     db.py              base de datos SQLite local
     historial.py       historial con retención, exportar y borrar
     reportes.py        reporte de números y reputación
+    base_guiones.py    API de solo lectura de la base de guiones
     clasificador.py    clasificador entrenado y estrategia híbrida
     senalizacion.py    salas y señalización WebRTC de la llamada simulada
     config.py          nivel de alerta, límite de contexto, estrategia visible
@@ -40,7 +41,7 @@ backend/
     transcripcion/     faster-whisper
   evaluacion/          generar audio de los guiones y medir las alertas
   tests/
-datos/guiones/         guiones de llamadas simuladas (legítimas y de riesgo)
+datos/guiones/         base de guiones: escritos, regionales, plantillas y generados
 datos/resultados/      informes de la evaluación
 docs/                  requisitos, diagramas y guía de anotación
 frontend/              interfaz web (HTML, CSS y JavaScript sin dependencias)

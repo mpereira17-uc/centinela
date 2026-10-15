@@ -23,6 +23,8 @@ def _ids(texto):
     ("No me vaya a colgar, sumercé", "aislamiento"),
     ("Tía, este es mi número nuevo", "finge_conocido"),
     ("Le hablamos de cobro jurídico", "suplanta_entidad"),
+    ("Tiene que colaborarnos con doscientos mil", "pide_transferencia"),            # extorsión
+    ("O le va a ir mal a su familia", "amenaza"),
 ])
 def test_un_modismo_se_reconoce_como_la_senal(texto, senal):
     assert senal in _ids(texto)

@@ -7,10 +7,10 @@ La beta se prueba con personas de Bogotá, pero quien llama a estafar puede habl
 1. **Diccionario de modismos** ([backend/app/modismos.py](../backend/app/modismos.py)). Antes de buscar señales, el texto (en minúsculas y sin tildes) se lleva a una forma común. Solo se reemplazan expresiones; no se borra nada. Grupos:
    - El código por mensaje: numeritos, codiguito, clavecita, mensajito, token.
    - Plata: lucas, luquitas, barras, palos, melones, platica.
-   - Pedir dinero: mándeme, pásame, eche, colabóreme con, regáleme, me presta... seguido de plata, pesos, lucas; y Bre-B.
+   - Pedir dinero: mándeme, pásame, eche, colabóreme o colaborarnos con, regáleme, me presta... seguido de plata, pesos, lucas o un monto ("doscientos mil"); y Bre-B.
    - Bajar una aplicación: bájese, descargue... una aplicación.
    - Afán: hágale ya, a la de ya, de afán, volando, ahí mismo.
-   - Amenaza: le caemos, lo tenemos ubicado, sabemos dónde vive, pagar la vacuna, boleteo.
+   - Amenaza: le caemos, lo tenemos ubicado, sabemos dónde vive, pagar la vacuna, boleteo, le va a ir mal.
    - Secreto: no le vaya a contar, no me vaya a colgar, esto queda entre los dos.
    - Conocido falso: adivine quién le habla, este es mi número nuevo, se me dañó el celular. Es una señal nueva de contexto, `finge_conocido`.
 2. **Excepción informativa.** "Ya le pasé por Nequi la plata" o "ya te consigné" cuentan algo que ya pasó; no piden una transferencia y no la marcan.
@@ -29,6 +29,8 @@ Partición `regional` ([guiones-regionales.json](../datos/guiones/guiones-region
 Antes, las reglas no reconocían "léame los numeritos del mensajito" (g01) y alertaban en falso cuando un hijo le contaba a su mamá "ya le pasé por Nequi la plata" (g12). En las particiones de desarrollo y reservada los resultados no cambiaron. Informe completo: [evaluacion-texto-regional.md](../datos/resultados/evaluacion-texto-regional.md).
 
 **Cuidado al leer esta tabla.** Los guiones regionales se escribieron antes del diccionario, pero el diccionario se ajustó viendo dónde fallaban. La mejora es real para esas frases, pero no es una medición a ciegas. La cifra que vale para el informe saldrá de llamadas nuevas del piloto en Bogotá, anotadas con la [guía de anotación](guia-anotacion.md).
+
+Más llamadas con estos modismos, 216 generadas desde plantillas para las 9 regiones, están en la [base de guiones](base-guiones.md).
 
 ## Límites
 

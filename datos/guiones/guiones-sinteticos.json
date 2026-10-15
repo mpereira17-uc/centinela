@@ -1,0 +1,1991 @@
+[
+  {"id": "s-suplanta_banco_codigo-costa-caribe", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "suplanta_banco_codigo", "descripcion": "Falso empleado del banco pide el código del mensaje para 'cancelar' una compra", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Ajá, buenas tardes. Le hablamos del área de seguridad del Banco de Bogotá."],
+      ["usuario", "Sí, ¿qué pasó?"],
+      ["llamante", "Eche, detectamos una compra rara en su cuenta. Para cancelarla dime el código del mensaje que le acaba de llegar, mi amor."],
+      ["usuario", "¿Y eso es seguro?"],
+      ["llamante", "No se preocupe, mi amor, pero hágale ahorita mismo que la compra se aprueba en dos minutos."]
+    ]
+  },
+  {"id": "s-suplanta_banco_codigo-antioquia", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "suplanta_banco_codigo", "descripcion": "Falso empleado del banco pide el código del mensaje para 'cancelar' una compra", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Hola, buenas. Le hablamos del área de seguridad de Davivienda."],
+      ["usuario", "Sí, ¿qué pasó?"],
+      ["llamante", "Vea, detectamos una compra rara en su cuenta. Para cancelarla páseme el código del mensaje que le acaba de llegar, mijo."],
+      ["usuario", "¿Y eso es seguro?"],
+      ["llamante", "No se preocupe, mijo, pero hágale ya mismo que la compra se aprueba en dos minutos."]
+    ]
+  },
+  {"id": "s-suplanta_banco_codigo-bogota", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "suplanta_banco_codigo", "descripcion": "Falso empleado del banco pide el código del mensaje para 'cancelar' una compra", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, buenos días. Le hablamos del área de seguridad de Colpatria."],
+      ["usuario", "Sí, ¿qué pasó?"],
+      ["llamante", "Oiga, detectamos una compra rara en su cuenta. Para cancelarla dígame los dígitos del mensaje que le acaba de llegar, sumercé."],
+      ["usuario", "¿Y eso es seguro?"],
+      ["llamante", "No se preocupe, sumercé, pero hágale de una vez que la compra se aprueba en dos minutos."]
+    ]
+  },
+  {"id": "s-suplanta_banco_codigo-valle-del-cauca", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "suplanta_banco_codigo", "descripcion": "Falso empleado del banco pide el código del mensaje para 'cancelar' una compra", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo estás? Le hablamos del área de seguridad de Colpatria."],
+      ["usuario", "Sí, ¿qué pasó?"],
+      ["llamante", "Ve, mirá, detectamos una compra rara en su cuenta. Para cancelarla pasame el código del mensaje que le acaba de llegar, parce."],
+      ["usuario", "¿Y eso es seguro?"],
+      ["llamante", "No se preocupe, parce, pero hágale volando que la compra se aprueba en dos minutos."]
+    ]
+  },
+  {"id": "s-suplanta_banco_codigo-santander", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "suplanta_banco_codigo", "descripcion": "Falso empleado del banco pide el código del mensaje para 'cancelar' una compra", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, ¿qué hubo? Le hablamos del área de seguridad del Banco Caja Social."],
+      ["usuario", "Sí, ¿qué pasó?"],
+      ["llamante", "Oiga, detectamos una compra rara en su cuenta. Para cancelarla páseme el código del mensaje que le acaba de llegar, hermano."],
+      ["usuario", "¿Y eso es seguro?"],
+      ["llamante", "No se preocupe, hermano, pero hágale rápido que la compra se aprueba en dos minutos."]
+    ]
+  },
+  {"id": "s-suplanta_banco_codigo-narino", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "suplanta_banco_codigo", "descripcion": "Falso empleado del banco pide el código del mensaje para 'cancelar' una compra", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo está? Le hablamos del área de seguridad del Banco Caja Social."],
+      ["usuario", "Sí, ¿qué pasó?"],
+      ["llamante", "Mire, detectamos una compra rara en su cuenta. Para cancelarla dígame los numeritos del mensaje que le acaba de llegar, mamita."],
+      ["usuario", "¿Y eso es seguro?"],
+      ["llamante", "No se preocupe, mamita, pero hágale ahoritica que la compra se aprueba en dos minutos."]
+    ]
+  },
+  {"id": "s-suplanta_banco_codigo-llanos", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "suplanta_banco_codigo", "descripcion": "Falso empleado del banco pide el código del mensaje para 'cancelar' una compra", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, compadre. Le hablamos del área de seguridad del Banco de Bogotá."],
+      ["usuario", "Sí, ¿qué pasó?"],
+      ["llamante", "Compadre, detectamos una compra rara en su cuenta. Para cancelarla regáleme el código del mensaje que le acaba de llegar, compadre."],
+      ["usuario", "¿Y eso es seguro?"],
+      ["llamante", "No se preocupe, compadre, pero hágale ya mismo que la compra se aprueba en dos minutos."]
+    ]
+  },
+  {"id": "s-suplanta_banco_codigo-tolima-y-huila", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "suplanta_banco_codigo", "descripcion": "Falso empleado del banco pide el código del mensaje para 'cancelar' una compra", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, ¿cómo le va? Le hablamos del área de seguridad de BBVA."],
+      ["usuario", "Sí, ¿qué pasó?"],
+      ["llamante", "Ole, detectamos una compra rara en su cuenta. Para cancelarla me regala el código del mensaje que le acaba de llegar, mi señora."],
+      ["usuario", "¿Y eso es seguro?"],
+      ["llamante", "No se preocupe, mi señora, pero hágale de una vez que la compra se aprueba en dos minutos."]
+    ]
+  },
+  {"id": "s-suplanta_banco_codigo-eje-cafetero", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "suplanta_banco_codigo", "descripcion": "Falso empleado del banco pide el código del mensaje para 'cancelar' una compra", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Quiubo, buenas. Le hablamos del área de seguridad de Davivienda."],
+      ["usuario", "Sí, ¿qué pasó?"],
+      ["llamante", "Ve, detectamos una compra rara en su cuenta. Para cancelarla regáleme los numeritos del mensaje que le acaba de llegar, parcero."],
+      ["usuario", "¿Y eso es seguro?"],
+      ["llamante", "No se preocupe, parcero, pero hágale de una que la compra se aprueba en dos minutos."]
+    ]
+  },
+  {"id": "s-familiar_numero_nuevo-costa-caribe", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "familiar_numero_nuevo", "descripcion": "Dice ser un familiar con número nuevo y pide plata", "turno_riesgo": 4,
+    "turnos": [
+      ["llamante", "Quiubo, buenas, ¿adivine quién le habla?"],
+      ["usuario", "No sé, ¿quién es?"],
+      ["llamante", "Soy yo, mija, su sobrino. Este es mi número nuevo, se me dañó el celular."],
+      ["usuario", "Ah, ¿y qué pasó?"],
+      ["llamante", "Ajá, estoy en un problema, pásame doscientas lucas por Daviplata rapidito y mañana se los devuelvo."],
+      ["llamante", "No le vaya a contar a mi mamá, por favor."]
+    ]
+  },
+  {"id": "s-familiar_numero_nuevo-antioquia", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "familiar_numero_nuevo", "descripcion": "Dice ser un familiar con número nuevo y pide plata", "turno_riesgo": 4,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo le va pues? ¿adivine quién le habla?"],
+      ["usuario", "No sé, ¿quién es?"],
+      ["llamante", "Soy yo, parce, su sobrino. Este es mi número nuevo, se me dañó el celular."],
+      ["usuario", "Ah, ¿y qué pasó?"],
+      ["llamante", "Pues mire, estoy en un problema, mándeme un palo por Nequi ya mismo y mañana se los devuelvo."],
+      ["llamante", "No le vaya a contar a mi mamá, por favor."]
+    ]
+  },
+  {"id": "s-familiar_numero_nuevo-bogota", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "familiar_numero_nuevo", "descripcion": "Dice ser un familiar con número nuevo y pide plata", "turno_riesgo": 4,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo me le va? ¿adivine quién le habla?"],
+      ["usuario", "No sé, ¿quién es?"],
+      ["llamante", "Soy yo, sumercé, su sobrino. Este es mi número nuevo, se me dañó el celular."],
+      ["usuario", "Ah, ¿y qué pasó?"],
+      ["llamante", "Mire, estoy en un problema, consígneme quinientos mil pesos por Bre-B en un momentico y mañana se los devuelvo."],
+      ["llamante", "No le vaya a contar a mi mamá, por favor."]
+    ]
+  },
+  {"id": "s-familiar_numero_nuevo-valle-del-cauca", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "familiar_numero_nuevo", "descripcion": "Dice ser un familiar con número nuevo y pide plata", "turno_riesgo": 4,
+    "turnos": [
+      ["llamante", "Aló, ¿qué más? ¿adivine quién le habla?"],
+      ["usuario", "No sé, ¿quién es?"],
+      ["llamante", "Soy yo, mija, su sobrino. Este es mi número nuevo, se me dañó el celular."],
+      ["usuario", "Ah, ¿y qué pasó?"],
+      ["llamante", "Ve, mirá, estoy en un problema, transferime trescientas lucas por Bre-B volando y mañana se los devuelvo."],
+      ["llamante", "No le vaya a contar a mi mamá, por favor."]
+    ]
+  },
+  {"id": "s-familiar_numero_nuevo-santander", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "familiar_numero_nuevo", "descripcion": "Dice ser un familiar con número nuevo y pide plata", "turno_riesgo": 4,
+    "turnos": [
+      ["llamante", "Buenas, mano, ¿adivine quién le habla?"],
+      ["usuario", "No sé, ¿quién es?"],
+      ["llamante", "Soy yo, hermano, su sobrino. Este es mi número nuevo, se me dañó el celular."],
+      ["usuario", "Ah, ¿y qué pasó?"],
+      ["llamante", "Oiga, estoy en un problema, mándeme un palo por Bre-B de una y mañana se los devuelvo."],
+      ["llamante", "No le vaya a contar a mi mamá, por favor."]
+    ]
+  },
+  {"id": "s-familiar_numero_nuevo-narino", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "familiar_numero_nuevo", "descripcion": "Dice ser un familiar con número nuevo y pide plata", "turno_riesgo": 4,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo está? ¿adivine quién le habla?"],
+      ["usuario", "No sé, ¿quién es?"],
+      ["llamante", "Soy yo, vecino, su sobrino. Este es mi número nuevo, se me dañó el celular."],
+      ["usuario", "Ah, ¿y qué pasó?"],
+      ["llamante", "Vea pues, estoy en un problema, consígneme doscientos mil por Daviplata ahoritica y mañana se los devuelvo."],
+      ["llamante", "No le vaya a contar a mi mamá, por favor."]
+    ]
+  },
+  {"id": "s-familiar_numero_nuevo-llanos", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "familiar_numero_nuevo", "descripcion": "Dice ser un familiar con número nuevo y pide plata", "turno_riesgo": 4,
+    "turnos": [
+      ["llamante", "Aló, ¿cómo amaneció? ¿adivine quién le habla?"],
+      ["usuario", "No sé, ¿quién es?"],
+      ["llamante", "Soy yo, patrón, su sobrino. Este es mi número nuevo, se me dañó el celular."],
+      ["usuario", "Ah, ¿y qué pasó?"],
+      ["llamante", "Mire, estoy en un problema, páseme quinientos mil por Bre-B ya mismo y mañana se los devuelvo."],
+      ["llamante", "No le vaya a contar a mi mamá, por favor."]
+    ]
+  },
+  {"id": "s-familiar_numero_nuevo-tolima-y-huila", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "familiar_numero_nuevo", "descripcion": "Dice ser un familiar con número nuevo y pide plata", "turno_riesgo": 4,
+    "turnos": [
+      ["llamante", "Aló, ¿cómo le va? ¿adivine quién le habla?"],
+      ["usuario", "No sé, ¿quién es?"],
+      ["llamante", "Soy yo, mijo, su sobrino. Este es mi número nuevo, se me dañó el celular."],
+      ["usuario", "Ah, ¿y qué pasó?"],
+      ["llamante", "Ole, estoy en un problema, mándeme doscientos mil por Nequi de una vez y mañana se los devuelvo."],
+      ["llamante", "No le vaya a contar a mi mamá, por favor."]
+    ]
+  },
+  {"id": "s-familiar_numero_nuevo-eje-cafetero", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "familiar_numero_nuevo", "descripcion": "Dice ser un familiar con número nuevo y pide plata", "turno_riesgo": 4,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo va? ¿adivine quién le habla?"],
+      ["usuario", "No sé, ¿quién es?"],
+      ["llamante", "Soy yo, parcero, su sobrino. Este es mi número nuevo, se me dañó el celular."],
+      ["usuario", "Ah, ¿y qué pasó?"],
+      ["llamante", "Pues mire, estoy en un problema, páseme cien lucas por Bre-B rapidito y mañana se los devuelvo."],
+      ["llamante", "No le vaya a contar a mi mamá, por favor."]
+    ]
+  },
+  {"id": "s-premio_envio-costa-caribe", "etiqueta": "riesgo", "categoria": "premio_falso", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "premio_envio", "descripcion": "Premio de un sorteo que exige pagar el envío", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, buenas. Lo llamamos de la tienda en línea porque usted ganó una moto en el sorteo de aniversario."],
+      ["usuario", "¿En serio? Yo no participé en nada."],
+      ["llamante", "Sí, mija, participó con su última compra. Solo tiene que pagar el envío: pásame doscientas lucas por Bre-B ya."],
+      ["usuario", "Déjeme pensarlo."],
+      ["llamante", "Es que el premio vence hoy, si no se lo damos a otra persona."]
+    ]
+  },
+  {"id": "s-premio_envio-antioquia", "etiqueta": "riesgo", "categoria": "premio_falso", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "premio_envio", "descripcion": "Premio de un sorteo que exige pagar el envío", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Hola, buenas. Lo llamamos del almacén Éxito porque usted ganó una moto en el sorteo de aniversario."],
+      ["usuario", "¿En serio? Yo no participé en nada."],
+      ["llamante", "Sí, mijo, participó con su última compra. Solo tiene que pagar el envío: mándeme cien lucas por Nequi rapidito pues."],
+      ["usuario", "Déjeme pensarlo."],
+      ["llamante", "Es que el premio vence hoy, si no se lo damos a otra persona."]
+    ]
+  },
+  {"id": "s-premio_envio-bogota", "etiqueta": "riesgo", "categoria": "premio_falso", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "premio_envio", "descripcion": "Premio de un sorteo que exige pagar el envío", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas tardes, sumercé. Lo llamamos del supermercado del barrio porque usted ganó una moto en el sorteo de aniversario."],
+      ["usuario", "¿En serio? Yo no participé en nada."],
+      ["llamante", "Sí, sumercé, participó con su última compra. Solo tiene que pagar el envío: transfiérame trescientos mil pesos por Daviplata ya mismo."],
+      ["usuario", "Déjeme pensarlo."],
+      ["llamante", "Es que el premio vence hoy, si no se lo damos a otra persona."]
+    ]
+  },
+  {"id": "s-premio_envio-valle-del-cauca", "etiqueta": "riesgo", "categoria": "premio_falso", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "premio_envio", "descripcion": "Premio de un sorteo que exige pagar el envío", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo estás? Lo llamamos del supermercado del barrio porque usted ganó una moto en el sorteo de aniversario."],
+      ["usuario", "¿En serio? Yo no participé en nada."],
+      ["llamante", "Sí, mijo, participó con su última compra. Solo tiene que pagar el envío: mandame trescientas lucas por Nequi rapidito."],
+      ["usuario", "Déjeme pensarlo."],
+      ["llamante", "Es que el premio vence hoy, si no se lo damos a otra persona."]
+    ]
+  },
+  {"id": "s-premio_envio-santander", "etiqueta": "riesgo", "categoria": "premio_falso", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "premio_envio", "descripcion": "Premio de un sorteo que exige pagar el envío", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenos días. Lo llamamos de la tienda en línea porque usted ganó una moto en el sorteo de aniversario."],
+      ["usuario", "¿En serio? Yo no participé en nada."],
+      ["llamante", "Sí, mi señora, participó con su última compra. Solo tiene que pagar el envío: gíreme un palo por Daviplata ya mismo."],
+      ["usuario", "Déjeme pensarlo."],
+      ["llamante", "Es que el premio vence hoy, si no se lo damos a otra persona."]
+    ]
+  },
+  {"id": "s-premio_envio-narino", "etiqueta": "riesgo", "categoria": "premio_falso", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "premio_envio", "descripcion": "Premio de un sorteo que exige pagar el envío", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, buenos días. Lo llamamos de la tienda en línea porque usted ganó una moto en el sorteo de aniversario."],
+      ["usuario", "¿En serio? Yo no participé en nada."],
+      ["llamante", "Sí, vecino, participó con su última compra. Solo tiene que pagar el envío: mándeme cien mil pesos por Nequi ya mismo."],
+      ["usuario", "Déjeme pensarlo."],
+      ["llamante", "Es que el premio vence hoy, si no se lo damos a otra persona."]
+    ]
+  },
+  {"id": "s-premio_envio-llanos", "etiqueta": "riesgo", "categoria": "premio_falso", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "premio_envio", "descripcion": "Premio de un sorteo que exige pagar el envío", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, compadre. Lo llamamos del almacén Éxito porque usted ganó una moto en el sorteo de aniversario."],
+      ["usuario", "¿En serio? Yo no participé en nada."],
+      ["llamante", "Sí, cuñao, participó con su última compra. Solo tiene que pagar el envío: mándeme doscientas lucas por Nequi de una."],
+      ["usuario", "Déjeme pensarlo."],
+      ["llamante", "Es que el premio vence hoy, si no se lo damos a otra persona."]
+    ]
+  },
+  {"id": "s-premio_envio-tolima-y-huila", "etiqueta": "riesgo", "categoria": "premio_falso", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "premio_envio", "descripcion": "Premio de un sorteo que exige pagar el envío", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Ole, buenas. Lo llamamos del almacén Éxito porque usted ganó una moto en el sorteo de aniversario."],
+      ["usuario", "¿En serio? Yo no participé en nada."],
+      ["llamante", "Sí, mijo, participó con su última compra. Solo tiene que pagar el envío: mándeme doscientos mil por Nequi de una vez."],
+      ["usuario", "Déjeme pensarlo."],
+      ["llamante", "Es que el premio vence hoy, si no se lo damos a otra persona."]
+    ]
+  },
+  {"id": "s-premio_envio-eje-cafetero", "etiqueta": "riesgo", "categoria": "premio_falso", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "premio_envio", "descripcion": "Premio de un sorteo que exige pagar el envío", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Quiubo, buenas. Lo llamamos del supermercado del barrio porque usted ganó una moto en el sorteo de aniversario."],
+      ["usuario", "¿En serio? Yo no participé en nada."],
+      ["llamante", "Sí, parcero, participó con su última compra. Solo tiene que pagar el envío: consígneme un palo por Bre-B de una."],
+      ["usuario", "Déjeme pensarlo."],
+      ["llamante", "Es que el premio vence hoy, si no se lo damos a otra persona."]
+    ]
+  },
+  {"id": "s-entidad_embargo-costa-caribe", "etiqueta": "riesgo", "categoria": "suplanta_entidad", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "entidad_embargo", "descripcion": "Falso funcionario amenaza con embargo y pide consignar un abono", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Quiubo, buenas. Le habla un funcionario de un juzgado de cobro, usted tiene un proceso pendiente."],
+      ["usuario", "¿Qué proceso?"],
+      ["llamante", "Mira, tiene una deuda y si no la paga hoy le embargamos la cuenta."],
+      ["llamante", "Para evitar el embargo consigne el abono a la cuenta que le voy a dictar, mi vida, ahorita mismo."],
+      ["usuario", "Yo no sabía nada de eso."]
+    ]
+  },
+  {"id": "s-entidad_embargo-antioquia", "etiqueta": "riesgo", "categoria": "suplanta_entidad", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "entidad_embargo", "descripcion": "Falso funcionario amenaza con embargo y pide consignar un abono", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Hola, buenas. Le habla un funcionario de la Fiscalía, usted tiene un proceso pendiente."],
+      ["usuario", "¿Qué proceso?"],
+      ["llamante", "Vea, tiene una deuda y si no la paga hoy le embargamos la cuenta."],
+      ["llamante", "Para evitar el embargo consigne el abono a la cuenta que le voy a dictar, mi amor, ya mismo."],
+      ["usuario", "Yo no sabía nada de eso."]
+    ]
+  },
+  {"id": "s-entidad_embargo-bogota", "etiqueta": "riesgo", "categoria": "suplanta_entidad", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "entidad_embargo", "descripcion": "Falso funcionario amenaza con embargo y pide consignar un abono", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo me le va? Le habla un funcionario de la Fiscalía, usted tiene un proceso pendiente."],
+      ["usuario", "¿Qué proceso?"],
+      ["llamante", "Mire, tiene una deuda y si no la paga hoy le embargamos la cuenta."],
+      ["llamante", "Para evitar el embargo consigne el abono a la cuenta que le voy a dictar, caballero, de una vez."],
+      ["usuario", "Yo no sabía nada de eso."]
+    ]
+  },
+  {"id": "s-entidad_embargo-valle-del-cauca", "etiqueta": "riesgo", "categoria": "suplanta_entidad", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "entidad_embargo", "descripcion": "Falso funcionario amenaza con embargo y pide consignar un abono", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo estás? Le habla un funcionario de la Fiscalía, usted tiene un proceso pendiente."],
+      ["usuario", "¿Qué proceso?"],
+      ["llamante", "Mirá, tiene una deuda y si no la paga hoy le embargamos la cuenta."],
+      ["llamante", "Para evitar el embargo consigne el abono a la cuenta que le voy a dictar, mija, volando."],
+      ["usuario", "Yo no sabía nada de eso."]
+    ]
+  },
+  {"id": "s-entidad_embargo-santander", "etiqueta": "riesgo", "categoria": "suplanta_entidad", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "entidad_embargo", "descripcion": "Falso funcionario amenaza con embargo y pide consignar un abono", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Buenas, mano. Le habla un funcionario de la Fiscalía, usted tiene un proceso pendiente."],
+      ["usuario", "¿Qué proceso?"],
+      ["llamante", "Vea, tiene una deuda y si no la paga hoy le embargamos la cuenta."],
+      ["llamante", "Para evitar el embargo consigne el abono a la cuenta que le voy a dictar, mi señora, ya mismo."],
+      ["usuario", "Yo no sabía nada de eso."]
+    ]
+  },
+  {"id": "s-entidad_embargo-narino", "etiqueta": "riesgo", "categoria": "suplanta_entidad", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "entidad_embargo", "descripcion": "Falso funcionario amenaza con embargo y pide consignar un abono", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Achichay, qué frío, buenas. Le habla un funcionario de la Secretaría de Movilidad, usted tiene un proceso pendiente."],
+      ["usuario", "¿Qué proceso?"],
+      ["llamante", "Vea pues, tiene una deuda y si no la paga hoy le embargamos la cuenta."],
+      ["llamante", "Para evitar el embargo consigne el abono a la cuenta que le voy a dictar, vecino, ahoritica."],
+      ["usuario", "Yo no sabía nada de eso."]
+    ]
+  },
+  {"id": "s-entidad_embargo-llanos", "etiqueta": "riesgo", "categoria": "suplanta_entidad", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "entidad_embargo", "descripcion": "Falso funcionario amenaza con embargo y pide consignar un abono", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Buenas tardes. Le habla un funcionario de un juzgado de cobro, usted tiene un proceso pendiente."],
+      ["usuario", "¿Qué proceso?"],
+      ["llamante", "Compadre, tiene una deuda y si no la paga hoy le embargamos la cuenta."],
+      ["llamante", "Para evitar el embargo consigne el abono a la cuenta que le voy a dictar, compadre, ya mismo."],
+      ["usuario", "Yo no sabía nada de eso."]
+    ]
+  },
+  {"id": "s-entidad_embargo-tolima-y-huila", "etiqueta": "riesgo", "categoria": "suplanta_entidad", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "entidad_embargo", "descripcion": "Falso funcionario amenaza con embargo y pide consignar un abono", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Buenas tardes. Le habla un funcionario de la Fiscalía, usted tiene un proceso pendiente."],
+      ["usuario", "¿Qué proceso?"],
+      ["llamante", "Vea, tiene una deuda y si no la paga hoy le embargamos la cuenta."],
+      ["llamante", "Para evitar el embargo consigne el abono a la cuenta que le voy a dictar, mi señora, ya mismo."],
+      ["usuario", "Yo no sabía nada de eso."]
+    ]
+  },
+  {"id": "s-entidad_embargo-eje-cafetero", "etiqueta": "riesgo", "categoria": "suplanta_entidad", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "entidad_embargo", "descripcion": "Falso funcionario amenaza con embargo y pide consignar un abono", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Quiubo, buenas. Le habla un funcionario de un juzgado de cobro, usted tiene un proceso pendiente."],
+      ["usuario", "¿Qué proceso?"],
+      ["llamante", "Ve, tiene una deuda y si no la paga hoy le embargamos la cuenta."],
+      ["llamante", "Para evitar el embargo consigne el abono a la cuenta que le voy a dictar, mijo, ya mismo."],
+      ["usuario", "Yo no sabía nada de eso."]
+    ]
+  },
+  {"id": "s-inversion_doble-costa-caribe", "etiqueta": "riesgo", "categoria": "inversion_falsa", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "inversion_doble", "descripcion": "Inversión que promete doblar la plata en un mes", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Ajá, buenas tardes, mi amor. Le tengo un negocio buenísimo."],
+      ["usuario", "¿Qué negocio?"],
+      ["llamante", "Eche, usted invierte cien lucas en una plataforma de criptomonedas y en un mes tiene el doble, garantizado."],
+      ["usuario", "Suena muy bueno."],
+      ["llamante", "Me los manda por Bre-B y le activo la cuenta rapidito."]
+    ]
+  },
+  {"id": "s-inversion_doble-antioquia", "etiqueta": "riesgo", "categoria": "inversion_falsa", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "inversion_doble", "descripcion": "Inversión que promete doblar la plata en un mes", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Hola, buenas, mija. Le tengo un negocio buenísimo."],
+      ["usuario", "¿Qué negocio?"],
+      ["llamante", "Pues mire, usted invierte cien lucas en una plataforma de criptomonedas y en un mes tiene el doble, garantizado."],
+      ["usuario", "Suena muy bueno."],
+      ["llamante", "Me los manda por Bre-B y le activo la cuenta ya mismo."]
+    ]
+  },
+  {"id": "s-inversion_doble-bogota", "etiqueta": "riesgo", "categoria": "inversion_falsa", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "inversion_doble", "descripcion": "Inversión que promete doblar la plata en un mes", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas tardes, sumercé, sumercé. Le tengo un negocio buenísimo."],
+      ["usuario", "¿Qué negocio?"],
+      ["llamante", "Oiga, usted invierte trescientos mil pesos en una plataforma de criptomonedas y en un mes tiene el doble, garantizado."],
+      ["usuario", "Suena muy bueno."],
+      ["llamante", "Me los manda por Nequi y le activo la cuenta ya mismo."]
+    ]
+  },
+  {"id": "s-inversion_doble-valle-del-cauca", "etiqueta": "riesgo", "categoria": "inversion_falsa", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "inversion_doble", "descripcion": "Inversión que promete doblar la plata en un mes", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, ¿qué más? mijo. Le tengo un negocio buenísimo."],
+      ["usuario", "¿Qué negocio?"],
+      ["llamante", "Oíste, usted invierte dos palos en una plataforma de criptomonedas y en un mes tiene el doble, garantizado."],
+      ["usuario", "Suena muy bueno."],
+      ["llamante", "Me los manda por Bre-B y le activo la cuenta rapidito."]
+    ]
+  },
+  {"id": "s-inversion_doble-santander", "etiqueta": "riesgo", "categoria": "inversion_falsa", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "inversion_doble", "descripcion": "Inversión que promete doblar la plata en un mes", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, mano, mijo. Le tengo un negocio buenísimo."],
+      ["usuario", "¿Qué negocio?"],
+      ["llamante", "Mano, usted invierte doscientos mil pesos en una plataforma de criptomonedas y en un mes tiene el doble, garantizado."],
+      ["usuario", "Suena muy bueno."],
+      ["llamante", "Me los manda por Nequi y le activo la cuenta rápido."]
+    ]
+  },
+  {"id": "s-inversion_doble-narino", "etiqueta": "riesgo", "categoria": "inversion_falsa", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "inversion_doble", "descripcion": "Inversión que promete doblar la plata en un mes", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo está? vecino. Le tengo un negocio buenísimo."],
+      ["usuario", "¿Qué negocio?"],
+      ["llamante", "Ve, usted invierte cien mil pesos en una plataforma de criptomonedas y en un mes tiene el doble, garantizado."],
+      ["usuario", "Suena muy bueno."],
+      ["llamante", "Me los manda por Bre-B y le activo la cuenta rapidito."]
+    ]
+  },
+  {"id": "s-inversion_doble-llanos", "etiqueta": "riesgo", "categoria": "inversion_falsa", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "inversion_doble", "descripcion": "Inversión que promete doblar la plata en un mes", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas tardes, compadre. Le tengo un negocio buenísimo."],
+      ["usuario", "¿Qué negocio?"],
+      ["llamante", "Mire, usted invierte un melón en una plataforma de criptomonedas y en un mes tiene el doble, garantizado."],
+      ["usuario", "Suena muy bueno."],
+      ["llamante", "Me los manda por Daviplata y le activo la cuenta rapidito."]
+    ]
+  },
+  {"id": "s-inversion_doble-tolima-y-huila", "etiqueta": "riesgo", "categoria": "inversion_falsa", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "inversion_doble", "descripcion": "Inversión que promete doblar la plata en un mes", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Ole, buenas, mi señora. Le tengo un negocio buenísimo."],
+      ["usuario", "¿Qué negocio?"],
+      ["llamante", "Vea, usted invierte trescientos mil pesos en una plataforma de criptomonedas y en un mes tiene el doble, garantizado."],
+      ["usuario", "Suena muy bueno."],
+      ["llamante", "Me los manda por Daviplata y le activo la cuenta rapidito."]
+    ]
+  },
+  {"id": "s-inversion_doble-eje-cafetero", "etiqueta": "riesgo", "categoria": "inversion_falsa", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "inversion_doble", "descripcion": "Inversión que promete doblar la plata en un mes", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo va? mija. Le tengo un negocio buenísimo."],
+      ["usuario", "¿Qué negocio?"],
+      ["llamante", "Vea, pues, usted invierte doscientas lucas en una plataforma de criptomonedas y en un mes tiene el doble, garantizado."],
+      ["usuario", "Suena muy bueno."],
+      ["llamante", "Me los manda por Daviplata y le activo la cuenta rapidito."]
+    ]
+  },
+  {"id": "s-empleo_curso-costa-caribe", "etiqueta": "riesgo", "categoria": "empleo_falso", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "empleo_curso", "descripcion": "Oferta de trabajo que exige pagar un curso", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Ajá, buenas tardes. Lo llamo por la hoja de vida que dejó para el trabajo en la bodega."],
+      ["usuario", "Ah, sí, claro."],
+      ["llamante", "Quedó seleccionado, mi llave. Para firmar el contrato tiene que pagar el curso de inducción: consígname doscientas lucas ya."],
+      ["usuario", "¿Y si no lo pago?"],
+      ["llamante", "Mira, pierde el cupo, hay muchas personas esperando."]
+    ]
+  },
+  {"id": "s-empleo_curso-antioquia", "etiqueta": "riesgo", "categoria": "empleo_falso", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "empleo_curso", "descripcion": "Oferta de trabajo que exige pagar un curso", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Hola, buenas. Lo llamo por la hoja de vida que dejó para el trabajo en la bodega."],
+      ["usuario", "Ah, sí, claro."],
+      ["llamante", "Quedó seleccionado, mi amor. Para firmar el contrato tiene que pagar el curso de inducción: mándeme un palo de una."],
+      ["usuario", "¿Y si no lo pago?"],
+      ["llamante", "Vea, pierde el cupo, hay muchas personas esperando."]
+    ]
+  },
+  {"id": "s-empleo_curso-bogota", "etiqueta": "riesgo", "categoria": "empleo_falso", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "empleo_curso", "descripcion": "Oferta de trabajo que exige pagar un curso", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, buenos días. Lo llamo por la hoja de vida que dejó para el trabajo en la bodega."],
+      ["usuario", "Ah, sí, claro."],
+      ["llamante", "Quedó seleccionado, sumercé. Para firmar el contrato tiene que pagar el curso de inducción: consígneme quinientos mil pesos en un momentico."],
+      ["usuario", "¿Y si no lo pago?"],
+      ["llamante", "Mire, pierde el cupo, hay muchas personas esperando."]
+    ]
+  },
+  {"id": "s-empleo_curso-valle-del-cauca", "etiqueta": "riesgo", "categoria": "empleo_falso", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "empleo_curso", "descripcion": "Oferta de trabajo que exige pagar un curso", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Ve, buenas. Lo llamo por la hoja de vida que dejó para el trabajo en la bodega."],
+      ["usuario", "Ah, sí, claro."],
+      ["llamante", "Quedó seleccionado, parce. Para firmar el contrato tiene que pagar el curso de inducción: transferime cien lucas rapidito."],
+      ["usuario", "¿Y si no lo pago?"],
+      ["llamante", "Oíste, pierde el cupo, hay muchas personas esperando."]
+    ]
+  },
+  {"id": "s-empleo_curso-santander", "etiqueta": "riesgo", "categoria": "empleo_falso", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "empleo_curso", "descripcion": "Oferta de trabajo que exige pagar un curso", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenos días. Lo llamo por la hoja de vida que dejó para el trabajo en la bodega."],
+      ["usuario", "Ah, sí, claro."],
+      ["llamante", "Quedó seleccionado, mi señora. Para firmar el contrato tiene que pagar el curso de inducción: gíreme un palo ya mismo."],
+      ["usuario", "¿Y si no lo pago?"],
+      ["llamante", "Mano, pierde el cupo, hay muchas personas esperando."]
+    ]
+  },
+  {"id": "s-empleo_curso-narino", "etiqueta": "riesgo", "categoria": "empleo_falso", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "empleo_curso", "descripcion": "Oferta de trabajo que exige pagar un curso", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo está? Lo llamo por la hoja de vida que dejó para el trabajo en la bodega."],
+      ["usuario", "Ah, sí, claro."],
+      ["llamante", "Quedó seleccionado, mamita. Para firmar el contrato tiene que pagar el curso de inducción: consígneme doscientos mil ahoritica."],
+      ["usuario", "¿Y si no lo pago?"],
+      ["llamante", "Mire, pierde el cupo, hay muchas personas esperando."]
+    ]
+  },
+  {"id": "s-empleo_curso-llanos", "etiqueta": "riesgo", "categoria": "empleo_falso", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "empleo_curso", "descripcion": "Oferta de trabajo que exige pagar un curso", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas tardes. Lo llamo por la hoja de vida que dejó para el trabajo en la bodega."],
+      ["usuario", "Ah, sí, claro."],
+      ["llamante", "Quedó seleccionado, patrón. Para firmar el contrato tiene que pagar el curso de inducción: páseme quinientos mil rapidito."],
+      ["usuario", "¿Y si no lo pago?"],
+      ["llamante", "Vea, pierde el cupo, hay muchas personas esperando."]
+    ]
+  },
+  {"id": "s-empleo_curso-tolima-y-huila", "etiqueta": "riesgo", "categoria": "empleo_falso", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "empleo_curso", "descripcion": "Oferta de trabajo que exige pagar un curso", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas tardes. Lo llamo por la hoja de vida que dejó para el trabajo en la bodega."],
+      ["usuario", "Ah, sí, claro."],
+      ["llamante", "Quedó seleccionado, mi señora. Para firmar el contrato tiene que pagar el curso de inducción: gíreme trescientos mil pesos ya mismo."],
+      ["usuario", "¿Y si no lo pago?"],
+      ["llamante", "Mire, pierde el cupo, hay muchas personas esperando."]
+    ]
+  },
+  {"id": "s-empleo_curso-eje-cafetero", "etiqueta": "riesgo", "categoria": "empleo_falso", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "empleo_curso", "descripcion": "Oferta de trabajo que exige pagar un curso", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo va? Lo llamo por la hoja de vida que dejó para el trabajo en la bodega."],
+      ["usuario", "Ah, sí, claro."],
+      ["llamante", "Quedó seleccionado, mija. Para firmar el contrato tiene que pagar el curso de inducción: consígneme un palo ya mismo."],
+      ["usuario", "¿Y si no lo pago?"],
+      ["llamante", "Pues mire, pierde el cupo, hay muchas personas esperando."]
+    ]
+  },
+  {"id": "s-extorsion_vacuna-costa-caribe", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "extorsion_vacuna", "descripcion": "Extorsión a un comerciante", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Ajá, ¿usted es el dueño del local?"],
+      ["usuario", "Sí, ¿quién habla?"],
+      ["llamante", "Eso no importa. Lo tenemos ubicado y sabemos dónde vive su familia."],
+      ["llamante", "Si no paga la vacuna de doscientas lucas esta semana, le caemos al negocio."],
+      ["usuario", "Yo no tengo esa plata."],
+      ["llamante", "No le vaya a contar a la policía, mi amor."]
+    ]
+  },
+  {"id": "s-extorsion_vacuna-antioquia", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "extorsion_vacuna", "descripcion": "Extorsión a un comerciante", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Ave María, ¿usted es el dueño del local?"],
+      ["usuario", "Sí, ¿quién habla?"],
+      ["llamante", "Eso no importa. Lo tenemos ubicado y sabemos dónde vive su familia."],
+      ["llamante", "Si no paga la vacuna de cien lucas esta semana, le caemos al negocio."],
+      ["usuario", "Yo no tengo esa plata."],
+      ["llamante", "No le vaya a contar a la policía, mija."]
+    ]
+  },
+  {"id": "s-extorsion_vacuna-bogota", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "extorsion_vacuna", "descripcion": "Extorsión a un comerciante", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Oiga, ¿usted es el dueño del local?"],
+      ["usuario", "Sí, ¿quién habla?"],
+      ["llamante", "Eso no importa. Lo tenemos ubicado y sabemos dónde vive su familia."],
+      ["llamante", "Si no paga la vacuna de trescientos mil pesos esta semana, le caemos al negocio."],
+      ["usuario", "Yo no tengo esa plata."],
+      ["llamante", "No le vaya a contar a la policía, mi señora."]
+    ]
+  },
+  {"id": "s-extorsion_vacuna-valle-del-cauca", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "extorsion_vacuna", "descripcion": "Extorsión a un comerciante", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Mirá, ¿usted es el dueño del local?"],
+      ["usuario", "Sí, ¿quién habla?"],
+      ["llamante", "Eso no importa. Lo tenemos ubicado y sabemos dónde vive su familia."],
+      ["llamante", "Si no paga la vacuna de trescientas lucas esta semana, le caemos al negocio."],
+      ["usuario", "Yo no tengo esa plata."],
+      ["llamante", "No le vaya a contar a la policía, mi vida."]
+    ]
+  },
+  {"id": "s-extorsion_vacuna-santander", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "extorsion_vacuna", "descripcion": "Extorsión a un comerciante", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Oiga, ¿usted es el dueño del local?"],
+      ["usuario", "Sí, ¿quién habla?"],
+      ["llamante", "Eso no importa. Lo tenemos ubicado y sabemos dónde vive su familia."],
+      ["llamante", "Si no paga la vacuna de ciento cincuenta mil esta semana, le caemos al negocio."],
+      ["usuario", "Yo no tengo esa plata."],
+      ["llamante", "No le vaya a contar a la policía, hermano."]
+    ]
+  },
+  {"id": "s-extorsion_vacuna-narino", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "extorsion_vacuna", "descripcion": "Extorsión a un comerciante", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Vea pues, ¿usted es el dueño del local?"],
+      ["usuario", "Sí, ¿quién habla?"],
+      ["llamante", "Eso no importa. Lo tenemos ubicado y sabemos dónde vive su familia."],
+      ["llamante", "Si no paga la vacuna de cien mil pesos esta semana, le caemos al negocio."],
+      ["usuario", "Yo no tengo esa plata."],
+      ["llamante", "No le vaya a contar a la policía, mamita."]
+    ]
+  },
+  {"id": "s-extorsion_vacuna-llanos", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "extorsion_vacuna", "descripcion": "Extorsión a un comerciante", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Vea, ¿usted es el dueño del local?"],
+      ["usuario", "Sí, ¿quién habla?"],
+      ["llamante", "Eso no importa. Lo tenemos ubicado y sabemos dónde vive su familia."],
+      ["llamante", "Si no paga la vacuna de un melón esta semana, le caemos al negocio."],
+      ["usuario", "Yo no tengo esa plata."],
+      ["llamante", "No le vaya a contar a la policía, compadre."]
+    ]
+  },
+  {"id": "s-extorsion_vacuna-tolima-y-huila", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "extorsion_vacuna", "descripcion": "Extorsión a un comerciante", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Ole, ¿usted es el dueño del local?"],
+      ["usuario", "Sí, ¿quién habla?"],
+      ["llamante", "Eso no importa. Lo tenemos ubicado y sabemos dónde vive su familia."],
+      ["llamante", "Si no paga la vacuna de cien lucas esta semana, le caemos al negocio."],
+      ["usuario", "Yo no tengo esa plata."],
+      ["llamante", "No le vaya a contar a la policía, paisano."]
+    ]
+  },
+  {"id": "s-extorsion_vacuna-eje-cafetero", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "extorsion_vacuna", "descripcion": "Extorsión a un comerciante", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Ve, ¿usted es el dueño del local?"],
+      ["usuario", "Sí, ¿quién habla?"],
+      ["llamante", "Eso no importa. Lo tenemos ubicado y sabemos dónde vive su familia."],
+      ["llamante", "Si no paga la vacuna de cien lucas esta semana, le caemos al negocio."],
+      ["usuario", "Yo no tengo esa plata."],
+      ["llamante", "No le vaya a contar a la policía, mijo."]
+    ]
+  },
+  {"id": "s-suplanta_banco_clave-costa-caribe", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_prueba", "region": "costa caribe", "fuente": "plantilla", "plantilla": "suplanta_banco_clave", "descripcion": "Falso asesor pide la clave y el código para 'desbloquear' la tarjeta", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Ajá, buenas tardes, le saluda el asesor de Bancolombia."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Su tarjeta quedó bloqueada por seguridad, mi amor. Para desbloquearla pásame la clave del cajero y el código del mensaje que le llegó."],
+      ["usuario", "Bueno, déjeme buscarlo."],
+      ["llamante", "Mira, hágale ya que se cierra el sistema."]
+    ]
+  },
+  {"id": "s-suplanta_banco_clave-antioquia", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_prueba", "region": "antioquia", "fuente": "plantilla", "plantilla": "suplanta_banco_clave", "descripcion": "Falso asesor pide la clave y el código para 'desbloquear' la tarjeta", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo le va pues? le saluda el asesor del Banco Caja Social."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Su tarjeta quedó bloqueada por seguridad, parce. Para desbloquearla páseme la clave del cajero y los numeritos del mensaje que le llegó."],
+      ["usuario", "Bueno, déjeme buscarlo."],
+      ["llamante", "Pues mire, hágale rapidito pues que se cierra el sistema."]
+    ]
+  },
+  {"id": "s-suplanta_banco_clave-bogota", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_prueba", "region": "bogota", "fuente": "plantilla", "plantilla": "suplanta_banco_clave", "descripcion": "Falso asesor pide la clave y el código para 'desbloquear' la tarjeta", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo me le va? le saluda el asesor del Banco Caja Social."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Su tarjeta quedó bloqueada por seguridad, mi señora. Para desbloquearla regáleme la clave del cajero y los dígitos del mensaje que le llegó."],
+      ["usuario", "Bueno, déjeme buscarlo."],
+      ["llamante", "Mire, hágale de una vez que se cierra el sistema."]
+    ]
+  },
+  {"id": "s-suplanta_banco_clave-valle-del-cauca", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_prueba", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "suplanta_banco_clave", "descripcion": "Falso asesor pide la clave y el código para 'desbloquear' la tarjeta", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo estás? le saluda el asesor de Davivienda."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Su tarjeta quedó bloqueada por seguridad, mi vida. Para desbloquearla decime la clave del cajero y el código del mensaje que le llegó."],
+      ["usuario", "Bueno, déjeme buscarlo."],
+      ["llamante", "Ve, mirá, hágale volando que se cierra el sistema."]
+    ]
+  },
+  {"id": "s-suplanta_banco_clave-santander", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_prueba", "region": "santander", "fuente": "plantilla", "plantilla": "suplanta_banco_clave", "descripcion": "Falso asesor pide la clave y el código para 'desbloquear' la tarjeta", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenos días, le saluda el asesor del Banco de Bogotá."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Su tarjeta quedó bloqueada por seguridad, mijo. Para desbloquearla regáleme la clave del cajero y los numeritos del mensaje que le llegó."],
+      ["usuario", "Bueno, déjeme buscarlo."],
+      ["llamante", "Vea, hágale ya mismo que se cierra el sistema."]
+    ]
+  },
+  {"id": "s-suplanta_banco_clave-narino", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_prueba", "region": "nariño", "fuente": "plantilla", "plantilla": "suplanta_banco_clave", "descripcion": "Falso asesor pide la clave y el código para 'desbloquear' la tarjeta", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, buenos días, le saluda el asesor de Colpatria."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Su tarjeta quedó bloqueada por seguridad, mamita. Para desbloquearla dígame la clave del cajero y los numeritos del mensaje que le llegó."],
+      ["usuario", "Bueno, déjeme buscarlo."],
+      ["llamante", "Ve, hágale rapidito que se cierra el sistema."]
+    ]
+  },
+  {"id": "s-suplanta_banco_clave-llanos", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_prueba", "region": "llanos", "fuente": "plantilla", "plantilla": "suplanta_banco_clave", "descripcion": "Falso asesor pide la clave y el código para 'desbloquear' la tarjeta", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, ¿cómo amaneció? le saluda el asesor de Davivienda."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Su tarjeta quedó bloqueada por seguridad, comadre. Para desbloquearla dígame la clave del cajero y el codiguito del mensaje que le llegó."],
+      ["usuario", "Bueno, déjeme buscarlo."],
+      ["llamante", "Mire, hágale ya mismo que se cierra el sistema."]
+    ]
+  },
+  {"id": "s-suplanta_banco_clave-tolima-y-huila", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_prueba", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "suplanta_banco_clave", "descripcion": "Falso asesor pide la clave y el código para 'desbloquear' la tarjeta", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, ¿cómo le va? le saluda el asesor de Davivienda."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Su tarjeta quedó bloqueada por seguridad, mijo. Para desbloquearla me regala la clave del cajero y los numeritos del mensaje que le llegó."],
+      ["usuario", "Bueno, déjeme buscarlo."],
+      ["llamante", "Mire, hágale ya mismo que se cierra el sistema."]
+    ]
+  },
+  {"id": "s-suplanta_banco_clave-eje-cafetero", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "sintetica_prueba", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "suplanta_banco_clave", "descripcion": "Falso asesor pide la clave y el código para 'desbloquear' la tarjeta", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, buenos días, le saluda el asesor del Banco de Bogotá."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Su tarjeta quedó bloqueada por seguridad, mi señora. Para desbloquearla dígame la clave del cajero y el codiguito del mensaje que le llegó."],
+      ["usuario", "Bueno, déjeme buscarlo."],
+      ["llamante", "Vea, pues, hágale rapidito que se cierra el sistema."]
+    ]
+  },
+  {"id": "s-familiar_detenido-costa-caribe", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_prueba", "region": "costa caribe", "fuente": "plantilla", "plantilla": "familiar_detenido", "descripcion": "Falso abogado dice que el hijo está detenido y pide plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Eche, ¿hablo con la mamá del muchacho?"],
+      ["usuario", "Sí, ¿qué pasó con mi hijo?"],
+      ["llamante", "Le habla el abogado, mi vida. Su hijo tuvo un accidente y está detenido."],
+      ["llamante", "Para que no lo pasen a la cárcel consígname trescientos mil pesos por Daviplata rapidito."],
+      ["usuario", "Ay, Dios mío, ¿lo puedo llamar?"],
+      ["llamante", "No, no me vaya a colgar, que ya le estamos haciendo el trámite."]
+    ]
+  },
+  {"id": "s-familiar_detenido-antioquia", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_prueba", "region": "antioquia", "fuente": "plantilla", "plantilla": "familiar_detenido", "descripcion": "Falso abogado dice que el hijo está detenido y pide plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Pues mire, ¿hablo con la mamá del muchacho?"],
+      ["usuario", "Sí, ¿qué pasó con mi hijo?"],
+      ["llamante", "Le habla el abogado, parce. Su hijo tuvo un accidente y está detenido."],
+      ["llamante", "Para que no lo pasen a la cárcel mándeme doscientas lucas por Daviplata rapidito pues."],
+      ["usuario", "Ay, Dios mío, ¿lo puedo llamar?"],
+      ["llamante", "No, no me vaya a colgar, que ya le estamos haciendo el trámite."]
+    ]
+  },
+  {"id": "s-familiar_detenido-bogota", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_prueba", "region": "bogota", "fuente": "plantilla", "plantilla": "familiar_detenido", "descripcion": "Falso abogado dice que el hijo está detenido y pide plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Mire, ¿hablo con la mamá del muchacho?"],
+      ["usuario", "Sí, ¿qué pasó con mi hijo?"],
+      ["llamante", "Le habla el abogado, veci. Su hijo tuvo un accidente y está detenido."],
+      ["llamante", "Para que no lo pasen a la cárcel hágame el giro de trescientos mil pesos por Daviplata ya mismo."],
+      ["usuario", "Ay, Dios mío, ¿lo puedo llamar?"],
+      ["llamante", "No, no me vaya a colgar, que ya le estamos haciendo el trámite."]
+    ]
+  },
+  {"id": "s-familiar_detenido-valle-del-cauca", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_prueba", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "familiar_detenido", "descripcion": "Falso abogado dice que el hijo está detenido y pide plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Ve, mirá, ¿hablo con la mamá del muchacho?"],
+      ["usuario", "Sí, ¿qué pasó con mi hijo?"],
+      ["llamante", "Le habla el abogado, mija. Su hijo tuvo un accidente y está detenido."],
+      ["llamante", "Para que no lo pasen a la cárcel transferime cien lucas por Daviplata volando."],
+      ["usuario", "Ay, Dios mío, ¿lo puedo llamar?"],
+      ["llamante", "No, no me vaya a colgar, que ya le estamos haciendo el trámite."]
+    ]
+  },
+  {"id": "s-familiar_detenido-santander", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_prueba", "region": "santander", "fuente": "plantilla", "plantilla": "familiar_detenido", "descripcion": "Falso abogado dice que el hijo está detenido y pide plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Vea, ¿hablo con la mamá del muchacho?"],
+      ["usuario", "Sí, ¿qué pasó con mi hijo?"],
+      ["llamante", "Le habla el abogado, mi señora. Su hijo tuvo un accidente y está detenido."],
+      ["llamante", "Para que no lo pasen a la cárcel consígneme doscientos mil pesos por Bre-B ya mismo."],
+      ["usuario", "Ay, Dios mío, ¿lo puedo llamar?"],
+      ["llamante", "No, no me vaya a colgar, que ya le estamos haciendo el trámite."]
+    ]
+  },
+  {"id": "s-familiar_detenido-narino", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_prueba", "region": "nariño", "fuente": "plantilla", "plantilla": "familiar_detenido", "descripcion": "Falso abogado dice que el hijo está detenido y pide plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Vea pues, ¿hablo con la mamá del muchacho?"],
+      ["usuario", "Sí, ¿qué pasó con mi hijo?"],
+      ["llamante", "Le habla el abogado, vecino. Su hijo tuvo un accidente y está detenido."],
+      ["llamante", "Para que no lo pasen a la cárcel páseme cien mil pesos por Nequi ya mismo."],
+      ["usuario", "Ay, Dios mío, ¿lo puedo llamar?"],
+      ["llamante", "No, no me vaya a colgar, que ya le estamos haciendo el trámite."]
+    ]
+  },
+  {"id": "s-familiar_detenido-llanos", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_prueba", "region": "llanos", "fuente": "plantilla", "plantilla": "familiar_detenido", "descripcion": "Falso abogado dice que el hijo está detenido y pide plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Vea, ¿hablo con la mamá del muchacho?"],
+      ["usuario", "Sí, ¿qué pasó con mi hijo?"],
+      ["llamante", "Le habla el abogado, compadre. Su hijo tuvo un accidente y está detenido."],
+      ["llamante", "Para que no lo pasen a la cárcel gíreme un melón por Bre-B de una."],
+      ["usuario", "Ay, Dios mío, ¿lo puedo llamar?"],
+      ["llamante", "No, no me vaya a colgar, que ya le estamos haciendo el trámite."]
+    ]
+  },
+  {"id": "s-familiar_detenido-tolima-y-huila", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_prueba", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "familiar_detenido", "descripcion": "Falso abogado dice que el hijo está detenido y pide plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Vea, ¿hablo con la mamá del muchacho?"],
+      ["usuario", "Sí, ¿qué pasó con mi hijo?"],
+      ["llamante", "Le habla el abogado, paisano. Su hijo tuvo un accidente y está detenido."],
+      ["llamante", "Para que no lo pasen a la cárcel gíreme doscientos mil por Daviplata de una vez."],
+      ["usuario", "Ay, Dios mío, ¿lo puedo llamar?"],
+      ["llamante", "No, no me vaya a colgar, que ya le estamos haciendo el trámite."]
+    ]
+  },
+  {"id": "s-familiar_detenido-eje-cafetero", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "sintetica_prueba", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "familiar_detenido", "descripcion": "Falso abogado dice que el hijo está detenido y pide plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Pues mire, ¿hablo con la mamá del muchacho?"],
+      ["usuario", "Sí, ¿qué pasó con mi hijo?"],
+      ["llamante", "Le habla el abogado, mi señora. Su hijo tuvo un accidente y está detenido."],
+      ["llamante", "Para que no lo pasen a la cárcel consígneme doscientas lucas por Nequi de una."],
+      ["usuario", "Ay, Dios mío, ¿lo puedo llamar?"],
+      ["llamante", "No, no me vaya a colgar, que ya le estamos haciendo el trámite."]
+    ]
+  },
+  {"id": "s-soporte_aplicacion-costa-caribe", "etiqueta": "riesgo", "categoria": "soporte_falso", "particion": "sintetica_prueba", "region": "costa caribe", "fuente": "plantilla", "plantilla": "soporte_aplicacion", "descripcion": "Falso soporte técnico pide instalar una aplicación de control remoto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, buenas, le hablamos del soporte técnico de su operador de internet."],
+      ["usuario", "Sí, ¿qué pasa?"],
+      ["llamante", "Su celular tiene un virus, mi amor. Descargue una aplicación que le voy a decir para que el técnico entre y lo limpie."],
+      ["usuario", "¿Cuál aplicación?"],
+      ["llamante", "Eche, se llama AnyDesk, hágale ya antes de que le roben las claves."]
+    ]
+  },
+  {"id": "s-soporte_aplicacion-antioquia", "etiqueta": "riesgo", "categoria": "soporte_falso", "particion": "sintetica_prueba", "region": "antioquia", "fuente": "plantilla", "plantilla": "soporte_aplicacion", "descripcion": "Falso soporte técnico pide instalar una aplicación de control remoto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Hola, buenas, le hablamos del soporte técnico de su operador de internet."],
+      ["usuario", "Sí, ¿qué pasa?"],
+      ["llamante", "Su celular tiene un virus, mija. Descargue una aplicación que le voy a decir para que el técnico entre y lo limpie."],
+      ["usuario", "¿Cuál aplicación?"],
+      ["llamante", "Vea, se llama AnyDesk, hágale rapidito pues antes de que le roben las claves."]
+    ]
+  },
+  {"id": "s-soporte_aplicacion-bogota", "etiqueta": "riesgo", "categoria": "soporte_falso", "particion": "sintetica_prueba", "region": "bogota", "fuente": "plantilla", "plantilla": "soporte_aplicacion", "descripcion": "Falso soporte técnico pide instalar una aplicación de control remoto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo me le va? le hablamos del soporte técnico de su operador de internet."],
+      ["usuario", "Sí, ¿qué pasa?"],
+      ["llamante", "Su celular tiene un virus, mi señora. Descargue una aplicación que le voy a decir para que el técnico entre y lo limpie."],
+      ["usuario", "¿Cuál aplicación?"],
+      ["llamante", "Oiga, se llama AnyDesk, hágale en un momentico antes de que le roben las claves."]
+    ]
+  },
+  {"id": "s-soporte_aplicacion-valle-del-cauca", "etiqueta": "riesgo", "categoria": "soporte_falso", "particion": "sintetica_prueba", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "soporte_aplicacion", "descripcion": "Falso soporte técnico pide instalar una aplicación de control remoto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo estás? le hablamos del soporte técnico de su operador de internet."],
+      ["usuario", "Sí, ¿qué pasa?"],
+      ["llamante", "Su celular tiene un virus, mi vida. Descargue una aplicación que le voy a decir para que el técnico entre y lo limpie."],
+      ["usuario", "¿Cuál aplicación?"],
+      ["llamante", "Ve, mirá, se llama AnyDesk, hágale ya mismo antes de que le roben las claves."]
+    ]
+  },
+  {"id": "s-soporte_aplicacion-santander", "etiqueta": "riesgo", "categoria": "soporte_falso", "particion": "sintetica_prueba", "region": "santander", "fuente": "plantilla", "plantilla": "soporte_aplicacion", "descripcion": "Falso soporte técnico pide instalar una aplicación de control remoto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, mano, le hablamos del soporte técnico de su operador de internet."],
+      ["usuario", "Sí, ¿qué pasa?"],
+      ["llamante", "Su celular tiene un virus, mi señora. Descargue una aplicación que le voy a decir para que el técnico entre y lo limpie."],
+      ["usuario", "¿Cuál aplicación?"],
+      ["llamante", "Mano, se llama AnyDesk, hágale ya mismo antes de que le roben las claves."]
+    ]
+  },
+  {"id": "s-soporte_aplicacion-narino", "etiqueta": "riesgo", "categoria": "soporte_falso", "particion": "sintetica_prueba", "region": "nariño", "fuente": "plantilla", "plantilla": "soporte_aplicacion", "descripcion": "Falso soporte técnico pide instalar una aplicación de control remoto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo está? le hablamos del soporte técnico de su operador de internet."],
+      ["usuario", "Sí, ¿qué pasa?"],
+      ["llamante", "Su celular tiene un virus, vecino. Descargue una aplicación que le voy a decir para que el técnico entre y lo limpie."],
+      ["usuario", "¿Cuál aplicación?"],
+      ["llamante", "Ve, se llama AnyDesk, hágale ya mismo antes de que le roben las claves."]
+    ]
+  },
+  {"id": "s-soporte_aplicacion-llanos", "etiqueta": "riesgo", "categoria": "soporte_falso", "particion": "sintetica_prueba", "region": "llanos", "fuente": "plantilla", "plantilla": "soporte_aplicacion", "descripcion": "Falso soporte técnico pide instalar una aplicación de control remoto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, ¿cómo amaneció? le hablamos del soporte técnico de su operador de internet."],
+      ["usuario", "Sí, ¿qué pasa?"],
+      ["llamante", "Su celular tiene un virus, comadre. Descargue una aplicación que le voy a decir para que el técnico entre y lo limpie."],
+      ["usuario", "¿Cuál aplicación?"],
+      ["llamante", "Compadre, se llama AnyDesk, hágale de una antes de que le roben las claves."]
+    ]
+  },
+  {"id": "s-soporte_aplicacion-tolima-y-huila", "etiqueta": "riesgo", "categoria": "soporte_falso", "particion": "sintetica_prueba", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "soporte_aplicacion", "descripcion": "Falso soporte técnico pide instalar una aplicación de control remoto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Ole, buenas, le hablamos del soporte técnico de su operador de internet."],
+      ["usuario", "Sí, ¿qué pasa?"],
+      ["llamante", "Su celular tiene un virus, mijo. Descargue una aplicación que le voy a decir para que el técnico entre y lo limpie."],
+      ["usuario", "¿Cuál aplicación?"],
+      ["llamante", "Mire, se llama AnyDesk, hágale de una vez antes de que le roben las claves."]
+    ]
+  },
+  {"id": "s-soporte_aplicacion-eje-cafetero", "etiqueta": "riesgo", "categoria": "soporte_falso", "particion": "sintetica_prueba", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "soporte_aplicacion", "descripcion": "Falso soporte técnico pide instalar una aplicación de control remoto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, buenos días, le hablamos del soporte técnico de su operador de internet."],
+      ["usuario", "Sí, ¿qué pasa?"],
+      ["llamante", "Su celular tiene un virus, mija. Descargue una aplicación que le voy a decir para que el técnico entre y lo limpie."],
+      ["usuario", "¿Cuál aplicación?"],
+      ["llamante", "Vea, pues, se llama AnyDesk, hágale de una antes de que le roben las claves."]
+    ]
+  },
+  {"id": "s-extorsion_familia-costa-caribe", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_prueba", "region": "costa caribe", "fuente": "plantilla", "plantilla": "extorsion_familia", "descripcion": "Amenaza a la familia para exigir plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Aló, buenas. Le habla el comandante del frente."],
+      ["usuario", "¿Quién?"],
+      ["llamante", "Mira, sabemos dónde vive y a qué colegio van sus hijos, mija."],
+      ["llamante", "Tiene que colaborarnos con trescientos mil pesos o le va a ir mal a su familia."],
+      ["usuario", "Yo no tengo cómo."]
+    ]
+  },
+  {"id": "s-extorsion_familia-antioquia", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_prueba", "region": "antioquia", "fuente": "plantilla", "plantilla": "extorsion_familia", "descripcion": "Amenaza a la familia para exigir plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Hola, buenas. Le habla el comandante del frente."],
+      ["usuario", "¿Quién?"],
+      ["llamante", "Pues mire, sabemos dónde vive y a qué colegio van sus hijos, parce."],
+      ["llamante", "Tiene que colaborarnos con cien lucas o le va a ir mal a su familia."],
+      ["usuario", "Yo no tengo cómo."]
+    ]
+  },
+  {"id": "s-extorsion_familia-bogota", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_prueba", "region": "bogota", "fuente": "plantilla", "plantilla": "extorsion_familia", "descripcion": "Amenaza a la familia para exigir plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Buenas tardes, sumercé. Le habla el comandante del frente."],
+      ["usuario", "¿Quién?"],
+      ["llamante", "Oiga, sabemos dónde vive y a qué colegio van sus hijos, veci."],
+      ["llamante", "Tiene que colaborarnos con doscientos mil o le va a ir mal a su familia."],
+      ["usuario", "Yo no tengo cómo."]
+    ]
+  },
+  {"id": "s-extorsion_familia-valle-del-cauca", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_prueba", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "extorsion_familia", "descripcion": "Amenaza a la familia para exigir plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Aló, ¿qué más? Le habla el comandante del frente."],
+      ["usuario", "¿Quién?"],
+      ["llamante", "Mirá, sabemos dónde vive y a qué colegio van sus hijos, mija."],
+      ["llamante", "Tiene que colaborarnos con dos palos o le va a ir mal a su familia."],
+      ["usuario", "Yo no tengo cómo."]
+    ]
+  },
+  {"id": "s-extorsion_familia-santander", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_prueba", "region": "santander", "fuente": "plantilla", "plantilla": "extorsion_familia", "descripcion": "Amenaza a la familia para exigir plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Buenos días. Le habla el comandante del frente."],
+      ["usuario", "¿Quién?"],
+      ["llamante", "Oiga, sabemos dónde vive y a qué colegio van sus hijos, mano."],
+      ["llamante", "Tiene que colaborarnos con doscientos mil pesos o le va a ir mal a su familia."],
+      ["usuario", "Yo no tengo cómo."]
+    ]
+  },
+  {"id": "s-extorsion_familia-narino", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_prueba", "region": "nariño", "fuente": "plantilla", "plantilla": "extorsion_familia", "descripcion": "Amenaza a la familia para exigir plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo está? Le habla el comandante del frente."],
+      ["usuario", "¿Quién?"],
+      ["llamante", "Ve, sabemos dónde vive y a qué colegio van sus hijos, papito."],
+      ["llamante", "Tiene que colaborarnos con la platica o le va a ir mal a su familia."],
+      ["usuario", "Yo no tengo cómo."]
+    ]
+  },
+  {"id": "s-extorsion_familia-llanos", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_prueba", "region": "llanos", "fuente": "plantilla", "plantilla": "extorsion_familia", "descripcion": "Amenaza a la familia para exigir plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Buenas tardes. Le habla el comandante del frente."],
+      ["usuario", "¿Quién?"],
+      ["llamante", "Vea, sabemos dónde vive y a qué colegio van sus hijos, cuñao."],
+      ["llamante", "Tiene que colaborarnos con un melón o le va a ir mal a su familia."],
+      ["usuario", "Yo no tengo cómo."]
+    ]
+  },
+  {"id": "s-extorsion_familia-tolima-y-huila", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_prueba", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "extorsion_familia", "descripcion": "Amenaza a la familia para exigir plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Aló, ¿cómo le va? Le habla el comandante del frente."],
+      ["usuario", "¿Quién?"],
+      ["llamante", "Vea, sabemos dónde vive y a qué colegio van sus hijos, mija."],
+      ["llamante", "Tiene que colaborarnos con doscientos mil o le va a ir mal a su familia."],
+      ["usuario", "Yo no tengo cómo."]
+    ]
+  },
+  {"id": "s-extorsion_familia-eje-cafetero", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "sintetica_prueba", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "extorsion_familia", "descripcion": "Amenaza a la familia para exigir plata", "turno_riesgo": 3,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo va? Le habla el comandante del frente."],
+      ["usuario", "¿Quién?"],
+      ["llamante", "Ve, sabemos dónde vive y a qué colegio van sus hijos, mijo."],
+      ["llamante", "Tiene que colaborarnos con doscientas lucas o le va a ir mal a su familia."],
+      ["usuario", "Yo no tengo cómo."]
+    ]
+  },
+  {"id": "s-envio_aduana-costa-caribe", "etiqueta": "riesgo", "categoria": "envio_falso", "particion": "sintetica_prueba", "region": "costa caribe", "fuente": "plantilla", "plantilla": "envio_aduana", "descripcion": "Paquete retenido que exige pagar un impuesto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, buenas, lo llamamos de Interrapidísimo porque tiene un paquete retenido en la bodega."],
+      ["usuario", "No estoy esperando nada."],
+      ["llamante", "Es un regalo, mi vida. Para liberarlo mándame cien lucas del impuesto de aduana ahorita mismo."],
+      ["usuario", "¿A qué cuenta?"],
+      ["llamante", "Ajá, se la mando por mensaje ahorita."]
+    ]
+  },
+  {"id": "s-envio_aduana-antioquia", "etiqueta": "riesgo", "categoria": "envio_falso", "particion": "sintetica_prueba", "region": "antioquia", "fuente": "plantilla", "plantilla": "envio_aduana", "descripcion": "Paquete retenido que exige pagar un impuesto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Hola, buenas, lo llamamos de Servientrega porque tiene un paquete retenido en la bodega."],
+      ["usuario", "No estoy esperando nada."],
+      ["llamante", "Es un regalo, parce. Para liberarlo mándeme doscientas lucas del impuesto de aduana de una."],
+      ["usuario", "¿A qué cuenta?"],
+      ["llamante", "Ave María, se la mando por mensaje ahorita."]
+    ]
+  },
+  {"id": "s-envio_aduana-bogota", "etiqueta": "riesgo", "categoria": "envio_falso", "particion": "sintetica_prueba", "region": "bogota", "fuente": "plantilla", "plantilla": "envio_aduana", "descripcion": "Paquete retenido que exige pagar un impuesto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo me le va? lo llamamos de Interrapidísimo porque tiene un paquete retenido en la bodega."],
+      ["usuario", "No estoy esperando nada."],
+      ["llamante", "Es un regalo, mi señora. Para liberarlo hágame el giro de trescientos mil pesos del impuesto de aduana en un momentico."],
+      ["usuario", "¿A qué cuenta?"],
+      ["llamante", "Mire, se la mando por mensaje ahorita."]
+    ]
+  },
+  {"id": "s-envio_aduana-valle-del-cauca", "etiqueta": "riesgo", "categoria": "envio_falso", "particion": "sintetica_prueba", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "envio_aduana", "descripcion": "Paquete retenido que exige pagar un impuesto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo estás? lo llamamos de Interrapidísimo porque tiene un paquete retenido en la bodega."],
+      ["usuario", "No estoy esperando nada."],
+      ["llamante", "Es un regalo, mi vida. Para liberarlo transferime cien lucas del impuesto de aduana rapidito."],
+      ["usuario", "¿A qué cuenta?"],
+      ["llamante", "Mirá, se la mando por mensaje ahorita."]
+    ]
+  },
+  {"id": "s-envio_aduana-santander", "etiqueta": "riesgo", "categoria": "envio_falso", "particion": "sintetica_prueba", "region": "santander", "fuente": "plantilla", "plantilla": "envio_aduana", "descripcion": "Paquete retenido que exige pagar un impuesto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, ¿qué hubo? lo llamamos de Servientrega porque tiene un paquete retenido en la bodega."],
+      ["usuario", "No estoy esperando nada."],
+      ["llamante", "Es un regalo, hermano. Para liberarlo consígneme ciento cincuenta mil del impuesto de aduana rápido."],
+      ["usuario", "¿A qué cuenta?"],
+      ["llamante", "Mano, se la mando por mensaje ahorita."]
+    ]
+  },
+  {"id": "s-envio_aduana-narino", "etiqueta": "riesgo", "categoria": "envio_falso", "particion": "sintetica_prueba", "region": "nariño", "fuente": "plantilla", "plantilla": "envio_aduana", "descripcion": "Paquete retenido que exige pagar un impuesto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Achichay, qué frío, buenas, lo llamamos de la transportadora porque tiene un paquete retenido en la bodega."],
+      ["usuario", "No estoy esperando nada."],
+      ["llamante", "Es un regalo, papito. Para liberarlo consígneme la platica del impuesto de aduana rapidito."],
+      ["usuario", "¿A qué cuenta?"],
+      ["llamante", "Mire, se la mando por mensaje ahorita."]
+    ]
+  },
+  {"id": "s-envio_aduana-llanos", "etiqueta": "riesgo", "categoria": "envio_falso", "particion": "sintetica_prueba", "region": "llanos", "fuente": "plantilla", "plantilla": "envio_aduana", "descripcion": "Paquete retenido que exige pagar un impuesto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Aló, ¿cómo amaneció? lo llamamos de Servientrega porque tiene un paquete retenido en la bodega."],
+      ["usuario", "No estoy esperando nada."],
+      ["llamante", "Es un regalo, compadre. Para liberarlo mándeme doscientas lucas del impuesto de aduana rapidito."],
+      ["usuario", "¿A qué cuenta?"],
+      ["llamante", "Mire, se la mando por mensaje ahorita."]
+    ]
+  },
+  {"id": "s-envio_aduana-tolima-y-huila", "etiqueta": "riesgo", "categoria": "envio_falso", "particion": "sintetica_prueba", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "envio_aduana", "descripcion": "Paquete retenido que exige pagar un impuesto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Buenas tardes, lo llamamos de la transportadora porque tiene un paquete retenido en la bodega."],
+      ["usuario", "No estoy esperando nada."],
+      ["llamante", "Es un regalo, paisano. Para liberarlo mándeme doscientos mil del impuesto de aduana rapidito."],
+      ["usuario", "¿A qué cuenta?"],
+      ["llamante", "Vea, se la mando por mensaje ahorita."]
+    ]
+  },
+  {"id": "s-envio_aduana-eje-cafetero", "etiqueta": "riesgo", "categoria": "envio_falso", "particion": "sintetica_prueba", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "envio_aduana", "descripcion": "Paquete retenido que exige pagar un impuesto", "turno_riesgo": 2,
+    "turnos": [
+      ["llamante", "Quiubo, buenas, lo llamamos de Interrapidísimo porque tiene un paquete retenido en la bodega."],
+      ["usuario", "No estoy esperando nada."],
+      ["llamante", "Es un regalo, mi señora. Para liberarlo páseme cien lucas del impuesto de aduana de una."],
+      ["usuario", "¿A qué cuenta?"],
+      ["llamante", "Ve, se la mando por mensaje ahorita."]
+    ]
+  },
+  {"id": "s-banco_confirma_compra-costa-caribe", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "banco_confirma_compra", "descripcion": "El banco confirma una compra y recuerda que nunca pide claves",
+    "turnos": [
+      ["llamante", "Ajá, buenas tardes, le hablamos del Banco Caja Social para confirmar una compra de ciento veinte mil pesos en un supermercado."],
+      ["usuario", "Sí, fui yo."],
+      ["llamante", "Perfecto, mi vida. Recuerde que nunca le vamos a pedir claves ni códigos por teléfono."],
+      ["llamante", "Si quiere revisar algo, entre a la aplicación oficial o llame a la línea de su tarjeta."],
+      ["usuario", "Listo, gracias."],
+      ["llamante", "Bueno, mi amor, cuídate."]
+    ]
+  },
+  {"id": "s-banco_confirma_compra-antioquia", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "banco_confirma_compra", "descripcion": "El banco confirma una compra y recuerda que nunca pide claves",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo le va pues? le hablamos de BBVA para confirmar una compra de ciento veinte mil pesos en un supermercado."],
+      ["usuario", "Sí, fui yo."],
+      ["llamante", "Perfecto, mijo. Recuerde que nunca le vamos a pedir claves ni códigos por teléfono."],
+      ["llamante", "Si quiere revisar algo, entre a la aplicación oficial o llame a la línea de su tarjeta."],
+      ["usuario", "Listo, gracias."],
+      ["llamante", "Bueno, pues, que esté bien."]
+    ]
+  },
+  {"id": "s-banco_confirma_compra-bogota", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "banco_confirma_compra", "descripcion": "El banco confirma una compra y recuerda que nunca pide claves",
+    "turnos": [
+      ["llamante", "Buenas tardes, sumercé, le hablamos de Davivienda para confirmar una compra de ciento veinte mil pesos en un supermercado."],
+      ["usuario", "Sí, fui yo."],
+      ["llamante", "Perfecto, veci. Recuerde que nunca le vamos a pedir claves ni códigos por teléfono."],
+      ["llamante", "Si quiere revisar algo, entre a la aplicación oficial o llame a la línea de su tarjeta."],
+      ["usuario", "Listo, gracias."],
+      ["llamante", "Listo, sumercé, que esté muy bien."]
+    ]
+  },
+  {"id": "s-banco_confirma_compra-valle-del-cauca", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "banco_confirma_compra", "descripcion": "El banco confirma una compra y recuerda que nunca pide claves",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo estás? le hablamos de Colpatria para confirmar una compra de ciento veinte mil pesos en un supermercado."],
+      ["usuario", "Sí, fui yo."],
+      ["llamante", "Perfecto, mija. Recuerde que nunca le vamos a pedir claves ni códigos por teléfono."],
+      ["llamante", "Si quiere revisar algo, entre a la aplicación oficial o llame a la línea de su tarjeta."],
+      ["usuario", "Listo, gracias."],
+      ["llamante", "Listo, hablamos."]
+    ]
+  },
+  {"id": "s-banco_confirma_compra-santander", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "banco_confirma_compra", "descripcion": "El banco confirma una compra y recuerda que nunca pide claves",
+    "turnos": [
+      ["llamante", "Aló, ¿qué hubo? le hablamos del Banco Caja Social para confirmar una compra de ciento veinte mil pesos en un supermercado."],
+      ["usuario", "Sí, fui yo."],
+      ["llamante", "Perfecto, mijo. Recuerde que nunca le vamos a pedir claves ni códigos por teléfono."],
+      ["llamante", "Si quiere revisar algo, entre a la aplicación oficial o llame a la línea de su tarjeta."],
+      ["usuario", "Listo, gracias."],
+      ["llamante", "Bueno, que esté bien."]
+    ]
+  },
+  {"id": "s-banco_confirma_compra-narino", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "banco_confirma_compra", "descripcion": "El banco confirma una compra y recuerda que nunca pide claves",
+    "turnos": [
+      ["llamante", "Achichay, qué frío, buenas, le hablamos de Colpatria para confirmar una compra de ciento veinte mil pesos en un supermercado."],
+      ["usuario", "Sí, fui yo."],
+      ["llamante", "Perfecto, vecino. Recuerde que nunca le vamos a pedir claves ni códigos por teléfono."],
+      ["llamante", "Si quiere revisar algo, entre a la aplicación oficial o llame a la línea de su tarjeta."],
+      ["usuario", "Listo, gracias."],
+      ["llamante", "Bueno, mamita, que le vaya bien."]
+    ]
+  },
+  {"id": "s-banco_confirma_compra-llanos", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "banco_confirma_compra", "descripcion": "El banco confirma una compra y recuerda que nunca pide claves",
+    "turnos": [
+      ["llamante", "Buenas, compadre, le hablamos de Colpatria para confirmar una compra de ciento veinte mil pesos en un supermercado."],
+      ["usuario", "Sí, fui yo."],
+      ["llamante", "Perfecto, comadre. Recuerde que nunca le vamos a pedir claves ni códigos por teléfono."],
+      ["llamante", "Si quiere revisar algo, entre a la aplicación oficial o llame a la línea de su tarjeta."],
+      ["usuario", "Listo, gracias."],
+      ["llamante", "Listo, compadre, hablamos."]
+    ]
+  },
+  {"id": "s-banco_confirma_compra-tolima-y-huila", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "banco_confirma_compra", "descripcion": "El banco confirma una compra y recuerda que nunca pide claves",
+    "turnos": [
+      ["llamante", "Ole, buenas, le hablamos de Davivienda para confirmar una compra de ciento veinte mil pesos en un supermercado."],
+      ["usuario", "Sí, fui yo."],
+      ["llamante", "Perfecto, mi señora. Recuerde que nunca le vamos a pedir claves ni códigos por teléfono."],
+      ["llamante", "Si quiere revisar algo, entre a la aplicación oficial o llame a la línea de su tarjeta."],
+      ["usuario", "Listo, gracias."],
+      ["llamante", "Bueno, mijo, que esté bien."]
+    ]
+  },
+  {"id": "s-banco_confirma_compra-eje-cafetero", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "banco_confirma_compra", "descripcion": "El banco confirma una compra y recuerda que nunca pide claves",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo va? le hablamos de BBVA para confirmar una compra de ciento veinte mil pesos en un supermercado."],
+      ["usuario", "Sí, fui yo."],
+      ["llamante", "Perfecto, mijo. Recuerde que nunca le vamos a pedir claves ni códigos por teléfono."],
+      ["llamante", "Si quiere revisar algo, entre a la aplicación oficial o llame a la línea de su tarjeta."],
+      ["usuario", "Listo, gracias."],
+      ["llamante", "Bueno, pues, que esté bien."]
+    ]
+  },
+  {"id": "s-familia_mercado-costa-caribe", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "familia_mercado", "descripcion": "Un familiar cuenta que ya mandó la plata del mercado",
+    "turnos": [
+      ["llamante", "Ajá, buenas tardes, mi llave, ¿cómo amaneció?"],
+      ["usuario", "Bien, ¿y usted?"],
+      ["llamante", "Eche, ya le consigné la plata del mercado por Bre-B, revise a ver si le llegó."],
+      ["usuario", "Sí, ya me llegó, gracias."],
+      ["llamante", "El domingo vamos a almorzar donde la abuela. Listo, hablamos ahorita."]
+    ]
+  },
+  {"id": "s-familia_mercado-antioquia", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "familia_mercado", "descripcion": "Un familiar cuenta que ya mandó la plata del mercado",
+    "turnos": [
+      ["llamante", "Hola, buenas, mi amor, ¿cómo amaneció?"],
+      ["usuario", "Bien, ¿y usted?"],
+      ["llamante", "Vea, ya le pasé la plata del mercado por Nequi, revise a ver si le llegó."],
+      ["usuario", "Sí, ya me llegó, gracias."],
+      ["llamante", "El domingo vamos a almorzar donde la abuela. Listo, chao pues."]
+    ]
+  },
+  {"id": "s-familia_mercado-bogota", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "familia_mercado", "descripcion": "Un familiar cuenta que ya mandó la plata del mercado",
+    "turnos": [
+      ["llamante", "Aló, buenos días, veci, ¿cómo amaneció?"],
+      ["usuario", "Bien, ¿y usted?"],
+      ["llamante", "Oiga, ya le pasé la plata del mercado por Daviplata, revise a ver si le llegó."],
+      ["usuario", "Sí, ya me llegó, gracias."],
+      ["llamante", "El domingo vamos a almorzar donde la abuela. Bueno, que tenga buen día."]
+    ]
+  },
+  {"id": "s-familia_mercado-valle-del-cauca", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "familia_mercado", "descripcion": "Un familiar cuenta que ya mandó la plata del mercado",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo estás? mijo, ¿cómo amaneció?"],
+      ["usuario", "Bien, ¿y usted?"],
+      ["llamante", "Mirá, ya le mandé la plata del mercado por Nequi, revise a ver si le llegó."],
+      ["usuario", "Sí, ya me llegó, gracias."],
+      ["llamante", "El domingo vamos a almorzar donde la abuela. Listo, hablamos."]
+    ]
+  },
+  {"id": "s-familia_mercado-santander", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "familia_mercado", "descripcion": "Un familiar cuenta que ya mandó la plata del mercado",
+    "turnos": [
+      ["llamante", "Buenas, mano, mijo, ¿cómo amaneció?"],
+      ["usuario", "Bien, ¿y usted?"],
+      ["llamante", "Vea, ya le mandé la plata del mercado por Bre-B, revise a ver si le llegó."],
+      ["usuario", "Sí, ya me llegó, gracias."],
+      ["llamante", "El domingo vamos a almorzar donde la abuela. Bueno, que esté bien."]
+    ]
+  },
+  {"id": "s-familia_mercado-narino", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "familia_mercado", "descripcion": "Un familiar cuenta que ya mandó la plata del mercado",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo está? mamita, ¿cómo amaneció?"],
+      ["usuario", "Bien, ¿y usted?"],
+      ["llamante", "Vea pues, ya le pasé la plata del mercado por Nequi, revise a ver si le llegó."],
+      ["usuario", "Sí, ya me llegó, gracias."],
+      ["llamante", "El domingo vamos a almorzar donde la abuela. Listo, chao."]
+    ]
+  },
+  {"id": "s-familia_mercado-llanos", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "familia_mercado", "descripcion": "Un familiar cuenta que ya mandó la plata del mercado",
+    "turnos": [
+      ["llamante", "Buenas tardes, patrón, ¿cómo amaneció?"],
+      ["usuario", "Bien, ¿y usted?"],
+      ["llamante", "Mire, ya le mandé la plata del mercado por Daviplata, revise a ver si le llegó."],
+      ["usuario", "Sí, ya me llegó, gracias."],
+      ["llamante", "El domingo vamos a almorzar donde la abuela. Listo, compadre, hablamos."]
+    ]
+  },
+  {"id": "s-familia_mercado-tolima-y-huila", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "familia_mercado", "descripcion": "Un familiar cuenta que ya mandó la plata del mercado",
+    "turnos": [
+      ["llamante", "Ole, buenas, mijo, ¿cómo amaneció?"],
+      ["usuario", "Bien, ¿y usted?"],
+      ["llamante", "Mire, ya le consigné la plata del mercado por Daviplata, revise a ver si le llegó."],
+      ["usuario", "Sí, ya me llegó, gracias."],
+      ["llamante", "El domingo vamos a almorzar donde la abuela. Bueno, mijo, que esté bien."]
+    ]
+  },
+  {"id": "s-familia_mercado-eje-cafetero", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "familia_mercado", "descripcion": "Un familiar cuenta que ya mandó la plata del mercado",
+    "turnos": [
+      ["llamante", "Aló, buenos días, mija, ¿cómo amaneció?"],
+      ["usuario", "Bien, ¿y usted?"],
+      ["llamante", "Vea, pues, ya le consigné la plata del mercado por Bre-B, revise a ver si le llegó."],
+      ["usuario", "Sí, ya me llegó, gracias."],
+      ["llamante", "El domingo vamos a almorzar donde la abuela. Bueno, pues, que esté bien."]
+    ]
+  },
+  {"id": "s-domicilio_efectivo-costa-caribe", "etiqueta": "legitima", "categoria": "domicilio", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "domicilio_efectivo", "descripcion": "El domiciliario pide la dirección y el efectivo listo",
+    "turnos": [
+      ["llamante", "Aló, buenas, es el domiciliario de la tienda."],
+      ["usuario", "Ah, sí, el pedido."],
+      ["llamante", "Ajá, ya voy llegando, tenga el efectivo listo, son cuarenta y cinco mil pesos."],
+      ["llamante", "¿Me regala la dirección exacta, mi llave? Es que no encuentro la casa."],
+      ["usuario", "Calle doce con carrera cuarta, la puerta verde."],
+      ["llamante", "Bueno, mi amor, cuídate."]
+    ]
+  },
+  {"id": "s-domicilio_efectivo-antioquia", "etiqueta": "legitima", "categoria": "domicilio", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "domicilio_efectivo", "descripcion": "El domiciliario pide la dirección y el efectivo listo",
+    "turnos": [
+      ["llamante", "Quiubo, ¿cómo va? es el domiciliario de la tienda."],
+      ["usuario", "Ah, sí, el pedido."],
+      ["llamante", "Vea, ya voy llegando, tenga el efectivo listo, son cuarenta y cinco mil pesos."],
+      ["llamante", "¿Me regala la dirección exacta, mi amor? Es que no encuentro la casa."],
+      ["usuario", "Calle doce con carrera cuarta, la puerta verde."],
+      ["llamante", "Bueno, pues, que esté bien."]
+    ]
+  },
+  {"id": "s-domicilio_efectivo-bogota", "etiqueta": "legitima", "categoria": "domicilio", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "domicilio_efectivo", "descripcion": "El domiciliario pide la dirección y el efectivo listo",
+    "turnos": [
+      ["llamante", "Aló, buenos días, es el domiciliario de la tienda."],
+      ["usuario", "Ah, sí, el pedido."],
+      ["llamante", "Oiga, ya voy llegando, tenga el efectivo listo, son cuarenta y cinco mil pesos."],
+      ["llamante", "¿Me regala la dirección exacta, sumercé? Es que no encuentro la casa."],
+      ["usuario", "Calle doce con carrera cuarta, la puerta verde."],
+      ["llamante", "Listo, sumercé, que esté muy bien."]
+    ]
+  },
+  {"id": "s-domicilio_efectivo-valle-del-cauca", "etiqueta": "legitima", "categoria": "domicilio", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "domicilio_efectivo", "descripcion": "El domiciliario pide la dirección y el efectivo listo",
+    "turnos": [
+      ["llamante", "Aló, ¿qué más? es el domiciliario de la tienda."],
+      ["usuario", "Ah, sí, el pedido."],
+      ["llamante", "Oíste, ya voy llegando, tenga el efectivo listo, son cuarenta y cinco mil pesos."],
+      ["llamante", "¿Me regala la dirección exacta, parce? Es que no encuentro la casa."],
+      ["usuario", "Calle doce con carrera cuarta, la puerta verde."],
+      ["llamante", "Listo, hablamos."]
+    ]
+  },
+  {"id": "s-domicilio_efectivo-santander", "etiqueta": "legitima", "categoria": "domicilio", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "domicilio_efectivo", "descripcion": "El domiciliario pide la dirección y el efectivo listo",
+    "turnos": [
+      ["llamante", "Buenos días, es el domiciliario de la tienda."],
+      ["usuario", "Ah, sí, el pedido."],
+      ["llamante", "Vea, ya voy llegando, tenga el efectivo listo, son cuarenta y cinco mil pesos."],
+      ["llamante", "¿Me regala la dirección exacta, mi señora? Es que no encuentro la casa."],
+      ["usuario", "Calle doce con carrera cuarta, la puerta verde."],
+      ["llamante", "Listo, mano, hablamos."]
+    ]
+  },
+  {"id": "s-domicilio_efectivo-narino", "etiqueta": "legitima", "categoria": "domicilio", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "domicilio_efectivo", "descripcion": "El domiciliario pide la dirección y el efectivo listo",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo está? es el domiciliario de la tienda."],
+      ["usuario", "Ah, sí, el pedido."],
+      ["llamante", "Vea pues, ya voy llegando, tenga el efectivo listo, son cuarenta y cinco mil pesos."],
+      ["llamante", "¿Me regala la dirección exacta, papito? Es que no encuentro la casa."],
+      ["usuario", "Calle doce con carrera cuarta, la puerta verde."],
+      ["llamante", "Listo, chao."]
+    ]
+  },
+  {"id": "s-domicilio_efectivo-llanos", "etiqueta": "legitima", "categoria": "domicilio", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "domicilio_efectivo", "descripcion": "El domiciliario pide la dirección y el efectivo listo",
+    "turnos": [
+      ["llamante", "Buenas tardes, es el domiciliario de la tienda."],
+      ["usuario", "Ah, sí, el pedido."],
+      ["llamante", "Vea, ya voy llegando, tenga el efectivo listo, son cuarenta y cinco mil pesos."],
+      ["llamante", "¿Me regala la dirección exacta, cuñao? Es que no encuentro la casa."],
+      ["usuario", "Calle doce con carrera cuarta, la puerta verde."],
+      ["llamante", "Bueno, que esté bien."]
+    ]
+  },
+  {"id": "s-domicilio_efectivo-tolima-y-huila", "etiqueta": "legitima", "categoria": "domicilio", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "domicilio_efectivo", "descripcion": "El domiciliario pide la dirección y el efectivo listo",
+    "turnos": [
+      ["llamante", "Ole, buenas, es el domiciliario de la tienda."],
+      ["usuario", "Ah, sí, el pedido."],
+      ["llamante", "Vea, ya voy llegando, tenga el efectivo listo, son cuarenta y cinco mil pesos."],
+      ["llamante", "¿Me regala la dirección exacta, mi señora? Es que no encuentro la casa."],
+      ["usuario", "Calle doce con carrera cuarta, la puerta verde."],
+      ["llamante", "Listo, hablamos."]
+    ]
+  },
+  {"id": "s-domicilio_efectivo-eje-cafetero", "etiqueta": "legitima", "categoria": "domicilio", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "domicilio_efectivo", "descripcion": "El domiciliario pide la dirección y el efectivo listo",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo va? es el domiciliario de la tienda."],
+      ["usuario", "Ah, sí, el pedido."],
+      ["llamante", "Pues mire, ya voy llegando, tenga el efectivo listo, son cuarenta y cinco mil pesos."],
+      ["llamante", "¿Me regala la dirección exacta, mija? Es que no encuentro la casa."],
+      ["usuario", "Calle doce con carrera cuarta, la puerta verde."],
+      ["llamante", "Bueno, pues, que esté bien."]
+    ]
+  },
+  {"id": "s-eps_cita-costa-caribe", "etiqueta": "legitima", "categoria": "cita_medica", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "eps_cita", "descripcion": "La EPS confirma una cita médica",
+    "turnos": [
+      ["llamante", "Ajá, buenas tardes, le hablamos de la EPS para confirmar la cita con el médico general."],
+      ["usuario", "Sí, ¿cuándo es?"],
+      ["llamante", "Es el martes a las ocho, mi amor. Llegue quince minutos antes con el documento."],
+      ["usuario", "Listo."],
+      ["llamante", "Si no puede ir, cancele por la aplicación para que otra persona use el turno. Bueno, mi amor, cuídate."]
+    ]
+  },
+  {"id": "s-eps_cita-antioquia", "etiqueta": "legitima", "categoria": "cita_medica", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "eps_cita", "descripcion": "La EPS confirma una cita médica",
+    "turnos": [
+      ["llamante", "Quiubo, ¿cómo va? le hablamos de la EPS para confirmar la cita con el médico general."],
+      ["usuario", "Sí, ¿cuándo es?"],
+      ["llamante", "Es el martes a las ocho, mijo. Llegue quince minutos antes con el documento."],
+      ["usuario", "Listo."],
+      ["llamante", "Si no puede ir, cancele por la aplicación para que otra persona use el turno. Bueno, pues, que esté bien."]
+    ]
+  },
+  {"id": "s-eps_cita-bogota", "etiqueta": "legitima", "categoria": "cita_medica", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "eps_cita", "descripcion": "La EPS confirma una cita médica",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo me le va? le hablamos de la EPS para confirmar la cita con el médico general."],
+      ["usuario", "Sí, ¿cuándo es?"],
+      ["llamante", "Es el martes a las ocho, mi señora. Llegue quince minutos antes con el documento."],
+      ["usuario", "Listo."],
+      ["llamante", "Si no puede ir, cancele por la aplicación para que otra persona use el turno. Listo, sumercé, que esté muy bien."]
+    ]
+  },
+  {"id": "s-eps_cita-valle-del-cauca", "etiqueta": "legitima", "categoria": "cita_medica", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "eps_cita", "descripcion": "La EPS confirma una cita médica",
+    "turnos": [
+      ["llamante", "Ve, buenas, le hablamos de la EPS para confirmar la cita con el médico general."],
+      ["usuario", "Sí, ¿cuándo es?"],
+      ["llamante", "Es el martes a las ocho, parce. Llegue quince minutos antes con el documento."],
+      ["usuario", "Listo."],
+      ["llamante", "Si no puede ir, cancele por la aplicación para que otra persona use el turno. Listo, hablamos."]
+    ]
+  },
+  {"id": "s-eps_cita-santander", "etiqueta": "legitima", "categoria": "cita_medica", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "eps_cita", "descripcion": "La EPS confirma una cita médica",
+    "turnos": [
+      ["llamante", "Buenos días, le hablamos de la EPS para confirmar la cita con el médico general."],
+      ["usuario", "Sí, ¿cuándo es?"],
+      ["llamante", "Es el martes a las ocho, hermano. Llegue quince minutos antes con el documento."],
+      ["usuario", "Listo."],
+      ["llamante", "Si no puede ir, cancele por la aplicación para que otra persona use el turno. Listo, mano, hablamos."]
+    ]
+  },
+  {"id": "s-eps_cita-narino", "etiqueta": "legitima", "categoria": "cita_medica", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "eps_cita", "descripcion": "La EPS confirma una cita médica",
+    "turnos": [
+      ["llamante", "Aló, buenos días, le hablamos de la EPS para confirmar la cita con el médico general."],
+      ["usuario", "Sí, ¿cuándo es?"],
+      ["llamante", "Es el martes a las ocho, vecino. Llegue quince minutos antes con el documento."],
+      ["usuario", "Listo."],
+      ["llamante", "Si no puede ir, cancele por la aplicación para que otra persona use el turno. Bueno, mamita, que le vaya bien."]
+    ]
+  },
+  {"id": "s-eps_cita-llanos", "etiqueta": "legitima", "categoria": "cita_medica", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "eps_cita", "descripcion": "La EPS confirma una cita médica",
+    "turnos": [
+      ["llamante", "Buenas, compadre, le hablamos de la EPS para confirmar la cita con el médico general."],
+      ["usuario", "Sí, ¿cuándo es?"],
+      ["llamante", "Es el martes a las ocho, patrón. Llegue quince minutos antes con el documento."],
+      ["usuario", "Listo."],
+      ["llamante", "Si no puede ir, cancele por la aplicación para que otra persona use el turno. Bueno, que esté bien."]
+    ]
+  },
+  {"id": "s-eps_cita-tolima-y-huila", "etiqueta": "legitima", "categoria": "cita_medica", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "eps_cita", "descripcion": "La EPS confirma una cita médica",
+    "turnos": [
+      ["llamante", "Ole, buenas, le hablamos de la EPS para confirmar la cita con el médico general."],
+      ["usuario", "Sí, ¿cuándo es?"],
+      ["llamante", "Es el martes a las ocho, mi señora. Llegue quince minutos antes con el documento."],
+      ["usuario", "Listo."],
+      ["llamante", "Si no puede ir, cancele por la aplicación para que otra persona use el turno. Bueno, mijo, que esté bien."]
+    ]
+  },
+  {"id": "s-eps_cita-eje-cafetero", "etiqueta": "legitima", "categoria": "cita_medica", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "eps_cita", "descripcion": "La EPS confirma una cita médica",
+    "turnos": [
+      ["llamante", "Aló, buenos días, le hablamos de la EPS para confirmar la cita con el médico general."],
+      ["usuario", "Sí, ¿cuándo es?"],
+      ["llamante", "Es el martes a las ocho, mi señora. Llegue quince minutos antes con el documento."],
+      ["usuario", "Listo."],
+      ["llamante", "Si no puede ir, cancele por la aplicación para que otra persona use el turno. Bueno, pues, que esté bien."]
+    ]
+  },
+  {"id": "s-trabajo_obra-costa-caribe", "etiqueta": "legitima", "categoria": "trabajo", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "trabajo_obra", "descripcion": "Un compañero de trabajo apura para llegar a la obra",
+    "turnos": [
+      ["llamante", "Quiubo, buenas, mi llave, ¿ya llegó a la obra?"],
+      ["usuario", "Voy en camino."],
+      ["llamante", "Ajá, hágale ya que el jefe quiere empezar temprano."],
+      ["llamante", "Y no se le olvide traer las herramientas."],
+      ["usuario", "Listo, ya llego."]
+    ]
+  },
+  {"id": "s-trabajo_obra-antioquia", "etiqueta": "legitima", "categoria": "trabajo", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "trabajo_obra", "descripcion": "Un compañero de trabajo apura para llegar a la obra",
+    "turnos": [
+      ["llamante", "Hola, buenas, mija, ¿ya llegó a la obra?"],
+      ["usuario", "Voy en camino."],
+      ["llamante", "Ave María, hágale ya mismo que el jefe quiere empezar temprano."],
+      ["llamante", "Y no se le olvide traer las herramientas."],
+      ["usuario", "Listo, ya llego."]
+    ]
+  },
+  {"id": "s-trabajo_obra-bogota", "etiqueta": "legitima", "categoria": "trabajo", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "trabajo_obra", "descripcion": "Un compañero de trabajo apura para llegar a la obra",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo me le va? caballero, ¿ya llegó a la obra?"],
+      ["usuario", "Voy en camino."],
+      ["llamante", "Sumercé, hágale ya mismo que el jefe quiere empezar temprano."],
+      ["llamante", "Y no se le olvide traer las herramientas."],
+      ["usuario", "Listo, ya llego."]
+    ]
+  },
+  {"id": "s-trabajo_obra-valle-del-cauca", "etiqueta": "legitima", "categoria": "trabajo", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "trabajo_obra", "descripcion": "Un compañero de trabajo apura para llegar a la obra",
+    "turnos": [
+      ["llamante", "Aló, ¿qué más? mi vida, ¿ya llegó a la obra?"],
+      ["usuario", "Voy en camino."],
+      ["llamante", "Ve, mirá, hágale volando que el jefe quiere empezar temprano."],
+      ["llamante", "Y no se le olvide traer las herramientas."],
+      ["usuario", "Listo, ya llego."]
+    ]
+  },
+  {"id": "s-trabajo_obra-santander", "etiqueta": "legitima", "categoria": "trabajo", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "trabajo_obra", "descripcion": "Un compañero de trabajo apura para llegar a la obra",
+    "turnos": [
+      ["llamante", "Aló, ¿qué hubo? mano, ¿ya llegó a la obra?"],
+      ["usuario", "Voy en camino."],
+      ["llamante", "Vea, hágale de una que el jefe quiere empezar temprano."],
+      ["llamante", "Y no se le olvide traer las herramientas."],
+      ["usuario", "Listo, ya llego."]
+    ]
+  },
+  {"id": "s-trabajo_obra-narino", "etiqueta": "legitima", "categoria": "trabajo", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "trabajo_obra", "descripcion": "Un compañero de trabajo apura para llegar a la obra",
+    "turnos": [
+      ["llamante", "Achichay, qué frío, buenas, mamita, ¿ya llegó a la obra?"],
+      ["usuario", "Voy en camino."],
+      ["llamante", "Ve, hágale ya mismo que el jefe quiere empezar temprano."],
+      ["llamante", "Y no se le olvide traer las herramientas."],
+      ["usuario", "Listo, ya llego."]
+    ]
+  },
+  {"id": "s-trabajo_obra-llanos", "etiqueta": "legitima", "categoria": "trabajo", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "trabajo_obra", "descripcion": "Un compañero de trabajo apura para llegar a la obra",
+    "turnos": [
+      ["llamante", "Buenas tardes, compadre, ¿ya llegó a la obra?"],
+      ["usuario", "Voy en camino."],
+      ["llamante", "Vea, hágale rapidito que el jefe quiere empezar temprano."],
+      ["llamante", "Y no se le olvide traer las herramientas."],
+      ["usuario", "Listo, ya llego."]
+    ]
+  },
+  {"id": "s-trabajo_obra-tolima-y-huila", "etiqueta": "legitima", "categoria": "trabajo", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "trabajo_obra", "descripcion": "Un compañero de trabajo apura para llegar a la obra",
+    "turnos": [
+      ["llamante", "Aló, ¿cómo le va? paisano, ¿ya llegó a la obra?"],
+      ["usuario", "Voy en camino."],
+      ["llamante", "Ole, hágale rapidito que el jefe quiere empezar temprano."],
+      ["llamante", "Y no se le olvide traer las herramientas."],
+      ["usuario", "Listo, ya llego."]
+    ]
+  },
+  {"id": "s-trabajo_obra-eje-cafetero", "etiqueta": "legitima", "categoria": "trabajo", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "trabajo_obra", "descripcion": "Un compañero de trabajo apura para llegar a la obra",
+    "turnos": [
+      ["llamante", "Quiubo, buenas, parcero, ¿ya llegó a la obra?"],
+      ["usuario", "Voy en camino."],
+      ["llamante", "Vea, pues, hágale ya mismo que el jefe quiere empezar temprano."],
+      ["llamante", "Y no se le olvide traer las herramientas."],
+      ["usuario", "Listo, ya llego."]
+    ]
+  },
+  {"id": "s-amigos_asado-costa-caribe", "etiqueta": "legitima", "categoria": "amistad", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "amigos_asado", "descripcion": "Un amigo invita a un asado",
+    "turnos": [
+      ["llamante", "Quiubo, buenas, mija, ¿qué más pues?"],
+      ["usuario", "Todo bien, ¿y usted?"],
+      ["llamante", "Eche, el sábado hay asado en la casa, ¿se viene?"],
+      ["usuario", "Claro, ¿llevo algo?"],
+      ["llamante", "Traiga la gaseosa y ya. Listo, hablamos ahorita."]
+    ]
+  },
+  {"id": "s-amigos_asado-antioquia", "etiqueta": "legitima", "categoria": "amistad", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "amigos_asado", "descripcion": "Un amigo invita a un asado",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo le va pues? parce, ¿qué más pues?"],
+      ["usuario", "Todo bien, ¿y usted?"],
+      ["llamante", "Pues mire, el sábado hay asado en la casa, ¿se viene?"],
+      ["usuario", "Claro, ¿llevo algo?"],
+      ["llamante", "Traiga la gaseosa y ya. Bueno, pues, que esté bien."]
+    ]
+  },
+  {"id": "s-amigos_asado-bogota", "etiqueta": "legitima", "categoria": "amistad", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "amigos_asado", "descripcion": "Un amigo invita a un asado",
+    "turnos": [
+      ["llamante", "Aló, buenos días, mi señora, ¿qué más pues?"],
+      ["usuario", "Todo bien, ¿y usted?"],
+      ["llamante", "Mire, el sábado hay asado en la casa, ¿se viene?"],
+      ["usuario", "Claro, ¿llevo algo?"],
+      ["llamante", "Traiga la gaseosa y ya. Bueno, que tenga buen día."]
+    ]
+  },
+  {"id": "s-amigos_asado-valle-del-cauca", "etiqueta": "legitima", "categoria": "amistad", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "amigos_asado", "descripcion": "Un amigo invita a un asado",
+    "turnos": [
+      ["llamante", "Aló, ¿qué más? mijo, ¿qué más pues?"],
+      ["usuario", "Todo bien, ¿y usted?"],
+      ["llamante", "Ve, mirá, el sábado hay asado en la casa, ¿se viene?"],
+      ["usuario", "Claro, ¿llevo algo?"],
+      ["llamante", "Traiga la gaseosa y ya. Listo, hablamos."]
+    ]
+  },
+  {"id": "s-amigos_asado-santander", "etiqueta": "legitima", "categoria": "amistad", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "amigos_asado", "descripcion": "Un amigo invita a un asado",
+    "turnos": [
+      ["llamante", "Buenas, mano, hermano, ¿qué más pues?"],
+      ["usuario", "Todo bien, ¿y usted?"],
+      ["llamante", "Vea, el sábado hay asado en la casa, ¿se viene?"],
+      ["usuario", "Claro, ¿llevo algo?"],
+      ["llamante", "Traiga la gaseosa y ya. Bueno, que esté bien."]
+    ]
+  },
+  {"id": "s-amigos_asado-narino", "etiqueta": "legitima", "categoria": "amistad", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "amigos_asado", "descripcion": "Un amigo invita a un asado",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo está? vecino, ¿qué más pues?"],
+      ["usuario", "Todo bien, ¿y usted?"],
+      ["llamante", "Ve, el sábado hay asado en la casa, ¿se viene?"],
+      ["usuario", "Claro, ¿llevo algo?"],
+      ["llamante", "Traiga la gaseosa y ya. Bueno, mamita, que le vaya bien."]
+    ]
+  },
+  {"id": "s-amigos_asado-llanos", "etiqueta": "legitima", "categoria": "amistad", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "amigos_asado", "descripcion": "Un amigo invita a un asado",
+    "turnos": [
+      ["llamante", "Aló, ¿cómo amaneció? compadre, ¿qué más pues?"],
+      ["usuario", "Todo bien, ¿y usted?"],
+      ["llamante", "Vea, el sábado hay asado en la casa, ¿se viene?"],
+      ["usuario", "Claro, ¿llevo algo?"],
+      ["llamante", "Traiga la gaseosa y ya. Listo, compadre, hablamos."]
+    ]
+  },
+  {"id": "s-amigos_asado-tolima-y-huila", "etiqueta": "legitima", "categoria": "amistad", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "amigos_asado", "descripcion": "Un amigo invita a un asado",
+    "turnos": [
+      ["llamante", "Ole, buenas, paisano, ¿qué más pues?"],
+      ["usuario", "Todo bien, ¿y usted?"],
+      ["llamante", "Ole, el sábado hay asado en la casa, ¿se viene?"],
+      ["usuario", "Claro, ¿llevo algo?"],
+      ["llamante", "Traiga la gaseosa y ya. Bueno, mijo, que esté bien."]
+    ]
+  },
+  {"id": "s-amigos_asado-eje-cafetero", "etiqueta": "legitima", "categoria": "amistad", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "amigos_asado", "descripcion": "Un amigo invita a un asado",
+    "turnos": [
+      ["llamante", "Aló, buenos días, parcero, ¿qué más pues?"],
+      ["usuario", "Todo bien, ¿y usted?"],
+      ["llamante", "Pues mire, el sábado hay asado en la casa, ¿se viene?"],
+      ["usuario", "Claro, ¿llevo algo?"],
+      ["llamante", "Traiga la gaseosa y ya. Listo, chao pues."]
+    ]
+  },
+  {"id": "s-banco_tarjeta_lista-costa-caribe", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_prueba", "region": "costa caribe", "fuente": "plantilla", "plantilla": "banco_tarjeta_lista", "descripcion": "El banco avisa que la tarjeta nueva está lista en la oficina",
+    "turnos": [
+      ["llamante", "Quiubo, buenas, le hablamos de Colpatria. Su tarjeta nueva ya está lista."],
+      ["usuario", "Ah, qué bien."],
+      ["llamante", "Puede reclamarla en la oficina con su cédula, mi llave. No le vamos a pedir ningún dato por esta llamada."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Bueno, mi amor, cuídate."]
+    ]
+  },
+  {"id": "s-banco_tarjeta_lista-antioquia", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_prueba", "region": "antioquia", "fuente": "plantilla", "plantilla": "banco_tarjeta_lista", "descripcion": "El banco avisa que la tarjeta nueva está lista en la oficina",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo le va pues? le hablamos de Colpatria. Su tarjeta nueva ya está lista."],
+      ["usuario", "Ah, qué bien."],
+      ["llamante", "Puede reclamarla en la oficina con su cédula, mija. No le vamos a pedir ningún dato por esta llamada."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Listo, chao pues."]
+    ]
+  },
+  {"id": "s-banco_tarjeta_lista-bogota", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_prueba", "region": "bogota", "fuente": "plantilla", "plantilla": "banco_tarjeta_lista", "descripcion": "El banco avisa que la tarjeta nueva está lista en la oficina",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo me le va? le hablamos de Bancolombia. Su tarjeta nueva ya está lista."],
+      ["usuario", "Ah, qué bien."],
+      ["llamante", "Puede reclamarla en la oficina con su cédula, veci. No le vamos a pedir ningún dato por esta llamada."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Listo, sumercé, que esté muy bien."]
+    ]
+  },
+  {"id": "s-banco_tarjeta_lista-valle-del-cauca", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_prueba", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "banco_tarjeta_lista", "descripcion": "El banco avisa que la tarjeta nueva está lista en la oficina",
+    "turnos": [
+      ["llamante", "Ve, buenas, le hablamos de Colpatria. Su tarjeta nueva ya está lista."],
+      ["usuario", "Ah, qué bien."],
+      ["llamante", "Puede reclamarla en la oficina con su cédula, mi vida. No le vamos a pedir ningún dato por esta llamada."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Bueno, ve, cuidate."]
+    ]
+  },
+  {"id": "s-banco_tarjeta_lista-santander", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_prueba", "region": "santander", "fuente": "plantilla", "plantilla": "banco_tarjeta_lista", "descripcion": "El banco avisa que la tarjeta nueva está lista en la oficina",
+    "turnos": [
+      ["llamante", "Aló, ¿qué hubo? le hablamos de Bancolombia. Su tarjeta nueva ya está lista."],
+      ["usuario", "Ah, qué bien."],
+      ["llamante", "Puede reclamarla en la oficina con su cédula, hermano. No le vamos a pedir ningún dato por esta llamada."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Bueno, que esté bien."]
+    ]
+  },
+  {"id": "s-banco_tarjeta_lista-narino", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_prueba", "region": "nariño", "fuente": "plantilla", "plantilla": "banco_tarjeta_lista", "descripcion": "El banco avisa que la tarjeta nueva está lista en la oficina",
+    "turnos": [
+      ["llamante", "Achichay, qué frío, buenas, le hablamos del Banco de Bogotá. Su tarjeta nueva ya está lista."],
+      ["usuario", "Ah, qué bien."],
+      ["llamante", "Puede reclamarla en la oficina con su cédula, vecino. No le vamos a pedir ningún dato por esta llamada."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Listo, chao."]
+    ]
+  },
+  {"id": "s-banco_tarjeta_lista-llanos", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_prueba", "region": "llanos", "fuente": "plantilla", "plantilla": "banco_tarjeta_lista", "descripcion": "El banco avisa que la tarjeta nueva está lista en la oficina",
+    "turnos": [
+      ["llamante", "Aló, ¿cómo amaneció? le hablamos de Davivienda. Su tarjeta nueva ya está lista."],
+      ["usuario", "Ah, qué bien."],
+      ["llamante", "Puede reclamarla en la oficina con su cédula, patrón. No le vamos a pedir ningún dato por esta llamada."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Listo, compadre, hablamos."]
+    ]
+  },
+  {"id": "s-banco_tarjeta_lista-tolima-y-huila", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_prueba", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "banco_tarjeta_lista", "descripcion": "El banco avisa que la tarjeta nueva está lista en la oficina",
+    "turnos": [
+      ["llamante", "Aló, ¿cómo le va? le hablamos del Banco de Bogotá. Su tarjeta nueva ya está lista."],
+      ["usuario", "Ah, qué bien."],
+      ["llamante", "Puede reclamarla en la oficina con su cédula, paisano. No le vamos a pedir ningún dato por esta llamada."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Listo, hablamos."]
+    ]
+  },
+  {"id": "s-banco_tarjeta_lista-eje-cafetero", "etiqueta": "legitima", "categoria": "banco_real", "particion": "sintetica_prueba", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "banco_tarjeta_lista", "descripcion": "El banco avisa que la tarjeta nueva está lista en la oficina",
+    "turnos": [
+      ["llamante", "Aló, buenos días, le hablamos del Banco de Bogotá. Su tarjeta nueva ya está lista."],
+      ["usuario", "Ah, qué bien."],
+      ["llamante", "Puede reclamarla en la oficina con su cédula, mija. No le vamos a pedir ningún dato por esta llamada."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Bueno, pues, que esté bien."]
+    ]
+  },
+  {"id": "s-familia_enferma-costa-caribe", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_prueba", "region": "costa caribe", "fuente": "plantilla", "plantilla": "familia_enferma", "descripcion": "Un familiar ofrece llevar la sopa y la droga",
+    "turnos": [
+      ["llamante", "Quiubo, buenas, mi amor, soy yo, ¿cómo sigue de la gripa?"],
+      ["usuario", "Mejor, gracias."],
+      ["llamante", "Eche, le llevo la sopa ahorita y le compro la droga en la farmacia."],
+      ["usuario", "Gracias, ¿cuánto le debo?"],
+      ["llamante", "Nada, tranquila. Listo, hablamos ahorita."]
+    ]
+  },
+  {"id": "s-familia_enferma-antioquia", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_prueba", "region": "antioquia", "fuente": "plantilla", "plantilla": "familia_enferma", "descripcion": "Un familiar ofrece llevar la sopa y la droga",
+    "turnos": [
+      ["llamante", "Quiubo, ¿cómo va? parce, soy yo, ¿cómo sigue de la gripa?"],
+      ["usuario", "Mejor, gracias."],
+      ["llamante", "Ave María, le llevo la sopa ahorita y le compro la droga en la farmacia."],
+      ["usuario", "Gracias, ¿cuánto le debo?"],
+      ["llamante", "Nada, tranquila. Listo, chao pues."]
+    ]
+  },
+  {"id": "s-familia_enferma-bogota", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_prueba", "region": "bogota", "fuente": "plantilla", "plantilla": "familia_enferma", "descripcion": "Un familiar ofrece llevar la sopa y la droga",
+    "turnos": [
+      ["llamante", "Buenas tardes, sumercé, sumercé, soy yo, ¿cómo sigue de la gripa?"],
+      ["usuario", "Mejor, gracias."],
+      ["llamante", "Oiga, le llevo la sopa ahorita y le compro la droga en la farmacia."],
+      ["usuario", "Gracias, ¿cuánto le debo?"],
+      ["llamante", "Nada, tranquila. Bueno, que tenga buen día."]
+    ]
+  },
+  {"id": "s-familia_enferma-valle-del-cauca", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_prueba", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "familia_enferma", "descripcion": "Un familiar ofrece llevar la sopa y la droga",
+    "turnos": [
+      ["llamante", "Ve, buenas, mi vida, soy yo, ¿cómo sigue de la gripa?"],
+      ["usuario", "Mejor, gracias."],
+      ["llamante", "Mirá, le llevo la sopa ahorita y le compro la droga en la farmacia."],
+      ["usuario", "Gracias, ¿cuánto le debo?"],
+      ["llamante", "Nada, tranquila. Bueno, ve, cuidate."]
+    ]
+  },
+  {"id": "s-familia_enferma-santander", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_prueba", "region": "santander", "fuente": "plantilla", "plantilla": "familia_enferma", "descripcion": "Un familiar ofrece llevar la sopa y la droga",
+    "turnos": [
+      ["llamante", "Buenos días, hermano, soy yo, ¿cómo sigue de la gripa?"],
+      ["usuario", "Mejor, gracias."],
+      ["llamante", "Mano, le llevo la sopa ahorita y le compro la droga en la farmacia."],
+      ["usuario", "Gracias, ¿cuánto le debo?"],
+      ["llamante", "Nada, tranquila. Listo, mano, hablamos."]
+    ]
+  },
+  {"id": "s-familia_enferma-narino", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_prueba", "region": "nariño", "fuente": "plantilla", "plantilla": "familia_enferma", "descripcion": "Un familiar ofrece llevar la sopa y la droga",
+    "turnos": [
+      ["llamante", "Achichay, qué frío, buenas, mijo, soy yo, ¿cómo sigue de la gripa?"],
+      ["usuario", "Mejor, gracias."],
+      ["llamante", "Mire, le llevo la sopa ahorita y le compro la droga en la farmacia."],
+      ["usuario", "Gracias, ¿cuánto le debo?"],
+      ["llamante", "Nada, tranquila. Bueno, mamita, que le vaya bien."]
+    ]
+  },
+  {"id": "s-familia_enferma-llanos", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_prueba", "region": "llanos", "fuente": "plantilla", "plantilla": "familia_enferma", "descripcion": "Un familiar ofrece llevar la sopa y la droga",
+    "turnos": [
+      ["llamante", "Aló, ¿cómo amaneció? compadre, soy yo, ¿cómo sigue de la gripa?"],
+      ["usuario", "Mejor, gracias."],
+      ["llamante", "Compadre, le llevo la sopa ahorita y le compro la droga en la farmacia."],
+      ["usuario", "Gracias, ¿cuánto le debo?"],
+      ["llamante", "Nada, tranquila. Bueno, que esté bien."]
+    ]
+  },
+  {"id": "s-familia_enferma-tolima-y-huila", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_prueba", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "familia_enferma", "descripcion": "Un familiar ofrece llevar la sopa y la droga",
+    "turnos": [
+      ["llamante", "Aló, ¿cómo le va? mija, soy yo, ¿cómo sigue de la gripa?"],
+      ["usuario", "Mejor, gracias."],
+      ["llamante", "Mire, le llevo la sopa ahorita y le compro la droga en la farmacia."],
+      ["usuario", "Gracias, ¿cuánto le debo?"],
+      ["llamante", "Nada, tranquila. Bueno, mijo, que esté bien."]
+    ]
+  },
+  {"id": "s-familia_enferma-eje-cafetero", "etiqueta": "legitima", "categoria": "familia", "particion": "sintetica_prueba", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "familia_enferma", "descripcion": "Un familiar ofrece llevar la sopa y la droga",
+    "turnos": [
+      ["llamante", "Aló, buenos días, parcero, soy yo, ¿cómo sigue de la gripa?"],
+      ["usuario", "Mejor, gracias."],
+      ["llamante", "Pues mire, le llevo la sopa ahorita y le compro la droga en la farmacia."],
+      ["usuario", "Gracias, ¿cuánto le debo?"],
+      ["llamante", "Nada, tranquila. Listo, chao pues."]
+    ]
+  },
+  {"id": "s-energia_corte-costa-caribe", "etiqueta": "legitima", "categoria": "servicios", "particion": "sintetica_prueba", "region": "costa caribe", "fuente": "plantilla", "plantilla": "energia_corte", "descripcion": "La empresa de energía avisa un corte programado",
+    "turnos": [
+      ["llamante", "Aló, buenas, le hablamos de la empresa de energía."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Mañana hay corte programado de ocho a doce por mantenimiento, mi vida."],
+      ["llamante", "Mira, no tiene que pagar nada ni dar datos, es solo un aviso."],
+      ["usuario", "Listo, gracias por avisar."]
+    ]
+  },
+  {"id": "s-energia_corte-antioquia", "etiqueta": "legitima", "categoria": "servicios", "particion": "sintetica_prueba", "region": "antioquia", "fuente": "plantilla", "plantilla": "energia_corte", "descripcion": "La empresa de energía avisa un corte programado",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo le va pues? le hablamos de la empresa de energía."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Mañana hay corte programado de ocho a doce por mantenimiento, mijo."],
+      ["llamante", "Ave María, no tiene que pagar nada ni dar datos, es solo un aviso."],
+      ["usuario", "Listo, gracias por avisar."]
+    ]
+  },
+  {"id": "s-energia_corte-bogota", "etiqueta": "legitima", "categoria": "servicios", "particion": "sintetica_prueba", "region": "bogota", "fuente": "plantilla", "plantilla": "energia_corte", "descripcion": "La empresa de energía avisa un corte programado",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo me le va? le hablamos de la empresa de energía."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Mañana hay corte programado de ocho a doce por mantenimiento, sumercé."],
+      ["llamante", "Oiga, no tiene que pagar nada ni dar datos, es solo un aviso."],
+      ["usuario", "Listo, gracias por avisar."]
+    ]
+  },
+  {"id": "s-energia_corte-valle-del-cauca", "etiqueta": "legitima", "categoria": "servicios", "particion": "sintetica_prueba", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "energia_corte", "descripcion": "La empresa de energía avisa un corte programado",
+    "turnos": [
+      ["llamante", "Aló, ¿qué más? le hablamos de la empresa de energía."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Mañana hay corte programado de ocho a doce por mantenimiento, mijo."],
+      ["llamante", "Mirá, no tiene que pagar nada ni dar datos, es solo un aviso."],
+      ["usuario", "Listo, gracias por avisar."]
+    ]
+  },
+  {"id": "s-energia_corte-santander", "etiqueta": "legitima", "categoria": "servicios", "particion": "sintetica_prueba", "region": "santander", "fuente": "plantilla", "plantilla": "energia_corte", "descripcion": "La empresa de energía avisa un corte programado",
+    "turnos": [
+      ["llamante", "Buenos días, le hablamos de la empresa de energía."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Mañana hay corte programado de ocho a doce por mantenimiento, mano."],
+      ["llamante", "Mano, no tiene que pagar nada ni dar datos, es solo un aviso."],
+      ["usuario", "Listo, gracias por avisar."]
+    ]
+  },
+  {"id": "s-energia_corte-narino", "etiqueta": "legitima", "categoria": "servicios", "particion": "sintetica_prueba", "region": "nariño", "fuente": "plantilla", "plantilla": "energia_corte", "descripcion": "La empresa de energía avisa un corte programado",
+    "turnos": [
+      ["llamante", "Achichay, qué frío, buenas, le hablamos de la empresa de energía."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Mañana hay corte programado de ocho a doce por mantenimiento, papito."],
+      ["llamante", "Vea pues, no tiene que pagar nada ni dar datos, es solo un aviso."],
+      ["usuario", "Listo, gracias por avisar."]
+    ]
+  },
+  {"id": "s-energia_corte-llanos", "etiqueta": "legitima", "categoria": "servicios", "particion": "sintetica_prueba", "region": "llanos", "fuente": "plantilla", "plantilla": "energia_corte", "descripcion": "La empresa de energía avisa un corte programado",
+    "turnos": [
+      ["llamante", "Aló, ¿cómo amaneció? le hablamos de la empresa de energía."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Mañana hay corte programado de ocho a doce por mantenimiento, compadre."],
+      ["llamante", "Vea, no tiene que pagar nada ni dar datos, es solo un aviso."],
+      ["usuario", "Listo, gracias por avisar."]
+    ]
+  },
+  {"id": "s-energia_corte-tolima-y-huila", "etiqueta": "legitima", "categoria": "servicios", "particion": "sintetica_prueba", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "energia_corte", "descripcion": "La empresa de energía avisa un corte programado",
+    "turnos": [
+      ["llamante", "Buenas tardes, le hablamos de la empresa de energía."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Mañana hay corte programado de ocho a doce por mantenimiento, mija."],
+      ["llamante", "Mire, no tiene que pagar nada ni dar datos, es solo un aviso."],
+      ["usuario", "Listo, gracias por avisar."]
+    ]
+  },
+  {"id": "s-energia_corte-eje-cafetero", "etiqueta": "legitima", "categoria": "servicios", "particion": "sintetica_prueba", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "energia_corte", "descripcion": "La empresa de energía avisa un corte programado",
+    "turnos": [
+      ["llamante", "Aló, buenos días, le hablamos de la empresa de energía."],
+      ["usuario", "Sí, dígame."],
+      ["llamante", "Mañana hay corte programado de ocho a doce por mantenimiento, mi señora."],
+      ["llamante", "Vea, pues, no tiene que pagar nada ni dar datos, es solo un aviso."],
+      ["usuario", "Listo, gracias por avisar."]
+    ]
+  },
+  {"id": "s-encuesta_barrio-costa-caribe", "etiqueta": "legitima", "categoria": "encuesta", "particion": "sintetica_desarrollo", "region": "costa caribe", "fuente": "plantilla", "plantilla": "encuesta_barrio", "descripcion": "La junta de acción comunal invita a una reunión y hace una pregunta corta",
+    "turnos": [
+      ["llamante", "Ajá, buenas tardes, le hablamos de la junta de acción comunal del barrio."],
+      ["usuario", "Sí, ¿qué necesita?"],
+      ["llamante", "Eche, el jueves hay reunión para lo del alumbrado, mi amor. ¿Puede ir?"],
+      ["usuario", "Creo que sí."],
+      ["llamante", "No hay que llevar nada ni pagar nada, solo vaya si puede. Listo, hablamos ahorita."]
+    ]
+  },
+  {"id": "s-encuesta_barrio-antioquia", "etiqueta": "legitima", "categoria": "encuesta", "particion": "sintetica_desarrollo", "region": "antioquia", "fuente": "plantilla", "plantilla": "encuesta_barrio", "descripcion": "La junta de acción comunal invita a una reunión y hace una pregunta corta",
+    "turnos": [
+      ["llamante", "Quiubo, ¿cómo va? le hablamos de la junta de acción comunal del barrio."],
+      ["usuario", "Sí, ¿qué necesita?"],
+      ["llamante", "Pues mire, el jueves hay reunión para lo del alumbrado, mi amor. ¿Puede ir?"],
+      ["usuario", "Creo que sí."],
+      ["llamante", "No hay que llevar nada ni pagar nada, solo vaya si puede. Bueno, pues, que esté bien."]
+    ]
+  },
+  {"id": "s-encuesta_barrio-bogota", "etiqueta": "legitima", "categoria": "encuesta", "particion": "sintetica_desarrollo", "region": "bogota", "fuente": "plantilla", "plantilla": "encuesta_barrio", "descripcion": "La junta de acción comunal invita a una reunión y hace una pregunta corta",
+    "turnos": [
+      ["llamante", "Buenas tardes, sumercé, le hablamos de la junta de acción comunal del barrio."],
+      ["usuario", "Sí, ¿qué necesita?"],
+      ["llamante", "Oiga, el jueves hay reunión para lo del alumbrado, sumercé. ¿Puede ir?"],
+      ["usuario", "Creo que sí."],
+      ["llamante", "No hay que llevar nada ni pagar nada, solo vaya si puede. Listo, sumercé, que esté muy bien."]
+    ]
+  },
+  {"id": "s-encuesta_barrio-valle-del-cauca", "etiqueta": "legitima", "categoria": "encuesta", "particion": "sintetica_desarrollo", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "encuesta_barrio", "descripcion": "La junta de acción comunal invita a una reunión y hace una pregunta corta",
+    "turnos": [
+      ["llamante", "Ve, buenas, le hablamos de la junta de acción comunal del barrio."],
+      ["usuario", "Sí, ¿qué necesita?"],
+      ["llamante", "Oíste, el jueves hay reunión para lo del alumbrado, parce. ¿Puede ir?"],
+      ["usuario", "Creo que sí."],
+      ["llamante", "No hay que llevar nada ni pagar nada, solo vaya si puede. Bueno, ve, cuidate."]
+    ]
+  },
+  {"id": "s-encuesta_barrio-santander", "etiqueta": "legitima", "categoria": "encuesta", "particion": "sintetica_desarrollo", "region": "santander", "fuente": "plantilla", "plantilla": "encuesta_barrio", "descripcion": "La junta de acción comunal invita a una reunión y hace una pregunta corta",
+    "turnos": [
+      ["llamante", "Buenas, mano, le hablamos de la junta de acción comunal del barrio."],
+      ["usuario", "Sí, ¿qué necesita?"],
+      ["llamante", "Mano, el jueves hay reunión para lo del alumbrado, hermano. ¿Puede ir?"],
+      ["usuario", "Creo que sí."],
+      ["llamante", "No hay que llevar nada ni pagar nada, solo vaya si puede. Bueno, que esté bien."]
+    ]
+  },
+  {"id": "s-encuesta_barrio-narino", "etiqueta": "legitima", "categoria": "encuesta", "particion": "sintetica_desarrollo", "region": "nariño", "fuente": "plantilla", "plantilla": "encuesta_barrio", "descripcion": "La junta de acción comunal invita a una reunión y hace una pregunta corta",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo está? le hablamos de la junta de acción comunal del barrio."],
+      ["usuario", "Sí, ¿qué necesita?"],
+      ["llamante", "Vea pues, el jueves hay reunión para lo del alumbrado, papito. ¿Puede ir?"],
+      ["usuario", "Creo que sí."],
+      ["llamante", "No hay que llevar nada ni pagar nada, solo vaya si puede. Bueno, mamita, que le vaya bien."]
+    ]
+  },
+  {"id": "s-encuesta_barrio-llanos", "etiqueta": "legitima", "categoria": "encuesta", "particion": "sintetica_desarrollo", "region": "llanos", "fuente": "plantilla", "plantilla": "encuesta_barrio", "descripcion": "La junta de acción comunal invita a una reunión y hace una pregunta corta",
+    "turnos": [
+      ["llamante", "Buenas tardes, le hablamos de la junta de acción comunal del barrio."],
+      ["usuario", "Sí, ¿qué necesita?"],
+      ["llamante", "Vea, el jueves hay reunión para lo del alumbrado, cuñao. ¿Puede ir?"],
+      ["usuario", "Creo que sí."],
+      ["llamante", "No hay que llevar nada ni pagar nada, solo vaya si puede. Bueno, que esté bien."]
+    ]
+  },
+  {"id": "s-encuesta_barrio-tolima-y-huila", "etiqueta": "legitima", "categoria": "encuesta", "particion": "sintetica_desarrollo", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "encuesta_barrio", "descripcion": "La junta de acción comunal invita a una reunión y hace una pregunta corta",
+    "turnos": [
+      ["llamante", "Buenas tardes, le hablamos de la junta de acción comunal del barrio."],
+      ["usuario", "Sí, ¿qué necesita?"],
+      ["llamante", "Mire, el jueves hay reunión para lo del alumbrado, mijo. ¿Puede ir?"],
+      ["usuario", "Creo que sí."],
+      ["llamante", "No hay que llevar nada ni pagar nada, solo vaya si puede. Listo, hablamos."]
+    ]
+  },
+  {"id": "s-encuesta_barrio-eje-cafetero", "etiqueta": "legitima", "categoria": "encuesta", "particion": "sintetica_desarrollo", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "encuesta_barrio", "descripcion": "La junta de acción comunal invita a una reunión y hace una pregunta corta",
+    "turnos": [
+      ["llamante", "Aló, buenos días, le hablamos de la junta de acción comunal del barrio."],
+      ["usuario", "Sí, ¿qué necesita?"],
+      ["llamante", "Vea, pues, el jueves hay reunión para lo del alumbrado, parcero. ¿Puede ir?"],
+      ["usuario", "Creo que sí."],
+      ["llamante", "No hay que llevar nada ni pagar nada, solo vaya si puede. Listo, chao pues."]
+    ]
+  },
+  {"id": "s-colegio_reunion-costa-caribe", "etiqueta": "legitima", "categoria": "colegio", "particion": "sintetica_prueba", "region": "costa caribe", "fuente": "plantilla", "plantilla": "colegio_reunion", "descripcion": "El colegio recuerda la entrega de boletines",
+    "turnos": [
+      ["llamante", "Ajá, buenas tardes, le hablamos del colegio de su hija."],
+      ["usuario", "Sí, ¿pasó algo?"],
+      ["llamante", "No, mi vida, tranquilo. Es para recordarle que el viernes es la entrega de boletines a las siete."],
+      ["llamante", "Ajá, si no puede venir, la profesora la atiende el lunes."],
+      ["usuario", "Listo, allá estaré."]
+    ]
+  },
+  {"id": "s-colegio_reunion-antioquia", "etiqueta": "legitima", "categoria": "colegio", "particion": "sintetica_prueba", "region": "antioquia", "fuente": "plantilla", "plantilla": "colegio_reunion", "descripcion": "El colegio recuerda la entrega de boletines",
+    "turnos": [
+      ["llamante", "Quiubo, ¿cómo va? le hablamos del colegio de su hija."],
+      ["usuario", "Sí, ¿pasó algo?"],
+      ["llamante", "No, mijo, tranquilo. Es para recordarle que el viernes es la entrega de boletines a las siete."],
+      ["llamante", "Vea, si no puede venir, la profesora la atiende el lunes."],
+      ["usuario", "Listo, allá estaré."]
+    ]
+  },
+  {"id": "s-colegio_reunion-bogota", "etiqueta": "legitima", "categoria": "colegio", "particion": "sintetica_prueba", "region": "bogota", "fuente": "plantilla", "plantilla": "colegio_reunion", "descripcion": "El colegio recuerda la entrega de boletines",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo me le va? le hablamos del colegio de su hija."],
+      ["usuario", "Sí, ¿pasó algo?"],
+      ["llamante", "No, mi señora, tranquilo. Es para recordarle que el viernes es la entrega de boletines a las siete."],
+      ["llamante", "Sumercé, si no puede venir, la profesora la atiende el lunes."],
+      ["usuario", "Listo, allá estaré."]
+    ]
+  },
+  {"id": "s-colegio_reunion-valle-del-cauca", "etiqueta": "legitima", "categoria": "colegio", "particion": "sintetica_prueba", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "colegio_reunion", "descripcion": "El colegio recuerda la entrega de boletines",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo estás? le hablamos del colegio de su hija."],
+      ["usuario", "Sí, ¿pasó algo?"],
+      ["llamante", "No, parce, tranquilo. Es para recordarle que el viernes es la entrega de boletines a las siete."],
+      ["llamante", "Mirá, si no puede venir, la profesora la atiende el lunes."],
+      ["usuario", "Listo, allá estaré."]
+    ]
+  },
+  {"id": "s-colegio_reunion-santander", "etiqueta": "legitima", "categoria": "colegio", "particion": "sintetica_prueba", "region": "santander", "fuente": "plantilla", "plantilla": "colegio_reunion", "descripcion": "El colegio recuerda la entrega de boletines",
+    "turnos": [
+      ["llamante", "Aló, ¿qué hubo? le hablamos del colegio de su hija."],
+      ["usuario", "Sí, ¿pasó algo?"],
+      ["llamante", "No, mano, tranquilo. Es para recordarle que el viernes es la entrega de boletines a las siete."],
+      ["llamante", "Vea, si no puede venir, la profesora la atiende el lunes."],
+      ["usuario", "Listo, allá estaré."]
+    ]
+  },
+  {"id": "s-colegio_reunion-narino", "etiqueta": "legitima", "categoria": "colegio", "particion": "sintetica_prueba", "region": "nariño", "fuente": "plantilla", "plantilla": "colegio_reunion", "descripcion": "El colegio recuerda la entrega de boletines",
+    "turnos": [
+      ["llamante", "Achichay, qué frío, buenas, le hablamos del colegio de su hija."],
+      ["usuario", "Sí, ¿pasó algo?"],
+      ["llamante", "No, mijo, tranquilo. Es para recordarle que el viernes es la entrega de boletines a las siete."],
+      ["llamante", "Mire, si no puede venir, la profesora la atiende el lunes."],
+      ["usuario", "Listo, allá estaré."]
+    ]
+  },
+  {"id": "s-colegio_reunion-llanos", "etiqueta": "legitima", "categoria": "colegio", "particion": "sintetica_prueba", "region": "llanos", "fuente": "plantilla", "plantilla": "colegio_reunion", "descripcion": "El colegio recuerda la entrega de boletines",
+    "turnos": [
+      ["llamante", "Buenas, compadre, le hablamos del colegio de su hija."],
+      ["usuario", "Sí, ¿pasó algo?"],
+      ["llamante", "No, patrón, tranquilo. Es para recordarle que el viernes es la entrega de boletines a las siete."],
+      ["llamante", "Compadre, si no puede venir, la profesora la atiende el lunes."],
+      ["usuario", "Listo, allá estaré."]
+    ]
+  },
+  {"id": "s-colegio_reunion-tolima-y-huila", "etiqueta": "legitima", "categoria": "colegio", "particion": "sintetica_prueba", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "colegio_reunion", "descripcion": "El colegio recuerda la entrega de boletines",
+    "turnos": [
+      ["llamante", "Buenas tardes, le hablamos del colegio de su hija."],
+      ["usuario", "Sí, ¿pasó algo?"],
+      ["llamante", "No, paisano, tranquilo. Es para recordarle que el viernes es la entrega de boletines a las siete."],
+      ["llamante", "Mire, si no puede venir, la profesora la atiende el lunes."],
+      ["usuario", "Listo, allá estaré."]
+    ]
+  },
+  {"id": "s-colegio_reunion-eje-cafetero", "etiqueta": "legitima", "categoria": "colegio", "particion": "sintetica_prueba", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "colegio_reunion", "descripcion": "El colegio recuerda la entrega de boletines",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo va? le hablamos del colegio de su hija."],
+      ["usuario", "Sí, ¿pasó algo?"],
+      ["llamante", "No, parcero, tranquilo. Es para recordarle que el viernes es la entrega de boletines a las siete."],
+      ["llamante", "Pues mire, si no puede venir, la profesora la atiende el lunes."],
+      ["usuario", "Listo, allá estaré."]
+    ]
+  },
+  {"id": "s-tienda_contra_entrega-costa-caribe", "etiqueta": "legitima", "categoria": "comercio", "particion": "sintetica_prueba", "region": "costa caribe", "fuente": "plantilla", "plantilla": "tienda_contra_entrega", "descripcion": "La tienda confirma un pedido que se paga contra entrega",
+    "turnos": [
+      ["llamante", "Aló, buenas, le hablamos de la tienda para confirmar su pedido."],
+      ["usuario", "Sí, el de la licuadora."],
+      ["llamante", "Exacto, mi amor. Llega el jueves y paga contra entrega, en efectivo o con tarjeta."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Listo, hablamos ahorita."]
+    ]
+  },
+  {"id": "s-tienda_contra_entrega-antioquia", "etiqueta": "legitima", "categoria": "comercio", "particion": "sintetica_prueba", "region": "antioquia", "fuente": "plantilla", "plantilla": "tienda_contra_entrega", "descripcion": "La tienda confirma un pedido que se paga contra entrega",
+    "turnos": [
+      ["llamante", "Quiubo, ¿cómo va? le hablamos de la tienda para confirmar su pedido."],
+      ["usuario", "Sí, el de la licuadora."],
+      ["llamante", "Exacto, mija. Llega el jueves y paga contra entrega, en efectivo o con tarjeta."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Listo, chao pues."]
+    ]
+  },
+  {"id": "s-tienda_contra_entrega-bogota", "etiqueta": "legitima", "categoria": "comercio", "particion": "sintetica_prueba", "region": "bogota", "fuente": "plantilla", "plantilla": "tienda_contra_entrega", "descripcion": "La tienda confirma un pedido que se paga contra entrega",
+    "turnos": [
+      ["llamante", "Buenas, ¿cómo me le va? le hablamos de la tienda para confirmar su pedido."],
+      ["usuario", "Sí, el de la licuadora."],
+      ["llamante", "Exacto, veci. Llega el jueves y paga contra entrega, en efectivo o con tarjeta."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Bueno, que tenga buen día."]
+    ]
+  },
+  {"id": "s-tienda_contra_entrega-valle-del-cauca", "etiqueta": "legitima", "categoria": "comercio", "particion": "sintetica_prueba", "region": "valle del cauca", "fuente": "plantilla", "plantilla": "tienda_contra_entrega", "descripcion": "La tienda confirma un pedido que se paga contra entrega",
+    "turnos": [
+      ["llamante", "Ve, buenas, le hablamos de la tienda para confirmar su pedido."],
+      ["usuario", "Sí, el de la licuadora."],
+      ["llamante", "Exacto, mi vida. Llega el jueves y paga contra entrega, en efectivo o con tarjeta."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Bueno, ve, cuidate."]
+    ]
+  },
+  {"id": "s-tienda_contra_entrega-santander", "etiqueta": "legitima", "categoria": "comercio", "particion": "sintetica_prueba", "region": "santander", "fuente": "plantilla", "plantilla": "tienda_contra_entrega", "descripcion": "La tienda confirma un pedido que se paga contra entrega",
+    "turnos": [
+      ["llamante", "Aló, ¿qué hubo? le hablamos de la tienda para confirmar su pedido."],
+      ["usuario", "Sí, el de la licuadora."],
+      ["llamante", "Exacto, mano. Llega el jueves y paga contra entrega, en efectivo o con tarjeta."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Bueno, que esté bien."]
+    ]
+  },
+  {"id": "s-tienda_contra_entrega-narino", "etiqueta": "legitima", "categoria": "comercio", "particion": "sintetica_prueba", "region": "nariño", "fuente": "plantilla", "plantilla": "tienda_contra_entrega", "descripcion": "La tienda confirma un pedido que se paga contra entrega",
+    "turnos": [
+      ["llamante", "Aló, buenos días, le hablamos de la tienda para confirmar su pedido."],
+      ["usuario", "Sí, el de la licuadora."],
+      ["llamante", "Exacto, papito. Llega el jueves y paga contra entrega, en efectivo o con tarjeta."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Listo, chao."]
+    ]
+  },
+  {"id": "s-tienda_contra_entrega-llanos", "etiqueta": "legitima", "categoria": "comercio", "particion": "sintetica_prueba", "region": "llanos", "fuente": "plantilla", "plantilla": "tienda_contra_entrega", "descripcion": "La tienda confirma un pedido que se paga contra entrega",
+    "turnos": [
+      ["llamante", "Buenas tardes, le hablamos de la tienda para confirmar su pedido."],
+      ["usuario", "Sí, el de la licuadora."],
+      ["llamante", "Exacto, cuñao. Llega el jueves y paga contra entrega, en efectivo o con tarjeta."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Bueno, que esté bien."]
+    ]
+  },
+  {"id": "s-tienda_contra_entrega-tolima-y-huila", "etiqueta": "legitima", "categoria": "comercio", "particion": "sintetica_prueba", "region": "tolima y huila", "fuente": "plantilla", "plantilla": "tienda_contra_entrega", "descripcion": "La tienda confirma un pedido que se paga contra entrega",
+    "turnos": [
+      ["llamante", "Ole, buenas, le hablamos de la tienda para confirmar su pedido."],
+      ["usuario", "Sí, el de la licuadora."],
+      ["llamante", "Exacto, paisano. Llega el jueves y paga contra entrega, en efectivo o con tarjeta."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Listo, hablamos."]
+    ]
+  },
+  {"id": "s-tienda_contra_entrega-eje-cafetero", "etiqueta": "legitima", "categoria": "comercio", "particion": "sintetica_prueba", "region": "eje cafetero", "fuente": "plantilla", "plantilla": "tienda_contra_entrega", "descripcion": "La tienda confirma un pedido que se paga contra entrega",
+    "turnos": [
+      ["llamante", "Aló, buenos días, le hablamos de la tienda para confirmar su pedido."],
+      ["usuario", "Sí, el de la licuadora."],
+      ["llamante", "Exacto, mi señora. Llega el jueves y paga contra entrega, en efectivo o con tarjeta."],
+      ["usuario", "Perfecto."],
+      ["llamante", "Listo, chao pues."]
+    ]
+  }
+]

@@ -1,0 +1,395 @@
+{
+  "descripcion": "Plantillas de llamadas con huecos que se llenan con variantes de cada región. python -m evaluacion.generar_guiones crea guiones-sinteticos.json: una llamada por plantilla y región. Son llamadas escritas por el equipo, no grabaciones reales. Las plantillas de uso 'entrenamiento' alimentan el clasificador; las de uso 'prueba' forman la partición 'sintetica' y nunca se usan para entrenar.",
+  "regiones": {
+    "costa caribe": {
+      "saludo": ["Aló, buenas", "Ajá, buenas tardes", "Quiubo, buenas"],
+      "trato": ["mi amor", "mi vida", "mi llave", "mija"],
+      "muletilla": ["Ajá,", "Eche,", "Mira,"],
+      "pida": ["pásame", "dime", "dígame"],
+      "codigo": ["los numeritos", "el codiguito", "el código"],
+      "afan": ["ahorita mismo", "rapidito", "ya"],
+      "monto": ["cien lucas", "doscientas lucas", "trescientos mil pesos"],
+      "consigne": ["mándame", "pásame", "consígname"],
+      "despedida": ["Bueno, mi amor, cuídate", "Listo, hablamos ahorita"]
+    },
+    "antioquia": {
+      "saludo": ["Quiubo, ¿cómo va?", "Buenas, ¿cómo le va pues?", "Hola, buenas"],
+      "trato": ["mijo", "mija", "parce", "mi amor"],
+      "muletilla": ["Vea,", "Pues mire,", "Ave María,"],
+      "pida": ["regáleme", "dígame", "páseme"],
+      "codigo": ["el codiguito", "el código", "los numeritos"],
+      "afan": ["ya mismo", "de una", "rapidito pues"],
+      "monto": ["doscientas lucas", "cien lucas", "un palo"],
+      "consigne": ["mándeme", "páseme", "consígneme"],
+      "despedida": ["Bueno, pues, que esté bien", "Listo, chao pues"]
+    },
+    "bogota": {
+      "saludo": ["Buenas tardes, sumercé", "Aló, buenos días", "Buenas, ¿cómo me le va?"],
+      "trato": ["sumercé", "veci", "mi señora", "caballero"],
+      "muletilla": ["Mire,", "Sumercé,", "Oiga,"],
+      "pida": ["regáleme", "me regala", "dígame"],
+      "codigo": ["el código", "los dígitos", "el código de verificación"],
+      "afan": ["ya mismo", "de una vez", "en un momentico"],
+      "monto": ["trescientos mil pesos", "doscientos mil", "quinientos mil pesos"],
+      "consigne": ["consígneme", "hágame el giro de", "transfiérame"],
+      "despedida": ["Listo, sumercé, que esté muy bien", "Bueno, que tenga buen día"]
+    },
+    "valle del cauca": {
+      "saludo": ["Ve, buenas", "Aló, ¿qué más?", "Buenas, ¿cómo estás?"],
+      "trato": ["mijo", "mija", "mi vida", "parce"],
+      "muletilla": ["Ve, mirá,", "Mirá,", "Oíste,"],
+      "pida": ["pasame", "decime", "dame"],
+      "codigo": ["el código", "los numeritos", "el codiguito"],
+      "afan": ["volando", "ya mismo", "rapidito"],
+      "monto": ["dos palos", "cien lucas", "trescientas lucas"],
+      "consigne": ["mandame", "pasame", "transferime"],
+      "despedida": ["Bueno, ve, cuidate", "Listo, hablamos"]
+    },
+    "santander": {
+      "saludo": ["Buenas, mano", "Aló, ¿qué hubo?", "Buenos días"],
+      "trato": ["mano", "mijo", "mi señora", "hermano"],
+      "muletilla": ["Mano,", "Vea,", "Oiga,"],
+      "pida": ["dígame", "páseme", "regáleme"],
+      "codigo": ["el código", "el codiguito", "los numeritos"],
+      "afan": ["ya mismo", "rápido", "de una"],
+      "monto": ["ciento cincuenta mil", "doscientos mil pesos", "un palo"],
+      "consigne": ["gíreme", "consígneme", "mándeme"],
+      "despedida": ["Listo, mano, hablamos", "Bueno, que esté bien"]
+    },
+    "nariño": {
+      "saludo": ["Buenas, ¿cómo está?", "Aló, buenos días", "Achichay, qué frío, buenas"],
+      "trato": ["mamita", "papito", "mijo", "vecino"],
+      "muletilla": ["Vea pues,", "Mire,", "Ve,"],
+      "pida": ["dígame", "regáleme", "páseme"],
+      "codigo": ["el código", "los numeritos", "el codiguito"],
+      "afan": ["ahoritica", "rapidito", "ya mismo"],
+      "monto": ["doscientos mil", "la platica", "cien mil pesos"],
+      "consigne": ["mándeme", "consígneme", "páseme"],
+      "despedida": ["Bueno, mamita, que le vaya bien", "Listo, chao"]
+    },
+    "llanos": {
+      "saludo": ["Buenas, compadre", "Aló, ¿cómo amaneció?", "Buenas tardes"],
+      "trato": ["compadre", "cuñao", "comadre", "patrón"],
+      "muletilla": ["Compadre,", "Mire,", "Vea,"],
+      "pida": ["dígame", "páseme", "regáleme"],
+      "codigo": ["el código", "los numeritos", "el codiguito"],
+      "afan": ["ya mismo", "rapidito", "de una"],
+      "monto": ["un melón", "quinientos mil", "doscientas lucas"],
+      "consigne": ["mándeme", "gíreme", "páseme"],
+      "despedida": ["Listo, compadre, hablamos", "Bueno, que esté bien"]
+    },
+    "tolima y huila": {
+      "saludo": ["Ole, buenas", "Aló, ¿cómo le va?", "Buenas tardes"],
+      "trato": ["mijo", "mija", "mi señora", "paisano"],
+      "muletilla": ["Ole,", "Vea,", "Mire,"],
+      "pida": ["me regala", "dígame", "regáleme"],
+      "codigo": ["el código", "los numeritos", "el codiguito"],
+      "afan": ["ya mismo", "rapidito", "de una vez"],
+      "monto": ["doscientos mil", "cien lucas", "trescientos mil pesos"],
+      "consigne": ["consígneme", "mándeme", "gíreme"],
+      "despedida": ["Bueno, mijo, que esté bien", "Listo, hablamos"]
+    },
+    "eje cafetero": {
+      "saludo": ["Buenas, ¿cómo va?", "Quiubo, buenas", "Aló, buenos días"],
+      "trato": ["mijo", "mija", "parcero", "mi señora"],
+      "muletilla": ["Vea, pues,", "Pues mire,", "Ve,"],
+      "pida": ["regáleme", "dígame", "páseme"],
+      "codigo": ["el código", "el codiguito", "los numeritos"],
+      "afan": ["ya mismo", "de una", "rapidito"],
+      "monto": ["doscientas lucas", "cien lucas", "un palo"],
+      "consigne": ["mándeme", "consígneme", "páseme"],
+      "despedida": ["Bueno, pues, que esté bien", "Listo, chao pues"]
+    }
+  },
+  "comunes": {
+    "banco": ["Bancolombia", "Davivienda", "el Banco de Bogotá", "BBVA", "el Banco Caja Social", "Colpatria"],
+    "billetera": ["Nequi", "Daviplata", "Bre-B"],
+    "entidad": ["la DIAN", "la Fiscalía", "la Secretaría de Movilidad", "un juzgado de cobro"],
+    "empresa": ["Servientrega", "Interrapidísimo", "la transportadora"],
+    "tienda": ["el almacén Éxito", "la tienda en línea", "el supermercado del barrio"],
+    "pasado": ["pasé", "mandé", "consigné"]
+  },
+  "plantillas": [
+    {
+      "id": "suplanta_banco_codigo", "uso": "entrenamiento", "etiqueta": "riesgo", "categoria": "suplanta_banco",
+      "descripcion": "Falso empleado del banco pide el código del mensaje para 'cancelar' una compra",
+      "turno_riesgo": 2,
+      "turnos": [
+        ["llamante", "{saludo}. Le hablamos del área de seguridad de {banco}."],
+        ["usuario", "Sí, ¿qué pasó?"],
+        ["llamante", "{muletilla} detectamos una compra rara en su cuenta. Para cancelarla {pida} {codigo} del mensaje que le acaba de llegar, {trato}."],
+        ["usuario", "¿Y eso es seguro?"],
+        ["llamante", "No se preocupe, {trato}, pero hágale {afan} que la compra se aprueba en dos minutos."]
+      ]
+    },
+    {
+      "id": "familiar_numero_nuevo", "uso": "entrenamiento", "etiqueta": "riesgo", "categoria": "familiar_falso",
+      "descripcion": "Dice ser un familiar con número nuevo y pide plata",
+      "turno_riesgo": 4,
+      "turnos": [
+        ["llamante", "{saludo}, ¿adivine quién le habla?"],
+        ["usuario", "No sé, ¿quién es?"],
+        ["llamante", "Soy yo, {trato}, su sobrino. Este es mi número nuevo, se me dañó el celular."],
+        ["usuario", "Ah, ¿y qué pasó?"],
+        ["llamante", "{muletilla} estoy en un problema, {consigne} {monto} por {billetera} {afan} y mañana se los devuelvo."],
+        ["llamante", "No le vaya a contar a mi mamá, por favor."]
+      ]
+    },
+    {
+      "id": "premio_envio", "uso": "entrenamiento", "etiqueta": "riesgo", "categoria": "premio_falso",
+      "descripcion": "Premio de un sorteo que exige pagar el envío",
+      "turno_riesgo": 2,
+      "turnos": [
+        ["llamante", "{saludo}. Lo llamamos de {tienda} porque usted ganó una moto en el sorteo de aniversario."],
+        ["usuario", "¿En serio? Yo no participé en nada."],
+        ["llamante", "Sí, {trato}, participó con su última compra. Solo tiene que pagar el envío: {consigne} {monto} por {billetera} {afan}."],
+        ["usuario", "Déjeme pensarlo."],
+        ["llamante", "Es que el premio vence hoy, si no se lo damos a otra persona."]
+      ]
+    },
+    {
+      "id": "entidad_embargo", "uso": "entrenamiento", "etiqueta": "riesgo", "categoria": "suplanta_entidad",
+      "descripcion": "Falso funcionario amenaza con embargo y pide consignar un abono",
+      "turno_riesgo": 3,
+      "turnos": [
+        ["llamante", "{saludo}. Le habla un funcionario de {entidad}, usted tiene un proceso pendiente."],
+        ["usuario", "¿Qué proceso?"],
+        ["llamante", "{muletilla} tiene una deuda y si no la paga hoy le embargamos la cuenta."],
+        ["llamante", "Para evitar el embargo consigne el abono a la cuenta que le voy a dictar, {trato}, {afan}."],
+        ["usuario", "Yo no sabía nada de eso."]
+      ]
+    },
+    {
+      "id": "inversion_doble", "uso": "entrenamiento", "etiqueta": "riesgo", "categoria": "inversion_falsa",
+      "descripcion": "Inversión que promete doblar la plata en un mes",
+      "turno_riesgo": 2,
+      "turnos": [
+        ["llamante", "{saludo}, {trato}. Le tengo un negocio buenísimo."],
+        ["usuario", "¿Qué negocio?"],
+        ["llamante", "{muletilla} usted invierte {monto} en una plataforma de criptomonedas y en un mes tiene el doble, garantizado."],
+        ["usuario", "Suena muy bueno."],
+        ["llamante", "Me los manda por {billetera} y le activo la cuenta {afan}."]
+      ]
+    },
+    {
+      "id": "empleo_curso", "uso": "entrenamiento", "etiqueta": "riesgo", "categoria": "empleo_falso",
+      "descripcion": "Oferta de trabajo que exige pagar un curso",
+      "turno_riesgo": 2,
+      "turnos": [
+        ["llamante", "{saludo}. Lo llamo por la hoja de vida que dejó para el trabajo en la bodega."],
+        ["usuario", "Ah, sí, claro."],
+        ["llamante", "Quedó seleccionado, {trato}. Para firmar el contrato tiene que pagar el curso de inducción: {consigne} {monto} {afan}."],
+        ["usuario", "¿Y si no lo pago?"],
+        ["llamante", "{muletilla} pierde el cupo, hay muchas personas esperando."]
+      ]
+    },
+    {
+      "id": "extorsion_vacuna", "uso": "entrenamiento", "etiqueta": "riesgo", "categoria": "extorsion",
+      "descripcion": "Extorsión a un comerciante",
+      "turno_riesgo": 3,
+      "turnos": [
+        ["llamante", "{muletilla} ¿usted es el dueño del local?"],
+        ["usuario", "Sí, ¿quién habla?"],
+        ["llamante", "Eso no importa. Lo tenemos ubicado y sabemos dónde vive su familia."],
+        ["llamante", "Si no paga la vacuna de {monto} esta semana, le caemos al negocio."],
+        ["usuario", "Yo no tengo esa plata."],
+        ["llamante", "No le vaya a contar a la policía, {trato}."]
+      ]
+    },
+    {
+      "id": "suplanta_banco_clave", "uso": "prueba", "etiqueta": "riesgo", "categoria": "suplanta_banco",
+      "descripcion": "Falso asesor pide la clave y el código para 'desbloquear' la tarjeta",
+      "turno_riesgo": 2,
+      "turnos": [
+        ["llamante", "{saludo}, le saluda el asesor de {banco}."],
+        ["usuario", "Sí, dígame."],
+        ["llamante", "Su tarjeta quedó bloqueada por seguridad, {trato}. Para desbloquearla {pida} la clave del cajero y {codigo} del mensaje que le llegó."],
+        ["usuario", "Bueno, déjeme buscarlo."],
+        ["llamante", "{muletilla} hágale {afan} que se cierra el sistema."]
+      ]
+    },
+    {
+      "id": "familiar_detenido", "uso": "prueba", "etiqueta": "riesgo", "categoria": "familiar_falso",
+      "descripcion": "Falso abogado dice que el hijo está detenido y pide plata",
+      "turno_riesgo": 3,
+      "turnos": [
+        ["llamante", "{muletilla} ¿hablo con la mamá del muchacho?"],
+        ["usuario", "Sí, ¿qué pasó con mi hijo?"],
+        ["llamante", "Le habla el abogado, {trato}. Su hijo tuvo un accidente y está detenido."],
+        ["llamante", "Para que no lo pasen a la cárcel {consigne} {monto} por {billetera} {afan}."],
+        ["usuario", "Ay, Dios mío, ¿lo puedo llamar?"],
+        ["llamante", "No, no me vaya a colgar, que ya le estamos haciendo el trámite."]
+      ]
+    },
+    {
+      "id": "soporte_aplicacion", "uso": "prueba", "etiqueta": "riesgo", "categoria": "soporte_falso",
+      "descripcion": "Falso soporte técnico pide instalar una aplicación de control remoto",
+      "turno_riesgo": 2,
+      "turnos": [
+        ["llamante", "{saludo}, le hablamos del soporte técnico de su operador de internet."],
+        ["usuario", "Sí, ¿qué pasa?"],
+        ["llamante", "Su celular tiene un virus, {trato}. Descargue una aplicación que le voy a decir para que el técnico entre y lo limpie."],
+        ["usuario", "¿Cuál aplicación?"],
+        ["llamante", "{muletilla} se llama AnyDesk, hágale {afan} antes de que le roben las claves."]
+      ]
+    },
+    {
+      "id": "extorsion_familia", "uso": "prueba", "etiqueta": "riesgo", "categoria": "extorsion",
+      "descripcion": "Amenaza a la familia para exigir plata",
+      "turno_riesgo": 3,
+      "turnos": [
+        ["llamante", "{saludo}. Le habla el comandante del frente."],
+        ["usuario", "¿Quién?"],
+        ["llamante", "{muletilla} sabemos dónde vive y a qué colegio van sus hijos, {trato}."],
+        ["llamante", "Tiene que colaborarnos con {monto} o le va a ir mal a su familia."],
+        ["usuario", "Yo no tengo cómo."]
+      ]
+    },
+    {
+      "id": "envio_aduana", "uso": "prueba", "etiqueta": "riesgo", "categoria": "envio_falso",
+      "descripcion": "Paquete retenido que exige pagar un impuesto",
+      "turno_riesgo": 2,
+      "turnos": [
+        ["llamante", "{saludo}, lo llamamos de {empresa} porque tiene un paquete retenido en la bodega."],
+        ["usuario", "No estoy esperando nada."],
+        ["llamante", "Es un regalo, {trato}. Para liberarlo {consigne} {monto} del impuesto de aduana {afan}."],
+        ["usuario", "¿A qué cuenta?"],
+        ["llamante", "{muletilla} se la mando por mensaje ahorita."]
+      ]
+    },
+    {
+      "id": "banco_confirma_compra", "uso": "entrenamiento", "etiqueta": "legitima", "categoria": "banco_real",
+      "descripcion": "El banco confirma una compra y recuerda que nunca pide claves",
+      "turnos": [
+        ["llamante", "{saludo}, le hablamos de {banco} para confirmar una compra de ciento veinte mil pesos en un supermercado."],
+        ["usuario", "Sí, fui yo."],
+        ["llamante", "Perfecto, {trato}. Recuerde que nunca le vamos a pedir claves ni códigos por teléfono."],
+        ["llamante", "Si quiere revisar algo, entre a la aplicación oficial o llame a la línea de su tarjeta."],
+        ["usuario", "Listo, gracias."],
+        ["llamante", "{despedida}."]
+      ]
+    },
+    {
+      "id": "familia_mercado", "uso": "entrenamiento", "etiqueta": "legitima", "categoria": "familia",
+      "descripcion": "Un familiar cuenta que ya mandó la plata del mercado",
+      "turnos": [
+        ["llamante", "{saludo}, {trato}, ¿cómo amaneció?"],
+        ["usuario", "Bien, ¿y usted?"],
+        ["llamante", "{muletilla} ya le {pasado} la plata del mercado por {billetera}, revise a ver si le llegó."],
+        ["usuario", "Sí, ya me llegó, gracias."],
+        ["llamante", "El domingo vamos a almorzar donde la abuela. {despedida}."]
+      ]
+    },
+    {
+      "id": "domicilio_efectivo", "uso": "entrenamiento", "etiqueta": "legitima", "categoria": "domicilio",
+      "descripcion": "El domiciliario pide la dirección y el efectivo listo",
+      "turnos": [
+        ["llamante", "{saludo}, es el domiciliario de la tienda."],
+        ["usuario", "Ah, sí, el pedido."],
+        ["llamante", "{muletilla} ya voy llegando, tenga el efectivo listo, son cuarenta y cinco mil pesos."],
+        ["llamante", "¿Me regala la dirección exacta, {trato}? Es que no encuentro la casa."],
+        ["usuario", "Calle doce con carrera cuarta, la puerta verde."],
+        ["llamante", "{despedida}."]
+      ]
+    },
+    {
+      "id": "eps_cita", "uso": "entrenamiento", "etiqueta": "legitima", "categoria": "cita_medica",
+      "descripcion": "La EPS confirma una cita médica",
+      "turnos": [
+        ["llamante", "{saludo}, le hablamos de la EPS para confirmar la cita con el médico general."],
+        ["usuario", "Sí, ¿cuándo es?"],
+        ["llamante", "Es el martes a las ocho, {trato}. Llegue quince minutos antes con el documento."],
+        ["usuario", "Listo."],
+        ["llamante", "Si no puede ir, cancele por la aplicación para que otra persona use el turno. {despedida}."]
+      ]
+    },
+    {
+      "id": "trabajo_obra", "uso": "entrenamiento", "etiqueta": "legitima", "categoria": "trabajo",
+      "descripcion": "Un compañero de trabajo apura para llegar a la obra",
+      "turnos": [
+        ["llamante", "{saludo}, {trato}, ¿ya llegó a la obra?"],
+        ["usuario", "Voy en camino."],
+        ["llamante", "{muletilla} hágale {afan} que el jefe quiere empezar temprano."],
+        ["llamante", "Y no se le olvide traer las herramientas."],
+        ["usuario", "Listo, ya llego."]
+      ]
+    },
+    {
+      "id": "amigos_asado", "uso": "entrenamiento", "etiqueta": "legitima", "categoria": "amistad",
+      "descripcion": "Un amigo invita a un asado",
+      "turnos": [
+        ["llamante", "{saludo}, {trato}, ¿qué más pues?"],
+        ["usuario", "Todo bien, ¿y usted?"],
+        ["llamante", "{muletilla} el sábado hay asado en la casa, ¿se viene?"],
+        ["usuario", "Claro, ¿llevo algo?"],
+        ["llamante", "Traiga la gaseosa y ya. {despedida}."]
+      ]
+    },
+    {
+      "id": "banco_tarjeta_lista", "uso": "prueba", "etiqueta": "legitima", "categoria": "banco_real",
+      "descripcion": "El banco avisa que la tarjeta nueva está lista en la oficina",
+      "turnos": [
+        ["llamante", "{saludo}, le hablamos de {banco}. Su tarjeta nueva ya está lista."],
+        ["usuario", "Ah, qué bien."],
+        ["llamante", "Puede reclamarla en la oficina con su cédula, {trato}. No le vamos a pedir ningún dato por esta llamada."],
+        ["usuario", "Perfecto."],
+        ["llamante", "{despedida}."]
+      ]
+    },
+    {
+      "id": "familia_enferma", "uso": "prueba", "etiqueta": "legitima", "categoria": "familia",
+      "descripcion": "Un familiar ofrece llevar la sopa y la droga",
+      "turnos": [
+        ["llamante", "{saludo}, {trato}, soy yo, ¿cómo sigue de la gripa?"],
+        ["usuario", "Mejor, gracias."],
+        ["llamante", "{muletilla} le llevo la sopa ahorita y le compro la droga en la farmacia."],
+        ["usuario", "Gracias, ¿cuánto le debo?"],
+        ["llamante", "Nada, tranquila. {despedida}."]
+      ]
+    },
+    {
+      "id": "energia_corte", "uso": "prueba", "etiqueta": "legitima", "categoria": "servicios",
+      "descripcion": "La empresa de energía avisa un corte programado",
+      "turnos": [
+        ["llamante", "{saludo}, le hablamos de la empresa de energía."],
+        ["usuario", "Sí, dígame."],
+        ["llamante", "Mañana hay corte programado de ocho a doce por mantenimiento, {trato}."],
+        ["llamante", "{muletilla} no tiene que pagar nada ni dar datos, es solo un aviso."],
+        ["usuario", "Listo, gracias por avisar."]
+      ]
+    },
+    {
+      "id": "encuesta_barrio", "uso": "entrenamiento", "etiqueta": "legitima", "categoria": "encuesta",
+      "descripcion": "La junta de acción comunal invita a una reunión y hace una pregunta corta",
+      "turnos": [
+        ["llamante", "{saludo}, le hablamos de la junta de acción comunal del barrio."],
+        ["usuario", "Sí, ¿qué necesita?"],
+        ["llamante", "{muletilla} el jueves hay reunión para lo del alumbrado, {trato}. ¿Puede ir?"],
+        ["usuario", "Creo que sí."],
+        ["llamante", "No hay que llevar nada ni pagar nada, solo vaya si puede. {despedida}."]
+      ]
+    },
+    {
+      "id": "colegio_reunion", "uso": "prueba", "etiqueta": "legitima", "categoria": "colegio",
+      "descripcion": "El colegio recuerda la entrega de boletines",
+      "turnos": [
+        ["llamante", "{saludo}, le hablamos del colegio de su hija."],
+        ["usuario", "Sí, ¿pasó algo?"],
+        ["llamante", "No, {trato}, tranquilo. Es para recordarle que el viernes es la entrega de boletines a las siete."],
+        ["llamante", "{muletilla} si no puede venir, la profesora la atiende el lunes."],
+        ["usuario", "Listo, allá estaré."]
+      ]
+    },
+    {
+      "id": "tienda_contra_entrega", "uso": "prueba", "etiqueta": "legitima", "categoria": "comercio",
+      "descripcion": "La tienda confirma un pedido que se paga contra entrega",
+      "turnos": [
+        ["llamante", "{saludo}, le hablamos de la tienda para confirmar su pedido."],
+        ["usuario", "Sí, el de la licuadora."],
+        ["llamante", "Exacto, {trato}. Llega el jueves y paga contra entrega, en efectivo o con tarjeta."],
+        ["usuario", "Perfecto."],
+        ["llamante", "{despedida}."]
+      ]
+    }
+  ]
+}

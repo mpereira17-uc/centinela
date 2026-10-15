@@ -17,12 +17,14 @@ Solo datos de desarrollo:
 |---|---|---|
 | [datos/entrenamiento/frases.json](../datos/entrenamiento/frases.json), escritas para entrenar | 80 | 80 |
 | Turnos de quien llama de los 24 guiones de desarrollo | 12 | 48 |
+| [Frases regionales](../datos/entrenamiento/frases-regionales.json) ([modismos](modismos.md)) | 36 | 36 |
+| Turnos de quien llama de los 126 guiones sintéticos de desarrollo ([base de guiones](base-guiones.md)) | 63 | 297 |
 
-En los guiones de riesgo se toma como positiva la frase anotada en `turno_riesgo`; las frases posteriores ("sí, rápido") se descartan porque son ambiguas. Una prueba verifica que ninguna frase de los guiones reservados entre al entrenamiento.
+En los guiones de riesgo se toma como positiva la frase anotada en `turno_riesgo`; las frases posteriores ("sí, rápido") se descartan porque son ambiguas. Una prueba verifica que ninguna frase de los guiones reservados, regionales o sintéticos de prueba entre al entrenamiento.
 
 ## Umbral
 
-Se elige con validación cruzada de 5 partes sobre los datos de entrenamiento: el umbral que más frases de riesgo detecta sin pasar de 3 % de falsas alertas por frase. Quedó en **0,61**, con 71 % de detección y 1,6 % de falsas alertas por frase fuera de muestra. Por llamada la detección es mayor, porque basta con que una frase supere el umbral.
+Se elige con validación cruzada de 5 partes sobre los datos de entrenamiento: el umbral que más frases de riesgo detecta sin pasar de 3 % de falsas alertas por frase. Las versiones regionales de una misma plantilla quedan siempre en la misma parte, y la tasa se mide sobre las frases escritas a mano ([por qué](base-guiones.md#cambios-en-el-clasificador)). Quedó en **0,63**, con 76 % de detección y 2 % de falsas alertas por frase fuera de muestra. Por llamada la detección es mayor, porque basta con que una frase supere el umbral.
 
 ## Estrategia híbrida
 
@@ -38,12 +40,12 @@ Modo texto, 6 llamadas de riesgo y 6 legítimas que el modelo nunca vio ([inform
 |---|---|---|---|---|
 | Reglas por fragmento | 3/6 | 1/6 | 6,4 s | 0 |
 | Reglas con acumulación | 3/6 | 1/6 | 6,4 s | 0 |
-| Clasificador solo | 6/6 | 0/6 | 5,6 s | 2 |
-| **Híbrida** | **6/6** | 1/6 | 5,6 s | 2 |
+| Clasificador solo | 6/6 | 1/6 | 2,8 s | 3 |
+| **Híbrida** | **6/6** | 1/6 | 2,8 s | 3 |
 
 - El clasificador detecta las tres estafas que las reglas no ven: el préstamo para "mandarlo a la cuenta de un amigo" (r14), el "número de verificación de WhatsApp" (r15) y el "léame el mensaje" (r18).
-- La falsa alerta de la híbrida (l13, el banco que pide **no** compartir un código) viene de las reglas, no del clasificador.
-- Las dos alertas anticipadas llegan un turno antes de la solicitud: en r14 con "cambié de número, guárdeme este" y en r15 con "le va a llegar un mensaje con un número de verificación". Son frases típicas de esas estafas, pero también podría decirlas alguien legítimo; hay que vigilarlas.
+- La falsa alerta de la híbrida (l13, el banco que pide **no** compartir un código) viene de las reglas. Desde que el clasificador entrena con la [base de guiones](base-guiones.md) también la marca, así que lo que ve el usuario no cambia.
+- Las alertas anticipadas llegan antes de la solicitud: en r14 con "cambié de número, guárdeme este", en r15 con "le va a llegar un mensaje con un número de verificación" y, desde que el modelo entrena con la base de guiones, en r16 con "ganó un bono de cien mil" en la billetera digital. Son frases típicas de esas estafas, pero también podría decirlas alguien legítimo; hay que vigilarlas.
 - Con 6 llamadas por grupo el intervalo de confianza de 6/6 va de 61 % a 100 %: el resultado es prometedor, no definitivo.
 
 En los guiones de desarrollo la híbrida detecta 12/12, pero esa cifra es optimista porque el modelo se entrenó con esos mismos turnos.
@@ -54,7 +56,7 @@ En los guiones de desarrollo la híbrida detecta 12/12, pero esa cifra es optimi
 
 ## Cómo se aplica sin scikit-learn
 
-El modelo se guarda en [backend/app/modelo_clasificador.json](../backend/app/modelo_clasificador.json) (unas 4.000 características): vocabulario, pesos IDF, coeficientes, intercepto y umbral. `backend/app/clasificador.py` repite el cálculo de scikit-learn con Python puro, así que el servidor no necesita scikit-learn ni abre archivos pickle, que pueden ejecutar código al cargarse (modelo de amenazas, A19). Una prueba compara las probabilidades con las de scikit-learn hasta la novena cifra decimal (se omite si scikit-learn no está instalado, como en la integración continua).
+El modelo se guarda en [backend/app/modelo_clasificador.json](../backend/app/modelo_clasificador.json) (unas 6.000 características): vocabulario, pesos IDF, coeficientes, intercepto y umbral. `backend/app/clasificador.py` repite el cálculo de scikit-learn con Python puro, así que el servidor no necesita scikit-learn ni abre archivos pickle, que pueden ejecutar código al cargarse (modelo de amenazas, A19). Una prueba compara las probabilidades con las de scikit-learn hasta la novena cifra decimal (se omite si scikit-learn no está instalado, como en la integración continua).
 
 Si el archivo no existe, la híbrida no se activa y la interfaz vuelve a la acumulación de reglas.
 

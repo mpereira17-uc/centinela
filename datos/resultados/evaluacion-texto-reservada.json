@@ -67,18 +67,20 @@
         0.9999999999999999
       ],
       "llamadas_legitimas": 6,
-      "falsas_alertas": 0,
-      "tasa_falsas_alertas": 0.0,
+      "falsas_alertas": 1,
+      "tasa_falsas_alertas": 0.16666666666666666,
       "falsas_alertas_ic95": [
-        0.0,
-        0.3903430336530645
+        0.03005258587173032,
+        0.563509436563646
       ],
-      "precision": 1.0,
-      "alertas_anticipadas": 2,
-      "segundos_hasta_aviso_mediana": 5.6,
+      "precision": 0.8571428571428571,
+      "alertas_anticipadas": 3,
+      "segundos_hasta_aviso_mediana": 2.8,
       "segundos_hasta_aviso_max": 7.6,
       "no_detectadas": [],
-      "con_falsa_alerta": []
+      "con_falsa_alerta": [
+        "l13"
+      ]
     },
     "hibrida": {
       "llamadas_riesgo": 6,
@@ -96,8 +98,8 @@
         0.563509436563646
       ],
       "precision": 0.8571428571428571,
-      "alertas_anticipadas": 2,
-      "segundos_hasta_aviso_mediana": 5.6,
+      "alertas_anticipadas": 3,
+      "segundos_hasta_aviso_mediana": 2.8,
       "segundos_hasta_aviso_max": 7.6,
       "no_detectadas": [],
       "con_falsa_alerta": [
@@ -144,7 +146,7 @@
             "bajo",
             "bajo",
             "alto",
-            "alto"
+            "bajo"
           ]
         },
         "hibrida": {
@@ -198,7 +200,7 @@
           "niveles": [
             "bajo",
             "alto",
-            "bajo",
+            "alto",
             "bajo"
           ]
         },
@@ -296,22 +298,22 @@
         },
         "clasificador": {
           "alerta": true,
-          "turno_alerta": 2,
-          "anticipada": false,
-          "segundos_hasta_aviso": 5.6,
+          "turno_alerta": 0,
+          "anticipada": true,
+          "segundos_hasta_aviso": 0.0,
           "niveles": [
-            "bajo",
             "alto",
-            "bajo"
+            "alto",
+            "alto"
           ]
         },
         "hibrida": {
           "alerta": true,
-          "turno_alerta": 2,
-          "anticipada": false,
-          "segundos_hasta_aviso": 5.6,
+          "turno_alerta": 0,
+          "anticipada": true,
+          "segundos_hasta_aviso": 0.0,
           "niveles": [
-            "moderado",
+            "alto",
             "alto",
             "critico"
           ]
@@ -450,13 +452,13 @@
           ]
         },
         "clasificador": {
-          "alerta": false,
-          "turno_alerta": null,
+          "alerta": true,
+          "turno_alerta": 1,
           "anticipada": false,
           "segundos_hasta_aviso": null,
           "niveles": [
             "bajo",
-            "bajo"
+            "alto"
           ]
         },
         "hibrida": {

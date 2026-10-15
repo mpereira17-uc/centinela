@@ -36,7 +36,7 @@ _REGLAS: list[tuple[str, str]] = [
     (r"\bbilletico\b", "plata"),
 
     # Pedir que mande dinero, dicho de forma coloquial
-    (r"\b(mandeme|mandame|me manda|me mandas|paseme|pasame|me pasa|me pasas|eche|echeme|hagame el giro de|colaboreme con|regaleme|me regala|me presta|prestame) (unas |unos |la |una |esa )?(\w+ )?(mil pesos|millones|millon|plata|pesos)\b",
+    (r"\b(mandeme|mandame|me manda|me mandas|paseme|pasame|me pasa|me pasas|eche|echeme|hagame el giro de|colabor(?:eme|enos|arnos|arme|e) con|regaleme|me regala|me presta|prestame) (unas |unos |la |una |esa )?(?:(\w+ )?(mil pesos|millones|millon|plata|pesos)|\w+ mil)\b",
      "transfiera la plata"),
     (r"\b(bre-?b|bre b|llave bre-?b)\b", "transferencia"),
 
@@ -56,6 +56,7 @@ _REGLAS: list[tuple[str, str]] = [
     (r"\bsabemos donde (vive|vives|trabaja|trabajas|estudia)\b", "le va a pasar algo, amenaza"),
     (r"\b(pagar|paga|pague|pagas|pagues) (la )?(vacuna|cuota de seguridad)\b", "extorsion amenaza"),
     (r"\bboleteo\b", "extorsion amenaza"),
+    (r"\b(le|te|les) va a ir (muy )?mal\b", "le va a pasar algo, amenaza"),
 
     # Secreto y no colgar
     (r"\bno le vaya a (decir|contar|comentar)\b", "no le diga"),

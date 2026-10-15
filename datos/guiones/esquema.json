@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mpereira17-uc/centinela/datos/guiones/esquema.json",
+  "title": "Guion de llamada anotado",
+  "description": "Una llamada simulada o transcrita, con su etiqueta y el turno donde aparece la solicitud de riesgo. Lo valida evaluacion/guiones.py.",
+  "type": "object",
+  "required": ["id", "etiqueta", "particion", "turnos"],
+  "properties": {
+    "id": {"type": "string", "description": "Único en toda la base."},
+    "etiqueta": {"enum": ["riesgo", "legitima"]},
+    "categoria": {"type": "string", "description": "Tipo de estafa (suplanta_banco, familiar_falso, extorsion...) o de llamada legítima (familia, banco_real...)."},
+    "particion": {
+      "enum": ["desarrollo", "reservada", "regional", "sintetica_desarrollo", "sintetica_prueba"],
+      "description": "Solo desarrollo y sintetica_desarrollo entrenan el clasificador; las demás sirven para medir."
+    },
+    "region": {"type": "string", "description": "Región de Colombia de los modismos usados, si aplica."},
+    "fuente": {
+      "enum": ["escrito", "plantilla", "piloto"],
+      "default": "escrito",
+      "description": "escrito: a mano por el equipo; plantilla: generado desde plantillas.json; piloto: transcrito de una llamada del piloto, con consentimiento y sin nombres."
+    },
+    "plantilla": {"type": "string", "description": "Plantilla de origen cuando la fuente es plantilla."},
+    "descripcion": {"type": "string"},
+    "turno_riesgo": {
+      "type": ["integer", "null"], "minimum": 0,
+      "description": "Índice del turno de quien llama con la solicitud de riesgo. Obligatorio en riesgo; vacío en legítima."
+    },
+    "turnos": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "array", "prefixItems": [{"enum": ["llamante", "usuario"]}, {"type": "string", "minLength": 1}],
+        "minItems": 2, "maxItems": 2
+      }
+    }
+  }
+}

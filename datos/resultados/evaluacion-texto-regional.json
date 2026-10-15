@@ -48,11 +48,11 @@
     },
     "clasificador": {
       "llamadas_riesgo": 6,
-      "detectadas": 5,
-      "deteccion": 0.8333333333333334,
+      "detectadas": 6,
+      "deteccion": 1.0,
       "deteccion_ic95": [
-        0.43649056343635395,
-        0.9699474141282697
+        0.6096569663469354,
+        0.9999999999999999
       ],
       "llamadas_legitimas": 6,
       "falsas_alertas": 0,
@@ -65,9 +65,7 @@
       "alertas_anticipadas": 0,
       "segundos_hasta_aviso_mediana": 9.2,
       "segundos_hasta_aviso_max": 11.2,
-      "no_detectadas": [
-        "g05"
-      ],
+      "no_detectadas": [],
       "con_falsa_alerta": []
     },
     "hibrida": {
@@ -330,13 +328,13 @@
           ]
         },
         "clasificador": {
-          "alerta": false,
-          "turno_alerta": null,
+          "alerta": true,
+          "turno_alerta": 2,
           "anticipada": false,
-          "segundos_hasta_aviso": null,
+          "segundos_hasta_aviso": 9.2,
           "niveles": [
             "bajo",
-            "bajo",
+            "alto",
             "bajo"
           ]
         },

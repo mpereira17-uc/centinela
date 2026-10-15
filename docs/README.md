@@ -13,5 +13,8 @@
 - [Reporte de números](reportes.md): reportes seudónimos y reputación como señal.
 - [Llamada simulada](llamada.md): dos navegadores en llamada por WebRTC con análisis en vivo.
 - [Guía de anotación](guia-anotacion.md): cómo se escriben y etiquetan los guiones.
+- [Base de guiones](base-guiones.md): formato, guiones generados por región y API de consulta.
+- [Modismos](modismos.md): frases y modismos regionales de Colombia.
+- [Denuncia](denuncia.md): resumen para denunciar ante las autoridades.
 - [Evaluación](evaluacion.md): guiones, métricas, cómo correrla y resultados.
 - [Clasificador](clasificador.md): modelo entrenado, estrategia híbrida y cómo reentrenarlo.
