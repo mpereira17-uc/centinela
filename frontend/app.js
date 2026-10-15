@@ -617,6 +617,53 @@ function descargarDenuncia() {
   $("#denuncia-estado").textContent = "Descargado en tu celular. Adjúntalo en la denuncia.";
 }
 
+function pintarMensaje(r) {
+  const caja = $("#msj-resultado");
+  caja.dataset.nivel = r.nivel;
+  $("#msj-nivel").textContent = `Riesgo ${ETIQUETAS[r.nivel].toLowerCase()}`;
+  $("#msj-texto").textContent = r.mensaje;
+  const lista = $("#msj-enlaces");
+  lista.replaceChildren();
+  for (const e of r.enlaces) {
+    const li = document.createElement("li");
+    li.dataset.oficial = e.oficial ? "si" : "no";
+    const nombre = document.createElement("strong");
+    nombre.textContent = e.dominio;
+    li.append(nombre);
+    if (e.hallazgos.length) {
+      const ul = document.createElement("ul");
+      for (const h of e.hallazgos) {
+        const item = document.createElement("li");
+        item.textContent = `El enlace ${h}.`;
+        ul.append(item);
+      }
+      li.append(ul);
+    } else if (!e.oficial) {
+      li.append(" Sin hallazgos en cómo está escrito.");
+    }
+    lista.append(li);
+  }
+  $("#msj-limite").textContent = r.limite;
+  caja.classList.remove("oculto");
+}
+
+async function revisarMensaje(ev) {
+  ev.preventDefault();
+  const texto = $("#texto-mensaje").value.trim();
+  const boton = $("#revisar-mensaje");
+  if (!texto) { $("#mensaje-error").textContent = "Pega el mensaje que recibiste."; $("#texto-mensaje").focus(); return; }
+  boton.disabled = true;
+  try {
+    const r = await api("/mensajes/analizar", { method: "POST", body: JSON.stringify({ texto }) });
+    $("#mensaje-error").textContent = "";
+    pintarMensaje(r);
+  } catch (e) {
+    $("#mensaje-error").textContent = e.status === 422 ? "El mensaje es demasiado largo (máximo 2000 caracteres)." : e.message;
+  } finally {
+    boton.disabled = false;
+  }
+}
+
 async function cargarCatalogo() {
   try {
     const senales = await api("/senales");
@@ -685,6 +732,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   cargarSugerencias();
   cargarCatalogo();
+  $("#form-mensaje").addEventListener("submit", revisarMensaje);
   $("#preparar-denuncia").addEventListener("click", prepararDenuncia);
   $("#copiar-denuncia").addEventListener("click", copiarDenuncia);
   $("#descargar-denuncia").addEventListener("click", descargarDenuncia);

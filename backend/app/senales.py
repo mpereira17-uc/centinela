@@ -210,12 +210,13 @@ _ACCIONES = {
 }
 
 
-def mensaje(nivel: Nivel, senales: list[Senal]) -> str:
+def mensaje(nivel: Nivel, senales: list[Senal], acciones: dict | None = None) -> str:
     """Texto breve y accionable para la alerta."""
+    acciones = acciones or _ACCIONES
     if not senales:
-        return f"{_TITULOS[nivel]}. {_ACCIONES[nivel]}"
+        return f"{_TITULOS[nivel]}. {acciones[nivel]}"
     # La razón principal es la señal más grave: solicitud, luego presión, luego contexto
     orden = {Tipo.SOLICITUD: 0, Tipo.PRESION: 1, Tipo.CONTEXTO: 2}
     principal = min(senales, key=lambda s: orden[s.tipo])
     motivo = principal.motivo[0].upper() + principal.motivo[1:]
-    return f"{_TITULOS[nivel]}. {motivo}. {_ACCIONES[nivel]}"
+    return f"{_TITULOS[nivel]}. {motivo}. {acciones[nivel]}"

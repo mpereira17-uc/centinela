@@ -80,3 +80,9 @@ def test_la_denuncia_se_prepara_en_el_equipo_y_apunta_a_canales_oficiales():
     # Centinela no envía la denuncia a terceros: no hay peticiones a otros dominios
     js = cliente.get("/app.js").text
     assert 'fetch("http' not in js and "fetch(`http" not in js
+
+
+def test_revisar_un_mensaje_esta_en_la_pagina_principal():
+    html = cliente.get("/").text
+    assert 'id="form-mensaje"' in html and 'id="msj-resultado"' in html
+    assert "/mensajes/analizar" in cliente.get("/app.js").text

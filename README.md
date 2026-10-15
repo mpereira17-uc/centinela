@@ -30,6 +30,7 @@ backend/
     cuentas.py         registro con passkey o PIN, sesiones y permisos
     db.py              base de datos SQLite local
     historial.py       historial con retención, exportar y borrar
+    mensajes.py        revisar SMS, WhatsApp o correos y sus enlaces
     reportes.py        reporte de números y reputación
     base_guiones.py    API de solo lectura de la base de guiones
     clasificador.py    clasificador entrenado y estrategia híbrida

@@ -581,3 +581,13 @@ html.letra-grande { font-size: 118%; }
 #canal-165 a { background: var(--critico-fondo); }
 #canal-165 a strong { color: var(--critico); }
 #denuncia-texto { font-size: .9rem; }
+
+/* Revisar un mensaje */
+.resultado-mensaje { margin-top: .9rem; padding: .9rem 1rem; border-radius: 18px; background: var(--cf, var(--campo)); box-shadow: inset 0 0 0 2px var(--c, transparent); }
+.resultado-cabeza { display: flex; align-items: center; gap: .6rem; margin: 0 0 .4rem; color: var(--c); font-size: 1.05rem; }
+.resultado-cabeza .nivel-icono { width: 1.6rem; height: 1.6rem; font-size: .85rem; flex: none; }
+.enlaces { list-style: none; padding: 0; margin: .6rem 0 0; display: grid; gap: .5rem; }
+.enlaces > li { padding: .6rem .8rem; border-radius: 14px; background: var(--superficie); overflow-wrap: anywhere; }
+.enlaces > li > strong { display: block; }
+.enlaces > li[data-oficial="si"] > strong::after { content: " · página oficial"; font-weight: 500; color: var(--bajo); }
+.enlaces ul { margin: .3rem 0 0; padding-left: 1.1rem; }
