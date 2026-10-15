@@ -21,6 +21,7 @@ def ids(texto):
         ("Le hablamos del Banco de Bogotá", "suplanta_entidad"),
         ("Usted es el ganador de un sorteo", "premio_inversion"),
         ("Confírmeme su fecha de nacimiento", "pide_datos_personales"),
+        ("Quiubo, ¿adivine quién le habla?", "finge_conocido"),
     ],
 )
 def test_cada_senal_del_catalogo_se_detecta(texto, esperada):
@@ -31,7 +32,7 @@ def test_todas_las_senales_tienen_un_caso_de_prueba():
     probadas = {
         "pide_codigo", "pide_datos_bancarios", "pide_transferencia", "acceso_remoto",
         "desactivar_seguridad", "urgencia", "amenaza", "aislamiento",
-        "suplanta_entidad", "premio_inversion", "pide_datos_personales",
+        "suplanta_entidad", "premio_inversion", "pide_datos_personales", "finge_conocido",
     }
     assert probadas == {s.id for s in CATALOGO}
 

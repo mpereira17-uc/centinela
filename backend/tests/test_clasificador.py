@@ -17,7 +17,7 @@ def test_el_modelo_entrenado_viene_con_el_repositorio():
 
 
 @pytest.mark.parametrize("frase,riesgo", [
-    ("Me puede leer los dígitos que le entraron por mensaje", True),
+    ("Me lee lo que le acaba de llegar al celular, por favor", True),
     ("Hágame el favor y me consigna a esta cuenta", True),
     ("Hola, te llamo para el almuerzo del domingo", False),
     ("Le hablamos del banco, su tarjeta está lista en la oficina", False),
@@ -28,7 +28,7 @@ def test_frases_nuevas(frase, riesgo):
 
 def test_la_hibrida_suma_el_clasificador_sin_quitar_reglas():
     hibrida = clasificador.Hibrida(Nivel.ALTO, 5, modelo)
-    evasiva = hibrida.decidir([], "Me puede leer los dígitos que le entraron por mensaje")
+    evasiva = hibrida.decidir([], "Me lee lo que le acaba de llegar al celular, por favor")
     assert evasiva.alerta and [s.id for s in evasiva.senales] == ["patron_aprendido"]
     clara = hibrida.decidir([], "Dígame el código que le llegó, es urgente")
     ids = {s.id for s in clara.senales}
@@ -47,7 +47,7 @@ def test_la_api_usa_la_hibrida_y_explica_la_senal():
     assert "patron_aprendido" in [s["id"] for s in c.get("/senales").json()]
     llamada = c.post("/llamadas").json()
     r = c.post(f"/llamadas/{llamada['id']}/fragmentos",
-               json={"texto": "Me puede leer los dígitos que le entraron por mensaje", "inicio": 0, "fin": 3}).json()
+               json={"texto": "Me lee lo que le acaba de llegar al celular, por favor", "inicio": 0, "fin": 3}).json()
     assert r["decision_visible"]["estrategia"] == "hibrida"
     assert r["mostrar_aviso"] is True
     assert "se parece a estafas conocidas" in r["decision_visible"]["mensaje"]

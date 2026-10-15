@@ -47,7 +47,7 @@ def test_evaluacion_en_texto():
     res = evaluar.evaluar(guiones.cargar())
     assert set(res["resumen"]) == {"por_fragmento", "acumulacion", "clasificador", "hibrida"}
     for r in res["resumen"].values():
-        assert r["llamadas_riesgo"] == r["llamadas_legitimas"] == 18
+        assert r["llamadas_riesgo"] == r["llamadas_legitimas"] == 24  # 18 originales y 6 regionales
         assert 0 <= r["deteccion"] <= 1
         assert r["segundos_hasta_aviso_mediana"] > 0
     # Un guion claro siempre se detecta y una llamada familiar nunca alerta

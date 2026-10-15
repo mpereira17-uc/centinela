@@ -4,8 +4,10 @@ from dataclasses import dataclass
 from pathlib import Path
 
 RUTA = Path(__file__).resolve().parents[2] / "datos" / "guiones" / "guiones.json"
+# Guiones con modismos de varias regiones de Colombia; nunca se usan para entrenar
+RUTA_REGIONALES = RUTA.with_name("guiones-regionales.json")
 ETIQUETAS = ("riesgo", "legitima")
-PARTICIONES = ("desarrollo", "reservada")
+PARTICIONES = ("desarrollo", "reservada", "regional")
 HABLANTES = ("llamante", "usuario")
 
 
@@ -52,8 +54,9 @@ def _validar(d: dict) -> Guion:
     return Guion(gid, d["etiqueta"], d.get("categoria", ""), d["particion"], d.get("descripcion", ""), riesgo, turnos)
 
 
-def cargar(ruta: Path = RUTA, particion: str | None = None) -> list[Guion]:
-    datos = json.loads(Path(ruta).read_text(encoding="utf-8"))
+def cargar(ruta: Path | None = None, particion: str | None = None) -> list[Guion]:
+    rutas = [Path(ruta)] if ruta else [RUTA, RUTA_REGIONALES]
+    datos = [d for r in rutas if r.exists() for d in json.loads(r.read_text(encoding="utf-8"))]
     guiones = [_validar(d) for d in datos]
     ids = [g.id for g in guiones]
     if len(ids) != len(set(ids)):

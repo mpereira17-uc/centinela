@@ -192,11 +192,11 @@
         },
         "clasificador": {
           "alerta": true,
-          "turno_alerta": 0,
+          "turno_alerta": 2,
           "anticipada": true,
           "segundos_hasta_aviso": 0.0,
           "niveles": [
-            "alto",
+            "bajo",
             "alto",
             "bajo",
             "bajo"
@@ -204,11 +204,11 @@
         },
         "hibrida": {
           "alerta": true,
-          "turno_alerta": 0,
+          "turno_alerta": 2,
           "anticipada": true,
           "segundos_hasta_aviso": 0.0,
           "niveles": [
-            "alto",
+            "bajo",
             "critico",
             "critico",
             "critico"
@@ -280,7 +280,7 @@
           "niveles": [
             "moderado",
             "alto",
-            "bajo"
+            "moderado"
           ]
         },
         "acumulacion": {
@@ -291,7 +291,7 @@
           "niveles": [
             "moderado",
             "alto",
-            "alto"
+            "critico"
           ]
         },
         "clasificador": {
@@ -302,7 +302,7 @@
           "niveles": [
             "bajo",
             "alto",
-            "alto"
+            "bajo"
           ]
         },
         "hibrida": {
@@ -313,7 +313,7 @@
           "niveles": [
             "moderado",
             "alto",
-            "alto"
+            "critico"
           ]
         }
       }

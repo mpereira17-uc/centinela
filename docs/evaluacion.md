@@ -49,7 +49,7 @@ Cada corrida escribe `datos/resultados/evaluacion-<modo>-<partición>[-<nombre>]
 
 ## Resultados en modo texto
 
-Reglas del [motor de señales](motor-de-senales.md) con el nivel de alerta por defecto (`alto`), antes del clasificador. Informes completos: [desarrollo](../datos/resultados/evaluacion-texto-desarrollo.md), [reservada](../datos/resultados/evaluacion-texto-reservada.md), [todas](../datos/resultados/evaluacion-texto-todas.md).
+Reglas del [motor de señales](motor-de-senales.md) con el nivel de alerta por defecto (`alto`), antes del clasificador. Informes completos: [desarrollo](../datos/resultados/evaluacion-texto-desarrollo.md), [reservada](../datos/resultados/evaluacion-texto-reservada.md), [todas](../datos/resultados/evaluacion-texto-todas.md), [regional](../datos/resultados/evaluacion-texto-regional.md) (ver [modismos.md](modismos.md)).
 
 | Partición | Estrategia | Detección | Falsas alertas | Aviso (mediana) |
 |---|---|---|---|---|

@@ -134,7 +134,10 @@ def informe(res: dict, particion: str) -> str:
         f"# Evaluación en modo {res['modo']} ({particion})",
         "",
         f"Generado por `python -m evaluacion.evaluar` el {fecha}. {res['guiones']} guiones de "
-        "[datos/guiones/guiones.json](../guiones/guiones.json). Solo se analizan los turnos de quien llama, como en la llamada simulada.",
+        + ("[datos/guiones/guiones-regionales.json](../guiones/guiones-regionales.json)" if particion == "regional" else
+           "[datos/guiones/guiones.json](../guiones/guiones.json)" if particion in ("desarrollo", "reservada") else
+           "[datos/guiones/](../guiones/)")
+        + ". Solo se analizan los turnos de quien llama, como en la llamada simulada.",
         "",
         "| Estrategia | Detección | IC 95 % | Falsas alertas | IC 95 % | Precisión | Aviso (mediana) | Aviso (máx.) |",
         "|---|---|---|---|---|---|---|---|",

@@ -422,8 +422,8 @@
           "segundos_hasta_aviso": 6.0,
           "niveles": [
             "moderado",
-            "alto",
-            "alto"
+            "critico",
+            "critico"
           ]
         }
       }
@@ -1282,7 +1282,7 @@
           "anticipada": false,
           "segundos_hasta_aviso": null,
           "niveles": [
-            "bajo",
+            "moderado",
             "moderado",
             "bajo"
           ]
@@ -1293,7 +1293,7 @@
           "anticipada": false,
           "segundos_hasta_aviso": null,
           "niveles": [
-            "bajo",
+            "moderado",
             "moderado",
             "moderado"
           ]
@@ -1315,7 +1315,7 @@
           "anticipada": false,
           "segundos_hasta_aviso": null,
           "niveles": [
-            "bajo",
+            "moderado",
             "moderado",
             "moderado"
           ]

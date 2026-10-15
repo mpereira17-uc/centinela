@@ -1,0 +1,692 @@
+{
+  "modo": "texto",
+  "guiones": 12,
+  "resumen": {
+    "por_fragmento": {
+      "llamadas_riesgo": 6,
+      "detectadas": 6,
+      "deteccion": 1.0,
+      "deteccion_ic95": [
+        0.6096569663469354,
+        0.9999999999999999
+      ],
+      "llamadas_legitimas": 6,
+      "falsas_alertas": 0,
+      "tasa_falsas_alertas": 0.0,
+      "falsas_alertas_ic95": [
+        0.0,
+        0.3903430336530645
+      ],
+      "precision": 1.0,
+      "alertas_anticipadas": 0,
+      "segundos_hasta_aviso_mediana": 9.2,
+      "segundos_hasta_aviso_max": 11.2,
+      "no_detectadas": [],
+      "con_falsa_alerta": []
+    },
+    "acumulacion": {
+      "llamadas_riesgo": 6,
+      "detectadas": 6,
+      "deteccion": 1.0,
+      "deteccion_ic95": [
+        0.6096569663469354,
+        0.9999999999999999
+      ],
+      "llamadas_legitimas": 6,
+      "falsas_alertas": 0,
+      "tasa_falsas_alertas": 0.0,
+      "falsas_alertas_ic95": [
+        0.0,
+        0.3903430336530645
+      ],
+      "precision": 1.0,
+      "alertas_anticipadas": 0,
+      "segundos_hasta_aviso_mediana": 9.2,
+      "segundos_hasta_aviso_max": 11.2,
+      "no_detectadas": [],
+      "con_falsa_alerta": []
+    },
+    "clasificador": {
+      "llamadas_riesgo": 6,
+      "detectadas": 5,
+      "deteccion": 0.8333333333333334,
+      "deteccion_ic95": [
+        0.43649056343635395,
+        0.9699474141282697
+      ],
+      "llamadas_legitimas": 6,
+      "falsas_alertas": 0,
+      "tasa_falsas_alertas": 0.0,
+      "falsas_alertas_ic95": [
+        0.0,
+        0.3903430336530645
+      ],
+      "precision": 1.0,
+      "alertas_anticipadas": 0,
+      "segundos_hasta_aviso_mediana": 9.2,
+      "segundos_hasta_aviso_max": 11.2,
+      "no_detectadas": [
+        "g05"
+      ],
+      "con_falsa_alerta": []
+    },
+    "hibrida": {
+      "llamadas_riesgo": 6,
+      "detectadas": 6,
+      "deteccion": 1.0,
+      "deteccion_ic95": [
+        0.6096569663469354,
+        0.9999999999999999
+      ],
+      "llamadas_legitimas": 6,
+      "falsas_alertas": 0,
+      "tasa_falsas_alertas": 0.0,
+      "falsas_alertas_ic95": [
+        0.0,
+        0.3903430336530645
+      ],
+      "precision": 1.0,
+      "alertas_anticipadas": 0,
+      "segundos_hasta_aviso_mediana": 9.2,
+      "segundos_hasta_aviso_max": 11.2,
+      "no_detectadas": [],
+      "con_falsa_alerta": []
+    }
+  },
+  "por_guion": [
+    {
+      "id": "g01",
+      "etiqueta": "riesgo",
+      "categoria": "suplanta_banco",
+      "estrategias": {
+        "por_fragmento": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 7.2,
+          "niveles": [
+            "moderado",
+            "critico",
+            "moderado"
+          ]
+        },
+        "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 7.2,
+          "niveles": [
+            "moderado",
+            "critico",
+            "critico"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 7.2,
+          "niveles": [
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 7.2,
+          "niveles": [
+            "moderado",
+            "critico",
+            "critico"
+          ]
+        }
+      }
+    },
+    {
+      "id": "g02",
+      "etiqueta": "riesgo",
+      "categoria": "familiar_falso",
+      "estrategias": {
+        "por_fragmento": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 10.8,
+          "niveles": [
+            "moderado",
+            "moderado",
+            "alto",
+            "moderado"
+          ]
+        },
+        "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 10.8,
+          "niveles": [
+            "moderado",
+            "moderado",
+            "alto",
+            "critico"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 10.8,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 10.8,
+          "niveles": [
+            "moderado",
+            "moderado",
+            "alto",
+            "critico"
+          ]
+        }
+      }
+    },
+    {
+      "id": "g03",
+      "etiqueta": "riesgo",
+      "categoria": "extorsion",
+      "estrategias": {
+        "por_fragmento": {
+          "alerta": true,
+          "turno_alerta": 1,
+          "anticipada": false,
+          "segundos_hasta_aviso": 9.2,
+          "niveles": [
+            "moderado",
+            "alto",
+            "alto"
+          ]
+        },
+        "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 1,
+          "anticipada": false,
+          "segundos_hasta_aviso": 9.2,
+          "niveles": [
+            "moderado",
+            "critico",
+            "critico"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 1,
+          "anticipada": false,
+          "segundos_hasta_aviso": 9.2,
+          "niveles": [
+            "bajo",
+            "alto",
+            "alto"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 1,
+          "anticipada": false,
+          "segundos_hasta_aviso": 9.2,
+          "niveles": [
+            "moderado",
+            "critico",
+            "critico"
+          ]
+        }
+      }
+    },
+    {
+      "id": "g04",
+      "etiqueta": "riesgo",
+      "categoria": "soporte_falso",
+      "estrategias": {
+        "por_fragmento": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 9.2,
+          "niveles": [
+            "moderado",
+            "alto",
+            "moderado"
+          ]
+        },
+        "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 9.2,
+          "niveles": [
+            "moderado",
+            "alto",
+            "critico"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 9.2,
+          "niveles": [
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 9.2,
+          "niveles": [
+            "moderado",
+            "alto",
+            "critico"
+          ]
+        }
+      }
+    },
+    {
+      "id": "g05",
+      "etiqueta": "riesgo",
+      "categoria": "premio_falso",
+      "estrategias": {
+        "por_fragmento": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 9.2,
+          "niveles": [
+            "moderado",
+            "alto",
+            "bajo"
+          ]
+        },
+        "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 9.2,
+          "niveles": [
+            "moderado",
+            "alto",
+            "alto"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 9.2,
+          "niveles": [
+            "moderado",
+            "alto",
+            "alto"
+          ]
+        }
+      }
+    },
+    {
+      "id": "g06",
+      "etiqueta": "riesgo",
+      "categoria": "suplanta_entidad",
+      "estrategias": {
+        "por_fragmento": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 11.2,
+          "niveles": [
+            "moderado",
+            "critico",
+            "moderado"
+          ]
+        },
+        "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 11.2,
+          "niveles": [
+            "moderado",
+            "critico",
+            "critico"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 11.2,
+          "niveles": [
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 11.2,
+          "niveles": [
+            "moderado",
+            "critico",
+            "critico"
+          ]
+        }
+      }
+    },
+    {
+      "id": "g07",
+      "etiqueta": "legitima",
+      "categoria": "familia",
+      "estrategias": {
+        "por_fragmento": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        }
+      }
+    },
+    {
+      "id": "g08",
+      "etiqueta": "legitima",
+      "categoria": "banco",
+      "estrategias": {
+        "por_fragmento": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "bajo"
+          ]
+        },
+        "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "moderado"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "moderado"
+          ]
+        }
+      }
+    },
+    {
+      "id": "g09",
+      "etiqueta": "legitima",
+      "categoria": "domicilio",
+      "estrategias": {
+        "por_fragmento": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        }
+      }
+    },
+    {
+      "id": "g10",
+      "etiqueta": "legitima",
+      "categoria": "trabajo",
+      "estrategias": {
+        "por_fragmento": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "bajo"
+          ]
+        },
+        "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "moderado"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "moderado"
+          ]
+        }
+      }
+    },
+    {
+      "id": "g11",
+      "etiqueta": "legitima",
+      "categoria": "salud",
+      "estrategias": {
+        "por_fragmento": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "bajo"
+          ]
+        },
+        "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "moderado"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "moderado"
+          ]
+        }
+      }
+    },
+    {
+      "id": "g12",
+      "etiqueta": "legitima",
+      "categoria": "familia",
+      "estrategias": {
+        "por_fragmento": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        }
+      }
+    }
+  ],
+  "fecha": "2026-10-15",
+  "particion": "regional"
+}

@@ -82,7 +82,7 @@ CATALOGO: list[Senal] = [
         Tipo.PRESION,
         "Amenaza con captura, embargo, bloqueo, demanda o daño.",
         "te amenazan",
-        _p(r"\b(captur\w*|embarg\w*|bloque\w*|demand\w*|orden de arresto|le va a pasar|secuestr\w*)\b"),
+        _p(r"\b(captur\w*|embarg\w*|bloque\w*|demand\w*|orden de arresto|le va a pasar|secuestr\w*|extorsion)\b"),
     ),
     Senal(
         "aislamiento",
@@ -96,7 +96,7 @@ CATALOGO: list[Senal] = [
         Tipo.CONTEXTO,
         "Dice llamar de un banco, entidad pública, operador, mensajería o soporte técnico.",
         "dicen llamar de una entidad",
-        _p(r"\b(banco|bancolombia|davivienda|fiscalia|policia|dian|gaula|soporte tecnico|servientrega|interrapidisimo|claro|movistar|tigo|superintendencia)\b"),
+        _p(r"\b(banco|bancolombia|davivienda|fiscalia|policia|dian|gaula|soporte tecnico|servientrega|interrapidisimo|claro|movistar|tigo|superintendencia|bbva|colpatria|av villas|banco de bogota|caja social|nu ?bank|sijin|dijin|registraduria|cobro juridico|eps)\b"),
     ),
     Senal(
         "premio_inversion",
@@ -104,6 +104,13 @@ CATALOGO: list[Senal] = [
         "Ofrece un premio, una inversión garantizada, un crédito o una devolución.",
         "te ofrecen un premio, crédito o ganancia",
         _p(r"\b(ganador|gano|premio|sorteo|inversion garantizada|rentabilidad|credito pre ?aprobado|devolucion de impuestos|reembolso)\b"),
+    ),
+    Senal(
+        "finge_conocido",
+        Tipo.CONTEXTO,
+        "Dice ser un familiar o conocido con un número nuevo, o pide adivinar quién habla.",
+        "dicen ser un conocido con número nuevo",
+        _p(r"\bfinge ser conocido\b"),
     ),
     Senal(
         "pide_datos_personales",
@@ -118,11 +125,16 @@ CATALOGO: list[Senal] = [
 # Si aparecen justo antes de la señal, la solicitud no cuenta.
 _NEGACION = re.compile(r"\b(nunca|jamas|no (le |te )?(vamos a |va a |vas a )?(pedi\w*|solicit\w*|preguntar\w*)|no comparta|no compartas|no de|no des|no entregue)\b")
 _VENTANA_NEGACION = 45
+# Quien cuenta que ya pagó o devolvió dinero no está pidiendo una transferencia
+_INFORMATIVO = re.compile(r"\b(ya )?(le|te|les) (pase|consigne|transferi|mande|gire|devolvi|deposite)\b")
 
 
 def normalizar(texto: str) -> str:
+    """Minúsculas, sin tildes y con los modismos regionales llevados a su forma común."""
+    from .modismos import llevar_a_forma_comun
+
     sin_tildes = unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode()
-    return re.sub(r"\s+", " ", sin_tildes.lower())
+    return llevar_a_forma_comun(re.sub(r"\s+", " ", sin_tildes.lower()))
 
 
 def detectar(texto: str) -> list[Senal]:
@@ -132,6 +144,8 @@ def detectar(texto: str) -> list[Senal]:
     for senal in CATALOGO:
         for m in senal.patron.finditer(limpio):
             previo = limpio[max(0, m.start() - _VENTANA_NEGACION): m.start()]
+            if senal.id == "pide_transferencia" and _INFORMATIVO.search(previo + m.group(0)):
+                continue
             if senal.tipo == Tipo.SOLICITUD and _NEGACION.search(previo):
                 continue
             encontradas.append(senal)

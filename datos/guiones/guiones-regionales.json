@@ -1,0 +1,116 @@
+[
+  {"id": "g01", "etiqueta": "riesgo", "categoria": "suplanta_banco", "particion": "regional", "region": "costa caribe",
+   "descripcion": "Falso banco con habla costeña pide los numeritos del mensaje",
+   "turno_riesgo": 2,
+   "turnos": [
+     ["llamante", "Ajá, buenas, ¿hablo con la señora Marta? Le habla Yeison del departamento de seguridad del Bancolombia."],
+     ["usuario", "Sí, ella habla. ¿Qué pasó?"],
+     ["llamante", "Mire, le acaba de entrar un mensajito con unos numeritos, léamelos ahí mismo pa' bloquearle la compra, ¿oíste?"],
+     ["usuario", "Pero yo no hice ninguna compra."],
+     ["llamante", "Por eso mismo, mi vida, hágale rapidito que eso se pasa en dos minutos."]
+   ]},
+  {"id": "g02", "etiqueta": "riesgo", "categoria": "familiar_falso", "particion": "regional", "region": "antioquia",
+   "descripcion": "Falso sobrino paisa con número nuevo pide plata por Nequi",
+   "turno_riesgo": 3,
+   "turnos": [
+     ["llamante", "¡Quiubo, tía! ¿Adivine quién le habla?"],
+     ["usuario", "¿Juancho? No le reconozco la voz."],
+     ["llamante", "Sí, tía, el mismo. Es que se me dañó el celular y este es mi número nuevo."],
+     ["llamante", "Vea, tía, estoy en una vuelta muy maluca, ¿me hace el favor y me manda unas cien lucas al Nequi de un amigo? Mañana se las devuelvo."],
+     ["usuario", "Ay, mijo, ¿y qué le pasó?"],
+     ["llamante", "Después le cuento, pero hágale ya, no le vaya a decir nada a mi mamá."]
+   ]},
+  {"id": "g03", "etiqueta": "riesgo", "categoria": "extorsion", "particion": "regional", "region": "valle del cauca",
+   "descripcion": "Extorsión con jerga de vacuna y amenaza velada",
+   "turno_riesgo": 1,
+   "turnos": [
+     ["llamante", "Oiga, mire, usted tiene el negocito de la esquina, ¿cierto? Nosotros ya lo tenemos ubicado."],
+     ["llamante", "Acá cada mes se paga la cuota pa' que trabaje tranquilo: dos palos, y los consigna hoy a la cuenta que le paso."],
+     ["usuario", "Yo no tengo esa plata."],
+     ["llamante", "Usted verá, mijo. Si no le cae la plata hoy, mañana le caemos al negocio. Y nada de llamar a la policía."]
+   ]},
+  {"id": "g04", "etiqueta": "riesgo", "categoria": "soporte_falso", "particion": "regional", "region": "bogota",
+   "descripcion": "Falso técnico del operador con trato rolo pide instalar una app",
+   "turno_riesgo": 2,
+   "turnos": [
+     ["llamante", "Buenas tardes, sumercé, le hablamos de soporte técnico de Claro por la falla en su internet."],
+     ["usuario", "Sí, es que anda lentísimo."],
+     ["llamante", "Listo, sumercé, regáleme un momentico: baje del Play Store una aplicación que se llama AnyDesk y me dicta el numerito que le sale."],
+     ["usuario", "Ya la estoy bajando."],
+     ["llamante", "Perfecto, y no me vaya a colgar mientras le arreglo eso, ¿bueno?"]
+   ]},
+  {"id": "g05", "etiqueta": "riesgo", "categoria": "premio_falso", "particion": "regional", "region": "santander",
+   "descripcion": "Premio falso con habla santandereana pide pagar el envío",
+   "turno_riesgo": 2,
+   "turnos": [
+     ["llamante", "¡Buenas, mano! Le cuento que usted salió ganador de una moto en el sorteo de aniversario del Éxito."],
+     ["usuario", "¿En serio? Yo ni sabía que estaba participando."],
+     ["llamante", "Sí señor. Lo único es que para despacharla tiene que girar los ciento ochenta mil del seguro por Efecty a nombre del encargado."],
+     ["usuario", "¿Y no lo pueden descontar de la moto?"],
+     ["llamante", "No, mano, así funciona. Y es pa' hoy, porque si no se la pasamos al siguiente."]
+   ]},
+  {"id": "g06", "etiqueta": "riesgo", "categoria": "suplanta_entidad", "particion": "regional", "region": "nariño",
+   "descripcion": "Falsa cobranza judicial con trato pastuso pide consignar para evitar embargo",
+   "turno_riesgo": 2,
+   "turnos": [
+     ["llamante", "Buenos días, ¿con el señor Andrés? Le hablamos de la oficina de cobro jurídico, vea pues."],
+     ["usuario", "Sí, con él."],
+     ["llamante", "Usted tiene una deuda vencida y hoy mismo sale la orden de embargo. Para pararla debe consignar el abono de trescientos mil a la cuenta de la abogada."],
+     ["usuario", "¿Deuda de qué? Yo no debo nada."],
+     ["llamante", "Eso lo aclara después, ahorita lo importante es parar el embargo, achichay, que se le viene encima."]
+   ]},
+  {"id": "g07", "etiqueta": "legitima", "categoria": "familia", "particion": "regional", "region": "costa caribe",
+   "descripcion": "Prima costeña llama para el cumpleaños, con modismos y dinero entre conocidos",
+   "turno_riesgo": null,
+   "turnos": [
+     ["llamante", "¡Ey, mi llave! ¿Qué más pues? Ajá, ¿vas a venir al cumpleaños de la abuela?"],
+     ["usuario", "¡Claro, prima! El sábado llego."],
+     ["llamante", "Bacano. Trae la grabadora, que la mía se jodió. Y lo de la torta lo pagamos entre todos allá, tranquilo."],
+     ["usuario", "Listo, nos vemos."]
+   ]},
+  {"id": "g08", "etiqueta": "legitima", "categoria": "banco", "particion": "regional", "region": "antioquia",
+   "descripcion": "Banco real confirma una compra sin pedir datos, con trato paisa",
+   "turno_riesgo": null,
+   "turnos": [
+     ["llamante", "Buenas tardes, le habla Daniela de Bancolombia. Vea, vimos una compra por ochenta mil en un almacén de Envigado."],
+     ["usuario", "Sí, esa la hice yo."],
+     ["llamante", "Listo pues, muchas gracias. Recuerde que nosotros nunca le vamos a pedir claves ni códigos por teléfono."],
+     ["usuario", "Bueno, gracias."]
+   ]},
+  {"id": "g09", "etiqueta": "legitima", "categoria": "domicilio", "particion": "regional", "region": "bogota",
+   "descripcion": "Domiciliario rolo confirma la dirección y el pago en efectivo",
+   "turno_riesgo": null,
+   "turnos": [
+     ["llamante", "Quiubo, sumercé, le hablo del domicilio de la droguería. ¿Me regala la dirección exacta, que no encuentro la casa?"],
+     ["usuario", "Calle 45 sur, la casa de la reja verde."],
+     ["llamante", "Listo, ya voy llegando, tenga los cuarenta mil en efectivo, porfa."],
+     ["usuario", "Dale, ya salgo."]
+   ]},
+  {"id": "g10", "etiqueta": "legitima", "categoria": "trabajo", "particion": "regional", "region": "valle del cauca",
+   "descripcion": "Compañero caleño cuadra un turno de trabajo con urgencia legítima",
+   "turno_riesgo": null,
+   "turnos": [
+     ["llamante", "Oíste, ve, ¿me podés cubrir el turno de mañana? Es urgente, mi mamá está en la clínica."],
+     ["usuario", "Uy, qué pena. Sí, yo te lo cubro."],
+     ["llamante", "Ve, mil gracias, parce. Ya le aviso al jefe para que quede anotado."],
+     ["usuario", "Tranquilo, que se mejore tu mamá."]
+   ]},
+  {"id": "g11", "etiqueta": "legitima", "categoria": "salud", "particion": "regional", "region": "santander",
+   "descripcion": "EPS llama a confirmar una cita, con habla santandereana",
+   "turno_riesgo": null,
+   "turnos": [
+     ["llamante", "Buenos días, le hablamos de la EPS para confirmarle la cita de medicina general del jueves a las siete."],
+     ["usuario", "Ah sí, ahí voy a estar."],
+     ["llamante", "Listo, mano. Llegue quince minuticos antes con el documento, y si no puede ir cancele por la aplicación."],
+     ["usuario", "Bueno, gracias."]
+   ]},
+  {"id": "g12", "etiqueta": "legitima", "categoria": "familia", "particion": "regional", "region": "nariño",
+   "descripcion": "Hijo pastuso le cuenta a la mamá que ya le pagó lo que le debía",
+   "turno_riesgo": null,
+   "turnos": [
+     ["llamante", "Mami, ¿cómo está? Ya le pasé por Nequi la plata que me prestó el mes pasado, revise a ver si le llegó."],
+     ["usuario", "Ay, mijo, sí, ya me llegó. Gracias."],
+     ["llamante", "Bueno, mamita, el domingo paso a almorzar. Achichay, qué frío está haciendo."],
+     ["usuario", "Venga abrigado pues."]
+   ]}
+]

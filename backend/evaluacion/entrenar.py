@@ -19,6 +19,8 @@ from app.clasificador import RUTA_MODELO, caracteristicas
 from . import guiones
 
 FRASES = Path(__file__).resolve().parents[2] / "datos" / "entrenamiento" / "frases.json"
+# Frases con modismos de varias regiones; las legítimas usan los mismos modismos
+FRASES_REGIONALES = FRASES.with_name("frases-regionales.json")
 # Tope de falsas alertas por frase al elegir el umbral con validación cruzada
 MAX_FALSAS_POR_FRASE = 0.03
 
@@ -27,6 +29,10 @@ def ejemplos(ruta_frases: Path = FRASES) -> tuple[list[str], list[int]]:
     datos = json.loads(Path(ruta_frases).read_text(encoding="utf-8"))
     textos = datos["riesgo"] + datos["legitima"]
     etiquetas = [1] * len(datos["riesgo"]) + [0] * len(datos["legitima"])
+    if Path(ruta_frases) == FRASES and FRASES_REGIONALES.exists():
+        regionales = json.loads(FRASES_REGIONALES.read_text(encoding="utf-8"))
+        textos += [f["texto"] for f in regionales["riesgo"]] + [f["texto"] for f in regionales["legitima"]]
+        etiquetas += [1] * len(regionales["riesgo"]) + [0] * len(regionales["legitima"])
     for g in guiones.cargar(particion="desarrollo"):
         for i, t in enumerate(g.turnos):
             if t.hablante != "llamante":

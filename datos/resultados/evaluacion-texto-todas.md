@@ -1,19 +1,19 @@
 # Evaluación en modo texto (todas)
 
-Generado por `python -m evaluacion.evaluar` el 2026-10-15. 36 guiones de [datos/guiones/guiones.json](../guiones/guiones.json). Solo se analizan los turnos de quien llama, como en la llamada simulada.
+Generado por `python -m evaluacion.evaluar` el 2026-10-15. 48 guiones de [datos/guiones/](../guiones/). Solo se analizan los turnos de quien llama, como en la llamada simulada.
 
 | Estrategia | Detección | IC 95 % | Falsas alertas | IC 95 % | Precisión | Aviso (mediana) | Aviso (máx.) |
 |---|---|---|---|---|---|---|---|
-| por_fragmento | 13/18 (72 %) | 49–88 % | 1/18 (6 %) | 1–26 % | 93 % | 6,4 s | 7,6 s |
-| acumulacion | 13/18 (72 %) | 49–88 % | 2/18 (11 %) | 3–33 % | 87 % | 6,4 s | 7,6 s |
-| clasificador | 18/18 (100 %) | 82–100 % | 0/18 (0 %) | 0–18 % | 100 % | 6,0 s | 7,6 s |
-| hibrida | 18/18 (100 %) | 82–100 % | 2/18 (11 %) | 3–33 % | 90 % | 6,0 s | 7,6 s |
+| por_fragmento | 19/24 (79 %) | 60–91 % | 1/24 (4 %) | 1–20 % | 95 % | 6,8 s | 11,2 s |
+| acumulacion | 19/24 (79 %) | 60–91 % | 2/24 (8 %) | 2–26 % | 90 % | 6,8 s | 11,2 s |
+| clasificador | 23/24 (96 %) | 80–99 % | 0/24 (0 %) | 0–14 % | 100 % | 6,4 s | 11,2 s |
+| hibrida | 24/24 (100 %) | 86–100 % | 2/24 (8 %) | 2–26 % | 92 % | 6,4 s | 11,2 s |
 
 ## Errores
 
 - **por_fragmento**: no detectadas r06, r09, r14, r15, r18; falsas alertas l13; alertas anticipadas 0.
 - **acumulacion**: no detectadas r06, r09, r14, r15, r18; falsas alertas l06, l13; alertas anticipadas 0.
-- **clasificador**: no detectadas ninguna; falsas alertas ninguna; alertas anticipadas 2.
+- **clasificador**: no detectadas g05; falsas alertas ninguna; alertas anticipadas 2.
 - **hibrida**: no detectadas ninguna; falsas alertas l06, l13; alertas anticipadas 2.
 
 ## Por guion
@@ -33,7 +33,7 @@ Generado por `python -m evaluacion.evaluar` el 2026-10-15. 36 guiones de [datos/
 | r11 | riesgo | empleo_falso | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s |
 | r12 | riesgo | suplanta_entidad | aviso en turno 2, 5,2 s | aviso en turno 2, 5,2 s | aviso en turno 2, 5,2 s | aviso en turno 2, 5,2 s |
 | r13 | riesgo | suplanta_banco | aviso en turno 2, 6,4 s | aviso en turno 2, 6,4 s | aviso en turno 2, 6,4 s | aviso en turno 2, 6,4 s |
-| r14 | riesgo | familiar_falso | sin aviso | sin aviso | aviso en turno 0, 0,0 s | aviso en turno 0, 0,0 s |
+| r14 | riesgo | familiar_falso | sin aviso | sin aviso | aviso en turno 2, 0,0 s | aviso en turno 2, 0,0 s |
 | r15 | riesgo | soporte_falso | sin aviso | sin aviso | aviso en turno 1, 0,0 s | aviso en turno 1, 0,0 s |
 | r16 | riesgo | premio_falso | aviso en turno 2, 5,6 s | aviso en turno 2, 5,6 s | aviso en turno 2, 5,6 s | aviso en turno 2, 5,6 s |
 | r17 | riesgo | extorsion | aviso en turno 1, 7,6 s | aviso en turno 1, 7,6 s | aviso en turno 1, 7,6 s | aviso en turno 1, 7,6 s |
@@ -56,6 +56,18 @@ Generado por `python -m evaluacion.evaluar` el 2026-10-15. 36 guiones de [datos/
 | l16 | legitima | comercio | sin aviso | sin aviso | sin aviso | sin aviso |
 | l17 | legitima | trabajo | sin aviso | sin aviso | sin aviso | sin aviso |
 | l18 | legitima | vecinos | sin aviso | sin aviso | sin aviso | sin aviso |
+| g01 | riesgo | suplanta_banco | aviso en turno 2, 7,2 s | aviso en turno 2, 7,2 s | aviso en turno 2, 7,2 s | aviso en turno 2, 7,2 s |
+| g02 | riesgo | familiar_falso | aviso en turno 3, 10,8 s | aviso en turno 3, 10,8 s | aviso en turno 3, 10,8 s | aviso en turno 3, 10,8 s |
+| g03 | riesgo | extorsion | aviso en turno 1, 9,2 s | aviso en turno 1, 9,2 s | aviso en turno 1, 9,2 s | aviso en turno 1, 9,2 s |
+| g04 | riesgo | soporte_falso | aviso en turno 2, 9,2 s | aviso en turno 2, 9,2 s | aviso en turno 2, 9,2 s | aviso en turno 2, 9,2 s |
+| g05 | riesgo | premio_falso | aviso en turno 2, 9,2 s | aviso en turno 2, 9,2 s | sin aviso | aviso en turno 2, 9,2 s |
+| g06 | riesgo | suplanta_entidad | aviso en turno 2, 11,2 s | aviso en turno 2, 11,2 s | aviso en turno 2, 11,2 s | aviso en turno 2, 11,2 s |
+| g07 | legitima | familia | sin aviso | sin aviso | sin aviso | sin aviso |
+| g08 | legitima | banco | sin aviso | sin aviso | sin aviso | sin aviso |
+| g09 | legitima | domicilio | sin aviso | sin aviso | sin aviso | sin aviso |
+| g10 | legitima | trabajo | sin aviso | sin aviso | sin aviso | sin aviso |
+| g11 | legitima | salud | sin aviso | sin aviso | sin aviso | sin aviso |
+| g12 | legitima | familia | sin aviso | sin aviso | sin aviso | sin aviso |
 
 ## Cómo leerlo
 
