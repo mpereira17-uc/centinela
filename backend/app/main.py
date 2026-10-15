@@ -5,7 +5,7 @@ from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, Respon
 from fastapi.concurrency import run_in_threadpool
 from fastapi.staticfiles import StaticFiles
 
-from . import asistente, base_guiones, cuentas, directorio, historial, mensajes, reportes, senalizacion, voz
+from . import asistente, base_guiones, cuentas, desenlaces, directorio, historial, mensajes, reportes, senalizacion, voz
 from .cuentas import Sesion, sesion_opcional
 from .config import ajustes
 from .modelos import (
@@ -71,6 +71,18 @@ def _respalda_reporte(llamada_id: str, usuario_id: str, ref: str) -> bool:
 reportes.respaldo_de_llamada = _respalda_reporte
 
 
+def _categoria_de_llamada(llamada_id: str, usuario_id: str) -> str | None:
+    """Categoría del reporte deducida de lo que Centinela detectó en esa llamada."""
+    llamada = llamadas.get(llamada_id)
+    if not llamada or llamada.dueno not in (None, usuario_id):
+        return None
+    ids = {s.id for f in llamada.fragmentos for d in f.decisiones if d.estrategia == ESTRATEGIA_VISIBLE for s in d.senales}
+    return desenlaces.categoria_por_senales(ids)
+
+
+reportes.categoria_de_llamada = _categoria_de_llamada
+
+
 @app.get("/salud")
 def salud():
     return {"estado": "ok", "estrategia_visible": ESTRATEGIA_VISIBLE}
@@ -109,6 +121,20 @@ def ver_llamada(llamada_id: str, sesion: Sesion | None = Depends(sesion_opcional
 @app.post("/llamadas/{llamada_id}/fragmentos")
 def agregar_fragmento(llamada_id: str, entrada: FragmentoEntrada, sesion: Sesion | None = Depends(sesion_opcional)):
     return _procesar(_buscar(llamada_id, sesion), entrada)
+
+
+@app.post("/llamadas/{llamada_id}/desenlace", status_code=201)
+def contar_desenlace(llamada_id: str, entrada: desenlaces.NuevoDesenlace, sesion: Sesion | None = Depends(sesion_opcional)):
+    llamada = _buscar(llamada_id, sesion)
+    if llamada.desenlace:
+        raise HTTPException(status_code=409, detail="Ya nos contaste cómo terminó esta llamada.")
+    visibles = [d for f in llamada.fragmentos for d in f.decisiones if d.estrategia == ESTRATEGIA_VISIBLE]
+    nivel_max = desenlaces.nivel_maximo([d.nivel for d in visibles])
+    llamada.desenlace = entrada.resultado
+    desenlaces.guardar(nivel_max, llamada.aviso_visible, entrada.resultado)
+    ids = {s.id for d in visibles for s in d.senales}
+    return {"guardado": True, "nivel_max": nivel_max, "aviso": llamada.aviso_visible,
+            "categoria_sugerida": desenlaces.categoria_por_senales(ids) if entrada.resultado in desenlaces.ES_ESTAFA else None}
 
 
 # Límites del audio (modelo de amenazas, A6)
@@ -252,6 +278,7 @@ def _buscar(llamada_id: str, sesion: Sesion | None) -> Llamada:
 
 app.include_router(base_guiones.router)
 app.include_router(cuentas.router)
+app.include_router(desenlaces.router)
 app.include_router(directorio.router)
 app.include_router(historial.router)
 app.include_router(mensajes.router)

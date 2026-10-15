@@ -39,6 +39,11 @@
         <label><input type="radio" name="rol" value="recibe" checked><span><strong>Recibo la llamada</strong><small>Centinela me protege y me avisa</small></span></label>
         <label><input type="radio" name="rol" value="llama"><span><strong>Hago la llamada</strong><small>Actúo el guion de quien llama</small></span></label>
       </fieldset>
+      <div id="caja-numero-llamada">
+        <label for="numero-llamada" class="etiqueta">Número que aparece en tu pantalla (opcional)</label>
+        <input type="tel" id="numero-llamada" class="campo" maxlength="25" autocomplete="off" placeholder="300 123 4567" aria-describedby="numero-llamada-ayuda">
+        <p id="numero-llamada-ayuda" class="ayuda">Si lo escribes, Centinela revisa sus reportes y al colgar puedes reportarlo con un toque.</p>
+      </div>
       <label class="consentimiento">
         <input type="checkbox" id="consentimiento">
         <span>Las dos personas saben que esta llamada de prueba se analiza y están de acuerdo. No usaremos datos reales.</span>
@@ -102,6 +107,17 @@
           </div>
           <p id="nivel-mensaje" class="nivel-mensaje"></p>
           <p id="escucha" class="ayuda" role="status"></p>
+        </section>
+        <section id="desenlace" class="tarjeta oculto" aria-labelledby="desenlace-titulo">
+          <h2 id="desenlace-titulo">¿Cómo terminó?</h2>
+          <p>Un toque nos ayuda a saber si Centinela acertó. No guardamos tu cuenta, el número ni lo que se dijo.</p>
+          <div class="desenlaces">
+            <button type="button" class="desenlace-boton" data-resultado="perdida"><span aria-hidden="true">💸</span>Me estafaron</button>
+            <button type="button" class="desenlace-boton" data-resultado="intento"><span aria-hidden="true">🛑</span>Intentaron estafarme</button>
+            <button type="button" class="desenlace-boton" data-resultado="legitima"><span aria-hidden="true">✅</span>Era una llamada normal</button>
+          </div>
+          <button type="button" class="enlace-boton" data-resultado="publicidad">Era publicidad o un call center</button>
+          <p id="desenlace-estado" class="ayuda" role="status" aria-live="polite"></p>
         </section>
         <section class="tarjeta" aria-labelledby="dicho-titulo">
           <h2 id="dicho-titulo">Lo que dijo quien llama</h2>

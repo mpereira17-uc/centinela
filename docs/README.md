@@ -15,6 +15,7 @@
 - [Me estafaron, ¿qué hago?](me-estafaron.md): pasos en orden según lo que pasó.
 - [Reporte de números](reportes.md): reportes seudónimos y reputación como señal.
 - [Llamada simulada](llamada.md): dos navegadores en llamada por WebRTC con análisis en vivo.
+- [¿Cómo terminó?](como-termino.md): feedback de un toque al colgar y reporte respaldado.
 - [Guía de anotación](guia-anotacion.md): cómo se escriben y etiquetan los guiones.
 - [Base de guiones](base-guiones.md): formato, guiones generados por región y API de consulta.
 - [Modismos](modismos.md): frases y modismos regionales de Colombia.

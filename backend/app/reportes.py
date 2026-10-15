@@ -57,6 +57,8 @@ ES_ESTAFA = ("perdida", "intento")
 
 # Lo asigna main.py: dice si una conversación analizada respalda el reporte
 respaldo_de_llamada = None
+# La asigna main: deduce la categoría de un reporte a partir de la llamada analizada
+categoria_de_llamada = None
 
 CATEGORIAS = {
     "suplanta_entidad": "Se hizo pasar por un banco, una empresa o una entidad",
@@ -238,9 +240,13 @@ def consultar_numero(datos: Numero):
 @router.post("/reportes", status_code=201, dependencies=[Depends(exigir_cabecera)])
 def reportar(datos: NuevoReporte, sesion: Sesion = Depends(usuario_actual)):
     numero = _numero_o_422(datos.numero)
-    if datos.resultado in ES_ESTAFA and not datos.categoria:
+    categoria = datos.categoria
+    if datos.resultado in ES_ESTAFA and not categoria and datos.llamada_id and categoria_de_llamada:
+        # Reporte de un toque al colgar: la categoría sale de lo que Centinela detectó
+        categoria = categoria_de_llamada(datos.llamada_id, sesion.usuario_id)
+    if datos.resultado in ES_ESTAFA and not categoria:
         raise HTTPException(status_code=422, detail="Cuéntanos qué hizo quien llamó.")
-    categoria = datos.categoria if datos.resultado in ES_ESTAFA else "ninguna"
+    categoria = categoria if datos.resultado in ES_ESTAFA else "ninguna"
     ahora = time.time()
     with conexion() as con:
         hoy = con.execute(

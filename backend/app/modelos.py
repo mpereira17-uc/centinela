@@ -67,6 +67,8 @@ class Llamada(BaseModel):
     # Estado de la reputación del número y su referencia HMAC (nunca el número en claro)
     numero_estado: str | None = None
     numero_ref: str | None = Field(default=None, exclude=True)
+    # Lo que contó quien recibió la llamada al colgar; se pregunta una sola vez
+    desenlace: str | None = Field(default=None, exclude=True)
 
 
 class NuevaLlamada(BaseModel):

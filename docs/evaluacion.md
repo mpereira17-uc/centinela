@@ -87,3 +87,7 @@ Los detalles y la decisión de usar la híbrida como estrategia visible están e
 - 36 guiones es una muestra pequeña: los intervalos de confianza son anchos y sirven para comparar estrategias, no como cifra definitiva.
 - Los guiones los escribió el mismo equipo que escribió las reglas. La partición reservada reduce, pero no elimina, ese sesgo; lo ideal es sumar guiones escritos por otras personas.
 - En modo texto los tiempos son estimados (2,5 palabras por segundo y 0,6 s entre turnos).
+
+## Fuera del laboratorio
+
+Las llamadas de prueba del piloto preguntan al colgar cómo terminó. `GET /desenlaces/resumen` da la tabla de aciertos y falsas alarmas con esas respuestas ([cómo-termino.md](como-termino.md)).

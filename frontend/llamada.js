@@ -188,7 +188,15 @@ async function alRecibir(m) {
 // ---- Análisis (solo quien recibe) ----
 
 async function empezarAnalisis() {
-  const r = await fetch("/llamadas", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+  const numero = $("#numero-llamada").value.trim();
+  estado.numero = numero;
+  const cuerpo = JSON.stringify(numero ? { numero } : {});
+  let r = await fetch("/llamadas", { method: "POST", headers: { "Content-Type": "application/json" }, body: cuerpo });
+  if (r.status === 422 && numero) {
+    // Un número mal escrito no debe impedir la llamada de prueba
+    estado.numero = "";
+    r = await fetch("/llamadas", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+  }
   const llamada = await json(r);
   estado.llamadaId = llamada.id;
   estado.inicio = performance.now();
@@ -336,6 +344,62 @@ function terminar(motivo) {
   otra.href = "/llamada.html";
   otra.textContent = "Hacer otra llamada de prueba";
   $("#compartir").replaceChildren(otra);
+  if (estado.rol === "recibe" && estado.llamadaId) {
+    $("#desenlace").classList.remove("oculto");
+    $("#desenlace").scrollIntoView({ block: "start" });
+  }
+}
+
+// ---- ¿Cómo terminó? (un toque al colgar) ----
+
+const GRACIAS = {
+  perdida: "Lo sentimos mucho. Te mostramos qué hacer ahora, en orden.",
+  intento: "Gracias. Bien hecho al no caer.",
+  publicidad: "Gracias. La publicidad se cuenta aparte de las estafas.",
+  legitima: "Gracias. Esto nos ayuda a no alarmar por llamadas normales.",
+};
+
+async function contarDesenlace(resultado) {
+  const botones = document.querySelectorAll("#desenlace button");
+  botones.forEach((b) => { b.disabled = true; b.classList.toggle("elegido", b.dataset.resultado === resultado); });
+  const salida = $("#desenlace-estado");
+  try {
+    await json(await fetch(`/llamadas/${estado.llamadaId}/desenlace`, {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ resultado }),
+    }));
+    salida.replaceChildren(GRACIAS[resultado]);
+    if (estado.numero) await reportarNumero(resultado, salida);
+    if (resultado === "perdida") {
+      const guia = document.createElement("a");
+      guia.href = "/ayuda.html#me-estafaron";
+      guia.className = "boton-principal";
+      guia.textContent = "Ver qué hacer ahora";
+      salida.append(" ", guia);
+    }
+  } catch (e) {
+    botones.forEach((b) => { b.disabled = false; });
+    salida.textContent = e instanceof TypeError ? "No pudimos conectar con Centinela." : e.message;
+  }
+}
+
+async function reportarNumero(resultado, salida) {
+  // El reporte va respaldado por el análisis de esta llamada; la categoría sale de lo detectado
+  const r = await fetch("/reportes", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Centinela": "1" },
+    body: JSON.stringify({ numero: estado.numero, resultado, llamada_id: estado.llamadaId }),
+  });
+  if (r.ok) {
+    const datos = await r.json();
+    salida.append(` También quedó como reporte del número${datos.respaldado ? ", respaldado por este análisis" : ""}.`);
+  } else if (r.status === 401) {
+    const entrar = document.createElement("a");
+    entrar.href = "/cuenta.html";
+    entrar.textContent = "Entra a tu cuenta";
+    salida.append(" ", entrar, " para que tu respuesta también cuente como reporte del número.");
+  } else if (r.status === 409) {
+    salida.append(" Ya habías reportado este número.");
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -344,6 +408,10 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#form-texto").addEventListener("submit", enviarFrase);
   $("#colgar").addEventListener("click", () => { enviar({ tipo: "colgar" }); terminar("Colgaste."); });
   $("#cerrar-alerta").addEventListener("click", () => $("#alerta").classList.add("oculto"));
+  document.querySelectorAll("#desenlace [data-resultado]").forEach((b) => b.addEventListener("click", () => contarDesenlace(b.dataset.resultado)));
+  document.querySelectorAll('input[name="rol"]').forEach((r) => r.addEventListener("change", () => {
+    $("#caja-numero-llamada").classList.toggle("oculto", rolElegido() !== "recibe");
+  }));
   const codigo = new URLSearchParams(location.search).get("codigo");
   if (codigo) $("#codigo").value = codigo.slice(0, 12);
 });

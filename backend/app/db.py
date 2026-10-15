@@ -71,6 +71,15 @@ CREATE TABLE IF NOT EXISTS reportes (
     UNIQUE (usuario_id, numero_ref)
 );
 CREATE INDEX IF NOT EXISTS reportes_por_numero ON reportes (numero_ref, creado);
+-- Cómo terminó una llamada analizada, contado por quien la recibió. Sin cuenta, número ni texto:
+-- solo sirve para medir aciertos y falsas alarmas fuera del laboratorio.
+CREATE TABLE IF NOT EXISTS desenlaces (
+    id TEXT PRIMARY KEY,
+    creado REAL NOT NULL,
+    nivel_max TEXT NOT NULL,
+    aviso INTEGER NOT NULL,
+    resultado TEXT NOT NULL
+);
 CREATE TABLE IF NOT EXISTS retos (
     id TEXT PRIMARY KEY,
     usuario_id TEXT REFERENCES usuarios(id) ON DELETE CASCADE,
