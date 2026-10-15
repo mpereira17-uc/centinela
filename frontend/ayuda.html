@@ -40,6 +40,23 @@
       <div id="directorio-lista"></div>
       <p id="directorio-fecha" class="ayuda"></p>
     </section>
+    <section id="me-estafaron" class="tarjeta" aria-labelledby="estafa-titulo">
+      <h2 id="estafa-titulo" class="titulo-icono"><span class="h-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5h.01"/></svg></span>Me estafaron, ¿qué hago?</h2>
+      <p>Tranquilo, no es tu culpa: estas estafas están hechas para engañar a cualquiera. Marca lo que pasó y te decimos qué hacer, en orden. Lo primero es lo más urgente.</p>
+      <fieldset id="situaciones" class="opciones">
+        <legend>¿Qué pasó?</legend>
+        <label><input type="checkbox" value="codigo"> Di un código que me llegó por mensaje</label>
+        <label><input type="checkbox" value="whatsapp"> Di el código de WhatsApp</label>
+        <label><input type="checkbox" value="tarjeta"> Di mi clave o los datos de mi tarjeta</label>
+        <label><input type="checkbox" value="transferencia"> Envié plata</label>
+        <label><input type="checkbox" value="aplicacion"> Instalé una aplicación que me dijeron</label>
+        <label><input type="checkbox" value="datos"> Di mi cédula u otros datos personales</label>
+        <label><input type="checkbox" value="amenaza"> Me están amenazando o extorsionando</label>
+      </fieldset>
+      <ol id="pasos" class="pasos" aria-live="polite"></ol>
+      <p id="pasos-vacio" class="ayuda">Marca al menos una opción para ver los pasos.</p>
+      <p class="ayuda">Los pasos que marques como hechos se recuerdan solo en este dispositivo.</p>
+    </section>
   </main>
 
   <footer class="pie">

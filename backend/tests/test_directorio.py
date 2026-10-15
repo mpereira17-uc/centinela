@@ -47,3 +47,14 @@ def test_la_pantalla_de_ayuda_existe_y_esta_en_la_barra():
     assert "innerHTML" not in js
     for pagina in ("/", "/cuenta.html", "/llamada.html", "/ayuda.html"):
         assert 'href="/ayuda.html"' in cliente.get(pagina).text
+
+
+def test_la_guia_me_estafaron_cubre_cada_situacion():
+    html = cliente.get("/ayuda.html").text
+    js = cliente.get("/ayuda.js").text
+    situaciones = ["codigo", "whatsapp", "tarjeta", "transferencia", "aplicacion", "datos", "amenaza"]
+    for s in situaciones:
+        assert f'value="{s}"' in html
+        assert f'"{s}"' in js
+    assert "tel:165" in js and "/#denuncia" in js
+    assert 'href="/ayuda.html#me-estafaron"' in cliente.get("/").text
