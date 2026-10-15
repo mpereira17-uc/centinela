@@ -70,3 +70,13 @@ def test_script_comun_sin_html_dinamico_y_cargado_en_todas_las_pantallas():
     assert "innerHTML" not in js and "insertAdjacentHTML" not in js and "document.write" not in js
     for pagina in ("/", "/cuenta.html", "/llamada.html"):
         assert '<script src="/comun.js" defer></script>' in cliente.get(pagina).text
+
+
+def test_la_denuncia_se_prepara_en_el_equipo_y_apunta_a_canales_oficiales():
+    html = cliente.get("/").text
+    assert 'id="preparar-denuncia"' in html
+    for canal in ("https://adenunciar.policia.gov.co/", "https://caivirtual.policia.gov.co/", 'href="tel:165"', 'href="tel:123"'):
+        assert canal in html
+    # Centinela no envía la denuncia a terceros: no hay peticiones a otros dominios
+    js = cliente.get("/app.js").text
+    assert 'fetch("http' not in js and "fetch(`http" not in js

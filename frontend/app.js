@@ -545,6 +545,78 @@ async function cargarCategorias() {
   } catch { /* sin categorías no se puede reportar; la consulta sigue funcionando */ }
 }
 
+// ---- Denuncia: resumen para presentar en el canal oficial; Centinela no lo envía ----
+
+const FECHA_DENUNCIA = new Intl.DateTimeFormat("es-CO", { dateStyle: "long", timeStyle: "short" });
+
+function resumenDenuncia() {
+  const frases = [...document.querySelectorAll("#conversacion > li")];
+  const numero = $("#numero").value.trim();
+  const perdida = $("#denuncia-perdida").checked;
+  const senales = new Set();
+  const lineas = [
+    "RESUMEN PARA DENUNCIA (preparado con Centinela, versión de prueba)",
+    "",
+    `Fecha y hora del resumen: ${FECHA_DENUNCIA.format(new Date())}`,
+    `Número que llamó: ${numero || "(no lo escribí)"} — el número en pantalla puede estar suplantado.`,
+    `¿Hubo pérdida de dinero o datos?: ${perdida ? "Sí" : "No"}`,
+    "",
+    "Lo que se dijo en la llamada:",
+  ];
+  if (!frases.length) lineas.push("(No analicé la conversación en Centinela. Describe aquí lo que te dijeron.)");
+  for (const li of frases) {
+    const quien = li.querySelector(".frase-quien")?.textContent || "Quien llama";
+    const texto = li.querySelector(".frase-texto")?.textContent || "";
+    const nivel = li.querySelector(".frase-nivel")?.textContent || "";
+    lineas.push(`- ${quien}: "${texto}"${nivel ? ` [${nivel}]` : ""}`);
+    for (const s of li.querySelectorAll("details li")) senales.add(s.textContent);
+  }
+  if (senales.size) {
+    lineas.push("", "Señales de estafa que detectó Centinela:");
+    for (const s of senales) lineas.push(`- ${s}`);
+  }
+  lineas.push(
+    "",
+    "Datos que debo agregar: mi nombre y documento, a dónde envié dinero (banco, cuenta, Nequi, Daviplata), montos, horas exactas y capturas de pantalla.",
+    "Centinela es una herramienta de apoyo y puede equivocarse; este resumen no es una prueba por sí solo.",
+  );
+  // La línea 165 es para extorsión o amenazas contra la persona, no para "su cuenta será bloqueada"
+  const dicho = frases.map((li) => li.querySelector(".frase-texto")?.textContent || "").join(" ");
+  const extorsion = /extors|vacuna|secuestr|le caemos|ubicad|le va a pasar|le va a ir mal|quem(ar|amos)|su familia|tenemos a/i.test(dicho);
+  return { texto: lineas.join("\n"), extorsion };
+}
+
+function prepararDenuncia() {
+  const { texto, extorsion } = resumenDenuncia();
+  $("#denuncia-texto").value = texto;
+  $("#canal-165").classList.toggle("oculto", !extorsion);
+  $("#canal-banco").classList.toggle("oculto", !$("#denuncia-perdida").checked);
+  $("#denuncia-lista").classList.remove("oculto");
+  $("#denuncia-estado").textContent = "";
+  $("#denuncia-texto").focus();
+  $("#denuncia-texto").scrollTop = 0;
+}
+
+async function copiarDenuncia() {
+  try {
+    await navigator.clipboard.writeText($("#denuncia-texto").value);
+    $("#denuncia-estado").textContent = "Copiado. Pégalo en el formulario de denuncia.";
+  } catch {
+    $("#denuncia-texto").select();
+    $("#denuncia-estado").textContent = "Selecciona el texto y cópialo con el menú del celular.";
+  }
+}
+
+function descargarDenuncia() {
+  const archivo = new Blob([$("#denuncia-texto").value], { type: "text/plain;charset=utf-8" });
+  const enlace = document.createElement("a");
+  enlace.href = URL.createObjectURL(archivo);
+  enlace.download = `denuncia-centinela-${new Date().toISOString().slice(0, 10)}.txt`;
+  enlace.click();
+  setTimeout(() => URL.revokeObjectURL(enlace.href), 1000);
+  $("#denuncia-estado").textContent = "Descargado en tu celular. Adjúntalo en la denuncia.";
+}
+
 async function cargarCatalogo() {
   try {
     const senales = await api("/senales");
@@ -613,4 +685,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   cargarSugerencias();
   cargarCatalogo();
+  $("#preparar-denuncia").addEventListener("click", prepararDenuncia);
+  $("#copiar-denuncia").addEventListener("click", copiarDenuncia);
+  $("#descargar-denuncia").addEventListener("click", descargarDenuncia);
 });

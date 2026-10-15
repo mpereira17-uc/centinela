@@ -168,6 +168,36 @@
       </details>
     </section>
 
+    <section id="denuncia" class="tarjeta" aria-labelledby="denuncia-titulo">
+      <h2 id="denuncia-titulo" class="titulo-icono"><span class="h-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 8h14M7 8l-3 7a3 3 0 0 0 6 0zM17 8l-3 7a3 3 0 0 0 6 0z"/></svg></span>Denunciar ante las autoridades</h2>
+      <p>Si te estafaron o te intentaron estafar, Centinela te arma un resumen con el número, la fecha y lo que te pidieron para que lo presentes tú en el canal oficial. Centinela no lo envía a nadie.</p>
+      <label class="consentimiento">
+        <input type="checkbox" id="denuncia-perdida">
+        <span>Perdí dinero o entregué datos</span>
+      </label>
+      <div class="acciones">
+        <button type="button" id="preparar-denuncia" class="boton-principal">Preparar resumen</button>
+      </div>
+      <div id="denuncia-lista" class="oculto">
+        <label for="denuncia-texto" class="etiqueta">Resumen para tu denuncia</label>
+        <textarea id="denuncia-texto" rows="10" readonly></textarea>
+        <p class="ayuda">Revísalo y agrega lo que falte. El número que se ve en pantalla se puede suplantar; dilo así si no estás seguro.</p>
+        <div class="acciones">
+          <button type="button" id="copiar-denuncia" class="boton-secundario">Copiar</button>
+          <button type="button" id="descargar-denuncia" class="boton-secundario">Descargar</button>
+        </div>
+        <p id="denuncia-estado" class="ayuda" role="status" aria-live="polite"></p>
+        <h3 class="subtitulo">Dónde presentarla</h3>
+        <ul class="canales">
+          <li id="canal-165" class="oculto"><a href="tel:165"><strong>Línea 165 del GAULA</strong><span>Extorsión o amenazas. Gratis, todo el día.</span></a></li>
+          <li id="canal-banco" class="oculto"><span class="canal-sin-enlace"><strong>Tu banco, primero</strong><span>Si perdiste dinero, llama ya a la línea oficial que está en tu tarjeta para bloquear y pedir la reversión.</span></span></li>
+          <li><a href="https://adenunciar.policia.gov.co/" rel="noopener" target="_blank"><strong>ADenunciar</strong><span>Denuncia virtual de la Fiscalía y la Policía para estafas y extorsión. Puedes adjuntar este resumen.</span></a></li>
+          <li><a href="https://caivirtual.policia.gov.co/" rel="noopener" target="_blank"><strong>CAI Virtual</strong><span>Policía Nacional, delitos informáticos y fraudes por internet o teléfono.</span></a></li>
+          <li><a href="tel:123"><strong>Línea 123</strong><span>Si estás en peligro ahora mismo.</span></a></li>
+        </ul>
+      </div>
+    </section>
+
     <section class="tarjeta" aria-labelledby="audio-titulo">
       <h2 id="audio-titulo" class="titulo-icono"><span class="h-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 11v2"/></svg></span>Analizar un audio</h2>
       <p>Graba una conversación o sube un archivo. Centinela lo convierte en texto <strong>en este equipo</strong> y lo descarta apenas termina; el audio no se guarda.</p>
