@@ -17,6 +17,10 @@ Cada paso llega como un commit directo a `main`, con criterios de aceptación, p
 | 10 | Conjunto simulado y evaluación | Guiones legítimos y de riesgo con voces de Piper; script que mide detección, falsas alertas, error de transcripción y tiempo de aviso | Hecho (modo audio pendiente de correr en un equipo con Piper y Whisper) |
 | 11 | Clasificador entrenado | TF-IDF y regresión logística comparados con las reglas en llamadas reservadas | Hecho |
 
+### Para la sustentación
+
+App instalable desde un QR, modo acompañante para llamadas telefónicas en altavoz, llamada por Centinela entre redes distintas (STUN y TURN) y arranque con dirección pública. Detalle en [sustentacion.md](sustentacion.md).
+
 ## Trabajo futuro (fuera de la beta)
 
 Se abordan solo si la evaluación muestra que son viables, precisos y seguros:

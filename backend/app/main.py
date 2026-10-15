@@ -5,7 +5,7 @@ from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, Respon
 from fastapi.concurrency import run_in_threadpool
 from fastapi.staticfiles import StaticFiles
 
-from . import asistente, base_guiones, cuentas, desenlaces, directorio, historial, mensajes, practica, reportes, senalizacion, voz, voz_clonada
+from . import asistente, base_guiones, cuentas, desenlaces, directorio, historial, instalacion, mensajes, practica, reportes, senalizacion, voz, voz_clonada
 from .cuentas import Sesion, sesion_opcional
 from .config import ajustes
 from .modelos import (
@@ -291,6 +291,7 @@ app.include_router(cuentas.router)
 app.include_router(desenlaces.router)
 app.include_router(directorio.router)
 app.include_router(historial.router)
+app.include_router(instalacion.router)
 app.include_router(mensajes.router)
 app.include_router(practica.router)
 app.include_router(reportes.router)

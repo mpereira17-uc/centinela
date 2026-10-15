@@ -26,3 +26,4 @@
 - [Denuncia](denuncia.md): resumen para denunciar ante las autoridades.
 - [Evaluación](evaluacion.md): guiones, métricas, cómo correrla y resultados.
 - [Clasificador](clasificador.md): modelo entrenado, estrategia híbrida y cómo reentrenarlo.
+- [Sustentación](sustentacion.md): instalar la app desde un QR, modo acompañante, llamada entre redes y lista de ensayo.

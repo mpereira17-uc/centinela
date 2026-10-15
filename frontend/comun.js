@@ -275,7 +275,13 @@
 
   window.Centinela = { consejoFamiliar, completarAviso, normalizarCelular, textoParaContacto };
 
+  // ---- App instalable: el service worker solo guarda la interfaz, nunca respuestas de la API ----
+  function registrarApp() {
+    if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
+    registrarApp();
     iniciarPalabraClave();
     iniciarContacto();
     iniciarLetra();

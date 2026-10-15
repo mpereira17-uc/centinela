@@ -33,5 +33,17 @@ class Ajustes(BaseSettings):
     # Días que se conserva el historial antes de borrarse solo
     dias_retencion: int = Field(default=30, ge=1, le=365)
 
+    # Llamada por Centinela entre redes distintas (datos móviles, otro Wi-Fi).
+    # STUN descubre la dirección pública de cada celular; TURN retransmite el audio cuando no hay camino directo.
+    # Vacío deja la llamada solo para la misma red, como en la beta.
+    stun_url: str = ""
+    # Un TURN cualquiera con usuario y clave fijos (por ejemplo, el de Metered o uno propio)
+    turn_url: str = ""
+    turn_usuario: str = ""
+    turn_clave: str = ""
+    # O el TURN de Cloudflare, que da credenciales temporales a partir de una llave
+    cloudflare_turn_llave: str = ""
+    cloudflare_turn_token: str = ""
+
 
 ajustes = Ajustes()

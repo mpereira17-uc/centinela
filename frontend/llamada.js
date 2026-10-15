@@ -10,7 +10,7 @@ const SEGUNDOS_POR_TROZO = 6;
 const estado = {
   rol: null, codigo: null, ws: null, pc: null, micro: null, llamadaId: null,
   inicio: 0, ultimoFin: 0, cola: Promise.resolve(), grabando: false, recorder: null,
-  pendientes: [], terminada: false,
+  pendientes: [], terminada: false, ice: [],
 };
 
 function rolElegido() {
@@ -69,6 +69,7 @@ async function conectar(codigo, rol, creador) {
   } catch {
     estado.micro = null;
   }
+  estado.ice = await servidoresIce();
 
   const protocolo = location.protocol === "https:" ? "wss" : "ws";
   const ws = new WebSocket(`${protocolo}://${location.host}/salas/${encodeURIComponent(codigo)}/ws?rol=${rol}`);
@@ -110,10 +111,20 @@ function enviar(mensaje) {
   if (estado.ws && estado.ws.readyState === WebSocket.OPEN) estado.ws.send(JSON.stringify(mensaje));
 }
 
+async function servidoresIce() {
+  // Con STUN y TURN configurados en el servidor, la llamada conecta entre redes distintas
+  // (datos móviles, otro Wi-Fi). Sin ellos, solo en el mismo equipo o la misma red.
+  try {
+    const r = await fetch("/webrtc/ice");
+    return r.ok ? (await r.json()).iceServers : [];
+  } catch {
+    return [];
+  }
+}
+
 function prepararConexion() {
   if (estado.pc) return estado.pc;
-  // Sin servidores STUN externos: funciona en el mismo equipo o la misma red, sin costo
-  const pc = new RTCPeerConnection({ iceServers: [] });
+  const pc = new RTCPeerConnection({ iceServers: estado.ice });
   estado.pc = pc;
   if (estado.micro) {
     for (const pista of estado.micro.getAudioTracks()) pc.addTrack(pista, estado.micro);
@@ -403,7 +414,15 @@ async function reportarNumero(resultado, salida) {
   }
 }
 
+async function avisarRed() {
+  try {
+    const { entre_redes } = await json(await fetch("/webrtc/ice"));
+    if (entre_redes) $("#aviso-red").textContent = "Funciona con datos móviles o con cualquier Wi-Fi.";
+  } catch { /* se queda el aviso de la misma red */ }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  avisarRed();
   $("#crear").addEventListener("click", crear);
   $("#form-unirse").addEventListener("submit", unirse);
   $("#form-texto").addEventListener("submit", enviarFrase);

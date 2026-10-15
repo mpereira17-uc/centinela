@@ -61,8 +61,8 @@ def test_pantalla_de_llamada_sin_html_dinamico():
     assert "<script>" not in html and "onclick=" not in html and "style=" not in html
     js = cliente.get("/llamada.js").text
     assert "innerHTML" not in js and "insertAdjacentHTML" not in js and "document.write" not in js
-    # Sin servidores STUN o TURN de terceros
-    assert "iceServers: []" in js and "stun:" not in js
+    # Ningún servidor STUN o TURN fijo en el código: solo los que configure el servidor (vacío por defecto)
+    assert "iceServers: estado.ice" in js and "stun:" not in js and "turn:" not in js
 
 
 def test_script_comun_sin_html_dinamico_y_cargado_en_todas_las_pantallas():

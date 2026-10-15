@@ -8,3 +8,5 @@ httpx==0.28.1
 python-multipart==0.0.32
 argon2-cffi==25.1.0
 webauthn==3.0.1
+# Código QR para instalar la app en la sustentación
+segno==1.6.6

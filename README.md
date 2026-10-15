@@ -65,6 +65,8 @@ cd backend
 uvicorn app.main:app --reload
 ```
 
+Para la sustentación, `python sustentacion.py` (desde la raíz) lo enciende con una dirección pública HTTPS y el QR para instalar la app ([docs/sustentacion.md](docs/sustentacion.md)).
+
 Abre http://localhost:8000/ para usar la interfaz, o http://localhost:8000/docs para probar la API directamente. Usa `localhost` y no `127.0.0.1`: las passkeys solo funcionan en el dominio configurado ([docs/registro.md](docs/registro.md)).
 
 ![Centinela en el celular](docs/capturas/movil-estafa.png)
@@ -102,6 +104,9 @@ Se cambia con variables de entorno o un archivo `.env` en `backend/`:
 | `CENTINELA_COOKIE_SEGURA` | `false` | Ponlo en `true` cuando sirvas la interfaz por HTTPS |
 | `CENTINELA_DURACION_SESION_HORAS` | `12` | Horas que dura una sesión (de 1 a 168) |
 | `CENTINELA_DIAS_RETENCION` | `30` | Días que se conserva el historial antes de borrarse solo (de 1 a 365) |
+| `CENTINELA_STUN_URL` | vacío | Servidor STUN para la llamada entre redes distintas |
+| `CENTINELA_TURN_URL`, `_USUARIO`, `_CLAVE` | vacío | Servidor TURN propio o de un proveedor |
+| `CENTINELA_CLOUDFLARE_TURN_LLAVE`, `_TOKEN` | vacío | TURN de Cloudflare con credenciales temporales ([docs/sustentacion.md](docs/sustentacion.md)) |
 
 ## Documentación
 

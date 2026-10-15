@@ -17,6 +17,8 @@ from urllib.parse import urlparse
 from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel
 
+from .config import ajustes
+
 log = logging.getLogger("centinela")
 
 ROLES = ("llama", "recibe")
@@ -90,7 +92,8 @@ def _mismo_origen(ws: WebSocket) -> bool:
     origen = ws.headers.get("origin")
     if origen is None:  # clientes que no son navegadores, como las pruebas
         return True
-    return urlparse(origen).netloc == ws.headers.get("host")
+    # Detrás del túnel de la sustentación el Host puede llegar cambiado; se acepta también el origen configurado
+    return urlparse(origen).netloc in (ws.headers.get("host"), urlparse(ajustes.origen).netloc)
 
 
 async def _enviar(ws: WebSocket | None, mensaje: dict):

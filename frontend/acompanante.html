@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1b2f4b">
+  <title>Modo acompañante · Centinela</title>
+  <meta name="description" content="Centinela escucha por el altavoz una llamada telefónica normal y avisa en vivo si parece estafa.">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/iconos/apple-touch-icon.png">
+  <link rel="stylesheet" href="/estilos.css">
+  <script src="/comun.js" defer></script>
+  <script src="/acompanante.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#principal">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <a class="marca" href="/">
+      <span class="logo-caja"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3Z"/></svg></span>
+      <span>Centinela</span>
+    </a>
+    <span class="chip-beta" title="Versión de prueba para el trabajo de grado">Beta</span>
+    <button type="button" id="tamano-letra" class="tamano" aria-pressed="false" aria-label="Usar letra grande"><span aria-hidden="true">A<span>A</span></span></button>
+    <a class="boton-icono" href="/" aria-label="Volver al análisis">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+    </a>
+  </header>
+
+  <main id="principal">
+    <!-- Paso 1: preparar -->
+    <section id="preparar" class="tarjeta" aria-labelledby="preparar-titulo">
+      <div class="centrado">
+        <span class="icono-grande" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 8.5a6 6 0 1 1 12 0c0 3.5-3 4.5-3 7.5a3.5 3.5 0 0 1-6.6 1.6"/><path d="M9.5 8.5a2.5 2.5 0 1 1 5 0c0 1.5-1.5 2-1.5 3.5"/></svg></span>
+        <h1 id="preparar-titulo">Modo acompañante</h1>
+        <p>Para una llamada telefónica normal, de cualquier operador. Pon la llamada en altavoz y deja cerca otro dispositivo con Centinela abierto: escucha lo que se dice y te avisa en vivo si parece estafa.</p>
+        <p class="ayuda">El celular de la llamada no puede usar Centinela al mismo tiempo, porque el teléfono ocupa su micrófono. Usa el de un familiar, una tablet o un computador. El audio no se guarda.</p>
+      </div>
+      <ol class="pasos-acompanante">
+        <li>Contesta la llamada y pon el <strong>altavoz</strong>.</li>
+        <li>Acerca este dispositivo, a unos 30 cm del celular.</li>
+        <li>Toca <strong>Empezar a escuchar</strong> y mira esta pantalla.</li>
+      </ol>
+      <div id="caja-numero-llamada">
+        <label for="numero-llamada" class="etiqueta">Número que aparece en la llamada (opcional)</label>
+        <input type="tel" id="numero-llamada" class="campo" maxlength="25" autocomplete="off" placeholder="300 123 4567" aria-describedby="numero-llamada-ayuda">
+        <p id="numero-llamada-ayuda" class="ayuda">Si lo escribes, Centinela revisa sus reportes y al terminar puedes reportarlo con un toque.</p>
+      </div>
+      <label class="consentimiento">
+        <input type="checkbox" id="consentimiento">
+        <span>Las personas de la llamada saben que Centinela la escucha para avisar de estafas y están de acuerdo.</span>
+      </label>
+      <div class="acciones">
+        <button type="button" id="empezar" class="boton-principal boton-grande">Empezar a escuchar</button>
+      </div>
+      <p id="preparar-error" class="error" role="status"></p>
+    </section>
+
+    <!-- Paso 2: escuchando -->
+    <section id="en-llamada" class="oculto" aria-labelledby="llamada-titulo">
+      <div class="pantalla-llamada">
+        <div class="pulso" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 8.5a6 6 0 1 1 12 0c0 3.5-3 4.5-3 7.5a3.5 3.5 0 0 1-6.6 1.6"/><path d="M9.5 8.5a2.5 2.5 0 1 1 5 0c0 1.5-1.5 2-1.5 3.5"/></svg></div>
+        <h2 id="llamada-titulo">Escuchando la llamada</h2>
+        <p id="estado-llamada" role="status" aria-live="polite">Preparando el micrófono…</p>
+        <p id="compartir" class="ayuda"></p>
+        <div class="colgar-caja">
+          <button type="button" id="colgar" aria-label="Dejar de escuchar"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/></svg></button>
+          <span aria-hidden="true">Dejar de escuchar</span>
+        </div>
+      </div>
+
+      <div id="vista-escucha">
+        <section id="alerta" class="alerta oculto" role="alert" aria-live="assertive" tabindex="-1">
+          <span class="alerta-icono" aria-hidden="true"></span>
+          <div>
+            <p class="alerta-titulo"></p>
+            <p class="alerta-texto"></p>
+            <p class="alerta-clave oculto"></p>
+            <a class="alerta-contacto boton-principal oculto" target="_blank" rel="noopener noreferrer">Avisarle a mi contacto</a>
+            <a class="alerta-enlace" href="/ayuda.html#directorio">Buscar el canal oficial de la entidad</a>
+          </div>
+          <button type="button" id="cerrar-alerta" class="boton-secundario">Entendido</button>
+        </section>
+        <section class="estado">
+          <div id="nivel" class="nivel sin-datos" data-nivel="bajo" aria-live="polite">
+            <span class="nivel-icono" aria-hidden="true"></span>
+            <span class="nivel-texto"><span class="nivel-etiqueta">Nivel de riesgo:</span> <strong id="nivel-valor">Sin analizar</strong></span>
+          </div>
+          <p id="nivel-mensaje" class="nivel-mensaje"></p>
+          <p id="escucha" class="ayuda" role="status"></p>
+        </section>
+        <section id="desenlace" class="tarjeta oculto" aria-labelledby="desenlace-titulo">
+          <h2 id="desenlace-titulo">¿Cómo terminó?</h2>
+          <p>Un toque nos ayuda a saber si Centinela acertó. No guardamos tu cuenta, el número ni lo que se dijo.</p>
+          <div class="desenlaces">
+            <button type="button" class="desenlace-boton" data-resultado="perdida"><span aria-hidden="true">💸</span>Me estafaron</button>
+            <button type="button" class="desenlace-boton" data-resultado="intento"><span aria-hidden="true">🛑</span>Intentaron estafarme</button>
+            <button type="button" class="desenlace-boton" data-resultado="legitima"><span aria-hidden="true">✅</span>Era una llamada normal</button>
+          </div>
+          <button type="button" class="enlace-boton" data-resultado="publicidad">Era publicidad o un call center</button>
+          <p id="desenlace-estado" class="ayuda" role="status" aria-live="polite"></p>
+        </section>
+        <section class="tarjeta" aria-labelledby="dicho-titulo">
+          <h2 id="dicho-titulo">Lo que Centinela escuchó</h2>
+          <p id="dicho-vacio" class="vacio">Todavía nada.</p>
+          <ol id="conversacion" class="conversacion"></ol>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>Centinela escucha por el altavoz porque Android y iPhone no dejan que ninguna app oiga el audio de una llamada telefónica. Para una llamada entre dos personas con Centinela, usa la <a href="/llamada.html">llamada de prueba</a>.</p>
+  </footer>
+
+  <nav class="barra" aria-label="Secciones">
+    <a href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</a>
+    <a href="/llamada.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Llamada</a>
+    <a href="/#asistente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.8A8 8 0 1 1 21 12z"/></svg>Pregúntale</a>
+    <a href="/ayuda.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m5.6 5.6 3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></svg>Ayuda</a>
+    <a href="/cuenta.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Cuenta</a>
+  </nav>
+</body>
+</html>

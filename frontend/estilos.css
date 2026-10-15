@@ -838,3 +838,13 @@ textarea, .fila input, .formulario input:not([type="checkbox"]), input[type="sea
 .boton-decidir.elegido { border-color: var(--texto); }
 .veredicto { box-shadow: var(--sombra); }
 .avatar-anillo { background: var(--degradado); }
+
+/* ---- Modo acompañante ---- */
+.pasos-acompanante { margin: .9rem 0; padding-left: 1.4rem; display: grid; gap: .35rem; }
+.pasos-acompanante li::marker { color: var(--primario); font-weight: 700; }
+
+/* ---- Instalar la app ---- */
+.qr-caja { display: grid; place-items: center; gap: .5rem; margin: 1rem 0; }
+.qr-caja img { width: min(260px, 70vw); height: auto; border-radius: 16px; background: #fff; padding: .5rem; }
+.qr-direccion { font-weight: 700; word-break: break-all; text-align: center; }
+#instalar-app { display: inline-flex; align-items: center; gap: .4rem; }
