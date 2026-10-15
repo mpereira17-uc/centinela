@@ -66,6 +66,8 @@ CREATE TABLE IF NOT EXISTS reportes (
     terminacion TEXT NOT NULL,
     categoria TEXT NOT NULL,
     creado REAL NOT NULL,
+    resultado TEXT NOT NULL DEFAULT 'intento',
+    respaldado INTEGER NOT NULL DEFAULT 0,
     UNIQUE (usuario_id, numero_ref)
 );
 CREATE INDEX IF NOT EXISTS reportes_por_numero ON reportes (numero_ref, creado);
@@ -77,6 +79,23 @@ CREATE TABLE IF NOT EXISTS retos (
     expira REAL NOT NULL
 );
 """
+
+# Columnas agregadas después de crear la tabla en bases ya existentes
+MIGRACIONES = {
+    "reportes": [
+        ("resultado", "TEXT NOT NULL DEFAULT 'intento'"),
+        ("respaldado", "INTEGER NOT NULL DEFAULT 0"),
+    ],
+}
+
+
+def _migrar(con):
+    for tabla, columnas in MIGRACIONES.items():
+        existentes = {f[1] for f in con.execute(f"PRAGMA table_info({tabla})")}
+        for nombre, tipo in columnas:
+            if nombre not in existentes:
+                con.execute(f"ALTER TABLE {tabla} ADD COLUMN {nombre} {tipo}")
+
 
 _lock = threading.Lock()
 _inicializada: set[str] = set()
@@ -93,6 +112,7 @@ def conexion():
         if ruta not in _inicializada:
             with _lock:
                 con.executescript(ESQUEMA)
+                _migrar(con)
                 _inicializada.add(ruta)
         yield con
         con.commit()

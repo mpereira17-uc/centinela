@@ -57,6 +57,7 @@ Las fronteras de confianza son el navegador frente a la API (todo lo que llega d
 | A19 | Dependencia o modelo descargado comprometido | Manipulación | Servidor | Versiones fijadas; modelos solo de fuentes oficiales; revisión de dependencias con `pip-audit` | Hecho (paso 2) |
 | A20 | Afirmar que se bloqueó algo que la app no puede bloquear | — | Interfaz | Los textos solo prometen lo que el sistema hace; revisión de mensajes en cada paso | Todos |
 | A21 | Otra página abre la llamada simulada a nombre del usuario o inunda la señalización | Suplantación / Denegación de servicio | Señalización | Verificar el origen del WebSocket; códigos aleatorios; máximo 100 salas, 64 KB por mensaje y 600 mensajes por minuto | Hecho (paso 9) |
+| A22 | Falsos positivos de reputación: call centers marcados como estafa, o reportes por odio masivo contra un número | Manipulación | Reportes | Separar publicidad y llamadas legítimas de las estafas; pesar los reportes | Hecho: cuentas de menos de un día en espera, 3 reportes por número al día, más peso a pérdidas y a reportes respaldados por un análisis, decaimiento a 90 días, estado en disputa y "probable estafa" solo con 2 personas que perdieron algo |
 
 ## 5. Riesgos aceptados en la beta
 

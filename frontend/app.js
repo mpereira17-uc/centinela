@@ -473,7 +473,7 @@ async function enviarReporte(ev) {
     const r = await fetch("/reportes", {
       method: "POST",
       headers: { "Content-Type": "application/json", "X-Centinela": "1" },
-      body: JSON.stringify({ numero, categoria: $("#categoria").value }),
+      body: JSON.stringify(cuerpoReporte(numero)),
     });
     const datos = await r.json().catch(() => ({}));
     if (r.status === 401) {
@@ -484,7 +484,9 @@ async function enviarReporte(ev) {
       return;
     }
     if (!r.ok) throw new Error(typeof datos.detail === "string" ? datos.detail : "Revisa el número y el motivo.");
-    estadoReporte.textContent = "Gracias. Tu reporte quedó guardado; nadie más verá que fuiste tú.";
+    estadoReporte.textContent = "Gracias. Tu reporte quedó guardado; nadie más verá que fuiste tú."
+      + (datos.respaldado ? " Como analizaste esta llamada aquí, tu reporte vale más." : "")
+      + (datos.cuenta_nueva ? " Empezará a contar cuando tu cuenta cumpla un día." : "");
     pintarReputacion(datos);
   } catch (e) {
     estadoReporte.textContent = e instanceof TypeError ? "No pudimos conectar con Centinela." : e.message;
@@ -493,7 +495,45 @@ async function enviarReporte(ev) {
   }
 }
 
+const RESULTADOS_ESTAFA = ["perdida", "intento"];
+
+function resultadoElegido() {
+  const r = document.querySelector('input[name="resultado"]:checked');
+  return r ? r.value : "intento";
+}
+
+function cuerpoReporte(numero) {
+  const resultado = resultadoElegido();
+  const cuerpo = { numero, resultado };
+  if (RESULTADOS_ESTAFA.includes(resultado)) cuerpo.categoria = $("#categoria").value;
+  // La conversación analizada respalda el reporte si es sobre este mismo número
+  if (estado.llamadaId && estado.numeroAplicado === numero) cuerpo.llamada_id = estado.llamadaId;
+  return cuerpo;
+}
+
+async function cargarResultados() {
+  try {
+    const resultados = await api("/reportes/resultados");
+    for (const r of resultados) {
+      const label = document.createElement("label");
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = "resultado";
+      radio.value = r.id;
+      radio.checked = r.id === "intento";
+      radio.addEventListener("change", () => {
+        $("#caja-categoria").classList.toggle("oculto", !RESULTADOS_ESTAFA.includes(r.id));
+      });
+      const texto = document.createElement("span");
+      texto.textContent = r.descripcion;
+      label.append(radio, texto);
+      $("#resultados").append(label);
+    }
+  } catch { /* sin opciones se reporta como intento */ }
+}
+
 async function cargarCategorias() {
+  cargarResultados();
   try {
     const categorias = await api("/reportes/categorias");
     for (const c of categorias) {

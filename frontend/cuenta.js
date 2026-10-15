@@ -361,7 +361,7 @@ async function cargarReportes() {
     numero.textContent = `Número terminado en ${r.terminacion}`;
     const datos = document.createElement("p");
     datos.className = "ayuda";
-    datos.textContent = `${r.descripcion} · ${FECHA.format(r.creado * 1000)}`;
+    datos.textContent = `${r.descripcion}${r.respaldado ? " · respaldado por un análisis" : ""} · ${FECHA.format(r.creado * 1000)}`;
     info.append(numero, datos);
     const boton = document.createElement("button");
     boton.type = "button";

@@ -58,6 +58,19 @@ MAX_LLAMADAS = 1000
 llamadas: dict[str, Llamada] = {}
 
 
+def _respalda_reporte(llamada_id: str, usuario_id: str, ref: str) -> bool:
+    """Un reporte queda respaldado si viene de una conversación sobre ese mismo número
+    que Centinela marcó alto o crítico, y que no es de otra cuenta."""
+    llamada = llamadas.get(llamada_id)
+    if not llamada or llamada.numero_ref != ref or llamada.dueno not in (None, usuario_id):
+        return False
+    niveles = {d.nivel for f in llamada.fragmentos for d in f.decisiones if d.estrategia == ESTRATEGIA_VISIBLE}
+    return bool(niveles & {"alto", "critico"})
+
+
+reportes.respaldo_de_llamada = _respalda_reporte
+
+
 @app.get("/salud")
 def salud():
     return {"estado": "ok", "estrategia_visible": ESTRATEGIA_VISIBLE}
@@ -75,11 +88,12 @@ def crear_llamada(entrada: NuevaLlamada | None = None, sesion: Sesion | None = D
         raise HTTPException(status_code=429, detail="Se alcanzó el máximo de llamadas en memoria")
     llamada = Llamada()
     if entrada and entrada.numero and entrada.numero.strip():
-        # Solo se conserva cuántas personas reportaron el número, no el número
+        # Se conserva la reputación y la referencia HMAC del número, no el número
         try:
-            llamada.numero_reportes = reportes.reputacion(entrada.numero)
+            rep = reportes.reputacion(entrada.numero)
         except reportes.NumeroInvalido as e:
             raise HTTPException(status_code=422, detail=str(e))
+        llamada.numero_reportes, llamada.numero_estado, llamada.numero_ref = rep["reportes"], rep["estado"], rep["ref"]
     if sesion and cuentas.tiene_permiso(sesion.usuario_id, "guardar_historial"):
         llamada.dueno, llamada.guardada = sesion.usuario_id, True
         historial.guardar_llamada(llamada)
@@ -207,7 +221,7 @@ def _procesar(llamada: Llamada, entrada: FragmentoEntrada) -> dict:
     previas = [f.texto for f in llamada.fragmentos]
     fragmento = Fragmento(**entrada.model_dump())
     # Ambas estrategias deciden sobre el mismo diálogo; el registro guarda las dos
-    externas = [NUMERO_REPORTADO] if llamada.numero_reportes >= reportes.UMBRAL_SENAL else []
+    externas = [NUMERO_REPORTADO] if llamada.numero_estado in reportes.ESTADOS_CON_SENAL else []
     fragmento.decisiones = [e.decidir(previas, entrada.texto, externas) for e in estrategias]
     llamada.fragmentos.append(fragmento)
 

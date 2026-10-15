@@ -20,14 +20,30 @@ def base_temporal(tmp_path, monkeypatch):
     reportes.limite_consultas.reiniciar()
 
 
-def _persona(alias):
+def _persona(alias, nueva=False):
+    """Crea una cuenta; salvo que sea nueva, se le da más de un día de antigüedad."""
     c = TestClient(app)
     assert c.post("/cuenta/registro", json={"alias": alias, "pin": PIN}, headers=H).status_code == 201
+    if not nueva:
+        con = sqlite3.connect(ajustes.base_datos)
+        con.execute("UPDATE usuarios SET creado = creado - 2 * 86400 WHERE alias = ?", (alias,))
+        con.commit()
+        con.close()
     return c
 
 
-def _reportar(c, numero=NUMERO, categoria="suplanta_entidad"):
-    return c.post("/reportes", json={"numero": numero, "categoria": categoria}, headers=H)
+def _reportar(c, numero=NUMERO, categoria="suplanta_entidad", resultado="intento", **extra):
+    cuerpo = {"numero": numero, "resultado": resultado, **extra}
+    if categoria:
+        cuerpo["categoria"] = categoria
+    return c.post("/reportes", json=cuerpo, headers=H)
+
+
+def _envejecer_reportes(dias):
+    con = sqlite3.connect(ajustes.base_datos)
+    con.execute("UPDATE reportes SET creado = creado - ? * 86400", (dias,))
+    con.commit()
+    con.close()
 
 
 def _consultar(numero=NUMERO):
@@ -183,3 +199,92 @@ def test_logs_sin_numero(caplog):
         _consultar()
         _decisiones(NUMERO, ["hola"])
     assert "4567" not in caplog.text and "zorrilla" not in caplog.text
+
+
+# ---- Reputación comunitaria: confirmación y protección contra abusos (A22) ----
+
+def test_cuentas_recien_creadas_no_cuentan_todavia():
+    for alias in ("nuevo1", "nuevo2", "nuevo3"):
+        r = _reportar(_persona(alias, nueva=True))
+        assert r.status_code == 201 and r.json()["cuenta_nueva"] is True
+    c = _consultar()
+    assert c["estado"] == "en_revision" and c["reportes"] == 0 and c["senal"] is False
+
+
+def test_una_avalancha_en_un_dia_solo_cuenta_tres_reportes():
+    for i in range(8):
+        _reportar(_persona(f"masa{i}"), resultado="perdida")
+    p = reportes._pesar(sqlite3.connect(ajustes.base_datos, factory=_ConFilas), _ref())
+    assert p["personas"] == reportes.MAX_QUE_CUENTAN_POR_DIA and p["en_espera"] == 5
+
+
+def test_estafa_confirmada_exige_personas_que_perdieron_algo():
+    for alias in ("persona_a1", "persona_a2", "persona_a3", "persona_a4"):
+        _reportar(_persona(alias))
+    assert _consultar()["estado"] == "varios_reportes"  # 4 intentos: puntaje alto, sin pérdidas
+    _envejecer_reportes(1)
+    _reportar(_persona("persona_p1"), resultado="perdida")
+    _reportar(_persona("persona_p2"), resultado="perdida")
+    c = _consultar()
+    assert c["estado"] == "estafa_confirmada" and c["senal"] is True
+    assert "2 personas" in c["mensaje"]
+
+
+def test_publicidad_no_cuenta_como_estafa():
+    for alias in ("persona_b1", "persona_b2", "persona_b3"):
+        assert _reportar(_persona(alias), categoria=None, resultado="publicidad").status_code == 201
+    c = _consultar()
+    assert c["estado"] == "publicidad" and c["senal"] is False and c["reportes"] == 0
+
+
+def test_llamadas_legitimas_ponen_el_numero_en_disputa():
+    _reportar(_persona("persona_c1"))
+    _reportar(_persona("persona_c2"))
+    assert _consultar()["senal"] is True
+    _reportar(_persona("persona_c3"), categoria=None, resultado="legitima")
+    c = _consultar()
+    assert c["estado"] == "en_disputa" and c["senal"] is False
+
+
+def test_los_reportes_viejos_pesan_menos():
+    _reportar(_persona("persona_d1"))
+    _reportar(_persona("persona_d2"))
+    assert _consultar()["estado"] == "varios_reportes"
+    _envejecer_reportes(100)
+    assert _consultar()["estado"] == "reportado"
+
+
+def test_estafa_exige_contar_que_hizo():
+    r = _reportar(_persona("persona_e1"), categoria=None, resultado="perdida")
+    assert r.status_code == 422
+
+
+def test_reporte_respaldado_por_una_conversacion_analizada():
+    ana = _persona("persona_f1")
+    llamada = ana.post("/llamadas", json={"numero": NUMERO}).json()
+    for i, t in enumerate(["Le hablamos del banco.", "Dígame el código que le llegó por mensaje."]):
+        ana.post(f"/llamadas/{llamada['id']}/fragmentos", json={"texto": t, "inicio": i, "fin": i + 1})
+    assert _reportar(ana, llamada_id=llamada["id"]).json()["respaldado"] is True
+    # La misma conversación no respalda el reporte de otro número
+    otra = _reportar(ana, numero="300 765 4321", llamada_id=llamada["id"]).json()
+    assert otra["respaldado"] is False
+    # Un respaldado más un intento simple ya pasan el umbral
+    _reportar(_persona("persona_f2"))
+    assert _consultar()["estado"] == "varios_reportes"
+
+
+def test_mis_reportes_muestran_lo_que_paso():
+    ana = _persona("persona_g1")
+    _reportar(ana, categoria=None, resultado="legitima")
+    [mio] = ana.get("/reportes/mios").json()
+    assert mio["resultado"] == "legitima" and mio["descripcion"] == reportes.RESULTADOS["legitima"]
+
+
+class _ConFilas(sqlite3.Connection):
+    def __init__(self, *a, **k):
+        super().__init__(*a, **k)
+        self.row_factory = sqlite3.Row
+
+
+def _ref():
+    return reportes.referencia(NUMERO)

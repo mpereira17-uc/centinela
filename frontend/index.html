@@ -141,14 +141,30 @@
       <p id="numero-aviso" class="error" role="status"></p>
       <p id="numero-resultado" class="reputacion oculto" role="status" aria-live="polite"></p>
       <details>
-        <summary>Reportar este número</summary>
+        <summary>Cuéntale a la comunidad cómo te fue</summary>
         <form id="form-reporte" novalidate>
-          <label for="categoria" class="etiqueta">¿Qué hizo?</label>
-          <select id="categoria"></select>
-          <div class="acciones"><button type="submit" class="boton-secundario">Enviar reporte</button></div>
+          <fieldset id="resultados" class="roles">
+            <legend>¿Qué pasó en esa llamada?</legend>
+          </fieldset>
+          <div id="caja-categoria">
+            <label for="categoria" class="etiqueta">¿Qué hizo?</label>
+            <select id="categoria"></select>
+          </div>
+          <div class="acciones"><button type="submit" class="boton-principal">Enviar</button></div>
           <p id="reporte-estado" class="ayuda" role="status" aria-live="polite"></p>
-          <p class="ayuda">Necesitas una cuenta. Nadie más verá que fuiste tú, y un reporte solo no hace que Centinela alerte.</p>
+          <p class="ayuda">Necesitas una cuenta. Nadie más verá que fuiste tú. Si analizaste la llamada aquí, tu reporte vale más.</p>
         </form>
+      </details>
+      <details>
+        <summary>¿Cómo evitamos reportes falsos?</summary>
+        <ul class="catalogo">
+          <li>Cada cuenta opina una sola vez por número y máximo 10 veces al día.</li>
+          <li>Las cuentas con menos de un día no cuentan todavía.</li>
+          <li>Por número solo cuentan los primeros 3 reportes de cada día, para frenar avalanchas.</li>
+          <li>Pesa más quien perdió algo y quien analizó la llamada en Centinela; los reportes viejos pesan menos.</li>
+          <li>Publicidad y call centers se separan de las estafas, y quien dice que la llamada fue legítima pone el número en duda.</li>
+          <li>Solo hablamos de "probable estafa" cuando al menos 2 personas dicen que perdieron algo.</li>
+        </ul>
       </details>
     </section>
 

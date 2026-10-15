@@ -64,6 +64,9 @@ class Llamada(BaseModel):
     dueno: str | None = Field(default=None, exclude=True)
     # Personas distintas que reportaron el número que llama; el número en sí no se guarda aquí
     numero_reportes: int = 0
+    # Estado de la reputación del número y su referencia HMAC (nunca el número en claro)
+    numero_estado: str | None = None
+    numero_ref: str | None = Field(default=None, exclude=True)
 
 
 class NuevaLlamada(BaseModel):
