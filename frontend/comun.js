@@ -161,10 +161,123 @@
     });
   }
 
-  window.Centinela = { consejoFamiliar };
+  // ---- Contacto de confianza ----
+  // Nombre y número quedan solo en este dispositivo. Centinela no envía nada: en un aviso crítico
+  // muestra un botón que abre WhatsApp o los mensajes con el texto listo, y la persona decide si lo manda.
+  const CLAVE_CONTACTO = "centinela-contacto";
+
+  // Celular colombiano de 10 dígitos que empieza por 3, con o sin +57
+  function normalizarCelular(texto) {
+    let d = String(texto || "").replace(/\D/g, "");
+    if (d.length === 12 && d.startsWith("57")) d = d.slice(2);
+    return /^3\d{9}$/.test(d) ? d : null;
+  }
+
+  function leerContacto() {
+    try {
+      const c = JSON.parse(guardado.leer(CLAVE_CONTACTO) || "null");
+      if (c && typeof c.nombre === "string" && normalizarCelular(c.telefono) && ["whatsapp", "sms"].includes(c.canal)) return c;
+    } catch { /* dato dañado: se ignora */ }
+    return null;
+  }
+
+  function textoParaContacto(contacto, motivo) {
+    const saludo = contacto.nombre ? `Hola ${contacto.nombre}` : "Hola";
+    const razon = motivo ? ` ${motivo.replace(/\.$/, "")}.` : "";
+    return `${saludo}, Centinela marcó como posible estafa una llamada que estoy recibiendo.${razon} ¿Me puedes llamar? No voy a dar códigos, claves ni plata.`;
+  }
+
+  function enlaceContacto(contacto, motivo) {
+    const texto = encodeURIComponent(textoParaContacto(contacto, motivo));
+    const numero = "57" + normalizarCelular(contacto.telefono);
+    return contacto.canal === "whatsapp" ? `https://wa.me/${numero}?text=${texto}` : `sms:+${numero}?body=${texto}`;
+  }
+
+  // Botón del aviso: solo en riesgo crítico y si hay un contacto guardado
+  function contactoParaAviso(nivel, motivo) {
+    const c = leerContacto();
+    if (nivel !== "critico" || !c) return null;
+    return { href: enlaceContacto(c, motivo), texto: `Avisarle a ${c.nombre || "mi contacto"}` };
+  }
+
+  // Completa lo que comparten los avisos de todas las pantallas: palabra clave y contacto de confianza
+  function completarAviso(alerta, decision, motivo) {
+    const consejo = consejoFamiliar(decision.senales);
+    const clave = alerta.querySelector(".alerta-clave");
+    if (clave) {
+      clave.textContent = consejo || "";
+      clave.classList.toggle("oculto", !consejo);
+    }
+    const boton = alerta.querySelector(".alerta-contacto");
+    if (boton) {
+      const c = contactoParaAviso(decision.nivel, motivo);
+      boton.classList.toggle("oculto", !c);
+      if (c) {
+        boton.href = c.href;
+        boton.textContent = c.texto;
+      } else {
+        boton.removeAttribute("href");
+      }
+    }
+  }
+
+  function iniciarContacto() {
+    const form = $("#form-contacto");
+    if (!form) return;
+    const estado = $("#contacto-estado");
+    const quitar = $("#quitar-contacto");
+
+    function pintar() {
+      const c = leerContacto();
+      quitar.classList.toggle("oculto", !c);
+      $("#contacto-prueba").classList.toggle("oculto", !c);
+      if (!c) {
+        estado.textContent = "";
+        return;
+      }
+      const n = normalizarCelular(c.telefono);
+      estado.textContent = `Guardado: ${c.nombre || "Sin nombre"}, ${n.slice(0, 3)} ••• ${n.slice(6)}, por ${c.canal === "whatsapp" ? "WhatsApp" : "mensaje de texto"}.`;
+      $("#contacto-prueba").href = enlaceContacto(c, "Esto es una prueba, no pasa nada");
+      $("#contacto-nombre").value = c.nombre;
+      $("#contacto-telefono").value = n;
+      form.querySelector(`input[name="canal"][value="${c.canal}"]`).checked = true;
+      $("#contacto-acepta").checked = true;
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const error = $("#contacto-error");
+      const telefono = normalizarCelular($("#contacto-telefono").value);
+      error.textContent = "";
+      if (!telefono) {
+        error.textContent = "Escribe un celular colombiano de 10 dígitos que empiece por 3.";
+        $("#contacto-telefono").focus();
+        return;
+      }
+      if (!$("#contacto-acepta").checked) {
+        error.textContent = "Primero pregúntale a esa persona si está de acuerdo y marca la casilla.";
+        $("#contacto-acepta").focus();
+        return;
+      }
+      const canal = form.querySelector('input[name="canal"]:checked')?.value || "whatsapp";
+      const nombre = $("#contacto-nombre").value.trim().slice(0, 30);
+      guardado.escribir(CLAVE_CONTACTO, JSON.stringify({ nombre, telefono, canal }));
+      pintar();
+    });
+
+    quitar.addEventListener("click", () => {
+      try { localStorage.removeItem(CLAVE_CONTACTO); } catch { /* sin almacenamiento */ }
+      form.reset();
+      pintar();
+    });
+    pintar();
+  }
+
+  window.Centinela = { consejoFamiliar, completarAviso, normalizarCelular, textoParaContacto };
 
   document.addEventListener("DOMContentLoaded", () => {
     iniciarPalabraClave();
+    iniciarContacto();
     iniciarLetra();
     iniciarBienvenida();
     iniciarAlerta();

@@ -305,9 +305,7 @@ function mostrarAlerta(d) {
   alerta.dataset.nivel = d.nivel;
   alerta.querySelector(".alerta-titulo").textContent = titulo;
   alerta.querySelector(".alerta-texto").textContent = resto.join(". ");
-  const consejo = window.Centinela?.consejoFamiliar(d.senales);
-  alerta.querySelector(".alerta-clave").textContent = consejo || "";
-  alerta.querySelector(".alerta-clave").classList.toggle("oculto", !consejo);
+  window.Centinela?.completarAviso(alerta, d, resto[0]);
   alerta.classList.remove("oculto");
   alerta.focus();
 }

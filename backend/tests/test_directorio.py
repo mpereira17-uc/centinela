@@ -70,4 +70,4 @@ def test_palabra_clave_familiar_nunca_pide_la_palabra():
     assert "consejoFamiliar" in comun and "emergencia_familiar" in comun
     for pagina, js in (("/", "/app.js"), ("/llamada.html", "/llamada.js")):
         assert 'class="alerta-clave' in cliente.get(pagina).text
-        assert "consejoFamiliar" in cliente.get(js).text
+        assert "completarAviso" in cliente.get(js).text

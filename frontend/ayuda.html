@@ -73,6 +73,34 @@
       <p id="palabra-estado" class="ayuda" role="status" aria-live="polite"></p>
       <p class="ayuda">Centinela no te pide la palabra y nunca la guarda. Solo recuerda en este dispositivo que la tienen, para recordártela cuando alguien diga ser de tu familia.</p>
     </section>
+
+    <section id="contacto-confianza" class="tarjeta" aria-labelledby="contacto-titulo">
+      <h2 id="contacto-titulo" class="titulo-icono"><span class="h-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M17 11l2 2 3.5-4"/></svg></span>Contacto de confianza</h2>
+      <p>Escoge a alguien de tu familia o un amigo. Si Centinela da un aviso de riesgo crítico, te mostrará un botón para escribirle con el mensaje listo y pedirle que te llame.</p>
+      <form id="form-contacto" class="formulario" novalidate>
+        <label for="contacto-nombre" class="etiqueta">Su nombre (opcional)</label>
+        <input id="contacto-nombre" maxlength="30" autocomplete="off" placeholder="Por ejemplo: Laura">
+        <label for="contacto-telefono" class="etiqueta">Su celular</label>
+        <input id="contacto-telefono" type="tel" inputmode="numeric" autocomplete="off" maxlength="16" placeholder="300 123 4567" required>
+        <fieldset class="opciones">
+          <legend>Avisarle por</legend>
+          <label><input type="radio" name="canal" value="whatsapp" checked> WhatsApp</label>
+          <label><input type="radio" name="canal" value="sms"> Mensaje de texto</label>
+        </fieldset>
+        <label class="consentimiento">
+          <input type="checkbox" id="contacto-acepta">
+          <span>Le pregunté a esta persona y está de acuerdo en recibir mis avisos</span>
+        </label>
+        <p id="contacto-error" class="error" role="status"></p>
+        <div class="acciones">
+          <button type="submit" class="boton-principal">Guardar contacto</button>
+          <button type="button" id="quitar-contacto" class="boton-secundario oculto">Quitar</button>
+        </div>
+      </form>
+      <p id="contacto-estado" class="ayuda" role="status" aria-live="polite"></p>
+      <a id="contacto-prueba" class="enlace-boton oculto" target="_blank" rel="noopener noreferrer">Enviarle un mensaje de prueba</a>
+      <p class="ayuda">El nombre y el número quedan solo en este dispositivo; Centinela no los sube a ningún servidor. Nada se envía solo: el botón abre WhatsApp o tus mensajes con el texto escrito y tú decides si lo mandas.</p>
+    </section>
   </main>
 
   <footer class="pie">
