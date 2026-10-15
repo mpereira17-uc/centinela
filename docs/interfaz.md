@@ -51,12 +51,23 @@ Las pruebas automáticas están en `backend/tests/test_interfaz.py`. La revisió
 
 pepe escogió, entre tres propuestas que se podían tocar en un celular de prueba (Conversación, Tablero y Escudo), el estilo **Conversación**, con colores más vivos. La idea es que Centinela se sienta como un chat que casi todos ya saben usar:
 
-- Barra superior verde jade y fondo de chat con puntitos.
+- Barra superior azul marino y fondo de chat con puntitos.
 - El saludo de Centinela aparece como la primera burbuja del chat, y los accesos rápidos como respuestas en píldora.
-- Las frases de quien llama van en burbujas blancas y las tuyas en burbujas menta.
+- Las frases de quien llama van en burbujas blancas y las tuyas en burbujas azul claro.
 - El resultado tiene una franja del color del nivel (verde, ámbar, naranja o rojo) con texto blanco.
 - La alerta ocupa toda la pantalla con el color del nivel, un ícono grande con ondas y un botón blanco.
 - Los niveles siguen distinguiéndose por forma del ícono y por texto, no solo por color.
 - Tiene modo oscuro y respeta la opción de reducir el movimiento.
 
 Solo cambió la hoja de estilos y el color de la barra del sistema (`theme-color`); el HTML, los identificadores y el JavaScript siguen iguales.
+
+## Paleta Vigía (15 de octubre de 2026)
+
+El verde jade vivo se veía fosforescente, sobre todo el rojo de las alertas y el modo oscuro. pepe pidió una paleta con personalidad propia y se compararon tres (Vigía, Bosque y Petróleo y coral; imágenes en `capturas/estilos/paleta-*.png` de la carpeta del proyecto). La elegida es **Vigía**, los colores de un centinela de noche:
+
+- Azul marino (`#24426a` y `#1b2f4b`) en la barra, los botones y la burbuja propia.
+- Ámbar de faro (`#e8a33d`) en el escudo, el foco del teclado y el pulso del micrófono.
+- Niveles con tonos apagados para las alertas de pantalla completa: verde `#2e7d5b`, ámbar `#9a6c16`, naranja `#b85a28` y rojo vino `#a83636`. El texto blanco encima tiene un contraste de al menos 4,5 a 1 en los cuatro niveles.
+- Modo oscuro casi negro azulado (`#0f1622`), superficies apagadas y los mismos niveles un poco más oscuros, para que no deslumbre de noche.
+
+Todos los colores salen de variables al inicio de `estilos.css`; cambiar la paleta es cambiar ese bloque.

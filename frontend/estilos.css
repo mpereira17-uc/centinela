@@ -1,43 +1,46 @@
 /* Centinela: estilo de app móvil (barra superior, tarjetas, burbujas de chat y navegación inferior).
    Sin estilos en línea: la política CSP solo permite esta hoja. */
 
-/* Estilo Conversación: Centinela se usa como un chat conocido. Verde jade vivo en la barra y los botones,
-   burbujas blancas y menta, y alertas de pantalla completa con el color del nivel. */
+/* Estilo Conversación con la paleta Vigía: Centinela se usa como un chat conocido y tiene los colores
+   de un vigía nocturno. Azul marino en la barra y los botones, ámbar de faro en el escudo y el foco,
+   y colores de nivel apagados (rojo vino, no fosforescente) en las alertas de pantalla completa. */
 :root {
-  --fondo: #e6f0ec;
+  --fondo: #eef1f5;
   --superficie: #ffffff;
-  --campo: #eef5f2;
-  --chip: #e0eee8;
-  --texto: #0f1f1b;
-  --texto-suave: #4f645d;
-  --borde: #d3e3dc;
-  --primario: #0a8f78;
-  --primario-fuerte: #077060;
+  --campo: #f2f5f9;
+  --chip: #e3e9f1;
+  --texto: #141d2b;
+  --texto-suave: #526072;
+  --borde: #d6dee8;
+  --primario: #24426a;
+  --primario-fuerte: #1b2f4b;
   --primario-texto: #ffffff;
-  --acento: #ff7a45;
-  --foco: #f59e0b;
-  --degradado: linear-gradient(135deg, #12b28f 0%, #0a8f78 55%, #087566 100%);
-  --degradado-suave: linear-gradient(135deg, #dcf6ec 0%, #e6f4fb 100%);
-  --sombra: 0 1px 2px rgba(10, 60, 50, .06), 0 6px 18px rgba(10, 60, 50, .08);
-  --sombra-boton: 0 6px 16px rgba(10, 143, 120, .32);
+  --acento: #e8a33d;
+  --foco: #e8a33d;
+  --degradado: linear-gradient(135deg, #2c4f7c 0%, #24426a 55%, #1b2f4b 100%);
+  --degradado-suave: linear-gradient(135deg, #e7edf6 0%, #f6efe2 100%);
+  --sombra: 0 1px 2px rgba(20, 35, 60, .06), 0 6px 18px rgba(20, 35, 60, .08);
+  --sombra-boton: 0 6px 16px rgba(27, 47, 75, .28);
   --burbuja-otro: #ffffff;
-  --burbuja-mia: #d6f7e7;
-  --puntos: rgba(10, 143, 120, .09);
-  --barra-sup: linear-gradient(120deg, #0fa585 0%, #0a8f78 60%, #087063 100%);
+  --burbuja-mia: #e4ecf7;
+  --puntos: rgba(36, 66, 106, .07);
+  --barra-sup: linear-gradient(120deg, #1b2f4b 0%, #24426a 100%);
+  --logo: #e8a33d;
+  --llamada-fondo: linear-gradient(170deg, #24426a 0%, #16263d 60%, #0d1726 100%);
 
-  --bajo: #13784a;
-  --bajo-fondo: #dbf6e7;
-  --moderado: #8a5a00;
-  --moderado-fondo: #fff1c9;
-  --alto: #a8400c;
-  --alto-fondo: #ffe5d4;
-  --critico: #b4142c;
-  --critico-fondo: #ffe1e5;
+  --bajo: #25694c;
+  --bajo-fondo: #e1f0e8;
+  --moderado: #7d5a12;
+  --moderado-fondo: #f6ecd6;
+  --alto: #934619;
+  --alto-fondo: #f6e3d8;
+  --critico: #962f2f;
+  --critico-fondo: #f5e0df;
   /* Fondos sólidos de las alertas de pantalla completa (texto blanco encima) */
-  --bajo-solido: #13945b;
-  --moderado-solido: #c98200;
-  --alto-solido: #e35d14;
-  --critico-solido: #d91e3c;
+  --bajo-solido: #2e7d5b;
+  --moderado-solido: #9a6c16;
+  --alto-solido: #b85a28;
+  --critico-solido: #a83636;
 
   --radio: 20px;
   --ancho: 520px;
@@ -46,33 +49,41 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --fondo: #0b1513;
-    --superficie: #15221f;
-    --campo: #1c2c28;
-    --chip: #213531;
-    --texto: #e9f3ef;
-    --texto-suave: #9fb6ae;
-    --borde: #27403a;
-    --primario: #2fd1ad;
-    --primario-fuerte: #6ee7c8;
-    --primario-texto: #04221c;
-    --degradado: linear-gradient(135deg, #14b893 0%, #0c9a80 55%, #0a7f6c 100%);
-    --degradado-suave: linear-gradient(135deg, #123a31 0%, #12303b 100%);
+    --fondo: #0f1622;
+    --superficie: #172131;
+    --campo: #1d2a3d;
+    --chip: #223249;
+    --texto: #e6ebf2;
+    --texto-suave: #9aa8bb;
+    --borde: #2a3a52;
+    --primario: #8fb3e6;
+    --primario-fuerte: #b9d0f0;
+    --primario-texto: #0f1622;
+    --degradado: linear-gradient(135deg, #2c4f7c 0%, #24426a 100%);
+    --degradado-suave: linear-gradient(135deg, #1a2740 0%, #2a2416 100%);
     --sombra: 0 1px 2px rgba(0, 0, 0, .4), 0 6px 18px rgba(0, 0, 0, .3);
     --sombra-boton: 0 6px 16px rgba(0, 0, 0, .35);
-    --burbuja-otro: #1d2e2a;
-    --burbuja-mia: #0f5848;
-    --puntos: rgba(47, 209, 173, .07);
-    --barra-sup: linear-gradient(120deg, #0c5c4e 0%, #0a4a40 60%, #083d35 100%);
+    --burbuja-otro: #1d2a3d;
+    --burbuja-mia: #24426a;
+    --puntos: rgba(143, 179, 230, .05);
+    --barra-sup: linear-gradient(120deg, #131d2c 0%, #18263a 100%);
 
-    --bajo: #6ee7a5;
-    --bajo-fondo: #12301f;
-    --moderado: #fcd34d;
-    --moderado-fondo: #3a2c0a;
-    --alto: #fdba74;
-    --alto-fondo: #3d1f0c;
-    --critico: #fda4af;
-    --critico-fondo: #431420;
+    --bajo: #8cc9a8;
+    --bajo-fondo: #16291f;
+    --moderado: #e0c27a;
+    --moderado-fondo: #2c2412;
+    --alto: #e3a57f;
+    --alto-fondo: #2f1d13;
+    --critico: #e59a9a;
+    --critico-fondo: #321a1c;
+
+    --acento: #e8a33d;
+    --logo: #e8a33d;
+    --bajo-solido: #24654a;
+    --moderado-solido: #94701f;
+    --alto-solido: #9c4f25;
+    --critico-solido: #8f2f33;
+    --llamada-fondo: linear-gradient(170deg, #1b2f4b 0%, #111c2d 60%, #0a121d 100%);
   }
 }
 
@@ -119,7 +130,7 @@ a { color: var(--primario); }
   -webkit-backdrop-filter: saturate(180%) blur(14px);
 }
 .marca { display: flex; align-items: center; gap: .55rem; font-weight: 800; font-size: 1.35rem; letter-spacing: -.02em; color: var(--texto); text-decoration: none; }
-.logo-caja { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px; background: var(--degradado); box-shadow: 0 4px 12px rgba(10, 143, 120, .3); }
+.logo-caja { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px; background: var(--degradado); box-shadow: 0 4px 12px rgba(27, 47, 75, .3); }
 .logo { width: 20px; height: 20px; fill: #fff; }
 .chip-beta { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: .2rem .55rem; border-radius: 999px; background: var(--chip); color: var(--texto-suave); }
 .boton-icono {
@@ -169,7 +180,7 @@ main { max-width: var(--ancho); margin: 0 auto; padding: .25rem 1rem 1.5rem; }
 .portada {
   position: relative; overflow: hidden; margin-top: .5rem; padding: 1.4rem 1.25rem 1.3rem;
   border-radius: 26px; background: var(--degradado); color: #fff;
-  box-shadow: 0 12px 30px rgba(10, 143, 120, .3);
+  box-shadow: 0 12px 30px rgba(27, 47, 75, .3);
 }
 .portada::after {
   content: ""; position: absolute; right: -60px; top: -60px; width: 180px; height: 180px; border-radius: 50%;
@@ -298,7 +309,7 @@ button, .boton-archivo, a.boton-principal, a.boton-secundario {
   font: inherit; font-weight: 700; cursor: pointer; min-height: 48px; border-radius: 999px; padding: .6rem 1.25rem;
   display: inline-flex; align-items: center; justify-content: center; gap: .45rem; text-decoration: none; border: 0;
 }
-.boton-principal { background: var(--degradado); color: #fff; box-shadow: 0 6px 16px rgba(10, 143, 120, .3); }
+.boton-principal { background: var(--degradado); color: #fff; box-shadow: 0 6px 16px rgba(27, 47, 75, .3); }
 .boton-secundario { background: var(--chip); color: var(--texto); }
 .boton-peligro { background: var(--critico); color: var(--superficie); }
 button:disabled { opacity: .6; cursor: progress; }
@@ -462,7 +473,7 @@ details[open] > summary::after { transform: rotate(90deg); }
 
 .icono-grande {
   display: grid; place-items: center; width: 76px; height: 76px; margin: .25rem auto 1rem; border-radius: 50%;
-  background: var(--degradado); color: #fff; box-shadow: 0 10px 26px rgba(10, 143, 120, .3);
+  background: var(--degradado); color: #fff; box-shadow: 0 10px 26px rgba(27, 47, 75, .3);
 }
 .icono-grande svg { width: 36px; height: 36px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .centrado { text-align: center; }
@@ -573,7 +584,7 @@ html.letra-grande { font-size: 118%; }
   .bienvenida-dialogo[open] { animation: subir .3s cubic-bezier(.2, .8, .2, 1); }
 
   #dejar-hablar { animation: escuchando 1.4s ease-out infinite; }
-  @keyframes escuchando { 0% { box-shadow: 0 0 0 0 rgba(10, 143, 120, .55); } 100% { box-shadow: 0 0 0 16px rgba(10, 143, 120, 0); } }
+  @keyframes escuchando { 0% { box-shadow: 0 0 0 0 rgba(232, 163, 61, .55); } 100% { box-shadow: 0 0 0 16px rgba(232, 163, 61, 0); } }
 
   #cargando { animation: brillo 1.2s linear infinite; }
   @keyframes brillo { to { background-position: -200% 0; } }
@@ -678,7 +689,7 @@ input[type="search"]:focus { border-color: var(--primario); background: var(--su
 .frase.trampa .frase-texto { box-shadow: inset 0 0 0 2px var(--critico); background: var(--critico-fondo); }
 .puntaje {
   margin: .25rem auto .5rem; width: 6.5rem; height: 6.5rem; border-radius: 50%; display: grid; place-items: center;
-  background: var(--degradado); color: #fff; font-size: 1.55rem; font-weight: 900; box-shadow: 0 10px 28px rgba(10, 143, 120, .3);
+  background: var(--degradado); color: #fff; font-size: 1.55rem; font-weight: 900; box-shadow: 0 10px 28px rgba(27, 47, 75, .3);
 }
 .centrado .puntaje { color: #fff; }
 #final .acciones a { text-align: center; justify-content: center; }
@@ -705,14 +716,14 @@ body { background-color: var(--fondo); background-image: radial-gradient(var(--p
 .cabecera {
   max-width: none; padding: .65rem max(1rem, calc((100% - var(--ancho)) / 2 + 1rem));
   background: var(--barra-sup); color: #fff; backdrop-filter: none; -webkit-backdrop-filter: none;
-  box-shadow: 0 2px 10px rgba(6, 60, 50, .18);
+  box-shadow: 0 2px 10px rgba(10, 20, 40, .18);
 }
 .marca { color: #fff; font-size: 1.25rem; }
 .logo-caja { width: 40px; height: 40px; border-radius: 50%; background: #fff; box-shadow: none; }
-.logo { fill: #0a8f78; }
+.logo { fill: var(--logo); }
 .chip-beta { background: rgba(255, 255, 255, .2); color: #fff; }
 .boton-icono, .tamano { background: rgba(255, 255, 255, .16); color: #fff; box-shadow: none; }
-.tamano[aria-pressed="true"] { background: #fff; color: #087566; }
+.tamano[aria-pressed="true"] { background: #fff; color: var(--primario-fuerte); }
 html { scroll-padding-top: 84px; }
 
 /* Portada: el saludo de Centinela como primera burbuja del chat */
@@ -813,7 +824,7 @@ textarea, .fila input, .formulario input:not([type="checkbox"]), input[type="sea
 .barra a[aria-current="page"] svg { background: var(--chip); border-radius: 999px; padding: 2px 16px; width: 58px; box-sizing: border-box; height: 30px; }
 
 /* Llamada de prueba: pantalla verde oscuro como una llamada entrante */
-.pantalla-llamada { background: linear-gradient(170deg, #0b5a4c 0%, #08392f 60%, #052620 100%); box-shadow: 0 14px 34px rgba(6, 40, 34, .35); }
+.pantalla-llamada { background: var(--llamada-fondo); box-shadow: 0 14px 34px rgba(6, 40, 34, .35); }
 .roles label:has(input:checked) { border-color: var(--primario); background: color-mix(in srgb, var(--primario) 10%, var(--superficie)); }
 
 /* Resultado de un mensaje: como la tarjeta de respuesta de Centinela */
