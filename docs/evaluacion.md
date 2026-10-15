@@ -49,7 +49,7 @@ Cada corrida escribe `datos/resultados/evaluacion-<modo>-<partición>[-<nombre>]
 
 ## Resultados en modo texto
 
-Reglas del [motor de señales](motor-de-senales.md) con el nivel de alerta por defecto (`alto`). Informes completos: [desarrollo](../datos/resultados/evaluacion-texto-desarrollo.md), [reservada](../datos/resultados/evaluacion-texto-reservada.md), [todas](../datos/resultados/evaluacion-texto-todas.md).
+Reglas del [motor de señales](motor-de-senales.md) con el nivel de alerta por defecto (`alto`), antes del clasificador. Informes completos: [desarrollo](../datos/resultados/evaluacion-texto-desarrollo.md), [reservada](../datos/resultados/evaluacion-texto-reservada.md), [todas](../datos/resultados/evaluacion-texto-todas.md).
 
 | Partición | Estrategia | Detección | Falsas alertas | Aviso (mediana) |
 |---|---|---|---|---|
@@ -61,9 +61,22 @@ Reglas del [motor de señales](motor-de-senales.md) con el nivel de alerta por d
 Lo que muestran:
 
 - **Las reglas fallan con las estafas que evitan las palabras típicas.** No detectan "léame los seis números que le llegaron" (r09), "léame el mensaje" (r18), un código de WhatsApp pedido como "número de verificación" (r15), un préstamo para "mandarlo a la cuenta de un amigo" (r14) ni una extorsión que dice "si no nos manda" (r06).
-- **La caída en la partición reservada (83 % a 50 %)** es la señal esperada de que las reglas se escribieron mirando ejemplos parecidos a los de desarrollo. Es el problema que el clasificador del paso 11 debe atacar.
+- **La caída en la partición reservada (83 % a 50 %)** es la señal esperada de que las reglas se escribieron mirando ejemplos parecidos a los de desarrollo. Es el problema que ataca el clasificador del paso 11.
 - **Falsas alertas:** l13 (el banco menciona un código pero pide no compartirlo) alerta con ambas estrategias; l06 (el banco habla de seguridad y bloqueo) alerta solo con acumulación, porque suma tres señales de contexto a lo largo de la llamada.
 - **Tiempo de aviso:** cuando detecta, avisa al terminar el mismo turno de la solicitud, unos 6 a 8 segundos después de que empieza, según la duración estimada del turno.
+
+## Comparación con el clasificador (paso 11)
+
+Con el [clasificador](clasificador.md) entrenado, el mismo script compara cuatro estrategias. En la partición reservada:
+
+| Estrategia | Detección | Falsas alertas |
+|---|---|---|
+| Reglas por fragmento | 3/6 | 1/6 |
+| Reglas con acumulación | 3/6 | 1/6 |
+| Clasificador solo | 6/6 | 0/6 |
+| Híbrida (reglas + clasificador) | 6/6 | 1/6 |
+
+Los detalles y la decisión de usar la híbrida como estrategia visible están en [clasificador.md](clasificador.md).
 
 ## Resultados en modo audio
 

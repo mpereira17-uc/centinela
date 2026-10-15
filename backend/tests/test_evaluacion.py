@@ -45,7 +45,7 @@ def test_wilson_y_mediana():
 
 def test_evaluacion_en_texto():
     res = evaluar.evaluar(guiones.cargar())
-    assert set(res["resumen"]) == {"por_fragmento", "acumulacion"}
+    assert set(res["resumen"]) == {"por_fragmento", "acumulacion", "clasificador", "hibrida"}
     for r in res["resumen"].values():
         assert r["llamadas_riesgo"] == r["llamadas_legitimas"] == 18
         assert 0 <= r["deteccion"] <= 1

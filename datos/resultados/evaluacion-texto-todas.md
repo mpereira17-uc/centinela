@@ -1,57 +1,61 @@
 # Evaluación en modo texto (todas)
 
-Generado por `python -m evaluacion.evaluar` el 2026-10-14. 36 guiones de [datos/guiones/guiones.json](../guiones/guiones.json). Solo se analizan los turnos de quien llama, como en la llamada simulada.
+Generado por `python -m evaluacion.evaluar` el 2026-10-15. 36 guiones de [datos/guiones/guiones.json](../guiones/guiones.json). Solo se analizan los turnos de quien llama, como en la llamada simulada.
 
 | Estrategia | Detección | IC 95 % | Falsas alertas | IC 95 % | Precisión | Aviso (mediana) | Aviso (máx.) |
 |---|---|---|---|---|---|---|---|
 | por_fragmento | 13/18 (72 %) | 49–88 % | 1/18 (6 %) | 1–26 % | 93 % | 6,4 s | 7,6 s |
 | acumulacion | 13/18 (72 %) | 49–88 % | 2/18 (11 %) | 3–33 % | 87 % | 6,4 s | 7,6 s |
+| clasificador | 18/18 (100 %) | 82–100 % | 0/18 (0 %) | 0–18 % | 100 % | 6,0 s | 7,6 s |
+| hibrida | 18/18 (100 %) | 82–100 % | 2/18 (11 %) | 3–33 % | 90 % | 6,0 s | 7,6 s |
 
 ## Errores
 
 - **por_fragmento**: no detectadas r06, r09, r14, r15, r18; falsas alertas l13; alertas anticipadas 0.
 - **acumulacion**: no detectadas r06, r09, r14, r15, r18; falsas alertas l06, l13; alertas anticipadas 0.
+- **clasificador**: no detectadas ninguna; falsas alertas ninguna; alertas anticipadas 2.
+- **hibrida**: no detectadas ninguna; falsas alertas l06, l13; alertas anticipadas 2.
 
 ## Por guion
 
-| Guion | Etiqueta | Categoría | por_fragmento | acumulacion |
-|---|---|---|---|---|
-| r01 | riesgo | suplanta_banco | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s |
-| r02 | riesgo | suplanta_banco | aviso en turno 2, 7,6 s | aviso en turno 2, 7,6 s |
-| r03 | riesgo | familiar_falso | aviso en turno 3, 7,6 s | aviso en turno 3, 7,6 s |
-| r04 | riesgo | soporte_falso | aviso en turno 2, 5,6 s | aviso en turno 2, 5,6 s |
-| r05 | riesgo | premio_falso | aviso en turno 3, 6,4 s | aviso en turno 3, 6,4 s |
-| r06 | riesgo | extorsion | sin aviso | sin aviso |
-| r07 | riesgo | suplanta_entidad | aviso en turno 2, 6,0 s | aviso en turno 2, 6,0 s |
-| r08 | riesgo | inversion_falsa | aviso en turno 3, 6,4 s | aviso en turno 3, 6,4 s |
-| r09 | riesgo | suplanta_banco | sin aviso | sin aviso |
-| r10 | riesgo | envio_falso | aviso en turno 2, 6,0 s | aviso en turno 2, 6,0 s |
-| r11 | riesgo | empleo_falso | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s |
-| r12 | riesgo | suplanta_entidad | aviso en turno 2, 5,2 s | aviso en turno 2, 5,2 s |
-| r13 | riesgo | suplanta_banco | aviso en turno 2, 6,4 s | aviso en turno 2, 6,4 s |
-| r14 | riesgo | familiar_falso | sin aviso | sin aviso |
-| r15 | riesgo | soporte_falso | sin aviso | sin aviso |
-| r16 | riesgo | premio_falso | aviso en turno 2, 5,6 s | aviso en turno 2, 5,6 s |
-| r17 | riesgo | extorsion | aviso en turno 1, 7,6 s | aviso en turno 1, 7,6 s |
-| r18 | riesgo | suplanta_banco | sin aviso | sin aviso |
-| l01 | legitima | banco_real | sin aviso | sin aviso |
-| l02 | legitima | cita_medica | sin aviso | sin aviso |
-| l03 | legitima | domicilio | sin aviso | sin aviso |
-| l04 | legitima | familia | sin aviso | sin aviso |
-| l05 | legitima | telefonia | sin aviso | sin aviso |
-| l06 | legitima | banco_real | sin aviso | aviso en turno 3 |
-| l07 | legitima | trabajo | sin aviso | sin aviso |
-| l08 | legitima | encuesta | sin aviso | sin aviso |
-| l09 | legitima | colegio | sin aviso | sin aviso |
-| l10 | legitima | domicilio | sin aviso | sin aviso |
-| l11 | legitima | amistad | sin aviso | sin aviso |
-| l12 | legitima | salud | sin aviso | sin aviso |
-| l13 | legitima | banco_real | aviso en turno 1 | aviso en turno 1 |
-| l14 | legitima | familia | sin aviso | sin aviso |
-| l15 | legitima | servicios | sin aviso | sin aviso |
-| l16 | legitima | comercio | sin aviso | sin aviso |
-| l17 | legitima | trabajo | sin aviso | sin aviso |
-| l18 | legitima | vecinos | sin aviso | sin aviso |
+| Guion | Etiqueta | Categoría | por_fragmento | acumulacion | clasificador | hibrida |
+|---|---|---|---|---|---|---|
+| r01 | riesgo | suplanta_banco | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s |
+| r02 | riesgo | suplanta_banco | aviso en turno 2, 7,6 s | aviso en turno 2, 7,6 s | aviso en turno 2, 7,6 s | aviso en turno 2, 7,6 s |
+| r03 | riesgo | familiar_falso | aviso en turno 3, 7,6 s | aviso en turno 3, 7,6 s | aviso en turno 3, 7,6 s | aviso en turno 3, 7,6 s |
+| r04 | riesgo | soporte_falso | aviso en turno 2, 5,6 s | aviso en turno 2, 5,6 s | aviso en turno 2, 5,6 s | aviso en turno 2, 5,6 s |
+| r05 | riesgo | premio_falso | aviso en turno 3, 6,4 s | aviso en turno 3, 6,4 s | aviso en turno 3, 6,4 s | aviso en turno 3, 6,4 s |
+| r06 | riesgo | extorsion | sin aviso | sin aviso | aviso en turno 2, 6,0 s | aviso en turno 2, 6,0 s |
+| r07 | riesgo | suplanta_entidad | aviso en turno 2, 6,0 s | aviso en turno 2, 6,0 s | aviso en turno 2, 6,0 s | aviso en turno 2, 6,0 s |
+| r08 | riesgo | inversion_falsa | aviso en turno 3, 6,4 s | aviso en turno 3, 6,4 s | aviso en turno 3, 6,4 s | aviso en turno 3, 6,4 s |
+| r09 | riesgo | suplanta_banco | sin aviso | sin aviso | aviso en turno 2, 5,2 s | aviso en turno 2, 5,2 s |
+| r10 | riesgo | envio_falso | aviso en turno 2, 6,0 s | aviso en turno 2, 6,0 s | aviso en turno 2, 6,0 s | aviso en turno 2, 6,0 s |
+| r11 | riesgo | empleo_falso | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s | aviso en turno 3, 6,8 s |
+| r12 | riesgo | suplanta_entidad | aviso en turno 2, 5,2 s | aviso en turno 2, 5,2 s | aviso en turno 2, 5,2 s | aviso en turno 2, 5,2 s |
+| r13 | riesgo | suplanta_banco | aviso en turno 2, 6,4 s | aviso en turno 2, 6,4 s | aviso en turno 2, 6,4 s | aviso en turno 2, 6,4 s |
+| r14 | riesgo | familiar_falso | sin aviso | sin aviso | aviso en turno 0, 0,0 s | aviso en turno 0, 0,0 s |
+| r15 | riesgo | soporte_falso | sin aviso | sin aviso | aviso en turno 1, 0,0 s | aviso en turno 1, 0,0 s |
+| r16 | riesgo | premio_falso | aviso en turno 2, 5,6 s | aviso en turno 2, 5,6 s | aviso en turno 2, 5,6 s | aviso en turno 2, 5,6 s |
+| r17 | riesgo | extorsion | aviso en turno 1, 7,6 s | aviso en turno 1, 7,6 s | aviso en turno 1, 7,6 s | aviso en turno 1, 7,6 s |
+| r18 | riesgo | suplanta_banco | sin aviso | sin aviso | aviso en turno 2, 5,6 s | aviso en turno 2, 5,6 s |
+| l01 | legitima | banco_real | sin aviso | sin aviso | sin aviso | sin aviso |
+| l02 | legitima | cita_medica | sin aviso | sin aviso | sin aviso | sin aviso |
+| l03 | legitima | domicilio | sin aviso | sin aviso | sin aviso | sin aviso |
+| l04 | legitima | familia | sin aviso | sin aviso | sin aviso | sin aviso |
+| l05 | legitima | telefonia | sin aviso | sin aviso | sin aviso | sin aviso |
+| l06 | legitima | banco_real | sin aviso | aviso en turno 3 | sin aviso | aviso en turno 3 |
+| l07 | legitima | trabajo | sin aviso | sin aviso | sin aviso | sin aviso |
+| l08 | legitima | encuesta | sin aviso | sin aviso | sin aviso | sin aviso |
+| l09 | legitima | colegio | sin aviso | sin aviso | sin aviso | sin aviso |
+| l10 | legitima | domicilio | sin aviso | sin aviso | sin aviso | sin aviso |
+| l11 | legitima | amistad | sin aviso | sin aviso | sin aviso | sin aviso |
+| l12 | legitima | salud | sin aviso | sin aviso | sin aviso | sin aviso |
+| l13 | legitima | banco_real | aviso en turno 1 | aviso en turno 1 | sin aviso | aviso en turno 1 |
+| l14 | legitima | familia | sin aviso | sin aviso | sin aviso | sin aviso |
+| l15 | legitima | servicios | sin aviso | sin aviso | sin aviso | sin aviso |
+| l16 | legitima | comercio | sin aviso | sin aviso | sin aviso | sin aviso |
+| l17 | legitima | trabajo | sin aviso | sin aviso | sin aviso | sin aviso |
+| l18 | legitima | vecinos | sin aviso | sin aviso | sin aviso | sin aviso |
 
 ## Cómo leerlo
 

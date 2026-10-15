@@ -62,6 +62,53 @@
         "l06",
         "l13"
       ]
+    },
+    "clasificador": {
+      "llamadas_riesgo": 18,
+      "detectadas": 18,
+      "deteccion": 1.0,
+      "deteccion_ic95": [
+        0.8241154494176252,
+        1.0
+      ],
+      "llamadas_legitimas": 18,
+      "falsas_alertas": 0,
+      "tasa_falsas_alertas": 0.0,
+      "falsas_alertas_ic95": [
+        0.0,
+        0.1758845505823749
+      ],
+      "precision": 1.0,
+      "alertas_anticipadas": 2,
+      "segundos_hasta_aviso_mediana": 6.0,
+      "segundos_hasta_aviso_max": 7.6,
+      "no_detectadas": [],
+      "con_falsa_alerta": []
+    },
+    "hibrida": {
+      "llamadas_riesgo": 18,
+      "detectadas": 18,
+      "deteccion": 1.0,
+      "deteccion_ic95": [
+        0.8241154494176252,
+        1.0
+      ],
+      "llamadas_legitimas": 18,
+      "falsas_alertas": 2,
+      "tasa_falsas_alertas": 0.1111111111111111,
+      "falsas_alertas_ic95": [
+        0.031018868453582787,
+        0.3280024486660421
+      ],
+      "precision": 0.9,
+      "alertas_anticipadas": 2,
+      "segundos_hasta_aviso_mediana": 6.0,
+      "segundos_hasta_aviso_max": 7.6,
+      "no_detectadas": [],
+      "con_falsa_alerta": [
+        "l06",
+        "l13"
+      ]
     }
   },
   "por_guion": [
@@ -83,6 +130,30 @@
           ]
         },
         "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.8,
+          "niveles": [
+            "bajo",
+            "moderado",
+            "alto",
+            "critico"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.8,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
@@ -124,6 +195,30 @@
             "alto",
             "critico"
           ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 7.6,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "alto"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 7.6,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "critico"
+          ]
         }
       }
     },
@@ -145,6 +240,30 @@
           ]
         },
         "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 7.6,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "critico"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 7.6,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
@@ -186,6 +305,30 @@
             "alto",
             "alto"
           ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 5.6,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 5.6,
+          "niveles": [
+            "moderado",
+            "moderado",
+            "alto",
+            "alto"
+          ]
         }
       }
     },
@@ -207,6 +350,30 @@
           ]
         },
         "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.4,
+          "niveles": [
+            "moderado",
+            "moderado",
+            "alto",
+            "alto"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.4,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
@@ -246,6 +413,28 @@
             "moderado",
             "moderado"
           ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.0,
+          "niveles": [
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.0,
+          "niveles": [
+            "moderado",
+            "alto",
+            "alto"
+          ]
         }
       }
     },
@@ -267,6 +456,30 @@
           ]
         },
         "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.0,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "alto"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.0,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
@@ -308,6 +521,30 @@
             "alto",
             "alto"
           ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.4,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.4,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "alto"
+          ]
         }
       }
     },
@@ -339,6 +576,30 @@
             "bajo",
             "bajo"
           ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 5.2,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 5.2,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "alto"
+          ]
         }
       }
     },
@@ -359,6 +620,28 @@
           ]
         },
         "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.0,
+          "niveles": [
+            "bajo",
+            "alto",
+            "alto"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.0,
+          "niveles": [
+            "bajo",
+            "alto",
+            "alto"
+          ]
+        },
+        "hibrida": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
@@ -397,6 +680,28 @@
             "bajo",
             "alto"
           ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.8,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.8,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto"
+          ]
         }
       }
     },
@@ -417,6 +722,28 @@
           ]
         },
         "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 5.2,
+          "niveles": [
+            "moderado",
+            "critico",
+            "critico"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 5.2,
+          "niveles": [
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
@@ -447,6 +774,30 @@
           ]
         },
         "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.4,
+          "niveles": [
+            "moderado",
+            "moderado",
+            "alto",
+            "critico"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 6.4,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "alto"
+          ]
+        },
+        "hibrida": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
@@ -488,6 +839,30 @@
             "moderado",
             "moderado"
           ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 0,
+          "anticipada": true,
+          "segundos_hasta_aviso": 0.0,
+          "niveles": [
+            "alto",
+            "alto",
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 0,
+          "anticipada": true,
+          "segundos_hasta_aviso": 0.0,
+          "niveles": [
+            "alto",
+            "critico",
+            "critico",
+            "critico"
+          ]
         }
       }
     },
@@ -516,6 +891,28 @@
             "bajo",
             "bajo",
             "bajo"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 1,
+          "anticipada": true,
+          "segundos_hasta_aviso": 0.0,
+          "niveles": [
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 1,
+          "anticipada": true,
+          "segundos_hasta_aviso": 0.0,
+          "niveles": [
+            "bajo",
+            "alto",
+            "alto"
           ]
         }
       }
@@ -546,6 +943,28 @@
             "alto",
             "alto"
           ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 5.6,
+          "niveles": [
+            "bajo",
+            "alto",
+            "alto"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 5.6,
+          "niveles": [
+            "moderado",
+            "alto",
+            "alto"
+          ]
         }
       }
     },
@@ -566,6 +985,28 @@
           ]
         },
         "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 1,
+          "anticipada": false,
+          "segundos_hasta_aviso": 7.6,
+          "niveles": [
+            "bajo",
+            "alto",
+            "critico"
+          ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 1,
+          "anticipada": false,
+          "segundos_hasta_aviso": 7.6,
+          "niveles": [
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": true,
           "turno_alerta": 1,
           "anticipada": false,
@@ -606,6 +1047,30 @@
             "bajo",
             "bajo"
           ]
+        },
+        "clasificador": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 5.6,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 2,
+          "anticipada": false,
+          "segundos_hasta_aviso": 5.6,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "alto",
+            "alto"
+          ]
         }
       }
     },
@@ -625,6 +1090,26 @@
           ]
         },
         "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "moderado"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
@@ -660,6 +1145,26 @@
             "bajo",
             "bajo"
           ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
         }
       }
     },
@@ -679,6 +1184,26 @@
           ]
         },
         "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
@@ -714,6 +1239,26 @@
             "bajo",
             "bajo"
           ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
         }
       }
     },
@@ -733,6 +1278,26 @@
           ]
         },
         "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
@@ -770,6 +1335,28 @@
             "moderado",
             "alto"
           ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": true,
+          "turno_alerta": 3,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "moderado",
+            "alto"
+          ]
         }
       }
     },
@@ -789,6 +1376,26 @@
           ]
         },
         "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
@@ -826,6 +1433,28 @@
             "bajo",
             "bajo"
           ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "bajo"
+          ]
         }
       }
     },
@@ -845,6 +1474,26 @@
           ]
         },
         "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
@@ -880,6 +1529,26 @@
             "bajo",
             "bajo"
           ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
         }
       }
     },
@@ -899,6 +1568,26 @@
           ]
         },
         "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
@@ -936,6 +1625,28 @@
             "moderado",
             "moderado"
           ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "moderado",
+            "moderado"
+          ]
         }
       }
     },
@@ -955,6 +1666,26 @@
           ]
         },
         "acumulacion": {
+          "alerta": true,
+          "turno_alerta": 1,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "alto"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": true,
           "turno_alerta": 1,
           "anticipada": false,
@@ -990,6 +1721,26 @@
             "moderado",
             "moderado"
           ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "moderado"
+          ]
         }
       }
     },
@@ -1009,6 +1760,26 @@
           ]
         },
         "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
@@ -1044,6 +1815,26 @@
             "moderado",
             "moderado"
           ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "moderado",
+            "moderado"
+          ]
         }
       }
     },
@@ -1063,6 +1854,26 @@
           ]
         },
         "acumulacion": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
@@ -1098,10 +1909,30 @@
             "bajo",
             "bajo"
           ]
+        },
+        "clasificador": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
+        },
+        "hibrida": {
+          "alerta": false,
+          "turno_alerta": null,
+          "anticipada": false,
+          "segundos_hasta_aviso": null,
+          "niveles": [
+            "bajo",
+            "bajo"
+          ]
         }
       }
     }
   ],
-  "fecha": "2026-10-14",
+  "fecha": "2026-10-15",
   "particion": "todas"
 }

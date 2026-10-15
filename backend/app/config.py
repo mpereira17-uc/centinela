@@ -14,7 +14,9 @@ class Ajustes(BaseSettings):
     # Número de fragmentos que recuerda la estrategia de acumulación
     limite_contexto: int = Field(default=5, ge=1, le=50)
     # Estrategia cuyo aviso se muestra en la interfaz de demostración
-    estrategia_visible: Literal["por_fragmento", "acumulacion"] = "acumulacion"
+    estrategia_visible: Literal["por_fragmento", "acumulacion", "hibrida"] = "hibrida"
+    # Modelo del clasificador en JSON; vacío usa el que viene en backend/app/modelo_clasificador.json
+    modelo_clasificador: str = ""
     # Modelo de faster-whisper (tiny, base, small...) para correr en CPU
     modelo_whisper: str = "base"
     # Ruta al archivo .onnx de una voz de Piper en español; vacío usa la voz del navegador

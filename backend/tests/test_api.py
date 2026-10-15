@@ -41,7 +41,7 @@ def test_llamada_de_riesgo_dispara_un_solo_aviso():
     assert r3.json()["decision_visible"]["nivel"] == "critico"
 
     decisiones = r3.json()["fragmento"]["decisiones"]
-    assert {d["estrategia"] for d in decisiones} == {"por_fragmento", "acumulacion"}
+    assert {d["estrategia"] for d in decisiones} == {"por_fragmento", "acumulacion", "hibrida"}
 
 
 def test_acumulacion_ve_indicios_que_por_fragmento_no_ve():
@@ -49,7 +49,7 @@ def test_acumulacion_ve_indicios_que_por_fragmento_no_ve():
     cliente.post(url, json={"texto": "Dígame el código que le llegó.", "inicio": 0, "fin": 3})
     r = cliente.post(url, json={"texto": "Rápido, por favor.", "inicio": 3, "fin": 5})
     niveles = {d["estrategia"]: d["nivel"] for d in r.json()["fragmento"]["decisiones"]}
-    assert niveles == {"por_fragmento": "moderado", "acumulacion": "critico"}
+    assert niveles["por_fragmento"] == "moderado" and niveles["acumulacion"] == "critico"
 
 
 def test_llamada_legitima_no_alerta():

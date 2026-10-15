@@ -31,6 +31,7 @@ backend/
     db.py              base de datos SQLite local
     historial.py       historial con retención, exportar y borrar
     reportes.py        reporte de números y reputación
+    clasificador.py    clasificador entrenado y estrategia híbrida
     senalizacion.py    salas y señalización WebRTC de la llamada simulada
     config.py          nivel de alerta, límite de contexto, estrategia visible
     senales.py         catálogo de señales y niveles de riesgo
@@ -84,7 +85,8 @@ Se cambia con variables de entorno o un archivo `.env` en `backend/`:
 |---|---|---|
 | `CENTINELA_NIVEL_ALERTA` | `alto` | Nivel desde el que alertan ambas estrategias (`moderado`, `alto` o `critico`) |
 | `CENTINELA_LIMITE_CONTEXTO` | `5` | Fragmentos que recuerda la acumulación |
-| `CENTINELA_ESTRATEGIA_VISIBLE` | `acumulacion` | Estrategia cuyo aviso se muestra |
+| `CENTINELA_ESTRATEGIA_VISIBLE` | `hibrida` | Estrategia cuyo aviso se muestra (`por_fragmento`, `acumulacion` o `hibrida`) |
+| `CENTINELA_MODELO_CLASIFICADOR` | vacío | Ruta a otro modelo JSON del clasificador; vacío usa `backend/app/modelo_clasificador.json` |
 | `CENTINELA_MODELO_WHISPER` | `base` | Tamaño del modelo de transcripción |
 | `CENTINELA_VOZ_PIPER` | vacío | Ruta a una voz `.onnx` de Piper; vacío usa la voz del navegador |
 | `CENTINELA_BASE_DATOS` | `centinela.db` | Archivo SQLite con cuentas, sesiones y permisos |
@@ -100,4 +102,4 @@ El alcance, las amenazas y el orden de trabajo están en [docs/](docs/README.md)
 
 ## Estado
 
-Avance por pasos según la [hoja de ruta](docs/hoja-de-ruta.md). El motor de señales está descrito en [docs/motor-de-senales.md](docs/motor-de-senales.md); el clasificador entrenado lo complementará en el paso 11.
+Avance por pasos según la [hoja de ruta](docs/hoja-de-ruta.md). Los once pasos de la beta están hechos. El motor de señales está descrito en [docs/motor-de-senales.md](docs/motor-de-senales.md), el clasificador en [docs/clasificador.md](docs/clasificador.md) y los resultados en [docs/evaluacion.md](docs/evaluacion.md). Falta correr la evaluación con audio en un equipo con Whisper y Piper.

@@ -8,7 +8,6 @@ from fastapi.staticfiles import StaticFiles
 from . import asistente, cuentas, historial, reportes, senalizacion, voz
 from .cuentas import Sesion, sesion_opcional
 from .config import ajustes
-from .estrategias import Acumulacion, PorFragmento
 from .modelos import (
     MAX_FRAGMENTOS_POR_LLAMADA,
     ConsultaAsistente,
@@ -18,7 +17,9 @@ from .modelos import (
     NuevaLlamada,
     TextoParaVoz,
 )
-from .senales import CATALOGO, NUMERO_REPORTADO, Nivel
+from .analisis import ESTRATEGIA_VISIBLE, estrategias
+from .clasificador import PATRON_APRENDIDO
+from .senales import CATALOGO, NUMERO_REPORTADO
 from .transcripcion import whisper
 
 # Nunca se registra el texto de la conversación (modelo de amenazas, A8)
@@ -27,14 +28,9 @@ log = logging.getLogger("centinela")
 app = FastAPI(
     title="Centinela",
     description="Prototipo de alertas de posible fraude conversacional en llamadas simuladas.",
-    version="0.9.0",
+    version="1.0.0",
 )
 
-_nivel_alerta = Nivel[ajustes.nivel_alerta.upper()]
-estrategias = [
-    PorFragmento(_nivel_alerta),
-    Acumulacion(_nivel_alerta, ajustes.limite_contexto),
-]
 
 FRONTEND = Path(__file__).resolve().parents[2] / "frontend"
 
@@ -64,13 +60,13 @@ llamadas: dict[str, Llamada] = {}
 
 @app.get("/salud")
 def salud():
-    return {"estado": "ok", "estrategia_visible": ajustes.estrategia_visible}
+    return {"estado": "ok", "estrategia_visible": ESTRATEGIA_VISIBLE}
 
 
 @app.get("/senales")
 def catalogo_de_senales():
     """Lista pública de las señales que el motor revisa, para explicar las alertas."""
-    return [{"id": s.id, "tipo": s.tipo, "descripcion": s.descripcion} for s in [*CATALOGO, NUMERO_REPORTADO]]
+    return [{"id": s.id, "tipo": s.tipo, "descripcion": s.descripcion} for s in [*CATALOGO, NUMERO_REPORTADO, PATRON_APRENDIDO]]
 
 
 @app.post("/llamadas", response_model=Llamada, status_code=201)
@@ -169,7 +165,7 @@ def comandos_del_asistente():
 @app.post("/asistente")
 def consultar_asistente(consulta: ConsultaAsistente, sesion: Sesion | None = Depends(sesion_opcional)):
     llamada = _buscar(consulta.llamada_id, sesion) if consulta.llamada_id else None
-    r = asistente.responder(consulta.texto, llamada, ajustes.estrategia_visible)
+    r = asistente.responder(consulta.texto, llamada, ESTRATEGIA_VISIBLE)
     log.info("asistente intencion=%s", r.intencion)
     return {"intencion": r.intencion, "respuesta": r.texto, "requiere_confirmacion": r.requiere_confirmacion}
 
@@ -188,7 +184,7 @@ async def consultar_asistente_por_voz(
     if not texto:
         return {"transcripcion": "", "intencion": "desconocido", "requiere_confirmacion": False,
                 "respuesta": "No te escuché bien. Intenta de nuevo, más cerca del micrófono."}
-    r = asistente.responder(texto, llamada, ajustes.estrategia_visible)
+    r = asistente.responder(texto, llamada, ESTRATEGIA_VISIBLE)
     log.info("asistente_voz intencion=%s", r.intencion)
     return {"transcripcion": texto, "intencion": r.intencion, "respuesta": r.texto,
             "requiere_confirmacion": r.requiere_confirmacion}
@@ -215,7 +211,7 @@ def _procesar(llamada: Llamada, entrada: FragmentoEntrada) -> dict:
     fragmento.decisiones = [e.decidir(previas, entrada.texto, externas) for e in estrategias]
     llamada.fragmentos.append(fragmento)
 
-    visible = next(d for d in fragmento.decisiones if d.estrategia == ajustes.estrategia_visible)
+    visible = next(d for d in fragmento.decisiones if d.estrategia == ESTRATEGIA_VISIBLE)
     mostrar_aviso = visible.alerta and not llamada.aviso_visible
     if mostrar_aviso:
         llamada.aviso_visible = True

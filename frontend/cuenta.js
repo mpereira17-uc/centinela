@@ -304,7 +304,7 @@ function itemDeHistorial(l) {
     try {
       const d = await api(`/historial/${encodeURIComponent(l.id)}`);
       for (const f of d.fragmentos) {
-        const visible = f.decisiones.find((x) => x.estrategia === "acumulacion") || f.decisiones[0];
+        const visible = f.decisiones.find((x) => x.estrategia === d.estrategia_visible) || f.decisiones[0];
         const item = document.createElement("li");
         item.className = "frase";
         item.dataset.nivel = visible.nivel;

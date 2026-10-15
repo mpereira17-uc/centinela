@@ -14,3 +14,4 @@
 - [Llamada simulada](llamada.md): dos navegadores en llamada por WebRTC con análisis en vivo.
 - [Guía de anotación](guia-anotacion.md): cómo se escriben y etiquetan los guiones.
 - [Evaluación](evaluacion.md): guiones, métricas, cómo correrla y resultados.
+- [Clasificador](clasificador.md): modelo entrenado, estrategia híbrida y cómo reentrenarlo.

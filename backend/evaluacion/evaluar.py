@@ -18,7 +18,7 @@ from pathlib import Path
 
 from . import guiones as g_mod
 from .metricas import mediana, wer, wilson
-from .motor import Tramo, correr, estrategias_reglas, tramos_de_texto
+from .motor import Tramo, correr, estrategias_todas, tramos_de_texto
 
 RESULTADOS = Path(__file__).resolve().parents[2] / "datos" / "resultados"
 AUDIO = Path(__file__).resolve().parents[2] / "datos" / "audio"
@@ -57,7 +57,7 @@ def tramos_de_audio(guion, carpeta: Path, transcribir) -> tuple[list[Tramo], int
 
 
 def evaluar(lista, modo: str = "texto", estrategias=None, carpeta_audio: Path = AUDIO, transcribir=None) -> dict:
-    estrategias = estrategias or estrategias_reglas()
+    estrategias = estrategias or estrategias_todas()
     por_guion, errores_total, palabras_total, por_voz = [], 0, 0, {}
     for guion in lista:
         if modo == "audio":

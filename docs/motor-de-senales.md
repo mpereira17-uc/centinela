@@ -41,7 +41,7 @@ Cada decisión trae un mensaje corto con el nivel, la razón más grave y qué h
 
 > RIESGO ALTO. Te piden un código o una clave. No lo hagas. Finaliza la llamada y verifica el contacto desde el canal oficial de la entidad.
 
-El nivel bajo nunca dice que la llamada es segura, solo que no se encontraron señales. Cada decisión indica su `fuente`: `"contenido"` cuando sale solo de lo dicho, o `"contenido_y_reputacion"` cuando además pesa la señal `numero_reportado` ([reportes.md](reportes.md)). Ninguna decisión afirma una identidad confirmada.
+El nivel bajo nunca dice que la llamada es segura, solo que no se encontraron señales. Cada decisión indica su `fuente`: `"contenido"` cuando sale solo de lo dicho, o `"contenido_y_reputacion"` cuando además pesa la señal `numero_reportado` ([reportes.md](reportes.md)). Ninguna decisión afirma una identidad confirmada. Desde el paso 11 la estrategia visible por defecto es la híbrida, que suma a estas reglas la señal `patron_aprendido` del [clasificador](clasificador.md).
 
 ## Criterios de aceptación
 

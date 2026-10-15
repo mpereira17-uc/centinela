@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Response
 
+from .analisis import ESTRATEGIA_VISIBLE
 from .config import ajustes
 from .cuentas import Sesion, exigir_cabecera, usuario_actual
 from .db import conexion
@@ -54,7 +55,7 @@ def guardar_llamada(llamada: Llamada):
 
 def guardar_fragmento(llamada: Llamada, fragmento: Fragmento):
     """Agrega el fragmento al historial. Si la persona borró la llamada mientras tanto, deja de guardarla."""
-    visible = next(d for d in fragmento.decisiones if d.estrategia == ajustes.estrategia_visible)
+    visible = next(d for d in fragmento.decisiones if d.estrategia == ESTRATEGIA_VISIBLE)
     with conexion() as con:
         fila = con.execute(
             "SELECT nivel_max FROM llamadas_guardadas WHERE id = ? AND usuario_id = ?", (llamada.id, llamada.dueno)
@@ -120,7 +121,7 @@ def ver_llamada_guardada(llamada_id: str, sesion: Sesion = Depends(usuario_actua
         ).fetchone()
         if fila is None:
             raise HTTPException(status_code=404, detail="Conversación no encontrada")
-        return {**_resumen(fila), "fragmentos": _fragmentos(con, llamada_id)}
+        return {**_resumen(fila), "estrategia_visible": ESTRATEGIA_VISIBLE, "fragmentos": _fragmentos(con, llamada_id)}
 
 
 @router.delete("/historial/{llamada_id}", dependencies=[Depends(exigir_cabecera)])

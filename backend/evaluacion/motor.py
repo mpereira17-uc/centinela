@@ -35,6 +35,16 @@ def estrategias_reglas():
     return [PorFragmento(nivel), Acumulacion(nivel, ajustes.limite_contexto)]
 
 
+def estrategias_todas():
+    """Reglas, y además el clasificador solo y la híbrida si hay un modelo entrenado."""
+    from app.clasificador import Clasificador, Hibrida, cargar
+
+    nivel = Nivel[ajustes.nivel_alerta.upper()]
+    modelo = cargar()
+    extra = [Clasificador(nivel, modelo), Hibrida(nivel, ajustes.limite_contexto, modelo)] if modelo else []
+    return [*estrategias_reglas(), *extra]
+
+
 def tiempos_estimados(guion: Guion) -> list[tuple[float, float]]:
     """Inicio y fin de cada turno si se leyera en voz alta a un ritmo normal."""
     t, tiempos = 0.0, []
