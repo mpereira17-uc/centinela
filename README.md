@@ -32,6 +32,7 @@ backend/
     historial.py       historial con retención, exportar y borrar
     mensajes.py        revisar SMS, WhatsApp o correos y sus enlaces
     directorio.py      canales oficiales para verificar una llamada
+    practica.py        llamadas de mentira para practicar
     reportes.py        reporte de números y reputación
     base_guiones.py    API de solo lectura de la base de guiones
     clasificador.py    clasificador entrenado y estrategia híbrida

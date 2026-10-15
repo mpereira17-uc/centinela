@@ -630,3 +630,40 @@ input[type="search"]:focus { border-color: var(--primario); background: var(--su
 /* Palabra clave familiar */
 .alerta-clave { margin: .55rem 0 0; padding: .6rem .8rem; border-radius: 14px; background: var(--cf); color: var(--texto); font-weight: 700; }
 .consejos { padding-left: 1.2rem; display: grid; gap: .45rem; margin: .6rem 0 1rem; }
+
+/* ---------- Modo práctica ---------- */
+
+.boton-claro {
+  position: relative; margin-top: 1rem; background: #fff; color: #4c1d95; font-weight: 800;
+  box-shadow: 0 6px 18px rgba(20, 22, 40, .18); min-width: 10rem;
+}
+.portada-nota { font-size: .88rem; }
+.portada-nota:empty { display: none; }
+.progreso { height: 8px; border-radius: 999px; background: var(--chip); overflow: hidden; margin-bottom: .9rem; }
+.progreso span { display: block; height: 100%; width: 0%; border-radius: inherit; background: var(--degradado); transition: width .4s ease; }
+.pregunta-practica { margin: 1.1rem 0 .5rem; font-weight: 800; font-size: 1.05rem; }
+.decidir { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+.boton-decidir { min-height: 56px; font-weight: 800; font-size: 1rem; background: var(--chip); color: var(--texto); border: 2px solid transparent; }
+.boton-decidir[data-respuesta="riesgo"] { background: var(--critico-fondo); color: var(--critico); }
+.boton-decidir[data-respuesta="legitima"] { background: var(--bajo-fondo); color: var(--bajo); }
+.boton-decidir.elegido { border-color: currentColor; }
+.boton-decidir:disabled:not(.elegido) { opacity: .45; }
+.veredicto { margin-top: 1rem; padding: 1rem 1.1rem; border-radius: 18px; background: var(--campo); }
+.veredicto[data-acerto="si"] { background: var(--bajo-fondo); }
+.veredicto[data-acerto="no"] { background: var(--alto-fondo); }
+.veredicto-titulo { margin: 0 0 .3rem; font-weight: 800; font-size: 1.15rem; }
+.veredicto[data-acerto="si"] .veredicto-titulo { color: var(--bajo); }
+.veredicto[data-acerto="no"] .veredicto-titulo { color: var(--alto); }
+.veredicto .catalogo { margin-bottom: .9rem; }
+.veredicto .boton-principal { width: 100%; }
+.frase.trampa .frase-texto { box-shadow: inset 0 0 0 2px var(--critico); background: var(--critico-fondo); }
+.puntaje {
+  margin: .25rem auto .5rem; width: 6.5rem; height: 6.5rem; border-radius: 50%; display: grid; place-items: center;
+  background: var(--degradado); color: #fff; font-size: 1.55rem; font-weight: 900; box-shadow: 0 10px 28px rgba(139, 92, 246, .35);
+}
+.centrado .puntaje { color: #fff; }
+#final .acciones a { text-align: center; justify-content: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .veredicto:not(.oculto) { animation: aparecer .3s ease-out; }
+  .puntaje { animation: latido .5s cubic-bezier(.3, 1.6, .5, 1); }
+}
