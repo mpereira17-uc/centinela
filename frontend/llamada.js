@@ -263,6 +263,7 @@ function mostrarResultado(r) {
   const li = document.createElement("li");
   li.className = "frase";
   li.dataset.nivel = d.nivel;
+  li.dataset.hablante = "llamante";
   const texto = document.createElement("p");
   texto.className = "frase-texto";
   texto.textContent = r.fragmento.texto;
@@ -272,7 +273,7 @@ function mostrarResultado(r) {
   icono.className = "nivel-icono";
   icono.setAttribute("aria-hidden", "true");
   const etiqueta = document.createElement("span");
-  etiqueta.textContent = `Nivel tras esta frase: ${ETIQUETAS[d.nivel]}`;
+  etiqueta.textContent = `Riesgo ${ETIQUETAS[d.nivel].toLowerCase()}`;
   nivel.append(icono, etiqueta);
   li.append(texto, nivel);
   $("#conversacion").append(li);
@@ -309,7 +310,7 @@ function enviarFrase(ev) {
   enviar({ tipo: "texto", texto });
   const li = document.createElement("li");
   li.className = "frase";
-  li.dataset.nivel = "bajo";
+  li.dataset.hablante = "propio";
   const p = document.createElement("p");
   p.className = "frase-texto";
   p.textContent = texto;

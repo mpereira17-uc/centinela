@@ -144,6 +144,7 @@ async function mostrarCuenta(cuenta) {
   $("#vista-entrar").classList.add("oculto");
   $("#vista-cuenta").classList.remove("oculto");
   $("#alias").textContent = cuenta.alias;
+  $("#avatar").textContent = cuenta.alias.charAt(0).toUpperCase();
   pintarPasskeys(cuenta.passkeys);
   pintarPermisos(cuenta.consentimientos);
   guardaHistorial = cuenta.consentimientos.some((c) => c.finalidad === "guardar_historial" && c.otorgado);
@@ -160,6 +161,7 @@ function pintarPasskeys(passkeys) {
   const lista = $("#passkeys");
   lista.replaceChildren();
   $("#passkeys-vacia").classList.toggle("oculto", passkeys.length > 0);
+  $("#total-passkeys").textContent = passkeys.length;
   for (const p of passkeys) {
     const li = document.createElement("li");
     const info = document.createElement("div");
@@ -259,7 +261,7 @@ function insignia(nivel, prefijo) {
   icono.className = "nivel-icono";
   icono.setAttribute("aria-hidden", "true");
   const texto = document.createElement("span");
-  texto.textContent = `${prefijo}: ${NIVELES[nivel] || nivel}`;
+  texto.textContent = prefijo === "Riesgo" ? `Riesgo ${(NIVELES[nivel] || nivel).toLowerCase()}` : `${prefijo}: ${NIVELES[nivel] || nivel}`;
   s.append(icono, texto);
   return s;
 }
@@ -279,6 +281,7 @@ async function cargarHistorial() {
     lista.append(li);
   }
   $("#borrar-historial").classList.toggle("oculto", llamadas.length === 0);
+  $("#total-conversaciones").textContent = llamadas.length;
   $("#confirmar-borrado").classList.add("oculto");
 }
 
@@ -308,13 +311,14 @@ function itemDeHistorial(l) {
         const item = document.createElement("li");
         item.className = "frase";
         item.dataset.nivel = visible.nivel;
+        item.dataset.hablante = f.hablante;
         const quien = document.createElement("p");
         quien.className = "frase-quien";
         quien.textContent = HABLANTES[f.hablante] || "Del audio";
         const texto = document.createElement("p");
         texto.className = "frase-texto";
         texto.textContent = f.texto;
-        item.append(quien, texto, insignia(visible.nivel, "Nivel tras esta frase"));
+        item.append(quien, texto, insignia(visible.nivel, "Riesgo"));
         frases.append(item);
       }
     } catch (e) {
@@ -349,6 +353,7 @@ async function cargarReportes() {
   const lista = $("#reportes");
   lista.replaceChildren();
   $("#reportes-vacia").classList.toggle("oculto", reportes.length > 0);
+  $("#total-reportes").textContent = reportes.length;
   for (const r of reportes) {
     const li = document.createElement("li");
     const info = document.createElement("div");

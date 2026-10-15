@@ -123,6 +123,7 @@ function agregarFrase(texto, hablante, respuesta) {
   const li = document.createElement("li");
   li.className = "frase";
   li.dataset.nivel = visible.nivel;
+  li.dataset.hablante = hablante;
 
   const quien = document.createElement("p");
   quien.className = "frase-quien";
@@ -137,7 +138,7 @@ function agregarFrase(texto, hablante, respuesta) {
   const icono = document.createElement("span");
   icono.className = "nivel-icono";
   icono.setAttribute("aria-hidden", "true");
-  nivel.append(icono, `Nivel tras esta frase: ${ETIQUETAS[visible.nivel]}`);
+  nivel.append(icono, `Riesgo ${ETIQUETAS[visible.nivel].toLowerCase()}`);
 
   li.append(quien, p, nivel);
 
@@ -169,7 +170,8 @@ function mostrarError(texto) {
 function ocupado(si) {
   estado.ocupado = si;
   for (const b of document.querySelectorAll("button")) b.disabled = si;
-  $("#analizar").textContent = si ? "Analizando…" : "Analizar frase";
+  $("#analizar-texto").textContent = si ? "Analizando…" : "Analizar frase";
+  $("#analizando").classList.toggle("oculto", !si);
 }
 
 async function procesar(texto, hablante) {
@@ -207,6 +209,8 @@ async function correrEjemplo(nombre) {
   if (estado.ocupado) return;
   mostrarError("");
   ocupado(true);
+  const boton = document.querySelector(`[data-ejemplo="${nombre}"]`);
+  boton.classList.add("reproduciendo");
   try {
     await nuevaConversacion();
     for (const [hablante, texto] of EJEMPLOS[nombre]) {
@@ -216,6 +220,7 @@ async function correrEjemplo(nombre) {
   } catch (e) {
     mostrarError(e.message);
   } finally {
+    boton.classList.remove("reproduciendo");
     ocupado(false);
   }
 }

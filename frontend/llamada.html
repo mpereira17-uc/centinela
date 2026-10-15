@@ -2,10 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3f4f8">
   <title>Llamada de prueba · Centinela</title>
   <meta name="description" content="Llamada simulada entre dos navegadores con análisis de Centinela en vivo.">
   <link rel="stylesheet" href="/estilos.css">
+  <script src="/comun.js" defer></script>
   <script src="/llamada.js" defer></script>
 </head>
 <body>
@@ -13,33 +15,36 @@
 
   <header class="cabecera">
     <a class="marca" href="/">
-      <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3Z"/></svg>
+      <span class="logo-caja"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3Z"/></svg></span>
       <span>Centinela</span>
     </a>
-    <a class="enlace-cabecera" href="/">Volver al análisis</a>
+    <span class="chip-beta" title="Versión de prueba para el trabajo de grado">Beta</span>
+    <button type="button" id="tamano-letra" class="tamano" aria-pressed="false" aria-label="Usar letra grande"><span aria-hidden="true">A<span>A</span></span></button>
+    <a class="boton-icono" href="/" aria-label="Volver al análisis">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+    </a>
   </header>
 
   <main id="principal">
-    <section class="intro">
-      <h1>Llamada de prueba</h1>
-      <p>Dos personas se llaman desde dos navegadores. Una hace el papel de quien llama y la otra recibe la llamada; Centinela analiza en vivo lo que dice quien llama y avisa a quien recibe.</p>
-      <p class="ayuda">No es una llamada telefónica real. La voz viaja directo entre los dos navegadores y no se guarda.</p>
-    </section>
-
     <!-- Paso 1: preparar -->
     <section id="preparar" class="tarjeta" aria-labelledby="preparar-titulo">
-      <h2 id="preparar-titulo">Empezar</h2>
-      <fieldset class="hablante">
+      <div class="centrado">
+        <span class="icono-grande" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span>
+        <h1 id="preparar-titulo">Llamada de prueba</h1>
+        <p>Dos personas se llaman desde dos navegadores. Centinela analiza en vivo lo que dice quien llama y avisa a quien recibe.</p>
+        <p class="ayuda">No es una llamada telefónica real. La voz viaja directo entre los dos navegadores y no se guarda.</p>
+      </div>
+      <fieldset class="roles">
         <legend>¿Qué papel haces?</legend>
-        <label><input type="radio" name="rol" value="recibe" checked> Recibo la llamada (Centinela me protege)</label>
-        <label><input type="radio" name="rol" value="llama"> Hago la llamada (actúo el guion)</label>
+        <label><input type="radio" name="rol" value="recibe" checked><span><strong>Recibo la llamada</strong><small>Centinela me protege y me avisa</small></span></label>
+        <label><input type="radio" name="rol" value="llama"><span><strong>Hago la llamada</strong><small>Actúo el guion de quien llama</small></span></label>
       </fieldset>
       <label class="consentimiento">
         <input type="checkbox" id="consentimiento">
         <span>Las dos personas saben que esta llamada de prueba se analiza y están de acuerdo. No usaremos datos reales.</span>
       </label>
       <div class="acciones">
-        <button type="button" id="crear" class="boton-principal">Crear llamada</button>
+        <button type="button" id="crear" class="boton-principal boton-grande">Crear llamada</button>
       </div>
       <form id="form-unirse" class="formulario" novalidate>
         <p class="separador">o únete a una que ya existe</p>
@@ -54,13 +59,15 @@
 
     <!-- Paso 2: en llamada -->
     <section id="en-llamada" class="oculto" aria-labelledby="llamada-titulo">
-      <div class="tarjeta">
+      <div class="pantalla-llamada">
+        <div class="pulso" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
         <h2 id="llamada-titulo">Llamada <span id="codigo-sala"></span></h2>
         <p id="estado-llamada" role="status" aria-live="polite">Conectando…</p>
         <p id="compartir" class="ayuda"></p>
         <audio id="audio-remoto" autoplay></audio>
-        <div class="acciones">
-          <button type="button" id="colgar" class="boton-peligro">Colgar</button>
+        <div class="colgar-caja">
+          <button type="button" id="colgar" aria-label="Colgar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.7 13.3a16 16 0 0 0 3.4 2.6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8M22 2 2 22"/></svg></button>
+          <span aria-hidden="true">Colgar</span>
         </div>
       </div>
 
@@ -68,14 +75,14 @@
       <div id="vista-llama" class="tarjeta oculto">
         <h2>Tu papel: quien llama</h2>
         <p>Habla al micrófono o escribe tus frases. Quien recibe ve las alertas; tú no.</p>
-        <form id="form-texto" novalidate>
-          <label for="frase" class="etiqueta">Escribir una frase</label>
+        <ol id="enviadas" class="conversacion"></ol>
+        <form id="form-texto" class="pregunta" novalidate>
+          <label for="frase" class="etiqueta visualmente-oculto">Escribir una frase</label>
           <div class="fila">
             <input id="frase" maxlength="2000" autocomplete="off" placeholder="Le hablamos del banco…">
-            <button type="submit" class="boton-secundario">Enviar</button>
+            <button type="submit" class="boton-principal">Enviar</button>
           </div>
         </form>
-        <ol id="enviadas" class="conversacion"></ol>
       </div>
 
       <!-- Solo quien recibe -->
@@ -98,7 +105,7 @@
         </section>
         <section class="tarjeta" aria-labelledby="dicho-titulo">
           <h2 id="dicho-titulo">Lo que dijo quien llama</h2>
-          <p id="dicho-vacio" class="ayuda">Todavía nada.</p>
+          <p id="dicho-vacio" class="vacio">Todavía nada.</p>
           <ol id="conversacion" class="conversacion"></ol>
         </section>
       </div>
@@ -108,5 +115,12 @@
   <footer class="pie">
     <p>Funciona entre navegadores del mismo equipo o de la misma red. Centinela no puede analizar llamadas telefónicas reales.</p>
   </footer>
+
+  <nav class="barra" aria-label="Secciones">
+    <a href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</a>
+    <a href="/llamada.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Llamada</a>
+    <a href="/#asistente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.8A8 8 0 1 1 21 12z"/></svg>Pregúntale</a>
+    <a href="/cuenta.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Cuenta</a>
+  </nav>
 </body>
 </html>

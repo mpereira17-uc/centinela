@@ -63,3 +63,10 @@ def test_pantalla_de_llamada_sin_html_dinamico():
     assert "innerHTML" not in js and "insertAdjacentHTML" not in js and "document.write" not in js
     # Sin servidores STUN o TURN de terceros
     assert "iceServers: []" in js and "stun:" not in js
+
+
+def test_script_comun_sin_html_dinamico_y_cargado_en_todas_las_pantallas():
+    js = cliente.get("/comun.js").text
+    assert "innerHTML" not in js and "insertAdjacentHTML" not in js and "document.write" not in js
+    for pagina in ("/", "/cuenta.html", "/llamada.html"):
+        assert '<script src="/comun.js" defer></script>' in cliente.get(pagina).text

@@ -2,30 +2,56 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3f4f8">
   <title>Centinela</title>
   <meta name="description" content="Analiza una conversación y te avisa si tiene señales de estafa.">
   <link rel="stylesheet" href="/estilos.css">
+  <script src="/comun.js" defer></script>
   <script src="/app.js" defer></script>
 </head>
 <body>
   <a class="saltar" href="#principal">Saltar al contenido</a>
 
   <header class="cabecera">
-    <div class="marca">
-      <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3Z"/></svg>
+    <a class="marca" href="/">
+      <span class="logo-caja"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3Z"/></svg></span>
       <span>Centinela</span>
-    </div>
-    <p class="aviso-beta">Versión de prueba para el trabajo de grado</p>
-    <a class="enlace-cabecera" href="/cuenta.html">Mi cuenta</a>
+    </a>
+    <span class="chip-beta" title="Versión de prueba para el trabajo de grado">Beta</span>
+    <button type="button" id="tamano-letra" class="tamano" aria-pressed="false" aria-label="Usar letra grande"><span aria-hidden="true">A<span>A</span></span></button>
+    <a class="boton-icono" href="/cuenta.html" aria-label="Mi cuenta">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+    </a>
   </header>
 
   <main id="principal">
-    <section class="intro">
+    <section class="portada">
       <h1>¿Esta conversación parece una estafa?</h1>
       <p>Escribe lo que te dicen en la llamada, frase por frase. Centinela revisa lo que se pide y te dice qué tan riesgoso parece y qué hacer.</p>
-      <p class="ayuda">¿Quieres probarlo con voz entre dos personas? Abre una <a href="/llamada.html">llamada de prueba</a>.</p>
     </section>
+
+    <ul class="historias" aria-label="Accesos rápidos">
+      <li><button type="button" class="historia" data-ejemplo="estafa">
+        <span class="historia-anillo"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span></span>
+        Ejemplo de estafa</button></li>
+      <li><button type="button" class="historia" data-ejemplo="legitima">
+        <span class="historia-anillo"><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></span></span>
+        Ejemplo legítimo</button></li>
+      <li><a class="historia" href="/llamada.html">
+        <span class="historia-anillo"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span></span>
+        Llamada de prueba</a></li>
+      <li><a class="historia" href="#numero-titulo">
+        <span class="historia-anillo"><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span></span>
+        ¿Quién llama?</a></li>
+      <li><a class="historia" href="#audio-titulo">
+        <span class="historia-anillo"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 11v2"/></svg></span></span>
+        Analizar audio</a></li>
+      <li><a class="historia" href="#asistente">
+        <span class="historia-anillo"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.8A8 8 0 1 1 21 12z"/></svg></span></span>
+        Pregúntale</a></li>
+    </ul>
+    <p class="nota-historias">Los ejemplos son guiones inventados para ver cómo funciona Centinela.</p>
 
     <!-- Aviso principal: se anuncia una sola vez por conversación -->
     <section id="alerta" class="alerta oculto" role="alert" aria-live="assertive" tabindex="-1">
@@ -39,7 +65,7 @@
 
     <section class="estado" aria-labelledby="estado-titulo">
       <h2 id="estado-titulo" class="visualmente-oculto">Nivel de riesgo actual</h2>
-      <div id="nivel" class="nivel" data-nivel="bajo" aria-live="polite">
+      <div id="nivel" class="nivel sin-datos" data-nivel="bajo" aria-live="polite">
         <span class="nivel-icono" aria-hidden="true"></span>
         <span class="nivel-texto"><span class="nivel-etiqueta">Nivel de riesgo:</span> <strong id="nivel-valor">Sin analizar</strong></span>
       </div>
@@ -47,13 +73,43 @@
       <p id="guardado" class="ayuda"></p>
     </section>
 
-    <section class="tarjeta asistente" aria-labelledby="asistente-titulo">
-      <h2 id="asistente-titulo">Pregúntale a Centinela</h2>
+    <section class="tarjeta" aria-labelledby="conv-titulo">
+      <h2 id="conv-titulo" class="titulo-icono"><span class="h-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg></span>Conversación</h2>
+      <p id="conv-vacia" class="vacio">Todavía no hay frases. Escribe la primera abajo o toca un ejemplo.</p>
+      <ol id="conversacion" class="conversacion"></ol>
+      <p id="analizando" class="escribiendo oculto" aria-hidden="true"><span></span><span></span><span></span></p>
+    </section>
+
+    <section class="tarjeta" aria-labelledby="form-titulo">
+      <h2 id="form-titulo">Agregar una frase</h2>
+      <form id="formulario" novalidate>
+        <fieldset class="hablante">
+          <legend>¿Quién lo dijo?</legend>
+          <div class="segmentos">
+            <label><input type="radio" name="hablante" value="llamante" checked> Quien llama</label>
+            <label><input type="radio" name="hablante" value="usuario"> Yo</label>
+          </div>
+        </fieldset>
+
+        <label for="texto" class="etiqueta visualmente-oculto">Frase</label>
+        <textarea id="texto" name="texto" rows="3" maxlength="2000" required
+          aria-describedby="texto-ayuda texto-error"
+          placeholder="Por ejemplo: Le hablamos del banco, necesito el código que le llegó."></textarea>
+        <p id="texto-ayuda" class="ayuda">No escribas tus claves ni números de tarjeta reales.</p>
+        <p id="texto-error" class="error" role="status"></p>
+
+        <div class="acciones">
+          <button type="submit" id="analizar" class="boton-principal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg><span id="analizar-texto">Analizar frase</span></button>
+          <button type="button" id="nueva" class="boton-secundario">Nueva conversación</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="asistente" class="tarjeta asistente" aria-labelledby="asistente-titulo">
+      <h2 id="asistente-titulo" class="titulo-icono"><span class="h-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.8A8 8 0 1 1 21 12z"/></svg></span>Pregúntale a Centinela</h2>
       <p>Habla o escribe una pregunta. Te respondo en pantalla y en voz alta.</p>
-      <div class="acciones">
-        <button type="button" id="hablar" class="boton-principal">Hablar</button>
-        <button type="button" id="dejar-hablar" class="boton-principal oculto">Listo, ya hablé</button>
-      </div>
+      <button type="button" id="hablar" class="boton-principal boton-grande"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg>Hablar</button>
+      <button type="button" id="dejar-hablar" class="boton-principal boton-grande oculto">Listo, ya hablé</button>
       <p class="ayuda">Tu voz se convierte en texto en este equipo y se descarta enseguida.</p>
       <form id="form-pregunta" class="pregunta" novalidate>
         <label for="pregunta" class="etiqueta">O escribe tu pregunta</label>
@@ -75,12 +131,12 @@
     </section>
 
     <section class="tarjeta" aria-labelledby="numero-titulo">
-      <h2 id="numero-titulo">¿Quién te llama?</h2>
+      <h2 id="numero-titulo" class="titulo-icono"><span class="h-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>¿Quién te llama?</h2>
       <p>Opcional. Si escribes el número, Centinela revisa si otras personas lo han reportado y lo tiene en cuenta como una señal más.</p>
       <label for="numero" class="etiqueta">Número que te llama</label>
       <div class="fila">
         <input type="tel" id="numero" maxlength="25" autocomplete="off" placeholder="300 123 4567" aria-describedby="numero-aviso">
-        <button type="button" id="consultar-numero" class="boton-secundario">Consultar reportes</button>
+        <button type="button" id="consultar-numero" class="boton-secundario">Consultar</button>
       </div>
       <p id="numero-aviso" class="error" role="status"></p>
       <p id="numero-resultado" class="reputacion oculto" role="status" aria-live="polite"></p>
@@ -96,63 +152,25 @@
       </details>
     </section>
 
-    <section class="tarjeta" aria-labelledby="form-titulo">
-      <h2 id="form-titulo">Agregar una frase</h2>
-      <form id="formulario" novalidate>
-        <fieldset class="hablante">
-          <legend>¿Quién lo dijo?</legend>
-          <label><input type="radio" name="hablante" value="llamante" checked> La persona que llama</label>
-          <label><input type="radio" name="hablante" value="usuario"> Yo</label>
-        </fieldset>
-
-        <label for="texto" class="etiqueta">Frase</label>
-        <textarea id="texto" name="texto" rows="3" maxlength="2000" required
-          aria-describedby="texto-ayuda texto-error"
-          placeholder="Por ejemplo: Le hablamos del banco, necesito el código que le llegó."></textarea>
-        <p id="texto-ayuda" class="ayuda">No escribas tus claves ni números de tarjeta reales.</p>
-        <p id="texto-error" class="error" role="status"></p>
-
-        <div class="acciones">
-          <button type="submit" id="analizar" class="boton-principal">Analizar frase</button>
-          <button type="button" id="nueva" class="boton-secundario">Nueva conversación</button>
-        </div>
-      </form>
-
-      <details class="ejemplos">
-        <summary>Probar con una conversación de ejemplo</summary>
-        <p>Los ejemplos son guiones inventados para ver cómo funciona Centinela.</p>
-        <div class="acciones">
-          <button type="button" class="boton-secundario" data-ejemplo="estafa">Ejemplo de estafa</button>
-          <button type="button" class="boton-secundario" data-ejemplo="legitima">Ejemplo de llamada legítima</button>
-        </div>
-      </details>
-    </section>
-
     <section class="tarjeta" aria-labelledby="audio-titulo">
-      <h2 id="audio-titulo">Analizar un audio</h2>
+      <h2 id="audio-titulo" class="titulo-icono"><span class="h-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 11v2"/></svg></span>Analizar un audio</h2>
       <p>Graba una conversación o sube un archivo. Centinela lo convierte en texto <strong>en este equipo</strong> y lo descarta apenas termina; el audio no se guarda.</p>
       <label class="consentimiento">
         <input type="checkbox" id="consentimiento">
         <span>Todas las personas que se escuchan en el audio saben que se está analizando y están de acuerdo.</span>
       </label>
       <div class="acciones">
-        <button type="button" id="grabar" class="boton-secundario">Grabar con el micrófono</button>
+        <button type="button" id="grabar" class="boton-secundario">Grabar</button>
         <button type="button" id="detener" class="boton-principal oculto">Detener y analizar</button>
         <input type="file" id="archivo" accept="audio/*,video/webm" class="visualmente-oculto">
-        <label class="boton-secundario boton-archivo" for="archivo">Subir un archivo de audio</label>
+        <label class="boton-archivo" for="archivo">Subir un archivo</label>
       </div>
       <p id="audio-estado" class="ayuda" role="status" aria-live="polite"></p>
       <p class="ayuda">Formatos: WAV, MP3, M4A, OGG o WebM, hasta 10 MB. La primera transcripción tarda más porque carga el modelo.</p>
     </section>
 
-    <section class="tarjeta" aria-labelledby="conv-titulo">
-      <h2 id="conv-titulo">Conversación</h2>
-      <p id="conv-vacia" class="ayuda">Todavía no hay frases.</p>
-      <ol id="conversacion" class="conversacion"></ol>
-    </section>
-
     <section class="tarjeta" aria-labelledby="como-titulo">
-      <h2 id="como-titulo">¿Cómo decide Centinela?</h2>
+      <h2 id="como-titulo" class="titulo-icono"><span class="h-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></svg></span>¿Cómo decide Centinela?</h2>
       <p>Centinela busca señales en <strong>lo que se pide</strong>, no en la voz, el acento ni quién habla. Con esas señales calcula un nivel:</p>
       <ul class="niveles">
         <li data-nivel="bajo"><span class="nivel-icono" aria-hidden="true"></span><span><strong>Bajo:</strong> no encontró señales.</span></li>
@@ -165,11 +183,46 @@
         <ul id="catalogo" class="catalogo"></ul>
       </details>
       <p class="ayuda">Centinela puede equivocarse. Un nivel bajo no garantiza que la llamada sea segura. Si dudas, cuelga y llama tú a la entidad por su número oficial.</p>
+      <div class="acciones"><button type="button" id="bv-abrir" class="boton-secundario">Ver la bienvenida otra vez</button></div>
     </section>
   </main>
 
   <footer class="pie">
     <p>Centinela no escucha tus llamadas: solo analiza el texto que escribes o el audio que tú le das. Solo guarda tus conversaciones si entras a tu cuenta y lo permites.</p>
   </footer>
+
+  <nav class="barra" aria-label="Secciones">
+    <a href="/" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</a>
+    <a href="/llamada.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Llamada</a>
+    <a href="/#asistente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.8A8 8 0 1 1 21 12z"/></svg>Pregúntale</a>
+    <a href="/cuenta.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Cuenta</a>
+  </nav>
+  <dialog id="bienvenida-dialogo" class="bienvenida-dialogo" aria-labelledby="bv-titulo">
+    <section class="diapositiva">
+      <span class="icono-grande" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3Z"/></svg></span>
+      <h2 id="bv-titulo">Te avisa si una llamada parece estafa</h2>
+      <p>Escribe o graba lo que te dicen. Centinela revisa lo que te piden y te dice qué tan riesgoso parece y qué hacer.</p>
+    </section>
+    <section class="diapositiva oculto">
+      <span class="icono-grande" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+      <h2>Tú decides qué se guarda</h2>
+      <p>No necesitas cuenta. El audio se convierte en texto y se descarta, y tus conversaciones solo se guardan si tú lo permites.</p>
+    </section>
+    <section class="diapositiva oculto">
+      <span class="icono-grande" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+      <h2>Cada nivel tiene su forma</h2>
+      <ul class="niveles">
+        <li data-nivel="bajo"><span class="nivel-icono" aria-hidden="true"></span><span>Bajo: sin señales</span></li>
+        <li data-nivel="moderado"><span class="nivel-icono" aria-hidden="true"></span><span>Moderado: ten cuidado</span></li>
+        <li data-nivel="alto"><span class="nivel-icono" aria-hidden="true"></span><span>Alto: te piden algo delicado</span></li>
+        <li data-nivel="critico"><span class="nivel-icono" aria-hidden="true"></span><span>Crítico: cuelga ya</span></li>
+      </ul>
+    </section>
+    <div class="puntos" aria-hidden="true"><span class="activo"></span><span></span><span></span></div>
+    <div class="acciones">
+      <button type="button" id="bv-saltar" class="boton-secundario">Saltar</button>
+      <button type="button" id="bv-siguiente" class="boton-principal">Siguiente</button>
+    </div>
+  </dialog>
 </body>
 </html>
