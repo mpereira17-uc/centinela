@@ -13,3 +13,5 @@ La clonación de voz con inteligencia artificial puede imitar a un hijo, una mam
 ## La señal `emergencia_familiar`
 
 Es de contexto: sola llega a moderado y no dispara el aviso. Sirve para sumar con lo que se pida después ("consígneme ya") y para dar el consejo de la palabra clave. Se comprobó que no cambia ninguna cifra de la evaluación en desarrollo, reservada, regional ni sintética de prueba.
+
+La [señal experimental de voz clonada](voz-clonada.md) complementa la palabra clave, pero no la reemplaza.

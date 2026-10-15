@@ -33,6 +33,7 @@ backend/
     mensajes.py        revisar SMS, WhatsApp o correos y sus enlaces
     directorio.py      canales oficiales para verificar una llamada
     practica.py        llamadas de mentira para practicar
+    voz_clonada.py     señal experimental de voz clonada (solo sube la alerta)
     reportes.py        reporte de números y reputación
     base_guiones.py    API de solo lectura de la base de guiones
     clasificador.py    clasificador entrenado y estrategia híbrida
@@ -93,6 +94,8 @@ Se cambia con variables de entorno o un archivo `.env` en `backend/`:
 | `CENTINELA_MODELO_CLASIFICADOR` | vacío | Ruta a otro modelo JSON del clasificador; vacío usa `backend/app/modelo_clasificador.json` |
 | `CENTINELA_MODELO_WHISPER` | `base` | Tamaño del modelo de transcripción |
 | `CENTINELA_VOZ_PIPER` | vacío | Ruta a una voz `.onnx` de Piper; vacío usa la voz del navegador |
+| `CENTINELA_MODELO_VOZ` | vacío | Ruta a un modelo `.onnx` de voz sintética; vacío deja apagada la parte acústica ([docs/voz-clonada.md](docs/voz-clonada.md)) |
+| `CENTINELA_UMBRAL_VOZ` | `0.9` | Puntaje mínimo para agregar la señal `voz_sintetica` |
 | `CENTINELA_BASE_DATOS` | `centinela.db` | Archivo SQLite con cuentas, sesiones y permisos |
 | `CENTINELA_RP_ID` | `localhost` | Dominio para las passkeys |
 | `CENTINELA_ORIGEN` | `http://localhost:8000` | Dirección exacta desde donde se abre la interfaz |

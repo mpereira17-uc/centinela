@@ -2,7 +2,8 @@ from abc import ABC, abstractmethod
 from collections.abc import Sequence
 
 from ..modelos import Decision, SenalDetectada
-from ..senales import Nivel, Senal, calcular_nivel, mensaje
+from ..senales import NUMERO_REPORTADO, Nivel, Senal, calcular_nivel, mensaje
+from ..voz_clonada import por_contexto
 
 
 class Estrategia(ABC):
@@ -21,6 +22,8 @@ class Estrategia(ABC):
 
     def _decision(self, senales: list[Senal], externas: Sequence[Senal] = ()) -> Decision:
         senales = [*senales, *(s for s in externas if s not in senales)]
+        # Supuesto familiar que pide algo: la voz se puede clonar (solo sube el nivel)
+        senales += por_contexto(senales)
         nivel = calcular_nivel(senales)
         return Decision(
             estrategia=self.nombre,
@@ -28,5 +31,5 @@ class Estrategia(ABC):
             alerta=nivel >= self.nivel_alerta,
             mensaje=mensaje(nivel, senales),
             senales=[SenalDetectada(id=s.id, tipo=s.tipo, descripcion=s.descripcion) for s in senales],
-            fuente="contenido_y_reputacion" if externas else "contenido",
+            fuente="contenido_y_reputacion" if NUMERO_REPORTADO in externas else "contenido",
         )

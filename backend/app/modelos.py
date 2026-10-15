@@ -69,6 +69,8 @@ class Llamada(BaseModel):
     numero_ref: str | None = Field(default=None, exclude=True)
     # Lo que contó quien recibió la llamada al colgar; se pregunta una sola vez
     desenlace: str | None = Field(default=None, exclude=True)
+    # El detector acústico experimental marcó el audio; una vez marcado no se desmarca
+    voz_sintetica: bool = Field(default=False, exclude=True)
 
 
 class NuevaLlamada(BaseModel):

@@ -2027,7 +2027,7 @@
           "niveles": [
             "moderado",
             "moderado",
-            "alto",
+            "critico",
             "critico"
           ]
         },
@@ -2051,7 +2051,7 @@
           "niveles": [
             "moderado",
             "moderado",
-            "alto",
+            "critico",
             "critico"
           ]
         }
@@ -3137,7 +3137,7 @@
           "niveles": [
             "moderado",
             "moderado",
-            "alto",
+            "critico",
             "critico"
           ]
         },
@@ -3161,7 +3161,7 @@
           "niveles": [
             "moderado",
             "moderado",
-            "alto",
+            "critico",
             "critico"
           ]
         }
@@ -3247,7 +3247,7 @@
           "niveles": [
             "moderado",
             "moderado",
-            "alto",
+            "critico",
             "critico"
           ]
         },
@@ -3271,7 +3271,7 @@
           "niveles": [
             "moderado",
             "moderado",
-            "alto",
+            "critico",
             "critico"
           ]
         }
@@ -3302,7 +3302,7 @@
           "niveles": [
             "moderado",
             "moderado",
-            "alto",
+            "critico",
             "critico"
           ]
         },
@@ -3326,7 +3326,7 @@
           "niveles": [
             "moderado",
             "moderado",
-            "alto",
+            "critico",
             "critico"
           ]
         }
@@ -6299,7 +6299,7 @@
           "segundos_hasta_aviso": 6.0,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "moderado"
           ]
@@ -6311,7 +6311,7 @@
           "segundos_hasta_aviso": 6.0,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6335,7 +6335,7 @@
           "segundos_hasta_aviso": 6.0,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6354,7 +6354,7 @@
           "segundos_hasta_aviso": 6.0,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "moderado"
           ]
@@ -6366,7 +6366,7 @@
           "segundos_hasta_aviso": 6.0,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6390,7 +6390,7 @@
           "segundos_hasta_aviso": 6.0,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6409,7 +6409,7 @@
           "segundos_hasta_aviso": 7.6,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "moderado"
           ]
@@ -6421,7 +6421,7 @@
           "segundos_hasta_aviso": 7.6,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6445,7 +6445,7 @@
           "segundos_hasta_aviso": 7.6,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6464,7 +6464,7 @@
           "segundos_hasta_aviso": 5.6,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "moderado"
           ]
@@ -6476,7 +6476,7 @@
           "segundos_hasta_aviso": 5.6,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6500,7 +6500,7 @@
           "segundos_hasta_aviso": 5.6,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6519,7 +6519,7 @@
           "segundos_hasta_aviso": 6.4,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "moderado"
           ]
@@ -6531,7 +6531,7 @@
           "segundos_hasta_aviso": 6.4,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6555,7 +6555,7 @@
           "segundos_hasta_aviso": 6.4,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6574,7 +6574,7 @@
           "segundos_hasta_aviso": 6.4,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "moderado"
           ]
@@ -6586,7 +6586,7 @@
           "segundos_hasta_aviso": 6.4,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6610,7 +6610,7 @@
           "segundos_hasta_aviso": 6.4,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6629,7 +6629,7 @@
           "segundos_hasta_aviso": 6.0,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "alto",
             "moderado"
           ]
@@ -6641,8 +6641,8 @@
           "segundos_hasta_aviso": 6.0,
           "niveles": [
             "bajo",
-            "bajo",
-            "alto",
+            "moderado",
+            "critico",
             "critico"
           ]
         },
@@ -6665,8 +6665,8 @@
           "segundos_hasta_aviso": 6.0,
           "niveles": [
             "bajo",
-            "bajo",
-            "alto",
+            "moderado",
+            "critico",
             "critico"
           ]
         }
@@ -6684,7 +6684,7 @@
           "segundos_hasta_aviso": 6.4,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "moderado"
           ]
@@ -6696,7 +6696,7 @@
           "segundos_hasta_aviso": 6.4,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6720,7 +6720,7 @@
           "segundos_hasta_aviso": 6.4,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "critico",
             "critico"
           ]
@@ -6739,7 +6739,7 @@
           "segundos_hasta_aviso": 6.0,
           "niveles": [
             "bajo",
-            "bajo",
+            "moderado",
             "alto",
             "moderado"
           ]
@@ -6751,8 +6751,8 @@
           "segundos_hasta_aviso": 6.0,
           "niveles": [
             "bajo",
-            "bajo",
-            "alto",
+            "moderado",
+            "critico",
             "critico"
           ]
         },
@@ -6775,8 +6775,8 @@
           "segundos_hasta_aviso": 6.0,
           "niveles": [
             "bajo",
-            "bajo",
-            "alto",
+            "moderado",
+            "critico",
             "critico"
           ]
         }

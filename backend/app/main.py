@@ -5,7 +5,7 @@ from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, Respon
 from fastapi.concurrency import run_in_threadpool
 from fastapi.staticfiles import StaticFiles
 
-from . import asistente, base_guiones, cuentas, desenlaces, directorio, historial, mensajes, practica, reportes, senalizacion, voz
+from . import asistente, base_guiones, cuentas, desenlaces, directorio, historial, mensajes, practica, reportes, senalizacion, voz, voz_clonada
 from .cuentas import Sesion, sesion_opcional
 from .config import ajustes
 from .modelos import (
@@ -155,7 +155,7 @@ async def agregar_audio(
     El audio se lee en memoria y se descarta al terminar; no se guarda.
     """
     llamada = _buscar(llamada_id, sesion)
-    segmentos = await _transcribir_subida(audio, consentimiento)
+    segmentos = await _transcribir_subida(audio, consentimiento, llamada)
 
     # Los tiempos del audio se desplazan para continuar después de lo ya analizado
     desfase = llamada.fragmentos[-1].fin if llamada.fragmentos else 0.0
@@ -169,8 +169,12 @@ async def agregar_audio(
     return {"resultados": resultados, "mostrar_aviso": any(r["mostrar_aviso"] for r in resultados)}
 
 
-async def _transcribir_subida(audio: UploadFile, consentimiento: bool) -> list:
-    """Valida, transcribe en memoria y descarta el audio subido."""
+async def _transcribir_subida(audio: UploadFile, consentimiento: bool, llamada: Llamada | None = None) -> list:
+    """Valida, transcribe en memoria y descarta el audio subido.
+
+    Con una llamada, el audio pasa también por el detector experimental de voz clonada,
+    si está instalado. Solo puede marcar la llamada, nunca desmarcarla.
+    """
     if not consentimiento:
         raise HTTPException(status_code=400, detail="Se necesita el consentimiento de las personas grabadas")
     if not (audio.content_type or "").startswith(TIPOS_AUDIO):
@@ -185,7 +189,11 @@ async def _transcribir_subida(audio: UploadFile, consentimiento: bool) -> list:
 
     try:
         # La transcripción es lenta y bloqueante: se ejecuta fuera del bucle de eventos
-        return await run_in_threadpool(whisper.transcribir, datos)
+        segmentos = await run_in_threadpool(whisper.transcribir, datos)
+        if llamada is not None and voz_clonada.detector.activo and await run_in_threadpool(voz_clonada.detector.es_sintetica, datos):
+            llamada.voz_sintetica = True
+            log.info("llamada=%s voz_sintetica=si", llamada.id)
+        return segmentos
     except whisper.TranscripcionNoDisponible as e:
         raise HTTPException(status_code=503, detail=str(e))
     except whisper.AudioInvalido as e:
@@ -248,6 +256,8 @@ def _procesar(llamada: Llamada, entrada: FragmentoEntrada) -> dict:
     fragmento = Fragmento(**entrada.model_dump())
     # Ambas estrategias deciden sobre el mismo diálogo; el registro guarda las dos
     externas = [NUMERO_REPORTADO] if llamada.numero_estado in reportes.ESTADOS_CON_SENAL else []
+    if llamada.voz_sintetica:
+        externas.append(voz_clonada.VOZ_SINTETICA)
     fragmento.decisiones = [e.decidir(previas, entrada.texto, externas) for e in estrategias]
     llamada.fragmentos.append(fragmento)
 

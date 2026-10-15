@@ -16,6 +16,7 @@
 - [Palabra clave familiar](palabra-clave.md): defensa contra la voz clonada que no depende de un detector.
 - [Modo práctica](practica.md): llamadas de mentira para aprender a reconocer una estafa.
 - [Contacto de confianza](contacto-confianza.md): botón para pedir ayuda a alguien de la familia en un aviso crítico.
+- [Señal experimental de voz clonada](voz-clonada.md): solo sube la alerta y nunca dice que una voz es real.
 - [Reporte de números](reportes.md): reportes seudónimos y reputación como señal.
 - [Llamada simulada](llamada.md): dos navegadores en llamada por WebRTC con análisis en vivo.
 - [¿Cómo terminó?](como-termino.md): feedback de un toque al colgar y reporte respaldado.
