@@ -46,3 +46,17 @@ La interfaz se abre en el navegador del celular o del computador en `http://127.
 - [x] Funciona en celular y en escritorio, en modo claro y oscuro, sin errores en la consola.
 
 Las pruebas automáticas están en `backend/tests/test_interfaz.py`. La revisión en navegador se hizo con Chromium a 390 px y 1280 px.
+
+## Estilo Conversación (elegido el 15 de octubre de 2026)
+
+pepe escogió, entre tres propuestas que se podían tocar en un celular de prueba (Conversación, Tablero y Escudo), el estilo **Conversación**, con colores más vivos. La idea es que Centinela se sienta como un chat que casi todos ya saben usar:
+
+- Barra superior verde jade y fondo de chat con puntitos.
+- El saludo de Centinela aparece como la primera burbuja del chat, y los accesos rápidos como respuestas en píldora.
+- Las frases de quien llama van en burbujas blancas y las tuyas en burbujas menta.
+- El resultado tiene una franja del color del nivel (verde, ámbar, naranja o rojo) con texto blanco.
+- La alerta ocupa toda la pantalla con el color del nivel, un ícono grande con ondas y un botón blanco.
+- Los niveles siguen distinguiéndose por forma del ícono y por texto, no solo por color.
+- Tiene modo oscuro y respeta la opción de reducir el movimiento.
+
+Solo cambió la hoja de estilos y el color de la barra del sistema (`theme-color`); el HTML, los identificadores y el JavaScript siguen iguales.
