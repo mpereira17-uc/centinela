@@ -66,7 +66,9 @@
     d.addEventListener("cancel", () => guardado.escribir("centinela-bienvenida", "vista"));
     const otraVez = $("#bv-abrir");
     if (otraVez) otraVez.addEventListener("click", abrir);
-    if (!guardado.leer("centinela-bienvenida")) abrir();
+    // Quien llega desde un aviso de llamada o compartiendo un mensaje quiere la respuesta ya; la bienvenida espera
+    const llegaConAlgo = /[?&](numero|compartido)=/.test(location.search);
+    if (!guardado.leer("centinela-bienvenida") && !llegaConAlgo) abrir();
   }
 
   // ---- Hoja de alerta: Escape, deslizar hacia abajo y vibración ----

@@ -65,7 +65,7 @@ Se guardan solo en la base del portátil. Para borrarlos: desde `backend/`, `pyt
 ## Guion de la demostración
 
 1. **Instalar.** Proyecta `/instalar.html`. Los jurados escanean el QR y tocan *Instalar Centinela* (en iPhone: Compartir → Agregar a inicio).
-2. **Revisar un mensaje.** Un jurado pega un SMS sospechoso inventado y ve el aviso.
+2. **Revisar un mensaje.** Envíale a un jurado por WhatsApp un SMS sospechoso inventado. El jurado lo mantiene presionado, busca *Compartir* y elige Centinela: el aviso aparece sin copiar ni pegar. Si en su celular no aparece *Compartir*, que lo copie y lo pegue en *Revisar un mensaje*.
 3. **Modo acompañante.** Llama desde tu celular al número de un jurado, por la red normal. El jurado pone el altavoz y otro jurado abre *Acompañante* en su celular y toca *Empezar a escuchar*. Haz el papel de estafador ("le hablamos del banco… dícteme el código que le llegó") y la alerta aparece en el segundo celular.
 4. **Llamada por Centinela.** Desde *Llamada*, crea una llamada, dicta el código al jurado y que se una con *Recibo la llamada*. Ve el aviso directo en su pantalla, sin altavoz.
 5. **Práctica.** Un jurado hace una ronda del modo práctica.
@@ -75,6 +75,7 @@ Se guardan solo en la base del portátil. Para borrarlos: desde `backend/`, `pyt
 
 - [ ] `python sustentacion.py` muestra la dirección y el QR.
 - [ ] Un celular Android con datos móviles (sin Wi‑Fi) abre el QR e instala la app.
+- [ ] Compartir un mensaje desde WhatsApp y desde Mensajes abre Centinela con el texto y lo revisa.
 - [ ] Un iPhone, si consigues uno, la agrega a inicio desde Safari.
 - [ ] Modo acompañante con una llamada real en altavoz: la alerta aparece antes de terminar la frase del código. Si la transcripción falla, acerca el dispositivo al altavoz o sube el volumen de la llamada.
 - [ ] Llamada por Centinela entre un celular con datos y otro en Wi‑Fi: se oyen y aparece el aviso.

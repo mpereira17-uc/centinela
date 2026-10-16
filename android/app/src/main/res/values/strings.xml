@@ -28,5 +28,6 @@
     <string name="limites_titulo">Lo que Centinela no hace</string>
     <string name="limites">No oye tus llamadas telefónicas: Android no lo permite a ninguna app. Solo recibe el número de quien llama, y solo si no está en tus contactos. No lee tu agenda ni guarda tus llamadas.</string>
     <string name="abrir">Abrir Centinela</string>
+    <string name="compartir">Revisar con Centinela</string>
     <string name="atajo_ajustes">Ajustes</string>
 </resources>

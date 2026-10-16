@@ -167,3 +167,27 @@ def test_websocket_acepta_el_origen_publico_configurado(monkeypatch):
         ws.send_text(json.dumps({"tipo": "unirse", "consentimiento": True}))
         assert json.loads(ws.receive_text())["tipo"] == "unido"
     senalizacion.salas.clear()
+
+
+# ---- Compartir con Centinela ----
+
+
+def test_la_app_instalable_recibe_mensajes_compartidos_por_post():
+    m = json.loads(cliente.get("/manifest.webmanifest").text)
+    destino = m["share_target"]
+    # Por POST, para que el mensaje no quede en la dirección ni en los registros del servidor
+    assert destino["method"] == "POST" and destino["action"] == "/compartir"
+    assert destino["params"]["text"] == "texto"
+    sw = cliente.get("/sw.js").text
+    assert 'url.pathname !== "/compartir"' in sw and "Response.redirect" in sw
+
+
+def test_compartir_sin_service_worker_no_lee_el_texto():
+    r = cliente.post("/compartir", data={"texto": "Su paquete está retenido"}, follow_redirects=False)
+    assert r.status_code == 303
+    assert r.headers["location"] == "/?compartido=sin-texto#mensaje"
+    assert "paquete" not in r.headers["location"]
+
+
+def test_la_pagina_explica_como_compartir():
+    assert "Compartir y elige Centinela" in cliente.get("/").text

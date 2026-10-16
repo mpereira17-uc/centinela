@@ -23,7 +23,8 @@ import androidx.webkit.WebViewFeature
 
 /**
  * La app es la misma interfaz web de Centinela dentro de un WebView, más lo que solo una app nativa
- * puede hacer: el filtro de llamadas ([FiltroLlamadas]) y sus avisos.
+ * puede hacer: el filtro de llamadas ([FiltroLlamadas]) y sus avisos, y recibir mensajes compartidos
+ * desde otras apps ([Compartido]).
  */
 class MainActivity : ComponentActivity() {
     companion object {
@@ -33,6 +34,8 @@ class MainActivity : ComponentActivity() {
     private lateinit var web: WebView
     private lateinit var servidor: String
     private var permisoPendiente: PermissionRequest? = null
+    // Texto compartido desde otra app, hasta que la página lo pida
+    private var compartido: String? = null
 
     private val pedirMicrofono = registerForActivityResult(ActivityResultContracts.RequestPermission()) { concedido ->
         permisoPendiente?.let { if (concedido) it.grant(arrayOf(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) else it.deny() }
@@ -44,6 +47,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val ajustes = Ajustes(this)
         servidor = ajustes.servidor
+        recibirCompartido(intent)
         // Sin servidor, o la primera vez si el filtro de llamadas no está activo, se abren los ajustes
         val filtroActivo = getSystemService(RoleManager::class.java).isRoleHeld(RoleManager.ROLE_CALL_SCREENING)
         if (servidor.isBlank() || (!filtroActivo && !ajustes.ajustesVistos)) {
@@ -98,7 +102,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        escucharContacto(ajustes)
+        escucharPagina(ajustes)
         onBackPressedDispatcher.addCallback(this) {
             if (web.canGoBack()) web.goBack() else finish()
         }
@@ -108,7 +112,8 @@ class MainActivity : ComponentActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        if (::web.isInitialized && intent.hasExtra(EXTRA_NUMERO)) web.loadUrl(direccion(intent))
+        recibirCompartido(intent)
+        if (::web.isInitialized && (intent.hasExtra(EXTRA_NUMERO) || esCompartido(intent))) web.loadUrl(direccion(intent))
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -116,23 +121,38 @@ class MainActivity : ComponentActivity() {
         if (::web.isInitialized) web.saveState(outState)
     }
 
+    // Abrir la app desde Recientes repite el intent original; ese mensaje ya se revisó
+    private fun esCompartido(intent: Intent) =
+        intent.action == Intent.ACTION_SEND && (intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0
+
+    private fun recibirCompartido(intent: Intent) {
+        if (esCompartido(intent)) compartido = Compartido.limpiar(intent.getCharSequenceExtra(Intent.EXTRA_TEXT))
+    }
+
     /**
-     * La interfaz web le cuenta a la app el contacto de confianza (Ayuda > Contacto de confianza), para
-     * ofrecer "Llamar a …" en el aviso de una llamada riesgosa. Solo lo acepta de la página principal del
-     * servidor configurado; el objeto CentinelaApp no existe para ninguna otra dirección.
+     * Canal entre la página y la app. La página le cuenta el contacto de confianza (Ayuda > Contacto de
+     * confianza), para ofrecer "Llamar a …" en el aviso de una llamada riesgosa, y pide el mensaje
+     * compartido. Solo funciona en la página principal del servidor configurado; el objeto CentinelaApp
+     * no existe para ninguna otra dirección.
      */
-    private fun escucharContacto(ajustes: Ajustes) {
+    private fun escucharPagina(ajustes: Ajustes) {
         if (!WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) return
         val origen = Uri.parse(servidor)
         try {
-            WebViewCompat.addWebMessageListener(web, "CentinelaApp", setOf(servidor)) { _, mensaje, desde, esPrincipal, _ ->
+            WebViewCompat.addWebMessageListener(web, "CentinelaApp", setOf(servidor)) { _, mensaje, desde, esPrincipal, respuesta ->
                 if (!esPrincipal || desde.scheme != "https" || desde.host != origen.host || desde.port != origen.port) {
                     return@addWebMessageListener
                 }
-                Contactos.leer(mensaje.data)?.let(ajustes::recibir)
+                if (Compartido.esPedido(mensaje.data)) {
+                    // Se entrega una sola vez: recargar la página no lo vuelve a analizar
+                    respuesta.postMessage(Compartido.respuesta(compartido))
+                    compartido = null
+                } else {
+                    Contactos.leer(mensaje.data)?.let(ajustes::recibir)
+                }
             }
         } catch (e: IllegalArgumentException) {
-            // dirección que WebView no acepta como origen: la app sigue, sin el botón de llamar
+            // dirección que WebView no acepta como origen: la app sigue, sin el botón de llamar ni compartir
         }
     }
 
@@ -148,6 +168,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun direccion(intent: Intent): String {
+        if (esCompartido(intent)) return "$servidor/?compartido=app#mensaje"
         val numero = intent.getStringExtra(EXTRA_NUMERO) ?: return "$servidor/"
         return "$servidor/?numero=${Uri.encode(numero)}#numero-titulo"
     }

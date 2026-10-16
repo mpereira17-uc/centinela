@@ -741,6 +741,7 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#descargar-denuncia").addEventListener("click", descargarDenuncia);
   mostrarConsejo();
   abrirNumeroDeLaApp();
+  recibirCompartido();
 });
 
 // Un consejo corto distinto cada vez que se abre el inicio
@@ -764,4 +765,53 @@ function abrirNumeroDeLaApp() {
   $("#numero").value = numero.slice(0, 25);
   $("#form-reporte").closest("details").open = true;
   consultarNumero();
+}
+
+// Compartir con Centinela: un mensaje compartido desde WhatsApp, Mensajes o el correo llega a "Revisar un
+// mensaje" y se revisa solo. El texto nunca viaja en la dirección: la app de Android lo entrega por su canal
+// (?compartido=app) y la app instalable lo deja un momento en este celular (?compartido=1, ver sw.js).
+async function recibirCompartido() {
+  const origen = new URLSearchParams(location.search).get("compartido");
+  if (!origen) return;
+  // Que recargar o volver no lo pida de nuevo
+  history.replaceState(null, "", "/#mensaje");
+  const texto = (origen === "app" ? await pedirleALaApp() : origen === "1" ? await leerCompartido() : "").trim();
+  if (!texto) {
+    $("#mensaje-error").textContent = "No nos llegó el mensaje. Cópialo y pégalo aquí.";
+    return;
+  }
+  $("#texto-mensaje").value = texto.slice(0, 2000);
+  await revisarMensaje(new Event("submit"));
+  // Lo primero que se ve es la respuesta
+  const resultado = $("#msj-resultado");
+  if (!resultado.classList.contains("oculto")) resultado.scrollIntoView({ block: "start", behavior: "smooth" });
+}
+
+function pedirleALaApp() {
+  const app = window.CentinelaApp;
+  if (!app || typeof app.postMessage !== "function") return Promise.resolve("");
+  return new Promise((resolver) => {
+    const plazo = setTimeout(() => resolver(""), 3000);
+    function alRecibir(ev) {
+      let m;
+      try { m = JSON.parse(ev.data); } catch { return; }
+      if (!m || m.tipo !== "compartido") return;
+      clearTimeout(plazo);
+      app.removeEventListener("message", alRecibir);
+      resolver(typeof m.texto === "string" ? m.texto : "");
+    }
+    app.addEventListener("message", alRecibir);
+    app.postMessage(JSON.stringify({ tipo: "pedir-compartido" }));
+  });
+}
+
+async function leerCompartido() {
+  try {
+    const cache = await caches.open("centinela-compartido");
+    const r = await cache.match("/compartido");
+    await caches.delete("centinela-compartido");
+    return r ? await r.text() : "";
+  } catch {
+    return "";
+  }
 }

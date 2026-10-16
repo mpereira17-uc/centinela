@@ -3,6 +3,7 @@ from pathlib import Path
 
 from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, Response, UploadFile
 from fastapi.concurrency import run_in_threadpool
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from . import asistente, base_guiones, cuentas, desenlaces, directorio, historial, instalacion, mensajes, practica, reportes, senalizacion, voz, voz_clonada
@@ -296,6 +297,12 @@ app.include_router(mensajes.router)
 app.include_router(practica.router)
 app.include_router(reportes.router)
 app.include_router(senalizacion.router)
+
+
+@app.post("/compartir", include_in_schema=False)
+def compartir_sin_app():
+    """Destino de "Compartir con Centinela" cuando el service worker no lo atiende: no se lee el texto."""
+    return RedirectResponse("/?compartido=sin-texto#mensaje", status_code=303)
 
 
 # La interfaz se sirve al final para que las rutas de la API tengan prioridad
