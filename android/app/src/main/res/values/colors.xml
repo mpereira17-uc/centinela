@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="marino">#1B2F4B</color>
+    <color name="primario">#24426A</color>
+    <color name="ambar">#E8A33D</color>
+    <color name="fondo">#EEF1F5</color>
+    <color name="texto">#141D2B</color>
+    <color name="texto_suave">#526072</color>
+</resources>

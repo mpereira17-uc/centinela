@@ -737,4 +737,15 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#preparar-denuncia").addEventListener("click", prepararDenuncia);
   $("#copiar-denuncia").addEventListener("click", copiarDenuncia);
   $("#descargar-denuncia").addEventListener("click", descargarDenuncia);
+  abrirNumeroDeLaApp();
 });
+
+// La app de Android abre /?numero=…#numero-titulo desde el aviso de una llamada entrante
+function abrirNumeroDeLaApp() {
+  const numero = new URLSearchParams(location.search).get("numero");
+  if (!numero) return;
+  $("#numero").value = numero.slice(0, 25);
+  $("#form-reporte").closest("details").open = true;
+  consultarNumero();
+  $("#numero-titulo").scrollIntoView({ block: "start" });
+}

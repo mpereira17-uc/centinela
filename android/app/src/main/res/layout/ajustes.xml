@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/raiz"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/marino">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/fondo"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            style="@style/Titulo"
+            android:text="@string/ajustes_titulo" />
+
+        <TextView
+            style="@style/Texto"
+            android:text="@string/ajustes_intro" />
+
+        <TextView
+            style="@style/Subtitulo"
+            android:text="@string/servidor_titulo" />
+
+        <EditText
+            android:id="@+id/servidor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/servidor_ejemplo"
+            android:importantForAutofill="no"
+            android:inputType="textUri"
+            android:minHeight="48dp" />
+
+        <TextView
+            style="@style/Ayuda"
+            android:text="@string/servidor_ayuda" />
+
+        <Button
+            android:id="@+id/guardar"
+            style="@style/Boton"
+            android:text="@string/guardar" />
+
+        <TextView
+            style="@style/Subtitulo"
+            android:text="@string/filtro_titulo" />
+
+        <TextView
+            android:id="@+id/estado_filtro"
+            style="@style/Texto" />
+
+        <Button
+            android:id="@+id/activar_filtro"
+            style="@style/Boton"
+            android:text="@string/activar_filtro" />
+
+        <Switch
+            android:id="@+id/silenciar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:minHeight="48dp"
+            android:text="@string/silenciar"
+            android:textSize="16sp" />
+
+        <TextView
+            style="@style/Ayuda"
+            android:text="@string/silenciar_ayuda" />
+
+        <TextView
+            style="@style/Subtitulo"
+            android:text="@string/limites_titulo" />
+
+        <TextView
+            style="@style/Texto"
+            android:text="@string/limites" />
+
+        <Button
+            android:id="@+id/abrir"
+            style="@style/Boton"
+            android:layout_marginTop="24dp"
+            android:text="@string/abrir" />
+    </LinearLayout>
+</ScrollView>

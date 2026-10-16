@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Tema" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/primario</item>
+        <item name="android:colorAccent">@color/ambar</item>
+        <item name="android:windowBackground">@color/marino</item>
+        <item name="android:statusBarColor">@color/marino</item>
+        <item name="android:navigationBarColor">@color/marino</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Titulo">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/texto</item>
+    </style>
+
+    <style name="Subtitulo">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/texto</item>
+    </style>
+
+    <style name="Texto">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/texto</item>
+    </style>
+
+    <style name="Ayuda" parent="Texto">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/texto_suave</item>
+    </style>
+
+    <style name="Boton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:backgroundTint">@color/primario</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>

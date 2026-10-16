@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Centinela</string>
+    <string name="ajustes_titulo">Ajustes de Centinela</string>
+    <string name="ajustes_intro">Centinela te avisa mientras el teléfono timbra si otras personas reportaron el número como estafa o como call center.</string>
+    <string name="servidor_titulo">Servidor de Centinela</string>
+    <string name="servidor_ejemplo">https://…trycloudflare.com</string>
+    <string name="servidor_ayuda">La dirección que aparece al encender Centinela, o la del enlace de la página de instalar. Debe empezar por https://.</string>
+    <string name="servidor_invalido">Escribe solo la dirección, empezando por https://</string>
+    <string name="guardar">Guardar</string>
+    <string name="filtro_titulo">Aviso de llamadas</string>
+    <string name="filtro_activo">Activo. Cuando te llame un número que no está en tus contactos, Centinela revisa sus reportes y te avisa si hay algo.</string>
+    <string name="filtro_inactivo">Inactivo. Actívalo y elige a Centinela como app de identificación de llamadas y spam.</string>
+    <string name="filtro_no_disponible">Este celular no permite apps de filtro de llamadas.</string>
+    <string name="activar_filtro">Activar el aviso de llamadas</string>
+    <string name="silenciar">Silenciar el timbre de números con muchos reportes</string>
+    <string name="silenciar_ayuda">La llamada sigue entrando y puedes contestar. Centinela nunca rechaza ni bloquea llamadas, porque un reporte puede estar equivocado.</string>
+    <string name="limites_titulo">Lo que Centinela no hace</string>
+    <string name="limites">No oye tus llamadas telefónicas: Android no lo permite a ninguna app. Solo recibe el número de quien llama, y solo si no está en tus contactos. No lee tu agenda ni guarda tus llamadas.</string>
+    <string name="abrir">Abrir Centinela</string>
+    <string name="atajo_ajustes">Ajustes</string>
+</resources>
