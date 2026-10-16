@@ -48,6 +48,18 @@ Muestra la dirección (`https://….trycloudflare.com`) y el QR en la terminal, 
 
 La dirección cambia cada vez que se arranca: arráncalo una sola vez, al llegar al salón.
 
+### Números de ejemplo para la app Android
+
+Con `python sustentacion.py --demo` se cargan tres números ya reportados por cuentas de ejemplo, para que la tarjeta sobre la llamada se vea sin esperar reportes reales:
+
+| Número | Aviso en la tarjeta |
+|---|---|
+| 300 000 0001 | Probable estafa (franja ámbar) |
+| 300 000 0002 | Posible estafa (franja ámbar) |
+| 601 000 0003 | Publicidad o call center |
+
+Se guardan solo en la base del portátil. Para borrarlos: desde `backend/`, `python -m app.demo --quitar`. Dilo tal cual a los jurados: son datos de ejemplo; los reportes reales que hagan ellos en la demo cuentan aparte.
+
 ## Guion de la demostración
 
 1. **Instalar.** Proyecta `/instalar.html`. Los jurados escanean el QR y tocan *Instalar Centinela* (en iPhone: Compartir → Agregar a inicio).

@@ -71,11 +71,16 @@ def main():
     parser = argparse.ArgumentParser(description="Enciende Centinela para la sustentación.")
     parser.add_argument("--puerto", type=int, default=8000)
     parser.add_argument("--sin-navegador", action="store_true", help="No abrir la página de instalación en este portátil")
+    parser.add_argument("--demo", action="store_true", help="Carga números de ejemplo ya reportados (ver backend/app/demo.py)")
     parser.add_argument("--espera", type=int, default=45, help="Segundos máximos para obtener la dirección pública")
     args = parser.parse_args()
 
     if not shutil.which("cloudflared"):
         sys.exit(COMO_INSTALAR)
+
+    if args.demo:
+        # Números de ejemplo con reportes, para que la tarjeta de "Posible estafa" se vea en vivo
+        subprocess.run([sys.executable, "-m", "app.demo"], cwd=RAIZ / "backend", check=False)
 
     print("Abriendo la dirección pública…")
     tunel, url = abrir_tunel(args.puerto, args.espera)
