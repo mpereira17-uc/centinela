@@ -170,7 +170,8 @@ function mostrarError(texto) {
 
 function ocupado(si) {
   estado.ocupado = si;
-  for (const b of document.querySelectorAll("button")) b.disabled = si;
+  // Los botones del aviso no se tocan: tienen su propia pausa y deben poder usarse mientras sigue el análisis
+  for (const b of document.querySelectorAll("button")) if (!b.closest("#alerta")) b.disabled = si;
   $("#analizar-texto").textContent = si ? "Analizando…" : "Analizar frase";
   $("#analizando").classList.toggle("oculto", !si);
   $("#nivel").classList.toggle("escuchando", si); // el búho pone cara de atento mientras analiza

@@ -356,6 +356,14 @@ main { max-width: var(--ancho); margin: 0 auto; padding: .5rem 1rem 1.5rem; }
   background: #fff; color: var(--cs); box-shadow: none; font-weight: 800; text-decoration: none; text-align: center;
 }
 .alerta-enlace { display: inline-block; margin-top: .35rem; color: #fff; font-weight: 700; }
+.alerta-decision { display: grid; gap: .7rem; width: 100%; margin-top: auto; }
+.alerta-pregunta { margin: 0; color: #fff; font-size: 1.2rem; font-weight: 800; }
+.alerta .alerta-decision button { margin-top: 0; }
+.alerta .alerta-sigo { background: transparent; color: #fff; border: 2px solid rgba(255, 255, 255, .8); box-shadow: none; }
+.alerta .alerta-sigo:disabled { opacity: .75; cursor: default; }
+/* Después de "Cuelgo y verifico": el azul de Centinela y el búho tranquilo, porque hizo lo correcto */
+.alerta.verificando { --cs: #1446b8; }
+.alerta.verificando .alerta-icono { background-image: url("/buho/tranquilo.svg"); }
 .alerta button, .alerta .boton-secundario { width: 100%; min-height: 60px; margin-top: auto; background: #fff; color: var(--cs); font-size: 1.15rem; font-weight: 800; }
 
 /* ---------- Formularios ---------- */

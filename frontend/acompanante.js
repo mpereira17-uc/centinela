@@ -252,6 +252,8 @@ async function reportarNumero(resultado, salida) {
 document.addEventListener("DOMContentLoaded", () => {
   $("#empezar").addEventListener("click", empezar);
   $("#colgar").addEventListener("click", terminar);
+  // "Cuelgo y verifico": la llamada se cuelga en el otro celular; aquí se deja de escuchar
+  $("#alerta").addEventListener("centinela:decision", (e) => { if (e.detail === "cuelgo") terminar(); });
   $("#cerrar-alerta").addEventListener("click", () => $("#alerta").classList.add("oculto"));
   document.querySelectorAll("#desenlace [data-resultado]").forEach((b) => b.addEventListener("click", () => contarDesenlace(b.dataset.resultado)));
   // Al volver a la app, el bloqueo de pantalla se pierde y se pide de nuevo

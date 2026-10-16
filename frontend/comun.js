@@ -71,14 +71,82 @@
     if (!guardado.leer("centinela-bienvenida") && !llegaConAlgo) abrir();
   }
 
+  // ---- Aviso crítico que pide una decisión ----
+  // En riesgo crítico, en vez de "Entendido" la persona elige "Cuelgo y verifico" o "Sigo, sé lo que hago".
+  // Seguir se habilita después de una pausa corta: los avisos que piden decidir y la pausa ayudan más que
+  // un aviso que se cierra con un toque (revisión de la FTC sobre mensajes de prevención).
+  const PAUSA_PARA_SEGUIR = 5;
+  let relojDecision = null;
+
+  function prepararDecision(alerta, pedir) {
+    const caja = alerta.querySelector(".alerta-decision");
+    const cerrar = alerta.querySelector("#cerrar-alerta");
+    if (!caja || !cerrar) return;
+    clearInterval(relojDecision);
+    alerta.classList.remove("verificando");
+    alerta.classList.toggle("pide-decision", pedir);
+    caja.classList.toggle("oculto", !pedir);
+    cerrar.classList.toggle("oculto", pedir);
+    cerrar.textContent = "Entendido";
+    if (!pedir) return;
+    const sigo = caja.querySelector(".alerta-sigo");
+    let quedan = PAUSA_PARA_SEGUIR;
+    const pintar = () => {
+      sigo.disabled = quedan > 0;
+      sigo.textContent = quedan > 0 ? `Sigo, sé lo que hago (${quedan})` : "Sigo, sé lo que hago";
+    };
+    pintar();
+    relojDecision = setInterval(() => {
+      quedan -= 1;
+      pintar();
+      if (quedan <= 0) clearInterval(relojDecision);
+    }, 1000);
+  }
+
+  function iniciarDecision(alerta, cerrar) {
+    const caja = alerta.querySelector(".alerta-decision");
+    if (!caja) return;
+    caja.querySelector(".alerta-cuelgo").addEventListener("click", () => {
+      clearInterval(relojDecision);
+      alerta.classList.remove("pide-decision");
+      alerta.classList.add("verificando");
+      caja.classList.add("oculto");
+      alerta.querySelector(".alerta-titulo").textContent = "Bien hecho";
+      alerta.querySelector(".alerta-texto").textContent =
+        "Cuelga y llama tú al número oficial de la entidad. Si ya diste un código o una clave, llama a tu banco ahora.";
+      alerta.querySelector(".alerta-clave")?.classList.add("oculto");
+      cerrar.textContent = "Listo";
+      cerrar.classList.remove("oculto");
+      cerrar.focus();
+      // Cada pantalla decide qué más hacer: la llamada por Centinela cuelga, el acompañante deja de escuchar
+      alerta.dispatchEvent(new CustomEvent("centinela:decision", { detail: "cuelgo" }));
+    });
+    caja.querySelector(".alerta-sigo").addEventListener("click", () => {
+      clearInterval(relojDecision);
+      alerta.classList.remove("pide-decision");
+      alerta.dispatchEvent(new CustomEvent("centinela:decision", { detail: "sigo" }));
+      cerrar.click();
+    });
+  }
+
   // ---- Hoja de alerta: Escape, deslizar hacia abajo y vibración ----
   function iniciarAlerta() {
     const alerta = $("#alerta");
     const cerrar = $("#cerrar-alerta");
     if (!alerta || !cerrar) return;
+    iniciarDecision(alerta, cerrar);
+
+    // Mientras pide una decisión, Escape y deslizar solo valen como "Sigo" y después de la pausa
+    function cerrarConGesto() {
+      if (!alerta.classList.contains("pide-decision")) cerrar.click();
+      else {
+        const sigo = alerta.querySelector(".alerta-sigo");
+        if (sigo && !sigo.disabled) sigo.click();
+      }
+    }
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !alerta.classList.contains("oculto")) cerrar.click();
+      if (e.key === "Escape" && !alerta.classList.contains("oculto")) cerrarConGesto();
     });
 
     let inicioY = null;
@@ -93,7 +161,7 @@
       const dy = e.changedTouches[0].clientY - inicioY;
       inicioY = null;
       alerta.style.removeProperty("--arrastre");
-      if (dy > 90) cerrar.click();
+      if (dy > 90) cerrarConGesto();
     });
 
     new MutationObserver(() => {
@@ -214,6 +282,7 @@
 
   // Completa lo que comparten los avisos de todas las pantallas: palabra clave y contacto de confianza
   function completarAviso(alerta, decision, motivo) {
+    prepararDecision(alerta, decision.nivel === "critico");
     const consejo = consejoFamiliar(decision.senales);
     const clave = alerta.querySelector(".alerta-clave");
     if (clave) {

@@ -427,6 +427,10 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#form-unirse").addEventListener("submit", unirse);
   $("#form-texto").addEventListener("submit", enviarFrase);
   $("#colgar").addEventListener("click", () => { enviar({ tipo: "colgar" }); terminar("Colgaste."); });
+  // "Cuelgo y verifico" en el aviso crítico cuelga de verdad esta llamada
+  $("#alerta").addEventListener("centinela:decision", (e) => {
+    if (e.detail === "cuelgo" && !estado.terminada) { enviar({ tipo: "colgar" }); terminar("Colgaste por el aviso de Centinela."); }
+  });
   $("#cerrar-alerta").addEventListener("click", () => $("#alerta").classList.add("oculto"));
   document.querySelectorAll("#desenlace [data-resultado]").forEach((b) => b.addEventListener("click", () => contarDesenlace(b.dataset.resultado)));
   document.querySelectorAll('input[name="rol"]').forEach((r) => r.addEventListener("change", () => {

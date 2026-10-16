@@ -94,3 +94,12 @@ Los SVG están en `frontend/buho/` y salen de `node herramientas/buho.js`. El mi
 **Una pantalla por herramienta.** Cada herramienta se abre en su propia pantalla con un botón grande para volver; lo que no hace falta ver siempre (usar un audio, reportar un número, cómo evitamos reportes falsos) está plegado. Las pantallas viven en la misma página y se abren con su ancla (`#conversar`, `#quien-llama`, `#mensaje`, `#asistente`, `#denuncia`, `#como`), así el botón Atrás del celular vuelve al inicio y no se pierde la conversación. Los enlaces viejos siguen sirviendo: `/#numero-titulo` (el que abre la app Android desde la tarjeta de la llamada), `/#asistente`, `/#audio-titulo` y `/ayuda.html#me-estafaron` abren la pantalla que tiene esa parte. Ayuda usa el mismo patrón con cuatro botones: Verificar una entidad, Me estafaron, Palabra clave familiar y Contacto de confianza.
 
 **Letra.** Base de 18 px, botones de al menos 54 px de alto y el botón "Aa" de la barra superior agranda todo un 18 % más.
+
+## Aviso que pide una decisión (16 de octubre de 2026)
+
+En **riesgo crítico**, el aviso de pantalla completa ya no se cierra con "Entendido". Pregunta "¿Qué vas a hacer?" y ofrece dos botones:
+
+- **Cuelgo y verifico** (botón blanco, siempre disponible). El aviso pasa a azul, el búho se tranquiliza y dice "Bien hecho: cuelga y llama tú al número oficial de la entidad; si ya diste un código o una clave, llama a tu banco ahora", con el enlace al directorio de canales oficiales. En la llamada por Centinela cuelga de verdad, y en el modo acompañante deja de escuchar. En los dos casos aparece "¿Cómo terminó?".
+- **Sigo, sé lo que hago** (botón de borde). Se habilita después de una pausa de 5 segundos, con la cuenta regresiva en el botón. Escape y deslizar hacia abajo solo valen como este botón y solo después de la pausa.
+
+Los avisos moderados y altos siguen con "Entendido", para no volver pesada cada alerta. El respaldo está en la revisión de la FTC sobre mensajes de prevención: los avisos que piden una decisión funcionan mejor que los que se cierran con un toque, y hacer una pausa se asocia con menos fraude (ver el documento de ideas). Los botones del aviso no se bloquean mientras sigue el análisis de la conversación. Capturas 69 y 70.
