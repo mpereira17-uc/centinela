@@ -14,10 +14,13 @@ object Compartido {
 
     fun limpiar(texto: CharSequence?): String? = texto?.toString()?.trim()?.take(MAXIMO)?.ifEmpty { null }
 
-    fun esPedido(mensaje: String?): Boolean = try {
-        JSONObject(mensaje ?: return false).optString("tipo") == "pedir-compartido"
-    } catch (e: JSONException) {
-        false
+    fun esPedido(mensaje: String?): Boolean {
+        if (mensaje == null) return false
+        return try {
+            JSONObject(mensaje).optString("tipo") == "pedir-compartido"
+        } catch (e: JSONException) {
+            false
+        }
     }
 
     fun respuesta(texto: String?): String = JSONObject().put("tipo", "compartido").put("texto", texto.orEmpty()).toString()
