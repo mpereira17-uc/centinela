@@ -3,8 +3,10 @@ package co.centinela.app
 import android.Manifest
 import android.app.role.RoleManager
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -14,8 +16,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 
 /**
- * Ajustes nativos: la dirección del servidor, activar el filtro de llamadas y silenciar el timbre
- * de los números con muchos reportes.
+ * Ajustes nativos: la dirección del servidor, activar el filtro de llamadas, la tarjeta sobre la
+ * pantalla de llamada y silenciar el timbre de los números con muchos reportes.
  *
  * El enlace centinela://configurar?servidor=… (desde la página de instalar) solo llena el campo:
  * la persona debe tocar Guardar, para que ninguna página pueda cambiar a escondidas a dónde van los números.
@@ -25,6 +27,7 @@ class AjustesActivity : ComponentActivity() {
     private lateinit var roles: RoleManager
 
     private val pedirFiltro = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { pintar() }
+    private val pedirTarjeta = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { pintar() }
     private val pedirNotificaciones = registerForActivityResult(ActivityResultContracts.RequestPermission()) { pintar() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +56,9 @@ class AjustesActivity : ComponentActivity() {
             if (Build.VERSION.SDK_INT >= 33) pedirNotificaciones.launch(Manifest.permission.POST_NOTIFICATIONS)
             pedirFiltro.launch(roles.createRequestRoleIntent(RoleManager.ROLE_CALL_SCREENING))
         }
+        findViewById<Button>(R.id.activar_tarjeta).setOnClickListener {
+            pedirTarjeta.launch(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName")))
+        }
         findViewById<Switch>(R.id.silenciar).apply {
             isChecked = ajustes.silenciarRiesgoAlto
             setOnCheckedChangeListener { _, activo -> ajustes.silenciarRiesgoAlto = activo }
@@ -76,6 +82,9 @@ class AjustesActivity : ComponentActivity() {
             },
         )
         findViewById<Button>(R.id.activar_filtro).visibility = if (disponible && !activo) View.VISIBLE else View.GONE
+        val tarjeta = TarjetaLlamada.puedeMostrarse(this)
+        findViewById<TextView>(R.id.estado_tarjeta).text = getString(if (tarjeta) R.string.tarjeta_activa else R.string.tarjeta_inactiva)
+        findViewById<Button>(R.id.activar_tarjeta).visibility = if (tarjeta) View.GONE else View.VISIBLE
         findViewById<Button>(R.id.abrir).isEnabled = hayServidor
     }
 }

@@ -13,6 +13,13 @@
     <string name="filtro_inactivo">Inactivo. Actívalo y elige a Centinela como app de identificación de llamadas y spam.</string>
     <string name="filtro_no_disponible">Este celular no permite apps de filtro de llamadas.</string>
     <string name="activar_filtro">Activar el aviso de llamadas</string>
+    <string name="tarjeta_titulo">Tarjeta sobre la llamada</string>
+    <string name="tarjeta_activa">Activa. El aviso aparece encima de la pantalla de la llamada mientras timbra.</string>
+    <string name="tarjeta_inactiva">Para ver el aviso encima de la pantalla de la llamada, como un identificador de llamadas, permite que Centinela se muestre sobre otras apps. Sin esto, el aviso llega como notificación.</string>
+    <string name="activar_tarjeta">Permitir mostrar sobre la llamada</string>
+    <string name="tarjeta_franja">REPORTADO POR LA COMUNIDAD DE CENTINELA</string>
+    <string name="tarjeta_pie">Toca para ver detalles. Al colgar puedes contar cómo terminó.</string>
+    <string name="tarjeta_cerrar">Cerrar aviso</string>
     <string name="silenciar">Silenciar el timbre de números con muchos reportes</string>
     <string name="silenciar_ayuda">La llamada sigue entrando y puedes contestar. Centinela nunca rechaza ni bloquea llamadas, porque un reporte puede estar equivocado.</string>
     <string name="limites_titulo">Lo que Centinela no hace</string>

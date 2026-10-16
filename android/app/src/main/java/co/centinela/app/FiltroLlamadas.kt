@@ -24,7 +24,11 @@ class FiltroLlamadas : CallScreeningService() {
                 ?.let { Avisos.para(it, ajustes.silenciarRiesgoAlto) }
             // Nunca se rechaza ni se bloquea la llamada; a lo sumo se silencia el timbre si la persona lo pidió
             respondToCall(details, CallResponse.Builder().setSilenceCall(aviso?.silenciar == true).build())
-            if (aviso != null) Notificaciones.mostrar(this, numero, aviso)
+            if (aviso != null) {
+                // La notificación queda para después de colgar; la tarjeta se ve encima de la llamada
+                Notificaciones.mostrar(this, numero, aviso)
+                TarjetaLlamada.mostrar(this, numero, aviso)
+            }
         }
     }
 }

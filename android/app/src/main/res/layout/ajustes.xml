@@ -56,6 +56,19 @@
             style="@style/Boton"
             android:text="@string/activar_filtro" />
 
+        <TextView
+            style="@style/Subtitulo"
+            android:text="@string/tarjeta_titulo" />
+
+        <TextView
+            android:id="@+id/estado_tarjeta"
+            style="@style/Texto" />
+
+        <Button
+            android:id="@+id/activar_tarjeta"
+            style="@style/Boton"
+            android:text="@string/activar_tarjeta" />
+
         <Switch
             android:id="@+id/silenciar"
             android:layout_width="match_parent"

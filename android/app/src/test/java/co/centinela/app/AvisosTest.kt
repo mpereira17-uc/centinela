@@ -33,6 +33,15 @@ class AvisosTest {
     }
 
     @Test
+    fun laFranjaAmbarEsSoloParaRiesgoAlto() {
+        assertTrue(Avisos.para(rep("estafa_confirmada"), false)!!.alto)
+        assertTrue(Avisos.para(rep("varios_reportes"), false)!!.alto)
+        for (estado in listOf("reportado", "publicidad", "en_disputa", "en_revision")) {
+            assertFalse(estado, Avisos.para(rep(estado), false)!!.alto)
+        }
+    }
+
+    @Test
     fun distingueCallCenterDeEstafa() {
         assertEquals("Publicidad o call center", Avisos.para(rep("publicidad"), false)!!.titulo)
     }
