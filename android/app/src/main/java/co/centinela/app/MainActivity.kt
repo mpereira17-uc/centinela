@@ -6,8 +6,10 @@ import android.app.role.RoleManager
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.view.WindowManager
 import android.webkit.PermissionRequest
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceError
@@ -23,8 +25,8 @@ import androidx.webkit.WebViewFeature
 
 /**
  * La app es la misma interfaz web de Centinela dentro de un WebView, más lo que solo una app nativa
- * puede hacer: el filtro de llamadas ([FiltroLlamadas]) y sus avisos, y recibir mensajes compartidos
- * desde otras apps ([Compartido]).
+ * puede hacer: el filtro de llamadas ([FiltroLlamadas]) y sus avisos, recibir mensajes compartidos
+ * desde otras apps ([Compartido]) y no apagar la pantalla mientras el modo acompañante escucha ([Pantalla]).
  */
 class MainActivity : ComponentActivity() {
     companion object {
@@ -78,6 +80,11 @@ class MainActivity : ComponentActivity() {
                     // nada que abra ese enlace
                 }
                 return true
+            }
+
+            // Al cambiar de página, la pantalla vuelve a apagarse sola como siempre
+            override fun onPageStarted(view: WebView, url: String?, favicon: Bitmap?) {
+                mantenerPantalla(false)
             }
 
             // Si el servidor no responde (por ejemplo, se reinició y su dirección cambió), se vuelve a Ajustes
@@ -143,7 +150,10 @@ class MainActivity : ComponentActivity() {
                 if (!esPrincipal || desde.scheme != "https" || desde.host != origen.host || desde.port != origen.port) {
                     return@addWebMessageListener
                 }
-                if (Compartido.esPedido(mensaje.data)) {
+                val pantalla = Pantalla.leer(mensaje.data)
+                if (pantalla != null) {
+                    mantenerPantalla(pantalla)
+                } else if (Compartido.esPedido(mensaje.data)) {
                     // Se entrega una sola vez: recargar la página no lo vuelve a analizar
                     respuesta.postMessage(Compartido.respuesta(compartido))
                     compartido = null
@@ -154,6 +164,11 @@ class MainActivity : ComponentActivity() {
         } catch (e: IllegalArgumentException) {
             // dirección que WebView no acepta como origen: la app sigue, sin el botón de llamar ni compartir
         }
+    }
+
+    private fun mantenerPantalla(encendida: Boolean) {
+        if (encendida) window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        else window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
     private fun volverAAjustes() {

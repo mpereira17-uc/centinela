@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#07142e" media="(prefers-color-scheme: dark)">
+  <title>Revisar antes de la demo · Centinela</title>
+  <meta name="description" content="Revisa en cada celular que la llamada, la voz y el micrófono de Centinela estén listos antes de la demostración.">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/buho/icono.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/iconos/apple-touch-icon.png">
+  <link rel="stylesheet" href="/estilos.css">
+  <script src="/comun.js" defer></script>
+  <script src="/escucha.js" defer></script>
+  <script src="/revisar.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#principal">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <a class="marca" href="/">
+      <img class="marca-buho" src="/buho/icono.svg" alt="" width="42" height="42">
+      <span>Centinela</span>
+    </a>
+    <button type="button" id="tamano-letra" class="tamano" aria-pressed="false" aria-label="Usar letra grande"><span aria-hidden="true">A<span>a</span></span></button>
+  </header>
+
+  <main id="principal">
+    <div class="panel-cabeza">
+      <a class="volver" href="/instalar.html" aria-label="Volver a instalar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></a>
+      <h1 id="revisar-titulo">Revisar antes de la demo</h1>
+    </div>
+    <p class="panel-intro">Ábrela en cada celular que vas a usar, con la red que vas a usar (datos o Wi‑Fi). Si todo sale en verde, las llamadas están listas.</p>
+
+    <section class="tarjeta" aria-labelledby="revisar-titulo">
+      <ul class="lista revision" aria-live="polite">
+        <li id="r-servidor" data-estado="revisando"><span class="revision-marca" aria-hidden="true"></span><div><strong>Conexión con Centinela</strong><p class="ayuda">Revisando…</p></div></li>
+        <li id="r-voz" data-estado="revisando"><span class="revision-marca" aria-hidden="true"></span><div><strong>Voz (transcripción)</strong><p class="ayuda">Revisando…</p></div></li>
+        <li id="r-red" data-estado="revisando"><span class="revision-marca" aria-hidden="true"></span><div><strong>Llamada por Centinela entre redes</strong><p class="ayuda">Revisando…</p></div></li>
+        <li id="r-pantalla" data-estado="revisando"><span class="revision-marca" aria-hidden="true"></span><div><strong>Pantalla encendida al escuchar</strong><p class="ayuda">Revisando…</p></div></li>
+        <li id="r-micro" data-estado="pendiente"><span class="revision-marca" aria-hidden="true"></span><div><strong>Micrófono</strong><p class="ayuda">Toca el botón y habla, o pon cerca un celular en altavoz.</p><div id="medidor" class="medidor medidor-claro oculto" aria-hidden="true"><span></span></div></div><button type="button" id="probar-micro" class="boton-secundario">Probar micrófono</button></li>
+      </ul>
+      <div class="acciones">
+        <button type="button" id="otra-vez" class="boton-principal">Revisar otra vez</button>
+      </div>
+    </section>
+    <p class="centrado"><a class="enlace-boton" href="/llamada.html">Ir a la llamada de prueba</a> · <a class="enlace-boton" href="/acompanante.html">Ir al modo acompañante</a></p>
+  </main>
+
+  <footer class="pie">
+    <p>Esta revisión no guarda nada: el micrófono se prueba en este celular y lo que oye no se envía.</p>
+  </footer>
+
+  <nav class="barra" aria-label="Secciones">
+    <a href="/" aria-current="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</a>
+    <a href="/ayuda.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m5.6 5.6 3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></svg>Ayuda</a>
+    <a href="/cuenta.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Cuenta</a>
+  </nav>
+</body>
+</html>

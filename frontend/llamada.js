@@ -2,15 +2,27 @@
 
 // Llamada simulada por WebRTC. El servidor solo reenvía los mensajes de conexión;
 // el audio va directo entre navegadores. Todo texto se inserta con textContent (A5).
+//
+// Para que aguante una demostración en vivo: si se cae la conexión con el servidor, se vuelve a entrar
+// con la llave de la sala sin cortar la voz; si el audio se interrumpe (cambio de red), quien llama
+// reinicia la conexión; y un mensaje cada 20 segundos evita que el túnel cierre la conexión por silencio.
 
 const $ = (sel) => document.querySelector(sel);
 const ETIQUETAS = { bajo: "Bajo", moderado: "Moderado", alto: "Alto", critico: "Crítico" };
-const SEGUNDOS_POR_TROZO = 6;
+const PING_CADA = 20000;
+const REINTENTOS_AUDIO = 3;
+const CODIGOS_FINALES = {
+  4401: "Falta el consentimiento.", 4404: "Esa llamada ya no existe.", 4409: "Ese papel ya lo tiene otra persona.",
+  4403: "No se pudo abrir la conexión desde esta página.", 4413: "Se enviaron demasiados datos.",
+  4410: "Pasó mucho tiempo sin conexión y la llamada se cerró.",
+};
 
 const estado = {
   rol: null, codigo: null, ws: null, pc: null, micro: null, llamadaId: null,
-  inicio: 0, ultimoFin: 0, cola: Promise.resolve(), grabando: false, recorder: null,
+  inicio: 0, ultimoFin: 0, cola: Promise.resolve(), grabando: false, escucha: null,
   pendientes: [], terminada: false, ice: [],
+  llave: null, enLlamada: false, ping: null, reconectarHasta: 0, espera: 1000,
+  reintentosAudio: 0, vigiaAudio: null, otroAusente: null,
 };
 
 function rolElegido() {
@@ -71,23 +83,7 @@ async function conectar(codigo, rol, creador) {
   }
   estado.ice = await servidoresIce();
 
-  const protocolo = location.protocol === "https:" ? "wss" : "ws";
-  const ws = new WebSocket(`${protocolo}://${location.host}/salas/${encodeURIComponent(codigo)}/ws?rol=${rol}`);
-  estado.ws = ws;
-  ws.addEventListener("open", () => ws.send(JSON.stringify({ tipo: "unirse", consentimiento: true })));
-  ws.addEventListener("message", (ev) => alRecibir(JSON.parse(ev.data)).catch(() => {}));
-  ws.addEventListener("close", (ev) => {
-    const motivos = {
-      4401: "Falta el consentimiento.", 4404: "Esa llamada ya no existe.", 4409: "Ese papel ya lo tiene otra persona.",
-      4403: "No se pudo abrir la conexión desde esta página.", 4413: "Se enviaron demasiados datos.",
-    };
-    if (motivos[ev.code]) {
-      if ($("#en-llamada").classList.contains("oculto")) error(motivos[ev.code]);
-      else terminar(motivos[ev.code]);
-    } else if (!estado.terminada && !$("#en-llamada").classList.contains("oculto")) {
-      terminar("Se perdió la conexión con Centinela.");
-    }
-  });
+  abrirSenal();
 
   $("#codigo-sala").textContent = codigo;
   $("#compartir").textContent = creador
@@ -95,7 +91,56 @@ async function conectar(codigo, rol, creador) {
     : "";
 }
 
+function abrirSenal() {
+  const protocolo = location.protocol === "https:" ? "wss" : "ws";
+  const ws = new WebSocket(`${protocolo}://${location.host}/salas/${encodeURIComponent(estado.codigo)}/ws?rol=${estado.rol}`);
+  estado.ws = ws;
+  ws.addEventListener("open", () => {
+    // Con la llave, el servidor sabe que es la misma persona que vuelve tras un corte
+    ws.send(JSON.stringify({ tipo: "unirse", consentimiento: true, ...(estado.llave ? { llave: estado.llave } : {}) }));
+    clearInterval(estado.ping);
+    estado.ping = setInterval(() => enviar({ tipo: "ping" }), PING_CADA);
+  });
+  ws.addEventListener("message", (ev) => {
+    if (ws !== estado.ws) return;
+    let m;
+    try { m = JSON.parse(ev.data); } catch { return; }
+    alRecibir(m).catch(() => {});
+  });
+  ws.addEventListener("close", (ev) => alCerrarSenal(ws, ev.code));
+}
+
+function alCerrarSenal(ws, codigo) {
+  if (ws !== estado.ws || estado.terminada) return; // una conexión vieja que ya se reemplazó
+  clearInterval(estado.ping);
+  if (CODIGOS_FINALES[codigo]) {
+    if (!estado.enLlamada) error(CODIGOS_FINALES[codigo]);
+    else if (audioConectado()) estadoLlamada("En llamada. Se perdió la conexión con Centinela: la voz sigue, pero las frases escritas ya no llegan.");
+    else terminar(CODIGOS_FINALES[codigo]);
+    return;
+  }
+  if (!estado.llave) {
+    error("No pudimos conectar con Centinela.");
+    return;
+  }
+  // Corte inesperado (túnel, cambio de red): se reintenta con la llave mientras el servidor guarda el lugar
+  if (!estado.reconectarHasta) estado.reconectarHasta = Date.now() + 40000;
+  if (Date.now() > estado.reconectarHasta) {
+    if (audioConectado()) estadoLlamada("En llamada. Se perdió la conexión con Centinela: la voz sigue, pero las frases escritas ya no llegan.");
+    else terminar("Se perdió la conexión con Centinela.");
+    return;
+  }
+  if (!audioConectado()) estadoLlamada("Se cortó la conexión. Reconectando…");
+  setTimeout(() => { if (!estado.terminada) abrirSenal(); }, estado.espera);
+  estado.espera = Math.min(estado.espera * 2, 5000);
+}
+
+function audioConectado() {
+  return estado.pc?.connectionState === "connected";
+}
+
 function mostrarLlamada() {
+  estado.enLlamada = true;
   $("#preparar").classList.add("oculto");
   $("#en-llamada").classList.remove("oculto");
   $(estado.rol === "llama" ? "#vista-llama" : "#vista-recibe").classList.remove("oculto");
@@ -138,13 +183,46 @@ function prepararConexion() {
     if (estado.rol === "recibe") empezarAEscuchar(flujo);
   });
   pc.addEventListener("connectionstatechange", () => {
+    if (estado.terminada) return;
     const textos = {
       connecting: "Conectando el audio…", connected: "En llamada.",
-      disconnected: "La conexión se interrumpió. Intentando recuperarla…", failed: "No se pudo conectar el audio. Pueden seguir en modo texto.",
+      disconnected: "La conexión se interrumpió. Intentando recuperarla…",
     };
-    if (textos[pc.connectionState] && !estado.terminada) estadoLlamada(textos[pc.connectionState]);
+    if (textos[pc.connectionState]) estadoLlamada(textos[pc.connectionState]);
+    clearTimeout(estado.vigiaAudio);
+    if (pc.connectionState === "connected") estado.reintentosAudio = 0;
+    // Si en unos segundos no se recupera sola (o falla del todo), se reinicia la conexión del audio
+    if (pc.connectionState === "disconnected") estado.vigiaAudio = setTimeout(recuperarAudio, 4000);
+    if (pc.connectionState === "failed") recuperarAudio();
   });
   return pc;
+}
+
+function recuperarAudio() {
+  const pc = estado.pc;
+  if (!pc || estado.terminada || audioConectado()) return;
+  if (estado.reintentosAudio >= REINTENTOS_AUDIO) {
+    estadoLlamada("No se pudo conectar el audio. Pueden seguir en modo texto.");
+    return;
+  }
+  estado.reintentosAudio += 1;
+  estadoLlamada("Reconectando el audio…");
+  // Solo quien llama crea ofertas; quien recibe se lo pide
+  if (estado.rol === "llama") reiniciarIce().catch(() => {});
+  else enviar({ tipo: "reiniciar" });
+  // Si el reinicio tampoco conecta, se vuelve a intentar
+  clearTimeout(estado.vigiaAudio);
+  estado.vigiaAudio = setTimeout(recuperarAudio, 10000);
+}
+
+async function reiniciarIce() {
+  const pc = estado.pc;
+  if (!pc || pc.signalingState !== "stable" || !estado.ws || estado.ws.readyState !== WebSocket.OPEN) return;
+  // Credenciales nuevas del TURN por si las anteriores vencieron
+  estado.ice = await servidoresIce();
+  if (estado.ice.length) pc.setConfiguration({ iceServers: estado.ice });
+  await pc.setLocalDescription(await pc.createOffer({ iceRestart: true }));
+  enviar({ tipo: "oferta", sdp: pc.localDescription.sdp });
 }
 
 async function aplicarCandidatos() {
@@ -154,7 +232,34 @@ async function aplicarCandidatos() {
 async function alRecibir(m) {
   switch (m.tipo) {
     case "unido":
-      mostrarLlamada();
+      estado.llave = m.llave || estado.llave;
+      estado.reconectarHasta = 0;
+      estado.espera = 1000;
+      if (!estado.enLlamada) mostrarLlamada();
+      else if (!audioConectado()) {
+        estadoLlamada("Conexión recuperada.");
+        if (estado.pc) recuperarAudio();
+      }
+      break;
+    case "reconectando":
+      // A la otra persona se le cortó la conexión con Centinela; la voz puede seguir llegando
+      clearTimeout(estado.otroAusente);
+      if (!audioConectado()) estadoLlamada("La otra persona perdió la conexión. Esperando que vuelva…");
+      estado.otroAusente = setTimeout(() => {
+        if (!audioConectado()) terminar("La otra persona no volvió.");
+      }, ((Number(m.segundos) || 45) + 5) * 1000);
+      break;
+    case "volvio":
+      clearTimeout(estado.otroAusente);
+      if (!audioConectado()) {
+        estadoLlamada("La otra persona volvió. Reconectando el audio…");
+        if (estado.pc) recuperarAudio();
+      }
+      break;
+    case "reiniciar":
+      if (estado.rol === "llama") reiniciarIce().catch(() => {});
+      break;
+    case "pong":
       break;
     case "listos": {
       estadoLlamada("La otra persona se unió. Conectando…");
@@ -232,33 +337,19 @@ async function analizarTexto(texto) {
 }
 
 function empezarAEscuchar(flujo) {
-  if (estado.grabando || typeof MediaRecorder !== "function") return;
+  if (estado.grabando || !window.CentinelaEscucha?.disponible()) return;
   estado.grabando = true;
-  $("#escucha").textContent = "Escuchando a quien llama. Centinela analiza su voz por partes de unos segundos.";
-  const tipo = ["audio/webm;codecs=opus", "audio/webm", "audio/ogg"].find((t) => MediaRecorder.isTypeSupported(t)) || "";
-
-  // Se graba por trozos completos (parar y volver a empezar) para que cada uno sea un archivo válido
-  const grabarTrozo = () => {
-    if (!estado.grabando) return;
-    const partes = [];
-    const recorder = new MediaRecorder(flujo, tipo ? { mimeType: tipo } : undefined);
-    estado.recorder = recorder;
-    recorder.addEventListener("dataavailable", (e) => { if (e.data.size) partes.push(e.data); });
-    recorder.addEventListener("stop", () => {
-      const audio = new Blob(partes, { type: recorder.mimeType || "audio/webm" });
-      if (audio.size > 2000) encolar(() => analizarAudio(audio));
-      grabarTrozo();
-    });
-    recorder.start();
-    setTimeout(() => { if (recorder.state === "recording") recorder.stop(); }, SEGUNDOS_POR_TROZO * 1000);
-  };
-  grabarTrozo();
+  $("#escucha").textContent = "Escuchando a quien llama. Centinela analiza cada frase apenas hace una pausa.";
+  estado.escucha = window.CentinelaEscucha.escuchar(flujo, {
+    alTrozo: (audio) => encolar(() => analizarAudio(audio)),
+    alCambiarModo: () => { $("#escucha").textContent = "Escuchando a quien llama. Centinela analiza su voz por partes de unos segundos."; },
+  });
 }
 
 async function analizarAudio(audio) {
   if (!estado.grabando) return;
   const datos = new FormData();
-  datos.append("audio", audio, "trozo.webm");
+  datos.append("audio", audio, window.CentinelaEscucha.nombreDeArchivo(audio));
   datos.append("consentimiento", "true");
   datos.append("hablante", "llamante");
   const r = await fetch(`/llamadas/${estado.llamadaId}/audio`, { method: "POST", body: datos });
@@ -274,7 +365,7 @@ async function analizarAudio(audio) {
 
 function detenerEscucha() {
   estado.grabando = false;
-  if (estado.recorder && estado.recorder.state === "recording") estado.recorder.stop();
+  estado.escucha?.detener();
 }
 
 function mostrarResultado(r) {
@@ -327,6 +418,11 @@ function enviarFrase(ev) {
   ev.preventDefault();
   const texto = $("#frase").value.trim();
   if (!texto) { $("#frase").focus(); return; }
+  if (!estado.ws || estado.ws.readyState !== WebSocket.OPEN) {
+    // Se queda escrita para enviarla apenas vuelva la conexión
+    estadoLlamada("Reconectando con Centinela… Envía la frase en un momento.");
+    return;
+  }
   enviar({ tipo: "texto", texto });
   const li = document.createElement("li");
   li.className = "frase";
@@ -345,6 +441,9 @@ function enviarFrase(ev) {
 function terminar(motivo) {
   if (estado.terminada) return;
   estado.terminada = true;
+  clearInterval(estado.ping);
+  clearTimeout(estado.vigiaAudio);
+  clearTimeout(estado.otroAusente);
   detenerEscucha();
   if (estado.pc) estado.pc.close();
   if (estado.micro) for (const p of estado.micro.getTracks()) p.stop();

@@ -1,4 +1,5 @@
 import logging
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, Response, UploadFile
@@ -26,7 +27,16 @@ from .transcripcion import whisper
 # Nunca se registra el texto de la conversación (modelo de amenazas, A8)
 log = logging.getLogger("centinela")
 
+@asynccontextmanager
+async def al_arrancar(_app: FastAPI):
+    # En la sustentación el modelo de voz se lee de una vez, para que la primera frase no espere
+    if ajustes.precargar_voz:
+        whisper.precargar_en_segundo_plano()
+    yield
+
+
 app = FastAPI(
+    lifespan=al_arrancar,
     title="Centinela",
     description="Prototipo de alertas de posible fraude conversacional en llamadas simuladas.",
     version="1.0.0",
@@ -82,6 +92,12 @@ def _categoria_de_llamada(llamada_id: str, usuario_id: str) -> str | None:
 
 
 reportes.categoria_de_llamada = _categoria_de_llamada
+
+
+@app.get("/transcripcion/estado")
+def estado_de_la_transcripcion():
+    """Si la voz está lista y cuánto tardó la última frase. No dice nada de lo que se dijo."""
+    return whisper.estado()
 
 
 @app.get("/salud")

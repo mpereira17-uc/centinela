@@ -9,7 +9,7 @@ from app.config import ajustes
 from app.main import app
 
 cliente = TestClient(app)
-PAGINAS = ("/", "/llamada.html", "/acompanante.html", "/practica.html", "/ayuda.html", "/cuenta.html", "/instalar.html", "/comunidad.html")
+PAGINAS = ("/", "/llamada.html", "/acompanante.html", "/practica.html", "/ayuda.html", "/cuenta.html", "/instalar.html", "/comunidad.html", "/revisar.html")
 
 
 @pytest.fixture(autouse=True)
@@ -191,3 +191,110 @@ def test_compartir_sin_service_worker_no_lee_el_texto():
 
 def test_la_pagina_explica_como_compartir():
     assert "Compartir y elige Centinela" in cliente.get("/").text
+
+
+# ---- Voz lista antes de la primera frase ----
+
+
+class _ModeloFalso:
+    def __init__(self):
+        self.llamadas = []
+
+    def transcribe(self, audio, **opciones):
+        self.llamadas.append(opciones)
+        return iter([]), None
+
+
+@pytest.fixture
+def estado_de_voz_limpio():
+    from app.transcripcion import whisper
+
+    guardado = dict(whisper._estado)
+    yield whisper
+    whisper._estado.clear()
+    whisper._estado.update(guardado)
+
+
+def test_el_estado_de_la_voz_no_dice_nada_de_lo_que_se_dijo(estado_de_voz_limpio):
+    datos = cliente.get("/transcripcion/estado").json()
+    assert set(datos) == {"modelo", "estado", "detalle", "ultima_segundos"}
+
+
+def test_precargar_deja_la_voz_lista(monkeypatch, estado_de_voz_limpio):
+    whisper = estado_de_voz_limpio
+    modelo = _ModeloFalso()
+    monkeypatch.setattr(whisper, "_modelo", lambda: modelo)
+    whisper.precargar()
+    assert whisper.estado()["estado"] == "lista"
+    assert len(modelo.llamadas) == 1  # una transcripción de prueba para calentar el modelo
+
+
+def test_precargar_sin_whisper_lo_dice(monkeypatch, estado_de_voz_limpio):
+    whisper = estado_de_voz_limpio
+
+    def sin_modelo():
+        raise whisper.TranscripcionNoDisponible("Ejecuta: pip install -r requirements-ml.txt")
+
+    monkeypatch.setattr(whisper, "_modelo", sin_modelo)
+    whisper.precargar()
+    assert whisper.estado()["estado"] == "no_disponible"
+    assert "requirements-ml.txt" in cliente.get("/transcripcion/estado").json()["detalle"]
+
+
+def test_cada_frase_se_transcribe_sola_y_se_mide_cuanto_tarda(monkeypatch, estado_de_voz_limpio):
+    whisper = estado_de_voz_limpio
+    modelo = _ModeloFalso()
+    monkeypatch.setattr(whisper, "_modelo", lambda: modelo)
+    whisper.transcribir(b"audio")
+    assert modelo.llamadas[0]["condition_on_previous_text"] is False
+    assert modelo.llamadas[0]["beam_size"] == ajustes.whisper_haz
+    assert isinstance(whisper.estado()["ultima_segundos"], float)
+
+
+# ---- Escucha por pausas y revisión previa ----
+
+
+def test_llamada_y_acompanante_escuchan_por_pausas():
+    for pagina, script in (("/llamada.html", "/llamada.js"), ("/acompanante.html", "/acompanante.js")):
+        html = cliente.get(pagina).text
+        assert html.index('src="/escucha.js"') < html.index(f'src="{script}"'), pagina
+        assert "CentinelaEscucha.escuchar" in cliente.get(script).text
+    js = cliente.get("/escucha.js").text
+    assert "innerHTML" not in js and "PAUSA" in js
+    # Si no se puede medir el volumen, vuelve a trozos fijos en vez de dejar de escuchar
+    assert "modoFijo" in js
+
+
+def test_la_llamada_aguanta_cortes_de_la_senal():
+    js = cliente.get("/llamada.js").text
+    assert "llave" in js and '{ tipo: "ping" }' in js and "iceRestart: true" in js
+
+
+def test_revision_previa_a_la_demo():
+    html = cliente.get("/revisar.html").text
+    assert 'rel="manifest" href="/manifest.webmanifest"' in html
+    assert "<script>" not in html and "onclick=" not in html and "style=" not in html
+    js = cliente.get("/revisar.js").text
+    assert "innerHTML" not in js and "insertAdjacentHTML" not in js
+    # Prueba de verdad que el TURN responde desde la red del celular
+    assert '"relay"' in js and "/transcripcion/estado" in js
+    assert 'href="/revisar.html"' in cliente.get("/instalar.html").text
+    sw = cliente.get("/sw.js").text
+    assert '"/revisar.html"' in sw and '"/escucha.js"' in sw and '"/revisar.js"' in sw
+
+
+def test_sustentacion_usa_stun_publico_si_no_hay_uno(tmp_path, monkeypatch):
+    import importlib.util
+    from pathlib import Path
+
+    ruta = Path(__file__).resolve().parents[2] / "sustentacion.py"
+    spec = importlib.util.spec_from_file_location("sustentacion", ruta)
+    modulo = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(modulo)
+    monkeypatch.setattr(modulo, "RAIZ", tmp_path)
+    monkeypatch.delenv("CENTINELA_STUN_URL", raising=False)
+    (tmp_path / "backend").mkdir()
+    assert modulo.configurado_en_env("CENTINELA_STUN_URL") is False
+    (tmp_path / "backend" / ".env").write_text("CENTINELA_STUN_URL=stun:propio.co:3478\n", encoding="utf-8")
+    assert modulo.configurado_en_env("CENTINELA_STUN_URL") is True
+    assert modulo.STUN_PUBLICO.startswith("stun:")

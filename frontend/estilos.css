@@ -650,6 +650,26 @@ details[open] > summary::after { transform: rotate(90deg); }
 .pulso::before, .pulso::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .35); }
 .pulso svg { width: 44px; height: 44px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .pulso .buho { width: 88px; height: 88px; }
+/* Cuánto oye el micrófono: si no se mueve, el altavoz está lejos o bajo */
+.medidor { width: min(220px, 70%); height: 8px; margin: .7rem auto .3rem; border-radius: 999px; background: rgba(255, 255, 255, .18); overflow: hidden; }
+.medidor span { display: block; height: 100%; width: calc(var(--volumen, 0) * 100%); border-radius: inherit; background: rgba(255, 255, 255, .55); transition: width .08s linear; }
+.medidor.voz span { background: #fff; }
+.medidor-claro { margin: .5rem 0 0; background: var(--chip); }
+.medidor-claro span, .medidor-claro.voz span { background: var(--primario); }
+
+/* Revisar antes de la demo */
+.revision > li { justify-content: flex-start; }
+.revision-marca {
+  flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%;
+  font-weight: 800; background: var(--chip); color: var(--primario-fuerte);
+}
+.revision [data-estado="revisando"] .revision-marca::before, .revision [data-estado="pendiente"] .revision-marca::before { content: "…"; }
+.revision [data-estado="bien"] .revision-marca { background: var(--bajo-fondo); color: var(--bajo); }
+.revision [data-estado="bien"] .revision-marca::before { content: "✓"; }
+.revision [data-estado="regular"] .revision-marca { background: var(--moderado-fondo); color: var(--moderado); }
+.revision [data-estado="regular"] .revision-marca::before { content: "!"; }
+.revision [data-estado="mal"] .revision-marca { background: var(--critico-fondo); color: var(--critico); }
+.revision [data-estado="mal"] .revision-marca::before { content: "✕"; }
 .colgar-caja { display: flex; flex-direction: column; align-items: center; margin-top: 1rem; }
 #colgar { width: 72px; height: 72px; min-height: 0; padding: 0; border-radius: 50%; background: #e5484d; color: #fff; box-shadow: 0 8px 20px rgba(229, 72, 77, .45); }
 #colgar svg { width: 32px; height: 32px; }

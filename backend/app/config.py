@@ -19,6 +19,10 @@ class Ajustes(BaseSettings):
     modelo_clasificador: str = ""
     # Modelo de faster-whisper (tiny, base, small...) para correr en CPU
     modelo_whisper: str = "base"
+    # Candidatos que compara Whisper por palabra: 5 es más preciso; 1 tarda más o menos la mitad en un portátil lento
+    whisper_haz: int = Field(default=5, ge=1, le=10)
+    # Leer el modelo de voz al arrancar, para que la primera frase no espere (lo activa sustentacion.py)
+    precargar_voz: bool = False
     # Ruta al archivo .onnx de una voz de Piper en español; vacío usa la voz del navegador
     voz_piper: str = ""
 
