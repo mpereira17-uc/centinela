@@ -9,7 +9,7 @@ from app.config import ajustes
 from app.main import app
 
 cliente = TestClient(app)
-PAGINAS = ("/", "/llamada.html", "/acompanante.html", "/practica.html", "/ayuda.html", "/cuenta.html", "/instalar.html")
+PAGINAS = ("/", "/llamada.html", "/acompanante.html", "/practica.html", "/ayuda.html", "/cuenta.html", "/instalar.html", "/comunidad.html")
 
 
 @pytest.fixture(autouse=True)

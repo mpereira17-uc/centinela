@@ -7,8 +7,8 @@
 
 const VERSION = "centinela-v3";
 const INTERFAZ = [
-  "/", "/index.html", "/llamada.html", "/acompanante.html", "/practica.html", "/ayuda.html", "/cuenta.html", "/instalar.html",
-  "/estilos.css", "/comun.js", "/app.js", "/llamada.js", "/acompanante.js", "/practica.js", "/ayuda.js", "/cuenta.js", "/instalar.js",
+  "/", "/index.html", "/llamada.html", "/acompanante.html", "/practica.html", "/ayuda.html", "/cuenta.html", "/instalar.html", "/comunidad.html",
+  "/estilos.css", "/comun.js", "/app.js", "/llamada.js", "/acompanante.js", "/practica.js", "/ayuda.js", "/cuenta.js", "/instalar.js", "/comunidad.js",
   "/manifest.webmanifest", "/iconos/icono-192.png", "/iconos/icono-512.png",
   "/buho/icono.svg", "/buho/tranquilo.svg", "/buho/atento.svg", "/buho/alerta.svg", "/buho/alarmado.svg",
 ];

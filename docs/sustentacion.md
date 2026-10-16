@@ -69,7 +69,7 @@ Se guardan solo en la base del portátil. Para borrarlos: desde `backend/`, `pyt
 3. **Modo acompañante.** Llama desde tu celular al número de un jurado, por la red normal. El jurado pone el altavoz y otro jurado abre *Acompañante* en su celular y toca *Empezar a escuchar*. Haz el papel de estafador ("le hablamos del banco… dícteme el código que le llegó") y la alerta aparece en el segundo celular.
 4. **Llamada por Centinela.** Desde *Llamada*, crea una llamada, dicta el código al jurado y que se una con *Recibo la llamada*. Ve el aviso directo en su pantalla, sin altavoz.
 5. **Práctica.** Un jurado hace una ronda del modo práctica.
-6. **Cierre.** Muestra *¿Cómo terminó?* y explica los límites de la sección anterior.
+6. **Cierre.** Proyecta el *Tablero de la comunidad* (desde la página de instalar) mientras los jurados reportan desde su celular el número que les llamó en la demo: el total sube solo. Muestra *¿Cómo terminó?* y explica los límites de la sección anterior.
 
 ## Lista de ensayo (hazla con dos días de anticipación)
 

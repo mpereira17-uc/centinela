@@ -768,6 +768,33 @@ details[open] > summary::after { transform: rotate(90deg); }
 
 /* ---------- Movimiento (solo si la persona no pidió reducirlo) ---------- */
 
+/* ---------- Tablero de la comunidad ---------- */
+
+.vivo { display: flex; align-items: center; gap: .5rem; margin: .7rem 0 0; color: var(--texto-suave); font-size: .95rem; }
+.vivo-punto { width: .7rem; height: .7rem; border-radius: 50%; background: var(--bajo-solido); flex: none; }
+.dato-principal { display: flex; align-items: center; gap: 1.1rem; margin-top: 1rem; }
+.dato-principal .dato-buho { flex: none; }
+.dato-etiqueta { margin: 0; color: var(--texto-suave); font-weight: 700; }
+.dato-heroe { margin: 0; font-size: 3.6rem; line-height: 1; font-weight: 800; color: var(--texto); }
+.dato-valor { margin: .2rem 0 0; font-size: 2.3rem; line-height: 1.05; font-weight: 800; color: var(--texto); }
+.dato-nota { margin: .25rem 0 0; color: var(--texto-suave); font-size: .9rem; }
+.datos { list-style: none; padding: 0; margin: 1rem 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+.dato { background: var(--superficie); border: 1px solid var(--borde); border-radius: 22px; padding: 1rem; }
+.barras { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+.barras li { display: grid; grid-template-columns: 1fr auto; gap: .35rem .75rem; align-items: baseline; }
+.barra-nombre { font-weight: 700; }
+.barra-valor { color: var(--texto-suave); font-weight: 700; white-space: nowrap; }
+/* Barras finas que crecen desde la izquierda, con el extremo del dato redondeado */
+.barra-pista { grid-column: 1 / -1; height: 18px; border-radius: 0 4px 4px 0; background: var(--fondo-2); }
+.barra-dato { display: block; height: 100%; width: var(--ancho, 0%); min-width: 6px; border-radius: 0 4px 4px 0; background: var(--primario); transition: width .4s ease-out; }
+/* En el computador o el proyector de la sustentación, el tablero usa más ancho */
+@media (min-width: 900px) {
+  main.tablero { max-width: 960px; }
+  body:has(> main.tablero) { --ancho: 960px; }
+  .datos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .tablero .dato-heroe { font-size: 4.5rem; }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   @view-transition { navigation: auto; }
   html { scroll-behavior: smooth; }
@@ -779,6 +806,9 @@ details[open] > summary::after { transform: rotate(90deg); }
   .mas a:active, .mas button:active { background: var(--campo); }
 
   .vista:not(.oculto) { animation: aparecer .22s ease-out; }
+  .subio { animation: subio .9s ease-out; }
+  @keyframes subio { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--primario) 55%, transparent); transform: scale(1.03); } 100% { box-shadow: 0 0 0 16px transparent; transform: none; } }
+  .vivo-punto { animation: titilar 1.6s ease-in-out infinite; }
   .saludo-buho { animation: saludar 2.6s ease-in-out 1; transform-origin: 50% 90%; }
   @keyframes saludar { 0%, 100% { transform: rotate(0); } 15% { transform: rotate(-5deg); } 30% { transform: rotate(4deg); } 45% { transform: rotate(-2deg); } 60% { transform: rotate(0); } }
 

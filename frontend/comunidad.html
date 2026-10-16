@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#07142e" media="(prefers-color-scheme: dark)">
+  <title>Tablero de la comunidad · Centinela</title>
+  <meta name="description" content="Lo que reportaron las personas de Centinela esta semana, solo con totales.">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/buho/icono.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/iconos/apple-touch-icon.png">
+  <link rel="stylesheet" href="/estilos.css">
+  <script src="/comun.js" defer></script>
+  <script src="/comunidad.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#principal">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <a class="marca" href="/">
+      <img class="marca-buho" src="/buho/icono.svg" alt="" width="42" height="42">
+      <span>Centinela</span>
+    </a>
+    <button type="button" id="tamano-letra" class="tamano" aria-pressed="false" aria-label="Usar letra grande"><span aria-hidden="true">A<span>a</span></span></button>
+  </header>
+
+  <main id="principal" class="tablero">
+    <div class="panel-cabeza">
+      <a class="volver" href="/" aria-label="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></a>
+      <h1 id="tablero-titulo">Tablero de la comunidad</h1>
+    </div>
+    <p class="panel-intro">Lo que reportaron las personas de Centinela en los últimos 7 días. Solo totales: nadie ve quién reportó ni qué números.</p>
+    <p class="vivo"><span class="vivo-punto" aria-hidden="true"></span><span id="tablero-hora">Cargando…</span></p>
+
+    <section class="tarjeta dato-principal" aria-labelledby="t-estafa">
+      <img class="dato-buho" src="/buho/alerta.svg" alt="" width="84" height="84">
+      <div>
+        <p class="dato-etiqueta" id="t-estafa">Reportes de estafa</p>
+        <p class="dato-heroe" id="v-estafa">–</p>
+        <p class="dato-nota" id="v-numeros"></p>
+      </div>
+    </section>
+
+    <ul class="datos" aria-label="Totales de la semana">
+      <li class="dato"><p class="dato-etiqueta">No cayeron</p><p class="dato-valor" id="v-intento">–</p><p class="dato-nota">Intentaron estafarlos</p></li>
+      <li class="dato"><p class="dato-etiqueta">Perdieron algo</p><p class="dato-valor" id="v-perdida">–</p><p class="dato-nota">Dinero, datos o una cuenta</p></li>
+      <li class="dato"><p class="dato-etiqueta">Publicidad o call center</p><p class="dato-valor" id="v-publicidad">–</p><p class="dato-nota">No cuenta como estafa</p></li>
+      <li class="dato"><p class="dato-etiqueta">No cayeron tras un aviso</p><p class="dato-valor" id="v-avisos">–</p><p class="dato-nota">Lo contaron al colgar</p></li>
+    </ul>
+
+    <section class="tarjeta" aria-labelledby="modalidades-titulo">
+      <h2 id="modalidades-titulo">Modalidades más reportadas</h2>
+      <ol id="modalidades" class="barras"></ol>
+      <p id="sin-modalidades" class="ayuda oculto">Todavía no hay reportes de estafa esta semana. Cuando alguien reporte un número, aparece aquí.</p>
+    </section>
+
+    <p id="tablero-ejemplo" class="ayuda oculto"></p>
+    <p class="ayuda">Son reportes de la comunidad sin verificar. Un número con reportes no queda confirmado como estafa por estar aquí.</p>
+    <p id="tablero-error" class="error" role="status"></p>
+    <p id="tablero-novedad" class="visualmente-oculto" role="status" aria-live="polite"></p>
+  </main>
+
+  <nav class="barra" aria-label="Secciones">
+    <a href="/" aria-current="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</a>
+    <a href="/ayuda.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m5.6 5.6 3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></svg>Ayuda</a>
+    <a href="/cuenta.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Cuenta</a>
+  </nav>
+</body>
+</html>

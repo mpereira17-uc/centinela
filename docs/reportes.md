@@ -72,6 +72,15 @@ La llamada en memoria guarda la reputación y la referencia HMAC del número (pa
 
 Quien reportó puede ver sus reportes y retirarlos en "Mi cuenta". Eliminar la cuenta retira todos sus reportes, y la exportación de datos los incluye con sus últimos 4 dígitos.
 
+## Tablero de la comunidad
+
+Pantalla `/comunidad.html` (en **Más opciones** del inicio y en la página de instalar) con lo que llegó en los últimos 7 días: reportes de estafa y de cuántos números distintos, cuántas personas no cayeron, cuántas perdieron algo, cuánta publicidad o call center y cuántas personas contaron al colgar que no cayeron después de un aviso de Centinela. Abajo, las modalidades más reportadas con barras. Se actualiza sola cada 10 segundos y el total que sube late, así en la sustentación se ve moverse cuando los jurados reportan.
+
+- **Solo totales** (`GET /comunidad/tablero`): ni alias, ni números, ni terminaciones. Ningún total permite llegar a una persona (Ley 1581).
+- Cuenta **todos los reportes que llegaron**, también los de cuentas nuevas que todavía no pesan en la reputación de un número. Por eso dice "sin verificar": estar en el tablero no confirma que un número sea estafa.
+- Si hay datos de ejemplo de la demostración, dice cuántos son ("Incluye 8 reportes de ejemplo…").
+- En un computador o un proyector usa más ancho y pone los cuatro totales en una fila.
+
 ## API
 
 | Método y ruta | Uso |
