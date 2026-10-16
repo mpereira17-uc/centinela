@@ -23,6 +23,8 @@ class Ajustes(BaseSettings):
     whisper_haz: int = Field(default=5, ge=1, le=10)
     # Leer el modelo de voz al arrancar, para que la primera frase no espere (lo activa sustentacion.py)
     precargar_voz: bool = False
+    # Llave de la pantalla del presentador; vacía la apaga (la pone sustentacion.py en cada arranque)
+    presentador_llave: str = ""
     # Ruta al archivo .onnx de una voz de Piper en español; vacío usa la voz del navegador
     voz_piper: str = ""
 

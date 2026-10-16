@@ -928,3 +928,57 @@ details[open] > summary::after { transform: rotate(90deg); }
 .saludo + .servicios { margin-top: 1rem; }
 #caja-numero-llamada { margin-top: 1.1rem; }
 .tarjeta > .ayuda:first-child { margin-top: 0; }
+
+/* ---------- Resumen al colgar ---------- */
+
+.resumen-cuerpo p { margin: .2rem 0 .6rem; }
+.resumen-senales { list-style: none; padding: 0; margin: 0 0 .9rem; }
+.resumen-senales li { display: flex; gap: .7rem; align-items: baseline; padding: .45rem 0; border-bottom: 1px solid var(--borde); }
+.resumen-senales li:last-child { border-bottom: 0; }
+.resumen-senales strong { flex: none; min-width: 3.2rem; font-variant-numeric: tabular-nums; color: var(--primario-fuerte); }
+
+/* ---------- Tarjetas de estafador ---------- */
+
+.guion { list-style: none; padding: 0; margin: .5rem 0 1rem; display: grid; gap: .65rem; }
+.guion li { border-radius: 16px; padding: .7rem .9rem; background: var(--chip); }
+/* Quien llama se ve igual en una estafa que en una llamada normal: el color no debe delatar la respuesta */
+.guion li[data-hablante="llamante"] { background: var(--superficie); border: 2px solid var(--primario); }
+.guion li p { margin: .15rem 0 0; font-size: 1.15rem; }
+.guion li[data-hablante="llamante"] p { font-size: 1.3rem; font-weight: 700; }
+.guion-quien { font-size: .85rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--texto-suave); }
+.respuesta-tarjeta { font-weight: 700; font-size: 1.15rem; padding: .8rem 1rem; border-radius: 14px; background: var(--bajo-fondo); color: var(--bajo); }
+.respuesta-tarjeta[data-estafa="true"] { background: var(--critico-fondo); color: var(--critico); }
+
+/* ---------- Pantalla del presentador (video beam) ---------- */
+
+.pagina-proyeccion { --ancho: 1400px; }
+.proy-cabeza { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: .5rem; }
+.proy-cabeza h1 { font-size: clamp(1.8rem, 3.2vw, 2.8rem); margin: 0; }
+.proy-qr { margin: 0; text-align: center; font-size: .85rem; color: var(--texto-suave); }
+.proy-qr img { display: block; width: 132px; height: 132px; border-radius: 12px; background: #fff; padding: 6px; }
+.proy-cuerpo { display: grid; gap: 1.2rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1000px) { .proy-cuerpo { grid-template-columns: minmax(0, 2.2fr) minmax(300px, 1fr); align-items: start; } }
+.proy-llamada h2 { font-size: 1.6rem; margin: 0; }
+.proy-llamada > .ayuda { margin: .1rem 0 .7rem; }
+.proy-primeros { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: .8rem; }
+.proy-primero { border-radius: 999px; padding: .35rem .85rem; background: var(--chip); font-size: 1rem; }
+.proy-primero[data-aviso="true"] { background: var(--alto-fondo); color: var(--alto); }
+.proy-primero[data-visible="true"] { outline: 2px solid var(--primario); }
+.proy-frases { list-style: none; padding: 0; margin: 0; display: grid; gap: .6rem; }
+.proy-frases li { border-radius: 14px; padding: .7rem .9rem; border: 1px solid var(--borde); }
+.proy-frases li.proy-aviso { border: 3px solid var(--critico-solido); }
+.proy-texto { margin: 0 0 .45rem; font-size: clamp(1.15rem, 1.8vw, 1.6rem); font-weight: 600; }
+.proy-niveles { display: flex; flex-wrap: wrap; gap: .4rem; }
+.proy-nivel { border-radius: 999px; padding: .2rem .7rem; font-size: .95rem; font-weight: 700; }
+.proy-nivel[data-nivel="bajo"] { background: var(--bajo-fondo); color: var(--bajo); }
+.proy-nivel[data-nivel="moderado"] { background: var(--moderado-fondo); color: var(--moderado); }
+.proy-nivel[data-nivel="alto"] { background: var(--alto-fondo); color: var(--alto); }
+.proy-nivel[data-nivel="critico"] { background: var(--critico-fondo); color: var(--critico); }
+.proy-nivel[data-alerta="true"] { box-shadow: inset 0 0 0 2px currentColor; }
+.proy-meta { display: block; margin-top: .35rem; font-size: .9rem; color: var(--texto-suave); font-variant-numeric: tabular-nums; }
+.proy-desenlace { margin: .8rem 0 0; font-weight: 700; }
+.tabla-cifras { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; margin: .4rem 0; }
+.tabla-cifras th, .tabla-cifras td { text-align: left; padding: .45rem .3rem; border-bottom: 1px solid var(--borde); }
+.tabla-cifras td { text-align: right; white-space: nowrap; }
+.tabla-cifras thead th { font-size: .85rem; color: var(--texto-suave); }
+.tabla-cifras thead th:not(:first-child) { text-align: right; }

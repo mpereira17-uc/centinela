@@ -45,6 +45,14 @@
         <label for="numero-llamada" class="etiqueta">Número que aparece en tu pantalla (opcional)</label>
         <input type="tel" id="numero-llamada" class="campo" maxlength="25" autocomplete="off" placeholder="300 123 4567" aria-describedby="numero-llamada-ayuda">
         <p id="numero-llamada-ayuda" class="ayuda">Si lo escribes, Centinela revisa sus reportes y al colgar puedes reportarlo con un toque.</p>
+        <label class="consentimiento">
+          <input type="checkbox" id="aviso-voz" checked>
+          <span>Decir los avisos en voz alta.</span>
+        </label>
+        <label id="caja-proyectar" class="consentimiento oculto">
+          <input type="checkbox" id="proyectar">
+          <span>Mostrar esta llamada en la pantalla del presentador. Solo durante la sustentación: lo que se diga se verá en el video beam.</span>
+        </label>
       </div>
       <label class="consentimiento">
         <input type="checkbox" id="consentimiento">
@@ -118,6 +126,10 @@
           </div>
           <p id="nivel-mensaje" class="nivel-mensaje"></p>
           <p id="escucha" class="ayuda" role="status"></p>
+        </section>
+        <section id="resumen" class="tarjeta oculto" aria-labelledby="resumen-titulo">
+          <h2 id="resumen-titulo">Lo que detectó Centinela</h2>
+          <div class="resumen-cuerpo"></div>
         </section>
         <section id="desenlace" class="tarjeta oculto" aria-labelledby="desenlace-titulo">
           <h2 id="desenlace-titulo">¿Cómo terminó?</h2>

@@ -413,7 +413,155 @@
     mostrar();
   }
 
-  window.Centinela = { consejoFamiliar, completarAviso, normalizarCelular, textoParaContacto };
+
+  // ---- Aviso hablado durante la llamada ----
+  // Cuando el aviso es alto o crítico, el celular lo dice en voz alta, para quien no está mirando la
+  // pantalla. Dentro de la app de Android lo dice la app (el WebView no trae voz); en el navegador, la voz
+  // del sistema. Se apaga con la casilla "Decir los avisos en voz alta", que queda guardada en el celular.
+  const CLAVE_VOZ = "centinela-aviso-voz";
+  const FRASES_VOZ = [
+    ["pide_codigo", "Cuidado: te están pidiendo un código. No lo digas."],
+    ["pide_datos_bancarios", "Cuidado: te piden datos de tu tarjeta o tu cuenta. No los des."],
+    ["pide_transferencia", "Cuidado: te están pidiendo plata. No transfieras."],
+    ["acceso_remoto", "Cuidado: te piden instalar una aplicación. No la instales."],
+    ["desactivar_seguridad", "Cuidado: te piden quitar una protección. No lo hagas."],
+    ["finge_conocido", "Cuidado: puede ser un falso familiar. Cuelga y llama tú a su número de siempre."],
+    ["emergencia_familiar", "Cuidado: puede ser un falso familiar. Cuelga y llama tú a su número de siempre."],
+    ["amenaza", "Cuidado: te están amenazando para asustarte. Cuelga y verifica."],
+    ["suplanta_entidad", "Cuidado: dicen llamar de una entidad. Cuelga y llama tú al número oficial."],
+  ];
+
+  function avisoEnVoz() {
+    return guardado.leer(CLAVE_VOZ) !== "no";
+  }
+
+  function fraseDeVoz(senales = []) {
+    const ids = new Set(senales.map((x) => x.id || x));
+    const familia = ids.has("finge_conocido") || ids.has("emergencia_familiar");
+    if (familia && tienePalabraClave()) return "Cuidado: puede ser un falso familiar. Pregúntale la palabra clave.";
+    const hallada = FRASES_VOZ.find(([id]) => ids.has(id));
+    return hallada ? hallada[1] : "Cuidado: esta llamada parece una estafa. Cuelga y verifica.";
+  }
+
+  function decir(texto) {
+    const app = window.CentinelaApp;
+    if (app && typeof app.postMessage === "function") {
+      try { app.postMessage(JSON.stringify({ tipo: "decir", texto })); return true; } catch { /* sigue con la del navegador */ }
+    }
+    if (!("speechSynthesis" in window)) return false;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(texto);
+    u.lang = "es-CO";
+    u.rate = 0.95;
+    const voz = speechSynthesis.getVoices().find((v) => /^es[-_]CO/i.test(v.lang)) || speechSynthesis.getVoices().find((v) => /^es/i.test(v.lang));
+    if (voz) u.voice = voz;
+    speechSynthesis.speak(u);
+    return true;
+  }
+
+  // Devuelve cuántos milisegundos puede tardar en decirlo (0 si no dijo nada), para dejar de escuchar mientras
+  function decirAviso(decision) {
+    if (!decision || !["alto", "critico"].includes(decision.nivel) || !avisoEnVoz()) return 0;
+    const texto = fraseDeVoz(decision.senales);
+    if (!decir(texto)) return 0;
+    return Math.round(texto.split(/\s+/).length * 380 + 1000);
+  }
+
+  function iniciarAvisoVoz() {
+    const casilla = $("#aviso-voz");
+    if (!casilla) return;
+    casilla.checked = avisoEnVoz();
+    casilla.addEventListener("change", () => guardado.escribir(CLAVE_VOZ, casilla.checked ? "si" : "no"));
+  }
+
+  // ---- Resumen al colgar: qué detectó Centinela y cuándo ----
+  const SENAL_CORTA = {
+    pide_codigo: "pidió un código o una clave", pide_datos_bancarios: "pidió datos de tarjeta o cuenta",
+    pide_transferencia: "pidió plata o una transferencia", acceso_remoto: "pidió instalar una aplicación",
+    desactivar_seguridad: "pidió quitar una protección", urgencia: "presionó para actuar ya", amenaza: "amenazó",
+    aislamiento: "pidió guardar secreto o no colgar", suplanta_entidad: "dijo llamar de una entidad",
+    premio_inversion: "ofreció un premio, un crédito o una inversión", finge_conocido: "dijo ser un familiar o conocido",
+    emergencia_familiar: "contó una emergencia", pide_datos_personales: "pidió datos personales",
+    numero_reportado: "llamó desde un número con reportes de otras personas", patron_aprendido: "dijo frases parecidas a estafas conocidas",
+    voz_sintetica: "tenía una voz que podría ser hecha por computador", voz_dudosa: "tenía una voz que podría ser imitada",
+  };
+  const ETIQUETA_NIVEL = { bajo: "bajo", moderado: "moderado", alto: "alto", critico: "crítico" };
+  const ORDEN_NIVEL = ["bajo", "moderado", "alto", "critico"];
+
+  function minutos(segundos) {
+    const s = Math.max(0, Math.round(Number(segundos) || 0));
+    return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+  }
+
+  // resultados: lo que respondió el servidor por cada frase ({ fragmento, decision_visible, mostrar_aviso })
+  function resumenDeLlamada(resultados) {
+    let nivel = "bajo";
+    let aviso = null;
+    const senales = new Map();
+    for (const r of resultados) {
+      const d = r.decision_visible;
+      if (ORDEN_NIVEL.indexOf(d.nivel) > ORDEN_NIVEL.indexOf(nivel)) nivel = d.nivel;
+      if (r.mostrar_aviso && aviso === null) aviso = r.fragmento.fin;
+      for (const x of d.senales || []) if (!senales.has(x.id)) senales.set(x.id, { id: x.id, segundo: r.fragmento.fin });
+    }
+    return { nivel, aviso, senales: [...senales.values()], frases: resultados.length };
+  }
+
+  function textoDelResumen(r, contacto) {
+    const saludo = contacto?.nombre ? `Hola ${contacto.nombre}` : "Hola";
+    const que = r.senales.map((x) => SENAL_CORTA[x.id]).filter(Boolean).join("; ");
+    return `${saludo}, Centinela revisó una llamada que recibí y la marcó con riesgo ${ETIQUETA_NIVEL[r.nivel]}. Quien llamó: ${que}. ¿Me ayudas a verificarlo? No voy a dar códigos, claves ni plata.`;
+  }
+
+  function pintarResumen(seccion, resultados) {
+    if (!seccion) return;
+    const r = resumenDeLlamada(resultados);
+    const cuerpo = seccion.querySelector(".resumen-cuerpo");
+    cuerpo.replaceChildren();
+    const p = document.createElement("p");
+    if (!r.frases) p.textContent = "Centinela no alcanzó a oír frases en esta llamada.";
+    else if (!r.senales.length) p.textContent = `Revisó ${r.frases} ${r.frases === 1 ? "frase" : "frases"} y no encontró nada sospechoso.`;
+    else p.textContent = `Riesgo más alto: ${ETIQUETA_NIVEL[r.nivel]}.${r.aviso !== null ? ` Te avisó al minuto ${minutos(r.aviso)}.` : ""}`;
+    cuerpo.append(p);
+    if (r.senales.length) {
+      const lista = document.createElement("ul");
+      lista.className = "resumen-senales";
+      for (const x of r.senales) {
+        const li = document.createElement("li");
+        const t = document.createElement("strong");
+        t.textContent = minutos(x.segundo);
+        li.append(t, ` Quien llamó ${SENAL_CORTA[x.id] || x.id}.`);
+        lista.append(li);
+      }
+      cuerpo.append(lista);
+    }
+    const c = leerContacto();
+    if (c && r.senales.length && r.nivel !== "bajo") {
+      const a = document.createElement("a");
+      a.className = "boton-secundario";
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      const numero = "57" + normalizarCelular(c.telefono);
+      const texto = encodeURIComponent(textoDelResumen(r, c));
+      a.href = c.canal === "whatsapp" ? `https://wa.me/${numero}?text=${texto}` : `sms:+${numero}?body=${texto}`;
+      a.textContent = `Contárselo a ${c.nombre || "mi contacto"}`;
+      cuerpo.append(a);
+    }
+    seccion.classList.remove("oculto");
+  }
+
+  // ---- Pantalla del presentador (solo en la sustentación) ----
+  // La casilla para mostrar la llamada en el video beam la muestra cada pantalla de llamada si la
+  // sustentación la activó; aquí solo se lee. Este archivo no habla con el servidor.
+  function quiereProyectar() {
+    const caja = $("#caja-proyectar");
+    return Boolean(caja && !caja.classList.contains("oculto") && $("#proyectar")?.checked);
+  }
+
+  window.Centinela = {
+    consejoFamiliar, completarAviso, normalizarCelular, textoParaContacto,
+    decirAviso, fraseDeVoz, resumenDeLlamada, pintarResumen, textoDelResumen, quiereProyectar,
+  };
 
   // ---- App instalable: el service worker solo guarda la interfaz, nunca respuestas de la API ----
   function registrarApp() {
@@ -431,5 +579,6 @@
     iniciarAlerta();
     iniciarNivel();
     iniciarConversaciones();
+    iniciarAvisoVoz();
   });
 })();

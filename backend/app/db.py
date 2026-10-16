@@ -80,6 +80,18 @@ CREATE TABLE IF NOT EXISTS desenlaces (
     aviso INTEGER NOT NULL,
     resultado TEXT NOT NULL
 );
+-- Cuándo avisó cada estrategia en cada llamada, para las cifras del documento. Sin texto, número ni cuenta.
+CREATE TABLE IF NOT EXISTS metricas_llamadas (
+    id TEXT PRIMARY KEY,
+    creada REAL NOT NULL,
+    origen TEXT NOT NULL,
+    proyectada INTEGER NOT NULL DEFAULT 0,
+    fragmentos INTEGER NOT NULL,
+    alertas TEXT NOT NULL,
+    niveles TEXT NOT NULL,
+    respuesta_media REAL,
+    desenlace TEXT
+);
 CREATE TABLE IF NOT EXISTS retos (
     id TEXT PRIMARY KEY,
     usuario_id TEXT REFERENCES usuarios(id) ON DELETE CASCADE,

@@ -26,7 +26,8 @@ import androidx.webkit.WebViewFeature
 /**
  * La app es la misma interfaz web de Centinela dentro de un WebView, más lo que solo una app nativa
  * puede hacer: el filtro de llamadas ([FiltroLlamadas]) y sus avisos, recibir mensajes compartidos
- * desde otras apps ([Compartido]) y no apagar la pantalla mientras el modo acompañante escucha ([Pantalla]).
+ * desde otras apps ([Compartido]), no apagar la pantalla mientras el modo acompañante escucha ([Pantalla])
+ * y decir en voz alta los avisos de la llamada ([VozPagina]).
  */
 class MainActivity : ComponentActivity() {
     companion object {
@@ -38,6 +39,8 @@ class MainActivity : ComponentActivity() {
     private var permisoPendiente: PermissionRequest? = null
     // Texto compartido desde otra app, hasta que la página lo pida
     private var compartido: String? = null
+    // Voz para decir los avisos durante la llamada; se crea la primera vez que la página la pide
+    private var voz: VozPagina? = null
 
     private val pedirMicrofono = registerForActivityResult(ActivityResultContracts.RequestPermission()) { concedido ->
         permisoPendiente?.let { if (concedido) it.grant(arrayOf(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) else it.deny() }
@@ -123,6 +126,12 @@ class MainActivity : ComponentActivity() {
         if (::web.isInitialized && (intent.hasExtra(EXTRA_NUMERO) || esCompartido(intent))) web.loadUrl(direccion(intent))
     }
 
+    override fun onDestroy() {
+        voz?.cerrar()
+        voz = null
+        super.onDestroy()
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (::web.isInitialized) web.saveState(outState)
@@ -151,8 +160,11 @@ class MainActivity : ComponentActivity() {
                     return@addWebMessageListener
                 }
                 val pantalla = Pantalla.leer(mensaje.data)
+                val decir = VozPagina.leer(mensaje.data)
                 if (pantalla != null) {
                     mantenerPantalla(pantalla)
+                } else if (decir != null) {
+                    (voz ?: VozPagina(this).also { voz = it }).decir(decir)
                 } else if (Compartido.esPedido(mensaje.data)) {
                     // Se entrega una sola vez: recargar la página no lo vuelve a analizar
                     respuesta.postMessage(Compartido.respuesta(compartido))

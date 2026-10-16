@@ -8,6 +8,7 @@ Lee los mismos archivos de datos/guiones/ que usan la evaluación y el entrenami
 así que la API y el modelo siempre ven la misma base. No guarda datos de usuarios.
 """
 import json
+import secrets
 from collections import Counter
 from dataclasses import asdict
 from functools import lru_cache
@@ -47,6 +48,13 @@ def listar(
     filtros = {"etiqueta": etiqueta, "categoria": categoria, "region": region, "particion": particion, "fuente": fuente}
     elegidos = [g for g in _base() if all(v is None or g[k] == v for k, v in filtros.items())]
     return {"total": len(elegidos), "desde": desde, "limite": limite, "guiones": elegidos[desde:desde + limite]}
+
+
+@router.get("/al-azar", dependencies=[Depends(limite_guiones)])
+def al_azar(etiqueta: Literal["riesgo", "legitima"] | None = None):
+    """Una tarjeta para la demostración: un guion cualquiera para leer en voz alta."""
+    elegibles = [g for g in _base() if etiqueta is None or g["etiqueta"] == etiqueta]
+    return secrets.choice(elegibles)
 
 
 @router.get("/resumen", dependencies=[Depends(limite_guiones)])

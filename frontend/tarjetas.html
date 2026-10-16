@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#07142e" media="(prefers-color-scheme: dark)">
+  <title>Tarjetas de estafador · Centinela</title>
+  <meta name="description" content="Guiones de llamadas para leer en voz alta y probar Centinela en vivo.">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/buho/icono.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/iconos/apple-touch-icon.png">
+  <link rel="stylesheet" href="/estilos.css">
+  <script src="/comun.js" defer></script>
+  <script src="/tarjetas.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#principal">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <a class="marca" href="/">
+      <img class="marca-buho" src="/buho/icono.svg" alt="" width="42" height="42">
+      <span>Centinela</span>
+    </a>
+    <button type="button" id="tamano-letra" class="tamano" aria-pressed="false" aria-label="Usar letra grande"><span aria-hidden="true">A<span>a</span></span></button>
+  </header>
+
+  <main id="principal">
+    <div class="panel-cabeza">
+      <a class="volver" href="/acompanante.html" aria-label="Volver al modo acompañante"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></a>
+      <h1 id="tarjetas-titulo">Tarjetas de estafador</h1>
+    </div>
+    <p class="panel-intro">Para probar Centinela sin improvisar: una persona lee en voz alta lo que dice quien llama y otra contesta. Centinela, en otro celular con el modo acompañante o en la llamada de prueba, escucha y avisa. Puede salir una estafa o una llamada normal.</p>
+
+    <section class="tarjeta" aria-labelledby="tarjetas-titulo">
+      <div class="acciones">
+        <button type="button" id="sacar" class="boton-principal boton-grande">Sacar una tarjeta</button>
+      </div>
+      <label class="consentimiento">
+        <input type="checkbox" id="solo-estafas">
+        <span>Solo estafas</span>
+      </label>
+      <p id="tarjeta-error" class="error" role="status"></p>
+      <div id="tarjeta" class="oculto" aria-live="polite">
+        <p id="tarjeta-pista" class="ayuda"></p>
+        <ol id="turnos" class="guion"></ol>
+        <div class="acciones">
+          <button type="button" id="revelar" class="boton-secundario">¿Era estafa? Ver la respuesta</button>
+        </div>
+        <p id="respuesta" class="respuesta-tarjeta oculto"></p>
+      </div>
+    </section>
+    <p class="centrado"><a class="enlace-boton" href="/acompanante.html">Abrir el modo acompañante</a> · <a class="enlace-boton" href="/llamada.html">Abrir la llamada de prueba</a></p>
+  </main>
+
+  <footer class="pie">
+    <p>Los guiones son inventados para el proyecto y no traen nombres ni datos de personas reales.</p>
+  </footer>
+
+  <nav class="barra" aria-label="Secciones">
+    <a href="/" aria-current="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</a>
+    <a href="/ayuda.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m5.6 5.6 3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></svg>Ayuda</a>
+    <a href="/cuenta.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Cuenta</a>
+  </nav>
+</body>
+</html>

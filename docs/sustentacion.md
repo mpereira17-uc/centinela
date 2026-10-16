@@ -9,6 +9,8 @@ La idea es que cada jurado escanee un código QR, instale Centinela en su celula
 | Llamada entre redes | La llamada de prueba conecta aunque cada celular esté en una red distinta (datos o Wi‑Fi) | `GET /webrtc/ice` |
 | Arranque | Un comando enciende el servidor en el portátil con una dirección pública HTTPS, muestra el QR y deja la voz cargada | `sustentacion.py` |
 | Revisión previa | Cada celular revisa, con su propia red, que la llamada conecte entre redes, que la voz esté lista y que el micrófono oiga | `revisar.html` |
+| Pantalla del presentador | En el video beam se ve en vivo lo que oye el celular del jurado, con las tres estrategias de la tesis lado a lado y en qué frase avisó cada una | `presentador.html` |
+| Tarjetas de estafador | Un guion al azar de la base para leerlo en voz alta; puede ser estafa o llamada normal | `tarjetas.html` |
 
 ## Por qué así y no desde la Play Store
 
@@ -69,11 +71,20 @@ Para mostrar el [bloqueo opcional](bloqueo.md), enciende *Ajustes > Rechazar lla
 
 Se guardan solo en la base del portátil. Para borrarlos: desde `backend/`, `python -m app.demo --quitar`. Dilo tal cual a los jurados: son datos de ejemplo; los reportes reales que hagan ellos en la demo cuentan aparte.
 
+## Pantalla del presentador y cifras para el documento
+
+`python sustentacion.py` abre en el portátil la **pantalla del presentador** con una llave nueva en cada arranque (la terminal muestra el enlace; la llave se borra de la dirección al abrirla, para que no quede proyectada). Proyéctala en el video beam.
+
+- Solo aparecen las llamadas en las que el jurado marcó **Mostrar esta llamada en la pantalla del presentador** antes de empezar. Esa casilla solo existe mientras la pantalla está encendida.
+- Por cada frase se ve lo que dijo quien llama, el nivel que le dio cada estrategia (por frase, acumulada e híbrida) y cuánto tardó el portátil. Arriba de cada llamada, en qué frase avisó primero cada una: es la comparación que evalúa la tesis, en vivo.
+- A la derecha, **Las tres estrategias, hoy**: en cuántas llamadas avisó cada una, en qué frase en promedio y cuántas falsas alarmas tuvo según *¿Cómo terminó?*.
+- **Descargar cifras (CSV)** baja una fila por llamada analizada (también las que no se proyectaron): fecha, origen (voz o texto), si se proyectó, número de frases, cómo terminó, tiempo de respuesta y, por cada estrategia, frase y segundo del primer aviso y nivel máximo. No lleva texto, número ni cuenta, y su identificador no es el de la llamada. Sin la pantalla, el mismo CSV sale con `python -m app.metricas` desde `backend/`. Las llamadas de la demo quedan marcadas como proyectadas para separarlas de las del piloto.
+
 ## Guion de la demostración
 
 1. **Instalar.** Proyecta `/instalar.html`. Los jurados escanean el QR y tocan *Instalar Centinela* (en iPhone: Compartir → Agregar a inicio).
 2. **Revisar un mensaje.** Envíale a un jurado por WhatsApp un SMS sospechoso inventado. El jurado lo mantiene presionado, busca *Compartir* y elige Centinela: el aviso aparece sin copiar ni pegar. Si en su celular no aparece *Compartir*, que lo copie y lo pegue en *Revisar un mensaje*.
-3. **Modo acompañante.** Llama desde tu celular al número de un jurado, por la red normal. El jurado pone el altavoz y otro jurado abre *Acompañante* en su celular y toca *Empezar a escuchar*. Haz el papel de estafador ("le hablamos del banco… dícteme el código que le llegó") y la alerta aparece en el segundo celular.
+3. **Modo acompañante.** Llama desde tu celular al número de un jurado, por la red normal. El jurado pone el altavoz y otro jurado abre *Acompañante* en su celular, marca *Mostrar esta llamada en la pantalla del presentador* y toca *Empezar a escuchar*. Abre una **tarjeta de estafador** (`/tarjetas.html`) y lee en voz alta las frases de *Quien llama*; el jurado lee las de *Quien contesta*. El aviso aparece en el segundo celular, que además lo dice en voz alta ("Cuidado: te están pidiendo un código. No lo digas."), y en el video beam se ve qué estrategia avisó primero. Al terminar, el celular muestra *Lo que detectó Centinela* con el minuto de cada señal y un botón para contárselo al contacto de confianza. Saca otra tarjeta: si sale una llamada normal, Centinela no debería alarmar.
 4. **Llamada por Centinela.** Desde *Llamada*, crea una llamada, dicta el código al jurado y que se una con *Recibo la llamada*. Ve el aviso directo en su pantalla, sin altavoz.
 5. **Práctica.** Un jurado toca "Practicar esta" en la estafa de la semana del inicio y hace las 5 llamadas de ese nivel. Con 4 de 5 gana la insignia y se ve la racha; si no, sale "Intentar otra vez".
 6. **Cierre.** Proyecta el *Tablero de la comunidad* (desde la página de instalar) mientras los jurados reportan desde su celular el número que les llamó en la demo: el total sube solo. Muestra *¿Cómo terminó?* y explica los límites de la sección anterior.
@@ -105,11 +116,15 @@ Antes, el celular enviaba el audio en trozos fijos de 6 segundos: una frase como
 - [ ] Llamada por Centinela entre un celular con datos y otro en Wi‑Fi: se oyen y aparece el aviso.
 - [ ] En plena llamada por Centinela, apaga los datos del celular que llama 5 segundos y vuelve a encenderlos: la llamada debe seguir sola.
 - [ ] Deja el modo acompañante escuchando 2 minutos sin tocar el celular: la pantalla no se apaga (en la app de Android y en Chrome).
+- [ ] El aviso se oye en voz alta en el celular del modo acompañante (en la app de Android lo dice la app; si el celular no tiene voz en español instalada, no dice nada) y la frase siguiente se sigue analizando.
+- [ ] La pantalla del presentador se ve bien en el video beam del salón y muestra la llamada marcada.
 - [ ] Grabar en video los pasos 1 a 4 del guion: es el **plan B** si falla internet en el salón.
 - [ ] Llevar el cargador del portátil y, por si acaso, activar el punto de acceso del celular como red de respaldo.
 
 ## Privacidad
 
+- La pantalla del presentador solo muestra llamadas marcadas por quien escucha, vive en la memoria del portátil y se borra al apagarlo o con *Limpiar la pantalla*. Sin el enlace con la llave no se ve nada.
+- Las cifras para el documento no guardan texto, número ni cuenta.
 - El audio del modo acompañante se transcribe en el portátil y se descarta; no se guarda. La pantalla pide confirmar que las personas de la llamada saben que se escucha.
 - El service worker guarda solo la interfaz (HTML, CSS, JS e íconos), nunca respuestas de la API.
 - Las claves del TURN viven en `backend/.env`, que no se versiona, y nunca se escriben en los registros.

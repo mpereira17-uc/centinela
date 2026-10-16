@@ -50,6 +50,14 @@
         <p id="numero-llamada-ayuda" class="ayuda">Si lo escribes, Centinela revisa sus reportes y al terminar puedes reportarlo con un toque.</p>
       </div>
       <label class="consentimiento">
+        <input type="checkbox" id="aviso-voz" checked>
+        <span>Decir los avisos en voz alta. Quien llama también puede oírlos por el altavoz.</span>
+      </label>
+      <label id="caja-proyectar" class="consentimiento oculto">
+        <input type="checkbox" id="proyectar">
+        <span>Mostrar esta llamada en la pantalla del presentador. Solo durante la sustentación: lo que se diga se verá en el video beam.</span>
+      </label>
+      <label class="consentimiento">
         <input type="checkbox" id="consentimiento">
         <span>Las personas de la llamada saben que Centinela la escucha para avisar de estafas y están de acuerdo.</span>
       </label>
@@ -57,6 +65,7 @@
         <button type="button" id="empezar" class="boton-principal boton-grande">Empezar a escuchar</button>
       </div>
       <p id="preparar-error" class="error" role="status"></p>
+      <p class="ayuda centrado">¿Quieres probarlo sin una llamada real? <a href="/tarjetas.html">Saca una tarjeta de estafador</a> y léela en voz alta cerca de este aparato.</p>
       </div>
     </section>
 
@@ -98,6 +107,10 @@
           </div>
           <p id="nivel-mensaje" class="nivel-mensaje"></p>
           <p id="escucha" class="ayuda" role="status"></p>
+        </section>
+        <section id="resumen" class="tarjeta oculto" aria-labelledby="resumen-titulo">
+          <h2 id="resumen-titulo">Lo que detectó Centinela</h2>
+          <div class="resumen-cuerpo"></div>
         </section>
         <section id="desenlace" class="tarjeta oculto" aria-labelledby="desenlace-titulo">
           <h2 id="desenlace-titulo">¿Cómo terminó?</h2>

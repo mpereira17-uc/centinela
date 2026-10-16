@@ -7,6 +7,9 @@
 //
 // Si el navegador no deja medir el volumen, o el volumen llega en cero absoluto (pasa con algunos audios
 // de llamada en ciertos navegadores), vuelve a trozos fijos de unos segundos, como antes.
+//
+// Mientras Centinela dice un aviso en voz alta, lo que se graba se descarta (silenciar), para que no
+// analice su propia voz como si fuera la de quien llama.
 
 (function () {
   const MIN_TROZO = 1200;      // ms: menos que esto casi nunca es una frase
@@ -30,12 +33,12 @@
   function escuchar(flujo, opciones) {
     const tipo = tipoDeAudio();
     if (tipo === null) return null;
-    const estado = { activo: true, actual: null, medidor: null, ctx: null, modo: "pausas" };
+    const estado = { activo: true, actual: null, medidor: null, ctx: null, modo: "pausas", mudoHasta: 0, reloj: null };
 
     function nuevoTrozo() {
       const partes = [];
       const recorder = new MediaRecorder(flujo, tipo ? { mimeType: tipo } : undefined);
-      const trozo = { recorder, inicio: performance.now(), hayVoz: false, ultimaVoz: 0, enviar: false };
+      const trozo = { recorder, inicio: performance.now(), hayVoz: false, ultimaVoz: 0, enviar: false, mudo: performance.now() < estado.mudoHasta };
       recorder.addEventListener("dataavailable", (e) => { if (e.data.size) partes.push(e.data); });
       recorder.addEventListener("stop", () => {
         const audio = new Blob(partes, { type: recorder.mimeType || tipo || "audio/webm" });
@@ -50,7 +53,7 @@
       const viejo = estado.actual;
       estado.actual = estado.activo ? nuevoTrozo() : null;
       if (viejo && viejo.recorder.state === "recording") {
-        viejo.enviar = enviar;
+        viejo.enviar = enviar && !viejo.mudo;
         viejo.recorder.stop();
       }
     }
@@ -114,10 +117,20 @@
 
     return {
       get modo() { return estado.modo; },
+      // Descarta lo que se grabe durante ms (por ejemplo, mientras el celular dice un aviso)
+      silenciar(ms) {
+        if (!estado.activo) return;
+        estado.mudoHasta = Math.max(estado.mudoHasta, performance.now() + ms);
+        if (estado.actual) estado.actual.mudo = true;
+        clearTimeout(estado.reloj);
+        // Al terminar, se empieza un trozo limpio en vez de esperar al siguiente corte
+        estado.reloj = setTimeout(() => { if (estado.activo && estado.actual?.mudo) cortar(false); }, estado.mudoHasta - performance.now());
+      },
       detener() {
         if (!estado.activo) return;
         estado.activo = false;
         clearInterval(estado.medidor);
+        clearTimeout(estado.reloj);
         // Al colgar ya no se analiza nada más
         const t = estado.actual;
         if (t && t.recorder.state === "recording") t.recorder.stop();

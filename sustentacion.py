@@ -9,6 +9,7 @@ Uso, desde la carpeta del repositorio:
 2. Arranca el servidor de Centinela en este portátil, configurado para esa dirección.
 3. Muestra la dirección y el código QR que escanean los jurados.
 4. Dice si la llamada por Centinela conecta entre redes distintas y deja la voz lista para la primera frase.
+5. Abre la pantalla del presentador para el video beam, con una llave nueva en cada arranque.
 
 Ctrl+C apaga todo. La dirección cambia cada vez que se arranca, así que el QR se vuelve a mostrar.
 Detalle y lista de ensayo en docs/sustentacion.md.
@@ -17,6 +18,7 @@ import argparse
 import json
 import os
 import re
+import secrets
 import shutil
 import subprocess
 import sys
@@ -120,7 +122,7 @@ def mostrar_qr(url: str):
 def main():
     parser = argparse.ArgumentParser(description="Enciende Centinela para la sustentación.")
     parser.add_argument("--puerto", type=int, default=8000)
-    parser.add_argument("--sin-navegador", action="store_true", help="No abrir la página de instalación en este portátil")
+    parser.add_argument("--sin-navegador", action="store_true", help="No abrir la pantalla del presentador en este portátil")
     parser.add_argument("--demo", action="store_true", help="Carga números de ejemplo ya reportados (ver backend/app/demo.py)")
     parser.add_argument("--espera", type=int, default=45, help="Segundos máximos para obtener la dirección pública")
     args = parser.parse_args()
@@ -142,6 +144,8 @@ def main():
         "CENTINELA_COOKIE_SEGURA": "true",
         # El modelo de voz se lee al arrancar y no con la primera frase de la demo
         "CENTINELA_PRECARGAR_VOZ": "true",
+        # Solo quien tenga este enlace ve la pantalla del presentador
+        "CENTINELA_PRESENTADOR_LLAVE": secrets.token_urlsafe(16),
     }
     if not configurado_en_env("CENTINELA_STUN_URL"):
         entorno["CENTINELA_STUN_URL"] = STUN_PUBLICO
@@ -157,13 +161,17 @@ def main():
     print("\nCentinela está encendido.\n")
     print(f"  Dirección para los jurados: {url}")
     print(f"  Página para instalar:       {url}/instalar.html")
-    print(f"  Revisión antes de la demo:  {url}/revisar.html\n")
+    print(f"  Revisión antes de la demo:  {url}/revisar.html")
+    print(f"  Tarjetas de estafador:      {url}/tarjetas.html")
+    presentador = f"{url}/presentador.html#llave={entorno['CENTINELA_PRESENTADOR_LLAVE']}"
+    print(f"  Pantalla del presentador:   {presentador}")
+    print("    (ábrela solo en el portátil: quien tenga ese enlace ve las llamadas que se marquen para mostrar)\n")
     revisar_llamadas(args.puerto)
     print()
     mostrar_qr(url)
     print("\nDeja esta ventana abierta durante la demostración. Ctrl+C para apagar.\n")
     if not args.sin_navegador:
-        webbrowser.open(f"{url}/instalar.html")
+        webbrowser.open(presentador)
 
     try:
         while servidor.poll() is None and tunel.poll() is None:

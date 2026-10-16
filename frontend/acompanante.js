@@ -8,7 +8,7 @@ const ETIQUETAS = { bajo: "Bajo", moderado: "Moderado", alto: "Alto", critico: "
 
 const estado = {
   micro: null, llamadaId: null, numero: "", cola: Promise.resolve(), grabando: false, escucha: null,
-  pantalla: null, terminada: false, oyendo: false,
+  pantalla: null, terminada: false, oyendo: false, resultados: [],
 };
 
 function error(texto) {
@@ -59,13 +59,14 @@ async function empezar() {
 async function crearLlamada() {
   const numero = $("#numero-llamada").value.trim();
   estado.numero = numero;
+  const base = { modo: "acompanante", proyectar: Boolean(window.Centinela?.quiereProyectar()) };
   let r = await fetch("/llamadas", {
-    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(numero ? { numero } : {}),
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(numero ? { ...base, numero } : base),
   });
   if (r.status === 422 && numero) {
     // Un número mal escrito no debe impedir escuchar
     estado.numero = "";
-    r = await fetch("/llamadas", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+    r = await fetch("/llamadas", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(base) });
   }
   const llamada = await json(r);
   estado.llamadaId = llamada.id;
@@ -144,6 +145,7 @@ function detener() {
 // ---- Mostrar lo que se oyó ----
 
 function mostrarResultado(r) {
+  estado.resultados.push(r);
   const d = r.decision_visible;
   const li = document.createElement("li");
   li.className = "frase";
@@ -185,6 +187,9 @@ function mostrarAlerta(d) {
   window.Centinela?.completarAviso(alerta, d, resto[0]);
   alerta.classList.remove("oculto");
   alerta.focus();
+  // Lo dice en voz alta; mientras habla no se escucha, para no analizar su propia voz
+  const ms = window.Centinela?.decirAviso(d) || 0;
+  if (ms) estado.escucha?.silenciar(ms);
 }
 
 // ---- Terminar ----
@@ -200,8 +205,9 @@ function terminar() {
   otra.href = "/acompanante.html";
   otra.textContent = "Escuchar otra llamada";
   $("#compartir").replaceChildren(otra);
+  window.Centinela?.pintarResumen($("#resumen"), estado.resultados);
   $("#desenlace").classList.remove("oculto");
-  $("#desenlace").scrollIntoView({ block: "start" });
+  $("#resumen").scrollIntoView({ block: "start" });
 }
 
 // ---- ¿Cómo terminó? (un toque al terminar) ----
@@ -256,7 +262,16 @@ async function reportarNumero(resultado, salida) {
   }
 }
 
+// La casilla de mostrar la llamada en el video beam solo aparece si la sustentación encendió esa pantalla
+async function ofrecerProyectar() {
+  try {
+    const r = await fetch("/presentador/estado");
+    if (r.ok && (await r.json()).activo) $("#caja-proyectar").classList.remove("oculto");
+  } catch { /* sin pantalla del presentador */ }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  ofrecerProyectar();
   $("#empezar").addEventListener("click", empezar);
   $("#colgar").addEventListener("click", terminar);
   // "Cuelgo y verifico": la llamada se cuelga en el otro celular; aquí se deja de escuchar
