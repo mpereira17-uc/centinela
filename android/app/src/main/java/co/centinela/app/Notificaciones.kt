@@ -58,4 +58,32 @@ object Notificaciones {
         }
         context.getSystemService(NotificationManager::class.java).notify(numero.hashCode(), notificacion.build())
     }
+
+    /** Avisa que Centinela rechazó la llamada por el bloqueo opcional; al tocarla se abre el registro para revisarla. */
+    fun rechazada(context: Context, numero: String, aviso: Aviso) {
+        if (Build.VERSION.SDK_INT >= 33 &&
+            context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) return
+        crearCanal(context)
+        val revisar = Intent(context, AjustesActivity::class.java)
+            .putExtra(AjustesActivity.EXTRA_RECHAZADAS, true)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        val alTocar = PendingIntent.getActivity(
+            context, numero.hashCode() + 2, revisar, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
+        )
+        val notificacion = Notification.Builder(context, CANAL)
+            .setSmallIcon(R.drawable.ic_buho)
+            .setColor(context.getColor(R.color.ambar))
+            .setContentTitle("Centinela rechazó una llamada de $numero")
+            .setContentText("${aviso.titulo}. Toca para revisarla.")
+            .setStyle(
+                Notification.BigTextStyle().bigText(
+                    "${aviso.texto}\n\nPasó porque encendiste el bloqueo de estafas confirmadas en Ajustes. " +
+                        "Si era alguien que conoces, toca aquí y permite el número.",
+                ),
+            )
+            .setContentIntent(alTocar)
+            .setAutoCancel(true)
+        context.getSystemService(NotificationManager::class.java).notify(numero.hashCode(), notificacion.build())
+    }
 }

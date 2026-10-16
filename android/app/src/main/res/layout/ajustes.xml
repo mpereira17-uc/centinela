@@ -95,6 +95,46 @@
             style="@style/Ayuda"
             android:text="@string/silenciar_ayuda" />
 
+        <Switch
+            android:id="@+id/bloquear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:minHeight="48dp"
+            android:text="@string/bloquear"
+            android:textSize="16sp" />
+
+        <TextView
+            style="@style/Ayuda"
+            android:text="@string/bloquear_ayuda" />
+
+        <LinearLayout
+            android:id="@+id/seccion_rechazadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Subtitulo"
+                android:text="@string/rechazadas_titulo" />
+
+            <TextView
+                android:id="@+id/rechazadas_vacio"
+                style="@style/Ayuda"
+                android:text="@string/rechazadas_vacio" />
+
+            <LinearLayout
+                android:id="@+id/lista_rechazadas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <Button
+                android:id="@+id/borrar_rechazadas"
+                style="@style/Boton"
+                android:text="@string/borrar_rechazadas" />
+        </LinearLayout>
+
         <TextView
             style="@style/Subtitulo"
             android:text="@string/limites_titulo" />

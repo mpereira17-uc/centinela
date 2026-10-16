@@ -23,8 +23,8 @@ object Avisos {
 
     /**
      * Decide qué decir de un número. Sin reportes no se avisa nada, para no volver ruido cada llamada.
-     * Como mucho se silencia el timbre: la llamada nunca se rechaza ni se bloquea, porque un reporte
-     * puede estar equivocado y la persona debe poder contestar.
+     * Como mucho se silencia el timbre: el aviso nunca rechaza la llamada, porque un reporte puede estar
+     * equivocado. Rechazar es aparte y solo si la persona encendió el bloqueo opcional (ver Bloqueo).
      */
     fun para(rep: Reputacion, silenciarRiesgoAlto: Boolean): Aviso? {
         if (rep.estado == "sin_reportes") return null

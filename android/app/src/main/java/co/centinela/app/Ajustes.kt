@@ -15,6 +15,27 @@ class Ajustes(context: Context) {
         get() = prefs.getBoolean("silenciar_riesgo_alto", false)
         set(valor) = prefs.edit { putBoolean("silenciar_riesgo_alto", valor) }
 
+    // Apagado de fábrica: solo la persona decide rechazar llamadas (ver Bloqueo)
+    var bloquearConfirmadas: Boolean
+        get() = prefs.getBoolean("bloquear_confirmadas", false)
+        set(valor) = prefs.edit { putBoolean("bloquear_confirmadas", valor) }
+
+    var rechazadas: List<LlamadaRechazada>
+        get() = Bloqueo.desdeJson(prefs.getString("rechazadas", null))
+        set(valor) = prefs.edit { putString("rechazadas", Bloqueo.aJson(valor)) }
+
+    fun anotarRechazada(llamada: LlamadaRechazada) {
+        rechazadas = Bloqueo.anotar(rechazadas, llamada)
+    }
+
+    // Números que la persona revisó y decidió dejar entrar aunque tengan reportes
+    val permitidos: Set<String>
+        get() = prefs.getStringSet("permitidos", emptySet()).orEmpty().toSet()
+
+    fun permitir(numero: String) {
+        prefs.edit { putStringSet("permitidos", permitidos + Bloqueo.clave(numero)) }
+    }
+
     var avisoHablado: Boolean
         get() = prefs.getBoolean("aviso_hablado", true)
         set(valor) = prefs.edit { putBoolean("aviso_hablado", valor) }
