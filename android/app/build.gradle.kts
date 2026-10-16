@@ -31,8 +31,11 @@ android {
     }
 }
 
+// Compila con el Java que traiga Android Studio (17 o más nuevo) y genera código para Java 17
 kotlin {
-    jvmToolchain(17)
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+    }
 }
 
 dependencies {
