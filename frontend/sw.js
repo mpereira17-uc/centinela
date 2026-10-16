@@ -5,7 +5,7 @@
 // porque llevan análisis de conversaciones y datos de la cuenta. Primero intenta la red, así siempre
 // se ve la versión más reciente y la copia solo se usa sin conexión.
 
-const VERSION = "centinela-v3";
+const VERSION = "centinela-v4";
 const INTERFAZ = [
   "/", "/index.html", "/llamada.html", "/acompanante.html", "/practica.html", "/ayuda.html", "/cuenta.html", "/instalar.html", "/comunidad.html",
   "/estilos.css", "/comun.js", "/app.js", "/llamada.js", "/acompanante.js", "/practica.js", "/ayuda.js", "/cuenta.js", "/instalar.js", "/comunidad.js",

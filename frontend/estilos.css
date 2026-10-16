@@ -43,6 +43,9 @@
   --alto-solido: #b4480f;
   --critico-solido: #c42b2b;
 
+  --llama: #f07c00;
+  --llama-centro: #ffd166;
+
   --radio: 22px;
   --ancho: 560px;
   color-scheme: light dark;
@@ -81,6 +84,8 @@
     --moderado-solido: #845600;
     --alto-solido: #a2400d;
     --critico-solido: #b02727;
+    --llama: #ff9a3c;
+    --llama-centro: #ffe08a;
   }
 }
 
@@ -759,6 +764,44 @@ details[open] > summary::after { transform: rotate(90deg); }
 .centrado .puntaje { color: #fff; }
 #final .acciones a { text-align: center; justify-content: center; }
 
+/* Niveles por táctica, racha e insignias */
+.racha { display: flex; align-items: center; gap: .6rem; margin: 1rem 0 0; padding: .7rem 1rem; border-radius: 18px; background: var(--fondo-2); border: 1px solid var(--borde); color: var(--texto); font-weight: 700; }
+.racha svg { flex: none; width: 30px; height: 30px; fill: none; stroke: var(--texto-suave); stroke-width: 1.8; stroke-linejoin: round; }
+.racha .llama-centro { stroke: none; }
+/* La llama de la racha es el único toque cálido: un ícono decorativo, el texto sigue en tinta */
+.racha.encendida .llama { fill: var(--llama); stroke: var(--llama); }
+.racha.encendida .llama-centro { fill: var(--llama-centro); }
+.semana { margin-top: 1rem; padding: 1.1rem; border-radius: var(--radio); background: var(--degradado-suave); border: 1px solid var(--borde); }
+.semana-etiqueta { margin: 0; font-size: .85rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--primario-fuerte); }
+.semana h2 { margin: .25rem 0 .5rem; font-size: 1.3rem; }
+.semana-lineas { margin: 0 0 1rem; padding-left: 1.4rem; display: grid; gap: .4rem; }
+.semana-lineas li::marker { font-weight: 800; color: var(--primario-fuerte); }
+.semana .boton-principal { width: 100%; }
+.niveles-practica { list-style: none; margin: .6rem 0 0; padding: 0; display: grid; gap: .6rem; }
+.nivel-practica {
+  width: 100%; min-height: 88px; padding: .8rem 1rem; gap: .9rem; justify-content: flex-start; text-align: left;
+  border-radius: 22px; background: var(--superficie); border: 1px solid var(--borde); color: var(--texto); box-shadow: var(--sombra);
+}
+.nivel-practica-texto { flex: 1; display: flex; flex-direction: column; gap: .15rem; line-height: 1.3; }
+.nivel-practica-texto strong { font-size: 1.05rem; }
+.nivel-practica-texto small { color: var(--texto-suave); font-size: .95rem; font-weight: 600; }
+.nivel-practica-texto .nivel-practica-estado { color: var(--primario-fuerte); font-weight: 800; }
+.nivel-practica-texto .nivel-practica-estado.ganada { color: var(--bajo); }
+.insignia {
+  flex: none; display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%;
+  border: 2px dashed var(--borde); background: var(--campo); color: var(--texto-suave); font-size: 1.35rem; font-weight: 800;
+}
+.insignia.ganada { border: 3px solid var(--primario); background: var(--chip); }
+.insignia img { width: 44px; height: 44px; }
+.mezcla { margin-top: .6rem; }
+.ronda-nivel { margin: 0 0 .2rem; font-size: .85rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--primario-fuerte); }
+.final-insignia { display: flex; align-items: center; gap: .9rem; margin-top: 1rem; padding: .9rem 1rem; border-radius: 20px; background: var(--degradado-suave); }
+.final-insignia .insignia { width: 72px; height: 72px; }
+.final-insignia .insignia img { width: 56px; height: 56px; }
+.final-insignia p { margin: 0; }
+.final-insignia strong { display: block; font-size: 1.1rem; }
+#final .racha { margin-top: .75rem; }
+
 /* ---------- Instalar la app ---------- */
 
 .qr-caja { display: grid; place-items: center; gap: .5rem; margin: 1rem 0; }
@@ -846,6 +889,7 @@ details[open] > summary::after { transform: rotate(90deg); }
 
   .veredicto:not(.oculto) { animation: aparecer .3s ease-out; }
   .puntaje { animation: latido .5s cubic-bezier(.3, 1.6, .5, 1); }
+  .final-insignia:not(.oculto) .insignia { animation: latido .6s cubic-bezier(.3, 1.6, .5, 1) .2s backwards; }
 }
 
 /* Pantallas muy angostas: los servicios siguen en dos columnas pero más compactos */

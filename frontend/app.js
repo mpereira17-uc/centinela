@@ -741,6 +741,7 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#copiar-denuncia").addEventListener("click", copiarDenuncia);
   $("#descargar-denuncia").addEventListener("click", descargarDenuncia);
   mostrarConsejo();
+  mostrarEstafaDeLaSemana();
   abrirNumeroDeLaApp();
   recibirCompartido();
 });
@@ -756,6 +757,25 @@ const CONSEJOS = [
 
 function mostrarConsejo() {
   $("#consejo-texto").textContent = CONSEJOS[Math.floor(Math.random() * CONSEJOS.length)];
+}
+
+// La estafa de la semana: una modalidad real en tres líneas, con un botón para practicarla
+async function mostrarEstafaDeLaSemana() {
+  try {
+    const r = await fetch("/practica/semana");
+    if (!r.ok) return;
+    const s = await r.json();
+    $("#semana-inicio-titulo").textContent = s.titulo;
+    $("#semana-inicio-lineas").replaceChildren(...s.lineas.map((l) => {
+      const li = document.createElement("li");
+      li.textContent = l;
+      return li;
+    }));
+    const a = $("#semana-inicio-practicar");
+    a.href = `/practica.html?nivel=${encodeURIComponent(s.nivel)}`;
+    a.textContent = "Practicar esta";
+    $("#semana-inicio").classList.remove("oculto");
+  } catch { /* sin conexión: el inicio funciona igual sin la tarjeta */ }
 }
 
 // La app de Android abre /?numero=…#numero-titulo desde el aviso de una llamada entrante

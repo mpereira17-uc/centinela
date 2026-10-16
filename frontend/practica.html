@@ -34,15 +34,33 @@
       <div class="saludo">
         <img class="saludo-buho" src="/buho/tranquilo.svg" alt="" width="112" height="112">
         <div class="saludo-burbuja">
-          <p>Te muestro 5 llamadas de mentira. Tú dices si es estafa o es normal, y te cuento qué la delataba.</p>
+          <p>Elige un nivel. Te muestro 5 llamadas de mentira, tú dices si es estafa o es normal, y te cuento qué la delataba. Con 4 de 5 ganas la insignia del nivel.</p>
         </div>
       </div>
-      <button type="button" id="empezar" class="boton-principal boton-grande">Empezar</button>
+
+      <p id="racha" class="racha"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="llama" d="M13.2 2c.4 3.1-1.3 4.6-2.6 6.2-.5-1.2-1.3-2-2.3-2.6.3 2.4-.8 3.7-1.8 5.1A6.9 6.9 0 0 0 5 14.8 7 7 0 0 0 19 15c0-3.3-1.6-5.4-3-7.1-.2 1.4-.8 2.4-1.7 3 .4-3.7-.2-6.6-1.1-8.9z"/><path class="llama-centro" d="M12 21.2a3 3 0 0 1-3-3c0-1.8 1.4-2.8 2.4-4.4.5 1 1.1 1.4 1.7 1.9.8.7 1.9 1.4 1.9 2.6a3 3 0 0 1-3 2.9z"/></svg><span id="racha-texto">Practica hoy para empezar una racha.</span></p>
+
+      <section id="semana" class="semana oculto" aria-labelledby="semana-titulo">
+        <p class="semana-etiqueta">La estafa de la semana</p>
+        <h2 id="semana-titulo"></h2>
+        <ol id="semana-lineas" class="semana-lineas"></ol>
+        <button type="button" id="semana-practicar" class="boton-principal">Practicar esta</button>
+      </section>
+
+      <h2 class="seccion-titulo" id="niveles-titulo">Niveles</h2>
+      <p id="insignias-resumen" class="ayuda"></p>
+      <ul id="niveles" class="niveles-practica" aria-labelledby="niveles-titulo"></ul>
+      <ul class="mas mezcla">
+        <li><button type="button" id="empezar">
+          <span class="mas-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></span>
+          <span><strong>Mezcla de todo</strong><small>Llamadas de todos los niveles</small></span></button></li>
+      </ul>
       <p id="mejor-puntaje" class="portada-nota ayuda centrado"></p>
     </section>
 
     <section id="ronda" class="tarjeta oculto" aria-labelledby="ronda-titulo">
       <div class="progreso" aria-hidden="true"><span id="barra-progreso"></span></div>
+      <p id="ronda-nivel" class="ronda-nivel"></p>
       <h2 id="ronda-titulo">Llamada <span id="ronda-numero">1</span> de <span id="ronda-total">5</span></h2>
       <p id="ronda-region" class="ayuda"></p>
       <ol id="ronda-conversacion" class="conversacion" aria-live="polite"></ol>
@@ -67,15 +85,22 @@
         <h2 id="final-titulo"></h2>
         <p id="final-texto"></p>
       </div>
+      <div id="final-insignia" class="final-insignia oculto">
+        <span class="insignia ganada" aria-hidden="true"><img src="/buho/tranquilo.svg" alt="" width="64" height="64"></span>
+        <p><strong id="final-insignia-titulo"></strong><span id="final-insignia-texto"></span></p>
+      </div>
+      <p id="final-racha" class="racha"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="llama" d="M13.2 2c.4 3.1-1.3 4.6-2.6 6.2-.5-1.2-1.3-2-2.3-2.6.3 2.4-.8 3.7-1.8 5.1A6.9 6.9 0 0 0 5 14.8 7 7 0 0 0 19 15c0-3.3-1.6-5.4-3-7.1-.2 1.4-.8 2.4-1.7 3 .4-3.7-.2-6.6-1.1-8.9z"/><path class="llama-centro" d="M12 21.2a3 3 0 0 1-3-3c0-1.8 1.4-2.8 2.4-4.4.5 1 1.1 1.4 1.7 1.9.8.7 1.9 1.4 1.9 2.6a3 3 0 0 1-3 2.9z"/></svg><span id="final-racha-texto"></span></p>
       <div class="acciones">
+        <button type="button" id="siguiente-nivel" class="boton-principal oculto">Siguiente nivel</button>
         <button type="button" id="otra-vez" class="boton-principal">Practicar otra vez</button>
+        <button type="button" id="elegir-nivel" class="boton-secundario">Elegir otro nivel</button>
         <a class="boton-secundario" href="/ayuda.html#palabra-clave">Acordar una palabra clave familiar</a>
       </div>
     </section>
   </main>
 
   <footer class="pie">
-    <p>Las llamadas de práctica son inventadas. Tu puntaje se guarda solo en este dispositivo.</p>
+    <p>Las llamadas de práctica son inventadas. Tu puntaje, tu racha y tus insignias se guardan solo en este dispositivo.</p>
   </footer>
 
   <nav class="barra" aria-label="Secciones">
