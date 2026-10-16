@@ -273,6 +273,63 @@
     pintar();
   }
 
+  // ---- Pantallas dentro de una misma página: el inicio y un panel por cada herramienta ----
+  // Cada panel se abre con su #ancla, así el botón Atrás del celular vuelve al inicio. Los enlaces
+  // a una parte de un panel (#numero-titulo, #audio-titulo, #me-estafaron...) abren el panel que la tiene.
+  function iniciarVistas() {
+    const main = $("[data-vistas]");
+    if (!main) return;
+    const vistas = [...main.children].filter((n) => n.classList.contains("vista"));
+    const inicio = vistas[0];
+    let actual = null;
+    let vinoDelInicio = false;
+
+    function mostrar() {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const destino = id ? document.getElementById(id) : null;
+      const vista = destino ? vistas.find((v) => v.contains(destino)) : inicio;
+      if (!vista) return; // un ancla fuera de los paneles, como "Saltar al contenido"
+      const anterior = actual;
+      for (const v of vistas) v.classList.toggle("oculto", v !== vista);
+      actual = vista;
+      vinoDelInicio = anterior === inicio && vista !== inicio;
+      const plegable = destino && destino.closest("details");
+      if (plegable) plegable.open = true;
+      if (anterior === null && vista === inicio) return;
+      const ubicar = () => {
+        if (destino && destino !== vista && !destino.closest(".panel-cabeza")) destino.scrollIntoView({ block: "start" });
+        else window.scrollTo({ top: 0, behavior: "instant" });
+      };
+      ubicar();
+      // Al abrir la página con un #ancla, el navegador vuelve a mover la pantalla al terminar de cargar
+      if (anterior === null && document.readyState !== "complete") addEventListener("load", ubicar, { once: true });
+      if (anterior !== null) {
+        const titulo = vista.querySelector(".panel-cabeza [tabindex='-1']") || vista;
+        titulo.focus({ preventScroll: true });
+      }
+    }
+
+    // "Volver" regresa en el historial si se llegó desde el inicio, para no apilar pantallas
+    main.addEventListener("click", (e) => {
+      if (e.target.closest(".volver") && vinoDelInicio) {
+        e.preventDefault();
+        history.back();
+      }
+    });
+    // El logo y la pestaña de esta misma página vuelven al inicio sin recargar (no se pierde la conversación)
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("a[href]");
+      if (!a || a.closest("[data-vistas]") || a.origin !== location.origin || a.hash) return;
+      const misma = a.pathname === location.pathname || (a.pathname === "/" && location.pathname === "/index.html");
+      if (!misma) return;
+      e.preventDefault();
+      if (actual !== inicio) location.hash = inicio.id;
+      else window.scrollTo({ top: 0 });
+    });
+    addEventListener("hashchange", mostrar);
+    mostrar();
+  }
+
   window.Centinela = { consejoFamiliar, completarAviso, normalizarCelular, textoParaContacto };
 
   // ---- App instalable: el service worker solo guarda la interfaz, nunca respuestas de la API ----
@@ -282,6 +339,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     registrarApp();
+    iniciarVistas();
     iniciarPalabraClave();
     iniciarContacto();
     iniciarLetra();

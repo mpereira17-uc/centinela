@@ -5,13 +5,14 @@
 // porque llevan análisis de conversaciones y datos de la cuenta. Primero intenta la red, así siempre
 // se ve la versión más reciente y la copia solo se usa sin conexión.
 
-const VERSION = "centinela-v1";
+const VERSION = "centinela-v2";
 const INTERFAZ = [
   "/", "/index.html", "/llamada.html", "/acompanante.html", "/practica.html", "/ayuda.html", "/cuenta.html", "/instalar.html",
   "/estilos.css", "/comun.js", "/app.js", "/llamada.js", "/acompanante.js", "/practica.js", "/ayuda.js", "/cuenta.js", "/instalar.js",
   "/manifest.webmanifest", "/iconos/icono-192.png", "/iconos/icono-512.png",
+  "/buho/icono.svg", "/buho/tranquilo.svg", "/buho/atento.svg", "/buho/alerta.svg", "/buho/alarmado.svg",
 ];
-const ES_INTERFAZ = /^\/($|[\w-]+\.(html|css|js|webmanifest)$|iconos\/)/;
+const ES_INTERFAZ = /^\/($|[\w-]+\.(html|css|js|webmanifest)$|iconos\/|buho\/)/;
 
 self.addEventListener("install", (ev) => {
   ev.waitUntil(caches.open(VERSION).then((c) => c.addAll(INTERFAZ)).then(() => self.skipWaiting()));

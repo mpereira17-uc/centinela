@@ -173,6 +173,7 @@ function ocupado(si) {
   for (const b of document.querySelectorAll("button")) b.disabled = si;
   $("#analizar-texto").textContent = si ? "Analizando…" : "Analizar frase";
   $("#analizando").classList.toggle("oculto", !si);
+  $("#nivel").classList.toggle("escuchando", si); // el búho pone cara de atento mientras analiza
 }
 
 async function procesar(texto, hablante) {
@@ -206,11 +207,12 @@ async function alEnviar(evento) {
   }
 }
 
-async function correrEjemplo(nombre) {
+async function correrEjemplo(nombre, boton) {
   if (estado.ocupado) return;
+  // El ejemplo se ve en la pantalla "Estoy en una llamada", aunque se pida desde el inicio
+  if (!$("#conversar").contains(boton)) location.hash = "conversar";
   mostrarError("");
   ocupado(true);
-  const boton = document.querySelector(`[data-ejemplo="${nombre}"]`);
   boton.classList.add("reproduciendo");
   try {
     await nuevaConversacion();
@@ -698,7 +700,7 @@ document.addEventListener("DOMContentLoaded", () => {
     $("#texto").focus();
   });
   for (const b of document.querySelectorAll("[data-ejemplo]")) {
-    b.addEventListener("click", () => correrEjemplo(b.dataset.ejemplo));
+    b.addEventListener("click", () => correrEjemplo(b.dataset.ejemplo, b));
   }
   $("#consultar-numero").addEventListener("click", consultarNumero);
   $("#form-reporte").addEventListener("submit", enviarReporte);
@@ -737,15 +739,29 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#preparar-denuncia").addEventListener("click", prepararDenuncia);
   $("#copiar-denuncia").addEventListener("click", copiarDenuncia);
   $("#descargar-denuncia").addEventListener("click", descargarDenuncia);
+  mostrarConsejo();
   abrirNumeroDeLaApp();
 });
+
+// Un consejo corto distinto cada vez que se abre el inicio
+const CONSEJOS = [
+  "Ningún banco te pide códigos ni claves por teléfono. Si te los piden, cuelga.",
+  "Si te dicen que es urgente y que no cuelgues, desconfía: la prisa es parte de la estafa.",
+  "¿Dicen que son de una entidad? Cuelga y llama tú al número oficial.",
+  "Un familiar que pide plata con afán desde un número nuevo: llámalo al número de siempre.",
+  "No instales aplicaciones que te pidan por teléfono. Con ellas pueden ver tu celular.",
+];
+
+function mostrarConsejo() {
+  $("#consejo-texto").textContent = CONSEJOS[Math.floor(Math.random() * CONSEJOS.length)];
+}
 
 // La app de Android abre /?numero=…#numero-titulo desde el aviso de una llamada entrante
 function abrirNumeroDeLaApp() {
   const numero = new URLSearchParams(location.search).get("numero");
   if (!numero) return;
+  if (!location.hash) location.hash = "numero-titulo";
   $("#numero").value = numero.slice(0, 25);
   $("#form-reporte").closest("details").open = true;
   consultarNumero();
-  $("#numero-titulo").scrollIntoView({ block: "start" });
 }

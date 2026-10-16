@@ -71,3 +71,26 @@ El verde jade vivo se veía fosforescente, sobre todo el rojo de las alertas y e
 - Modo oscuro casi negro azulado (`#0f1622`), superficies apagadas y los mismos niveles un poco más oscuros, para que no deslumbre de noche.
 
 Todos los colores salen de variables al inicio de `estilos.css`; cambiar la paleta es cambiar ese bloque.
+
+## Blanco y azul con el búho, y una interfaz para mayores (16 de octubre de 2026)
+
+Reemplaza el estilo Conversación y la paleta Vigía. pepe pidió un logo propio, colores blanco con azul y una interfaz con menos texto para personas de la tercera edad, al estilo de las apps de transporte (DiDi, Uber) pero propia de Centinela. Está en la rama de la app Android; `main` no cambia hasta que pepe lo apruebe.
+
+**Personaje.** El búho de Centinela es el logo y la figura que acompaña a la persona. Tiene cuatro caras según el riesgo, y la cara cambia sola con el nivel:
+
+| Cara | Cuándo sale |
+|---|---|
+| Tranquilo (saluda con el ala) | Inicio y nivel bajo |
+| Atento (escucha) | Mientras analiza o escucha por el altavoz, y números en revisión o de publicidad |
+| Alerta (señala un aviso ámbar) | Riesgo moderado o alto, y números con reportes |
+| Alarmado (levanta el ala para decir "detente") | Riesgo crítico y "probable estafa"; cejas de preocupación, no de enojo |
+
+Los SVG están en `frontend/buho/` y salen de `node herramientas/buho.js`. El mismo búho es el ícono de la app instalable, el ícono adaptable de Android (con versión de una tinta para el ícono temático y la barra de notificaciones) y la imagen de la tarjeta que aparece encima de la llamada entrante.
+
+**Colores.** Blanco de fondo y un azul propio, el azul Centinela (`#1D5BD6`, degradado de `#2B6BE4` a `#1446B8` para que el texto blanco siempre cumpla el contraste), con azul noche (`#0B2A5B`) para el texto. El ámbar y el rojo solo aparecen en los avisos de riesgo. Cada texto cumple contraste 4,5:1 sobre su fondo, y el modo oscuro es azul casi negro.
+
+**Inicio.** Una pantalla con el búho que saluda, una barra grande "¿Quién te llama?" (como el "¿A dónde vas?" de las apps de transporte), seis botones grandes con ícono, nombre corto y una pista de pocas palabras (Estoy en una llamada, Revisar un mensaje, Escuchar mi llamada, Pregúntale, Me estafaron, Practicar), una lista "Más opciones" y un consejo corto que cambia cada vez. Abajo quedan solo tres pestañas: Inicio, Ayuda y Cuenta.
+
+**Una pantalla por herramienta.** Cada herramienta se abre en su propia pantalla con un botón grande para volver; lo que no hace falta ver siempre (usar un audio, reportar un número, cómo evitamos reportes falsos) está plegado. Las pantallas viven en la misma página y se abren con su ancla (`#conversar`, `#quien-llama`, `#mensaje`, `#asistente`, `#denuncia`, `#como`), así el botón Atrás del celular vuelve al inicio y no se pierde la conversación. Los enlaces viejos siguen sirviendo: `/#numero-titulo` (el que abre la app Android desde la tarjeta de la llamada), `/#asistente`, `/#audio-titulo` y `/ayuda.html#me-estafaron` abren la pantalla que tiene esa parte. Ayuda usa el mismo patrón con cuatro botones: Verificar una entidad, Me estafaron, Palabra clave familiar y Contacto de confianza.
+
+**Letra.** Base de 18 px, botones de al menos 54 px de alto y el botón "Aa" de la barra superior agranda todo un 18 % más.

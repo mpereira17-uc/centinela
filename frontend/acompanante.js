@@ -51,6 +51,7 @@ async function empezar() {
   $("#preparar").classList.add("oculto");
   $("#en-llamada").classList.remove("oculto");
   $("#estado-llamada").textContent = "Escuchando. Deja este dispositivo cerca del altavoz.";
+  $("#nivel").classList.add("escuchando"); // el búho pone cara de atento mientras escucha
   mantenerPantalla();
   escuchar(estado.micro);
   $("#colgar").focus();
@@ -186,6 +187,7 @@ function terminar() {
   estado.terminada = true;
   detener();
   $("#estado-llamada").textContent = "Centinela dejó de escuchar.";
+  $("#nivel").classList.remove("escuchando");
   $("#colgar").classList.add("oculto");
   const otra = document.createElement("a");
   otra.href = "/acompanante.html";

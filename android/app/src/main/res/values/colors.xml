@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="marino">#1B2F4B</color>
-    <color name="primario">#24426A</color>
-    <color name="ambar">#E8A33D</color>
-    <color name="fondo">#EEF1F5</color>
-    <color name="texto">#141D2B</color>
-    <color name="texto_suave">#526072</color>
+    <!-- Identidad de Centinela: blanco con azul; el ámbar solo para los avisos -->
+    <color name="marino">#0B2A5B</color>
+    <color name="primario">#1D5BD6</color>
+    <color name="ambar">#F5A524</color>
+    <color name="fondo">#FFFFFF</color>
+    <color name="texto">#0B2A5B</color>
+    <color name="texto_suave">#4B5F80</color>
+    <color name="celeste">#7FB0FF</color>
 </resources>

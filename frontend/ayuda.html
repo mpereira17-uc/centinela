@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#1b2f4b">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#07142e" media="(prefers-color-scheme: dark)">
   <title>Ayuda · Centinela</title>
   <meta name="description" content="Canales oficiales para verificar una llamada y qué hacer si te estafaron.">
   <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/buho/icono.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/iconos/apple-touch-icon.png">
   <link rel="stylesheet" href="/estilos.css">
   <script src="/comun.js" defer></script>
@@ -17,91 +19,142 @@
 
   <header class="cabecera">
     <a class="marca" href="/">
-      <span class="logo-caja"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3Z"/></svg></span>
+      <img class="marca-buho" src="/buho/icono.svg" alt="" width="42" height="42">
       <span>Centinela</span>
     </a>
-    <span class="chip-beta" title="Versión de prueba para el trabajo de grado">Beta</span>
-    <button type="button" id="tamano-letra" class="tamano" aria-pressed="false" aria-label="Usar letra grande"><span aria-hidden="true">A<span>A</span></span></button>
-    <a class="boton-icono" href="/" aria-label="Volver al análisis">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
-    </a>
+    <button type="button" id="tamano-letra" class="tamano" aria-pressed="false" aria-label="Usar letra grande"><span aria-hidden="true">A<span>a</span></span></button>
   </header>
 
-  <main id="principal">
-    <section class="portada">
-      <h1>Ayuda</h1>
-      <p>La regla de oro: cuelga y contacta tú a la entidad por un canal que no te dio quien llamó.</p>
-    </section>
-
-    <section id="directorio" class="tarjeta" aria-labelledby="directorio-titulo">
-      <h2 id="directorio-titulo" class="titulo-icono"><span class="h-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h12a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2z"/><path d="M18 8h2M18 12h2M8 9h6M8 13h6"/></svg></span>Verifica con el canal oficial</h2>
-      <p>¿Te llamaron o escribieron diciendo que son de una entidad? Cuelga y búscala aquí.</p>
-      <label for="buscar-entidad" class="etiqueta">Buscar entidad</label>
-      <input type="search" id="buscar-entidad" autocomplete="off" placeholder="Ej.: Bancolombia, DIAN, Servientrega">
-      <p id="directorio-estado" class="ayuda" role="status" aria-live="polite"></p>
-      <div id="directorio-lista"></div>
-      <p id="directorio-fecha" class="ayuda"></p>
-    </section>
-    <section id="me-estafaron" class="tarjeta" aria-labelledby="estafa-titulo">
-      <h2 id="estafa-titulo" class="titulo-icono"><span class="h-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5h.01"/></svg></span>Me estafaron, ¿qué hago?</h2>
-      <p>Tranquilo, no es tu culpa: estas estafas están hechas para engañar a cualquiera. Marca lo que pasó y te decimos qué hacer, en orden. Lo primero es lo más urgente.</p>
-      <fieldset id="situaciones" class="opciones">
-        <legend>¿Qué pasó?</legend>
-        <label><input type="checkbox" value="codigo"> Di un código que me llegó por mensaje</label>
-        <label><input type="checkbox" value="whatsapp"> Di el código de WhatsApp</label>
-        <label><input type="checkbox" value="tarjeta"> Di mi clave o los datos de mi tarjeta</label>
-        <label><input type="checkbox" value="transferencia"> Envié plata</label>
-        <label><input type="checkbox" value="aplicacion"> Instalé una aplicación que me dijeron</label>
-        <label><input type="checkbox" value="datos"> Di mi cédula u otros datos personales</label>
-        <label><input type="checkbox" value="amenaza"> Me están amenazando o extorsionando</label>
-      </fieldset>
-      <ol id="pasos" class="pasos" aria-live="polite"></ol>
-      <p id="pasos-vacio" class="ayuda">Marca al menos una opción para ver los pasos.</p>
-      <p class="ayuda">Los pasos que marques como hechos se recuerdan solo en este dispositivo.</p>
-    </section>
-    <section id="palabra-clave" class="tarjeta" aria-labelledby="palabra-titulo">
-      <h2 id="palabra-titulo" class="titulo-icono"><span class="h-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M15 8l2 2"/></svg></span>Palabra clave familiar</h2>
-      <p>Hoy se puede imitar la voz de una persona con inteligencia artificial a partir de unos segundos de audio. Una palabra secreta que solo conoce tu familia protege aunque la voz suene idéntica.</p>
-      <ol class="consejos">
-        <li><strong>Escójanla en persona,</strong> no por chat ni por redes.</li>
-        <li><strong>Que no se pueda adivinar:</strong> nada de fechas, nombres de mascotas ni apodos que aparezcan en redes. Mejor algo raro, como "arepa con trompeta".</li>
-        <li><strong>Úsenla solo en emergencias:</strong> si alguien con la voz de tu hijo, tu mamá o tu nieto pide plata con afán, pídele la palabra.</li>
-        <li><strong>Si no la sabe, cuelga</strong> y llama tú al número de siempre de esa persona.</li>
-      </ol>
-      <label class="consentimiento">
-        <input type="checkbox" id="palabra-acordada">
-        <span>Ya acordé una palabra clave con mi familia</span>
-      </label>
-      <p id="palabra-estado" class="ayuda" role="status" aria-live="polite"></p>
-      <p class="ayuda">Centinela no te pide la palabra y nunca la guarda. Solo recuerda en este dispositivo que la tienen, para recordártela cuando alguien diga ser de tu familia.</p>
-    </section>
-
-    <section id="contacto-confianza" class="tarjeta" aria-labelledby="contacto-titulo">
-      <h2 id="contacto-titulo" class="titulo-icono"><span class="h-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M17 11l2 2 3.5-4"/></svg></span>Contacto de confianza</h2>
-      <p>Escoge a alguien de tu familia o un amigo. Si Centinela da un aviso de riesgo crítico, te mostrará un botón para escribirle con el mensaje listo y pedirle que te llame.</p>
-      <form id="form-contacto" class="formulario" novalidate>
-        <label for="contacto-nombre" class="etiqueta">Su nombre (opcional)</label>
-        <input id="contacto-nombre" maxlength="30" autocomplete="off" placeholder="Por ejemplo: Laura">
-        <label for="contacto-telefono" class="etiqueta">Su celular</label>
-        <input id="contacto-telefono" type="tel" inputmode="numeric" autocomplete="off" maxlength="16" placeholder="300 123 4567" required>
-        <fieldset class="opciones">
-          <legend>Avisarle por</legend>
-          <label><input type="radio" name="canal" value="whatsapp" checked> WhatsApp</label>
-          <label><input type="radio" name="canal" value="sms"> Mensaje de texto</label>
-        </fieldset>
-        <label class="consentimiento">
-          <input type="checkbox" id="contacto-acepta">
-          <span>Le pregunté a esta persona y está de acuerdo en recibir mis avisos</span>
-        </label>
-        <p id="contacto-error" class="error" role="status"></p>
-        <div class="acciones">
-          <button type="submit" class="boton-principal">Guardar contacto</button>
-          <button type="button" id="quitar-contacto" class="boton-secundario oculto">Quitar</button>
+  <main id="principal" data-vistas>
+    <div id="inicio" class="vista" tabindex="-1">
+      <section class="saludo" aria-labelledby="ayuda-titulo">
+        <img class="saludo-buho" src="/buho/atento.svg" alt="" width="112" height="112">
+        <div class="saludo-burbuja">
+          <h1 id="ayuda-titulo">Ayuda</h1>
+          <p>La regla de oro: cuelga y llama tú a la entidad por su número oficial.</p>
         </div>
-      </form>
-      <p id="contacto-estado" class="ayuda" role="status" aria-live="polite"></p>
-      <a id="contacto-prueba" class="enlace-boton oculto" target="_blank" rel="noopener noreferrer">Enviarle un mensaje de prueba</a>
-      <p class="ayuda">El nombre y el número quedan solo en este dispositivo; Centinela no los sube a ningún servidor. Nada se envía solo: el botón abre WhatsApp o tus mensajes con el texto escrito y tú decides si lo mandas.</p>
+      </section>
+
+      <ul class="servicios">
+        <li><a class="servicio" href="#directorio">
+          <span class="servicio-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h12a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2z"/><path d="M18 8h2M18 12h2M8 9h6M8 13h6"/></svg></span>
+          <strong>Verificar una entidad</strong><small>Busca su número oficial</small></a></li>
+        <li><a class="servicio" href="#me-estafaron">
+          <span class="servicio-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m5.6 5.6 3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></svg></span>
+          <strong>Me estafaron</strong><small>Qué hacer ahora, en orden</small></a></li>
+        <li><a class="servicio" href="#palabra-clave">
+          <span class="servicio-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M15 8l2 2"/></svg></span>
+          <strong>Palabra clave familiar</strong><small>Contra la voz imitada</small></a></li>
+        <li><a class="servicio" href="#contacto-confianza">
+          <span class="servicio-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M17 11l2 2 3.5-4"/></svg></span>
+          <strong>Contacto de confianza</strong><small>Alguien que te ayude</small></a></li>
+      </ul>
+
+      <h2 class="seccion-titulo">También te puede servir</h2>
+      <ul class="mas">
+        <li><a href="/#denuncia">
+          <span class="mas-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 8h14M7 8l-3 7a3 3 0 0 0 6 0zM17 8l-3 7a3 3 0 0 0 6 0z"/></svg></span>
+          <span><strong>Denunciar</strong><small>Resumen para la Policía o la Fiscalía</small></span></a></li>
+        <li><a href="/practica.html">
+          <span class="mas-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 2 8l10 5 10-5z"/><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"/></svg></span>
+          <span><strong>Practicar</strong><small>Llamadas de mentira para aprender</small></span></a></li>
+        <li><a href="tel:123">
+          <span class="mas-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 15.5v2.6a1.8 1.8 0 0 1-2 1.8 17.6 17.6 0 0 1-7.6-2.7 17.3 17.3 0 0 1-5.3-5.3A17.6 17.6 0 0 1 2.4 4.2 1.8 1.8 0 0 1 4.2 2.4h2.6a1.8 1.8 0 0 1 1.8 1.5c.1.8.3 1.6.6 2.4a1.8 1.8 0 0 1-.4 1.9L7.7 9.3a14 14 0 0 0 5.3 5.3l1.1-1.1a1.8 1.8 0 0 1 1.9-.4c.8.3 1.6.5 2.4.6a1.8 1.8 0 0 1 1.6 1.8z"/></svg></span>
+          <span><strong>Línea 123</strong><small>Si estás en peligro ahora mismo</small></span></a></li>
+      </ul>
+    </div>
+
+    <section id="directorio" class="vista oculto" aria-labelledby="directorio-titulo">
+      <div class="panel-cabeza">
+        <a class="volver" href="#inicio" aria-label="Volver a Ayuda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></a>
+        <h2 id="directorio-titulo" tabindex="-1">Verificar una entidad</h2>
+      </div>
+      <p class="panel-intro">¿Dicen que son de un banco o una entidad? Cuelga y busca aquí su número oficial.</p>
+      <div class="tarjeta">
+        <label for="buscar-entidad" class="etiqueta">Buscar entidad</label>
+        <input type="search" id="buscar-entidad" autocomplete="off" placeholder="Ej.: Bancolombia, DIAN, Servientrega">
+        <p id="directorio-estado" class="ayuda" role="status" aria-live="polite"></p>
+        <div id="directorio-lista"></div>
+        <p id="directorio-fecha" class="ayuda"></p>
+      </div>
+    </section>
+
+    <section id="me-estafaron" class="vista oculto" aria-labelledby="estafa-titulo">
+      <div class="panel-cabeza">
+        <a class="volver" href="#inicio" aria-label="Volver a Ayuda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></a>
+        <h2 id="estafa-titulo" tabindex="-1">Me estafaron, ¿qué hago?</h2>
+      </div>
+      <p class="panel-intro">No es tu culpa: estas estafas engañan a cualquiera. Marca lo que pasó y te digo qué hacer, en orden.</p>
+      <div class="tarjeta">
+        <fieldset id="situaciones" class="opciones">
+          <legend>¿Qué pasó?</legend>
+          <label><input type="checkbox" value="codigo"> Di un código que me llegó por mensaje</label>
+          <label><input type="checkbox" value="whatsapp"> Di el código de WhatsApp</label>
+          <label><input type="checkbox" value="tarjeta"> Di mi clave o los datos de mi tarjeta</label>
+          <label><input type="checkbox" value="transferencia"> Envié plata</label>
+          <label><input type="checkbox" value="aplicacion"> Instalé una aplicación que me dijeron</label>
+          <label><input type="checkbox" value="datos"> Di mi cédula u otros datos personales</label>
+          <label><input type="checkbox" value="amenaza"> Me están amenazando o extorsionando</label>
+        </fieldset>
+        <ol id="pasos" class="pasos" aria-live="polite"></ol>
+        <p id="pasos-vacio" class="ayuda">Marca al menos una opción para ver los pasos.</p>
+        <p class="ayuda">Los pasos que marques como hechos se recuerdan solo en este dispositivo.</p>
+      </div>
+    </section>
+
+    <section id="palabra-clave" class="vista oculto" aria-labelledby="palabra-titulo">
+      <div class="panel-cabeza">
+        <a class="volver" href="#inicio" aria-label="Volver a Ayuda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></a>
+        <h2 id="palabra-titulo" tabindex="-1">Palabra clave familiar</h2>
+      </div>
+      <p class="panel-intro">La voz de una persona se puede imitar con inteligencia artificial. Una palabra secreta de tu familia te protege aunque la voz suene igual.</p>
+      <div class="tarjeta">
+        <ol class="consejos">
+          <li><strong>Escójanla en persona,</strong> no por chat ni por redes.</li>
+          <li><strong>Que no se pueda adivinar:</strong> nada de fechas, nombres de mascotas ni apodos que aparezcan en redes. Mejor algo raro, como "arepa con trompeta".</li>
+          <li><strong>Úsenla solo en emergencias:</strong> si alguien con la voz de tu hijo, tu mamá o tu nieto pide plata con afán, pídele la palabra.</li>
+          <li><strong>Si no la sabe, cuelga</strong> y llama tú al número de siempre de esa persona.</li>
+        </ol>
+        <label class="consentimiento">
+          <input type="checkbox" id="palabra-acordada">
+          <span>Ya acordé una palabra clave con mi familia</span>
+        </label>
+        <p id="palabra-estado" class="ayuda" role="status" aria-live="polite"></p>
+        <p class="ayuda">Centinela no te pide la palabra y nunca la guarda. Solo recuerda en este dispositivo que la tienen, para recordártela cuando alguien diga ser de tu familia.</p>
+      </div>
+    </section>
+
+    <section id="contacto-confianza" class="vista oculto" aria-labelledby="contacto-titulo">
+      <div class="panel-cabeza">
+        <a class="volver" href="#inicio" aria-label="Volver a Ayuda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></a>
+        <h2 id="contacto-titulo" tabindex="-1">Contacto de confianza</h2>
+      </div>
+      <p class="panel-intro">Escoge a alguien de tu familia o un amigo. Si Centinela ve un riesgo crítico, te muestra un botón para escribirle con el mensaje listo y pedirle que te llame.</p>
+      <div class="tarjeta">
+        <form id="form-contacto" class="formulario" novalidate>
+          <label for="contacto-nombre" class="etiqueta">Su nombre (opcional)</label>
+          <input id="contacto-nombre" maxlength="30" autocomplete="off" placeholder="Por ejemplo: Laura">
+          <label for="contacto-telefono" class="etiqueta">Su celular</label>
+          <input id="contacto-telefono" type="tel" inputmode="numeric" autocomplete="off" maxlength="16" placeholder="300 123 4567" required>
+          <fieldset class="opciones">
+            <legend>Avisarle por</legend>
+            <label><input type="radio" name="canal" value="whatsapp" checked> WhatsApp</label>
+            <label><input type="radio" name="canal" value="sms"> Mensaje de texto</label>
+          </fieldset>
+          <label class="consentimiento">
+            <input type="checkbox" id="contacto-acepta">
+            <span>Le pregunté a esta persona y está de acuerdo en recibir mis avisos</span>
+          </label>
+          <p id="contacto-error" class="error" role="status"></p>
+          <div class="acciones">
+            <button type="submit" class="boton-principal">Guardar contacto</button>
+            <button type="button" id="quitar-contacto" class="boton-secundario oculto">Quitar</button>
+          </div>
+        </form>
+        <p id="contacto-estado" class="ayuda" role="status" aria-live="polite"></p>
+        <a id="contacto-prueba" class="enlace-boton oculto" target="_blank" rel="noopener noreferrer">Enviarle un mensaje de prueba</a>
+        <p class="ayuda">El nombre y el número quedan solo en este dispositivo; Centinela no los sube a ningún servidor. Nada se envía solo: el botón abre WhatsApp o tus mensajes con el texto escrito y tú decides si lo mandas.</p>
+      </div>
     </section>
   </main>
 
@@ -111,8 +164,6 @@
 
   <nav class="barra" aria-label="Secciones">
     <a href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</a>
-    <a href="/llamada.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Llamada</a>
-    <a href="/#asistente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.8A8 8 0 1 1 21 12z"/></svg>Pregúntale</a>
     <a href="/ayuda.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m5.6 5.6 3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></svg>Ayuda</a>
     <a href="/cuenta.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Cuenta</a>
   </nav>

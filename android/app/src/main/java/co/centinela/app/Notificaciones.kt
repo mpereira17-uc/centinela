@@ -33,7 +33,7 @@ object Notificaciones {
             context, numero.hashCode(), abrir, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
         )
         val notificacion = Notification.Builder(context, CANAL)
-            .setSmallIcon(R.drawable.ic_escudo)
+            .setSmallIcon(R.drawable.ic_buho)
             .setColor(context.getColor(R.color.ambar))
             .setContentTitle("${aviso.titulo}: $numero")
             .setContentText(aviso.texto)

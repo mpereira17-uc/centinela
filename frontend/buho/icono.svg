@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs>
+  <linearGradient id="cci5_f" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3B82FF"/><stop offset="1" stop-color="#1446B8"/></linearGradient>
+  <radialGradient id="cci5_m" cx="0.5" cy="0.45" r="0.62"><stop offset="0.75" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E8F0FE"/></radialGradient>
+  <radialGradient id="cci5_i" cx="0.4" cy="0.3" r="0.8"><stop offset="0" stop-color="#3B82FF"/><stop offset="1" stop-color="#1446B8"/></radialGradient>
+  </defs><rect width="100" height="100" rx="23" fill="url(#cci5_f)"/>
+  <path d="M50 27 C43 27 37 26 33 24 Q30 22 28 17.5 Q26.5 22 24.5 24 Q22 19.5 19.5 14 Q16 23 17 33 Q15 47 17 61 Q21 85 50 87 Q79 85 83 61 Q85 47 83 33 Q84 23 80.5 14 Q78 19.5 75.5 24 Q73.5 22 72 17.5 Q70 22 67 24 C63 26 57 27 50 27 Z" fill="url(#cci5_m)" stroke="url(#cci5_m)" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="37.5" cy="56" r="11.5" fill="url(#cci5_i)"/><circle cx="62.5" cy="56" r="11.5" fill="url(#cci5_i)"/>
+  <circle cx="37.5" cy="56" r="6.2" fill="#0B2A5B"/><circle cx="62.5" cy="56" r="6.2" fill="#0B2A5B"/>
+  <circle cx="34.5" cy="52.5" r="3.1" fill="#fff"/><circle cx="59.5" cy="52.5" r="3.1" fill="#fff"/>
+  <path d="M27 42 Q36 35.5 45.5 41 M54.5 41 Q64 35.5 73 42" fill="none" stroke="#0B2A5B" stroke-width="3.8" stroke-linecap="round"/>
+  <path d="M45 68 Q50 66 55 68 Q53 74 50 77 Q47 74 45 68 Z" fill="#7FB0FF"/></svg>
