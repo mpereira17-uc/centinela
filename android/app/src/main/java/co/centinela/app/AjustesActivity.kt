@@ -23,6 +23,10 @@ import androidx.activity.result.contract.ActivityResultContracts
  * la persona debe tocar Guardar, para que ninguna página pueda cambiar a escondidas a dónde van los números.
  */
 class AjustesActivity : ComponentActivity() {
+    companion object {
+        const val EXTRA_SIN_CONEXION = "sin_conexion"
+    }
+
     private lateinit var ajustes: Ajustes
     private lateinit var roles: RoleManager
 
@@ -41,6 +45,7 @@ class AjustesActivity : ComponentActivity() {
 
         val campo = findViewById<EditText>(R.id.servidor)
         campo.setText(intent.data?.getQueryParameter("servidor") ?: ajustes.servidor)
+        if (intent.getBooleanExtra(EXTRA_SIN_CONEXION, false)) campo.error = getString(R.string.servidor_sin_conexion)
 
         findViewById<Button>(R.id.guardar).setOnClickListener {
             val direccion = Direcciones.normalizar(campo.text.toString())

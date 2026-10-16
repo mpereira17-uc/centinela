@@ -10,7 +10,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.webkit.PermissionRequest
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.ComponentActivity
@@ -71,6 +73,15 @@ class MainActivity : ComponentActivity() {
                 }
                 return true
             }
+
+            // Si el servidor no responde (por ejemplo, se reinició y su dirección cambió), se vuelve a Ajustes
+            override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
+                if (request.isForMainFrame) volverAAjustes()
+            }
+
+            override fun onReceivedHttpError(view: WebView, request: WebResourceRequest, respuesta: WebResourceResponse) {
+                if (request.isForMainFrame && respuesta.statusCode >= 500) volverAAjustes()
+            }
         }
         web.webChromeClient = object : WebChromeClient() {
             override fun onPermissionRequest(request: PermissionRequest) {
@@ -100,6 +111,12 @@ class MainActivity : ComponentActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (::web.isInitialized) web.saveState(outState)
+    }
+
+    private fun volverAAjustes() {
+        if (isFinishing) return
+        startActivity(Intent(this, AjustesActivity::class.java).putExtra(AjustesActivity.EXTRA_SIN_CONEXION, true))
+        finish()
     }
 
     private fun esDelServidor(url: Uri): Boolean {

@@ -7,6 +7,7 @@
     <string name="servidor_ejemplo">https://…trycloudflare.com</string>
     <string name="servidor_ayuda">La dirección que aparece al encender Centinela, o la del enlace de la página de instalar. Debe empezar por https://.</string>
     <string name="servidor_invalido">Escribe solo la dirección, empezando por https://</string>
+    <string name="servidor_sin_conexion">No pudimos conectar con esta dirección. Si reiniciaste el servidor, la dirección cambió: pega la dirección nueva y toca Guardar.</string>
     <string name="guardar">Guardar</string>
     <string name="filtro_titulo">Aviso de llamadas</string>
     <string name="filtro_activo">Activo. Cuando te llame un número que no está en tus contactos, Centinela revisa sus reportes y te avisa si hay algo.</string>
