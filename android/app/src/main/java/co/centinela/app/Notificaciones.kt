@@ -8,6 +8,8 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.Icon
+import android.net.Uri
 import android.os.Build
 
 object Notificaciones {
@@ -40,7 +42,20 @@ object Notificaciones {
             .setStyle(Notification.BigTextStyle().bigText("${aviso.texto}\n\nAl colgar, toca aquí para contar cómo terminó o reportar el número."))
             .setContentIntent(alTocar)
             .setAutoCancel(true)
-            .build()
-        context.getSystemService(NotificationManager::class.java).notify(numero.hashCode(), notificacion)
+        // Con varios reportes de estafa y un contacto de confianza guardado: un botón para llamarle y preguntar.
+        // Abre el marcador con el número escrito; la persona toca llamar (la app no pide permiso de llamadas).
+        val contacto = Ajustes(context).contacto
+        if (aviso.alto && contacto != null) {
+            val marcar = Intent(Intent.ACTION_DIAL, Uri.parse("tel:+57${contacto.telefono}"))
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            val alLlamar = PendingIntent.getActivity(
+                context, numero.hashCode() + 1, marcar, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
+            )
+            notificacion.addAction(
+                Notification.Action.Builder(Icon.createWithResource(context, R.drawable.ic_buho), Contactos.textoLlamar(contacto), alLlamar)
+                    .build(),
+            )
+        }
+        context.getSystemService(NotificationManager::class.java).notify(numero.hashCode(), notificacion.build())
     }
 }

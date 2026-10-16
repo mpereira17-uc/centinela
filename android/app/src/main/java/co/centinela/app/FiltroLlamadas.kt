@@ -28,6 +28,7 @@ class FiltroLlamadas : CallScreeningService() {
                 // La notificación queda para después de colgar; la tarjeta se ve encima de la llamada
                 Notificaciones.mostrar(this, numero, aviso)
                 TarjetaLlamada.mostrar(this, numero, aviso)
+                AvisoHablado.iniciar(this, aviso, ajustes.avisoHablado)
             }
         }
     }

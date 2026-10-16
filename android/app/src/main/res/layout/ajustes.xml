@@ -70,6 +70,19 @@
             android:text="@string/activar_tarjeta" />
 
         <Switch
+            android:id="@+id/aviso_hablado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:minHeight="48dp"
+            android:text="@string/aviso_hablado"
+            android:textSize="16sp" />
+
+        <TextView
+            style="@style/Ayuda"
+            android:text="@string/aviso_hablado_ayuda" />
+
+        <Switch
             android:id="@+id/silenciar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

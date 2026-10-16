@@ -21,6 +21,8 @@
     <string name="tarjeta_franja">REPORTADO POR LA COMUNIDAD DE CENTINELA</string>
     <string name="tarjeta_pie">Toca para ver detalles. Al colgar puedes contar cómo terminó.</string>
     <string name="tarjeta_cerrar">Cerrar aviso</string>
+    <string name="aviso_hablado">Decir el aviso en voz alta y vibrar distinto</string>
+    <string name="aviso_hablado_ayuda">Si te llama un número que varias personas reportaron como estafa, el celular dice \"Cuidado: posible estafa\" mientras timbra y vibra con tres toques cortos. Con el celular en silencio o en No molestar no suena nada; en modo vibración solo vibra.</string>
     <string name="silenciar">Silenciar el timbre de números con muchos reportes</string>
     <string name="silenciar_ayuda">La llamada sigue entrando y puedes contestar. Centinela nunca rechaza ni bloquea llamadas, porque un reporte puede estar equivocado.</string>
     <string name="limites_titulo">Lo que Centinela no hace</string>

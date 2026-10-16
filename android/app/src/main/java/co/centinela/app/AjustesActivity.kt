@@ -17,7 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 
 /**
  * Ajustes nativos: la dirección del servidor, activar el filtro de llamadas, la tarjeta sobre la
- * pantalla de llamada y silenciar el timbre de los números con muchos reportes.
+ * pantalla de llamada, el aviso hablado y silenciar el timbre de los números con muchos reportes.
  *
  * El enlace centinela://configurar?servidor=… (desde la página de instalar) solo llena el campo:
  * la persona debe tocar Guardar, para que ninguna página pueda cambiar a escondidas a dónde van los números.
@@ -67,6 +67,10 @@ class AjustesActivity : ComponentActivity() {
         findViewById<Switch>(R.id.silenciar).apply {
             isChecked = ajustes.silenciarRiesgoAlto
             setOnCheckedChangeListener { _, activo -> ajustes.silenciarRiesgoAlto = activo }
+        }
+        findViewById<Switch>(R.id.aviso_hablado).apply {
+            isChecked = ajustes.avisoHablado
+            setOnCheckedChangeListener { _, activo -> ajustes.avisoHablado = activo }
         }
         findViewById<Button>(R.id.abrir).setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))

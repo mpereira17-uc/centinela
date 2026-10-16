@@ -45,9 +45,14 @@ object TarjetaLlamada {
         tarjeta.findViewById<TextView>(R.id.tarjeta_numero).text = numero
         tarjeta.findViewById<TextView>(R.id.tarjeta_texto).text = aviso.texto
         tarjeta.findViewById<View>(R.id.tarjeta_franja).visibility = if (aviso.alto) View.VISIBLE else View.GONE
-        tarjeta.findViewById<View>(R.id.tarjeta_cerrar).setOnClickListener { quitar(app) }
+        // Cerrar o tocar la tarjeta también calla el aviso hablado
+        tarjeta.findViewById<View>(R.id.tarjeta_cerrar).setOnClickListener {
+            AvisoHablado.detener()
+            quitar(app)
+        }
         // Tocar la tarjeta abre "¿Quién te llama?" con el número, igual que la notificación
         tarjeta.setOnClickListener {
+            AvisoHablado.detener()
             quitar(app)
             app.startActivity(
                 Intent(app, MainActivity::class.java)

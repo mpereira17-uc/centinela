@@ -58,6 +58,8 @@ Con `python sustentacion.py --demo` se cargan tres números ya reportados por cu
 | 300 000 0002 | Posible estafa (franja ámbar) |
 | 601 000 0003 | Publicidad o call center |
 
+Con 300 000 0001 o 300 000 0002, si el celular tiene el timbre normal, Centinela además dice en voz alta "Cuidado: probable estafa…" mientras timbra y vibra con tres toques cortos; en modo vibración solo vibra y en silencio o No molestar no hace nada. Se apaga en *Ajustes > Decir el aviso en voz alta*. Si en *Ayuda > Contacto de confianza* hay alguien guardado, la notificación de esos números trae el botón *Llamar a …*.
+
 Se guardan solo en la base del portátil. Para borrarlos: desde `backend/`, `python -m app.demo --quitar`. Dilo tal cual a los jurados: son datos de ejemplo; los reportes reales que hagan ellos en la demo cuentan aparte.
 
 ## Guion de la demostración

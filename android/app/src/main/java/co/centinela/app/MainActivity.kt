@@ -18,6 +18,8 @@ import android.webkit.WebViewClient
 import androidx.activity.ComponentActivity
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.webkit.WebViewCompat
+import androidx.webkit.WebViewFeature
 
 /**
  * La app es la misma interfaz web de Centinela dentro de un WebView, más lo que solo una app nativa
@@ -51,7 +53,7 @@ class MainActivity : ComponentActivity() {
         }
 
         web = WebView(this)
-        web.setBackgroundColor(getColor(R.color.marino))
+        web.setBackgroundColor(getColor(R.color.fondo))
         web.respetarBarras()
         setContentView(web)
         web.settings.apply {
@@ -96,6 +98,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+        escucharContacto(ajustes)
         onBackPressedDispatcher.addCallback(this) {
             if (web.canGoBack()) web.goBack() else finish()
         }
@@ -111,6 +114,26 @@ class MainActivity : ComponentActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (::web.isInitialized) web.saveState(outState)
+    }
+
+    /**
+     * La interfaz web le cuenta a la app el contacto de confianza (Ayuda > Contacto de confianza), para
+     * ofrecer "Llamar a …" en el aviso de una llamada riesgosa. Solo lo acepta de la página principal del
+     * servidor configurado; el objeto CentinelaApp no existe para ninguna otra dirección.
+     */
+    private fun escucharContacto(ajustes: Ajustes) {
+        if (!WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) return
+        val origen = Uri.parse(servidor)
+        try {
+            WebViewCompat.addWebMessageListener(web, "CentinelaApp", setOf(servidor)) { _, mensaje, desde, esPrincipal, _ ->
+                if (!esPrincipal || desde.scheme != "https" || desde.host != origen.host || desde.port != origen.port) {
+                    return@addWebMessageListener
+                }
+                Contactos.leer(mensaje.data)?.let(ajustes::recibir)
+            }
+        } catch (e: IllegalArgumentException) {
+            // dirección que WebView no acepta como origen: la app sigue, sin el botón de llamar
+        }
     }
 
     private fun volverAAjustes() {

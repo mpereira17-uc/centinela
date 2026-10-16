@@ -193,6 +193,16 @@
     return contacto.canal === "whatsapp" ? `https://wa.me/${numero}?text=${texto}` : `sms:+${numero}?body=${texto}`;
   }
 
+  // Dentro de la app de Android, el contacto también queda en el celular para que el aviso de una llamada
+  // riesgosa traiga "Llamar a …". CentinelaApp solo existe en la app y solo para el servidor configurado.
+  function contarleALaApp() {
+    const app = window.CentinelaApp;
+    if (!app || typeof app.postMessage !== "function") return;
+    const c = leerContacto();
+    const mensaje = c ? { tipo: "contacto", nombre: c.nombre, telefono: normalizarCelular(c.telefono) } : { tipo: "contacto-quitado" };
+    try { app.postMessage(JSON.stringify(mensaje)); } catch { /* la app no lo recibió: queda en la página */ }
+  }
+
   // Botón del aviso: solo en riesgo crítico y si hay un contacto guardado
   function contactoParaAviso(nivel, motivo) {
     const c = leerContacto();
@@ -262,11 +272,13 @@
       const canal = form.querySelector('input[name="canal"]:checked')?.value || "whatsapp";
       const nombre = $("#contacto-nombre").value.trim().slice(0, 30);
       guardado.escribir(CLAVE_CONTACTO, JSON.stringify({ nombre, telefono, canal }));
+      contarleALaApp();
       pintar();
     });
 
     quitar.addEventListener("click", () => {
       try { localStorage.removeItem(CLAVE_CONTACTO); } catch { /* sin almacenamiento */ }
+      contarleALaApp();
       form.reset();
       pintar();
     });
@@ -342,6 +354,7 @@
     iniciarVistas();
     iniciarPalabraClave();
     iniciarContacto();
+    contarleALaApp();
     iniciarLetra();
     iniciarBienvenida();
     iniciarAlerta();
