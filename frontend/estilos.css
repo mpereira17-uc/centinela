@@ -982,3 +982,216 @@ details[open] > summary::after { transform: rotate(90deg); }
 .tabla-cifras td { text-align: right; white-space: nowrap; }
 .tabla-cifras thead th { font-size: .85rem; color: var(--texto-suave); }
 .tabla-cifras thead th:not(:first-child) { text-align: right; }
+
+/* =====================================================================
+   Estilo Noche (noviembre de 2026)
+   Inspirado en las apps de compras modernas que pepe escogió como referencia:
+   fondo azul pizarra, una franja diagonal de azul eléctrico, tarjetas que parecen
+   de vidrio con brillo en el borde y botones con degradado de cian a azul.
+   Lo que no se copió a propósito: la letra pequeña y las tarjetas giradas en 3D,
+   porque la app también la usan personas mayores. Todo texto sigue con contraste 4,5:1.
+   Va al final para que gane sobre el modo claro y el oscuro anteriores.
+   ===================================================================== */
+:root, :root:not(.x) {
+  --fondo: #1f2533;
+  --fondo-2: #2a3245;
+  --superficie: #2c3448;
+  --campo: #181d29;
+  --chip: #343d54;
+  --texto: #ffffff;
+  --texto-suave: #c9d1e3;
+  --borde: rgba(255, 255, 255, .08);
+  --primario: #4fc3f7;
+  --primario-fuerte: #7dd6ff;
+  --primario-texto: #0f1420;
+  --celeste: #4fc3f7;
+  --foco: #7dd6ff;
+  --electrico: linear-gradient(135deg, #34c8e8 0%, #4e4af2 100%);
+  --degradado: linear-gradient(135deg, #2bb3e0 0%, #3f5ff0 55%, #4e4af2 100%);
+  --degradado-suave: linear-gradient(160deg, #353e55 0%, #232a3b 100%);
+  --vidrio: linear-gradient(160deg, rgba(64, 74, 100, .92) 0%, rgba(36, 43, 60, .92) 100%);
+  --vidrio-borde: linear-gradient(160deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, .02) 45%, rgba(0, 0, 0, .25));
+  --sombra: 0 18px 32px rgba(10, 13, 22, .45), 0 2px 4px rgba(10, 13, 22, .3);
+  --sombra-boton: 0 10px 22px rgba(62, 92, 240, .45);
+  --burbuja-otro: #343d54;
+  --burbuja-mia: #3f5ff0;
+  --burbuja-mia-texto: #ffffff;
+  --llamada-fondo: linear-gradient(165deg, #34c8e8 0%, #3f5ff0 50%, #1f2533 100%);
+
+  --bajo: #8fe0b3;
+  --bajo-fondo: #17352a;
+  --moderado: #ffd27a;
+  --moderado-fondo: #3a2f12;
+  --alto: #ffb48a;
+  --alto-fondo: #3f2416;
+  --critico: #ffa6a6;
+  --critico-fondo: #431c22;
+  --bajo-solido: #1d7a52;
+  --moderado-solido: #8f5d00;
+  --alto-solido: #b4480f;
+  --critico-solido: #c42b2b;
+  --llama: #ff9a3c;
+  --llama-centro: #ffe08a;
+  --radio: 26px;
+  color-scheme: dark;
+}
+
+/* Fondo: azul pizarra con la franja diagonal de azul eléctrico detrás de todo */
+body { background: var(--fondo); }
+body::before {
+  content: ""; position: fixed; z-index: -1; pointer-events: none;
+  top: 0; right: 0; width: 100%; height: 100vh;
+  background: var(--electrico);
+  clip-path: polygon(78% 0, 100% 0, 100% 62%, 34% 100%, 14% 100%);
+  /* Atenuada para que el texto gris que pase encima siga con contraste 4,5:1 */
+  opacity: .55;
+}
+@media (min-width: 700px) {
+  body::before { clip-path: polygon(70% 0, 100% 0, 100% 55%, 55% 100%, 40% 100%); }
+}
+
+/* Vidrio: tarjetas oscuras con brillo en el borde superior */
+.tarjeta, .estado, .mas, .plegable, .saludo-burbuja, .buscador, .servicio, .semana, .respuesta-burbuja,
+.roles label, .lista-tarjeta {
+  position: relative; isolation: isolate;
+  background: var(--vidrio);
+  border: 0;
+  box-shadow: var(--sombra);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+}
+.tarjeta::after, .estado::after, .mas::after, .plegable::after, .saludo-burbuja::after, .buscador::after,
+.servicio::after, .semana::after, .respuesta-burbuja::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+  background: var(--vidrio-borde);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+
+/* Barra superior transparente sobre el fondo */
+.cabecera { background: color-mix(in srgb, var(--fondo) 72%, transparent); border-bottom: 0; }
+.marca { color: #fff; }
+.marca-buho { box-shadow: 0 8px 18px rgba(62, 92, 240, .5); }
+.tamano, .boton-icono {
+  border-radius: 14px; background: var(--electrico); color: #fff; box-shadow: var(--sombra-boton);
+}
+
+/* Inicio */
+.saludo-burbuja { border-radius: 26px 26px 26px 8px; }
+.saludo-burbuja h1 { color: #fff; }
+.saludo-burbuja p { color: var(--texto-suave); }
+.saludo-buho {
+  filter: drop-shadow(0 14px 20px rgba(0, 0, 0, .45));
+  background: radial-gradient(closest-side, rgba(79, 195, 247, .35), transparent); border-radius: 50%;
+}
+
+.buscador { border-radius: 24px; color: #fff; }
+.buscador:hover { border-color: transparent; }
+.buscador-icono, .servicio-icono {
+  border-radius: 16px; background: var(--electrico); box-shadow: var(--sombra-boton);
+}
+.buscador-flecha { color: var(--primario-fuerte); }
+
+.seccion-titulo { color: #fff; font-size: 1.3rem; }
+
+/* Servicios: tarjetas con el borde superior inclinado, como las de la referencia */
+.servicios { gap: .9rem; }
+.servicio {
+  border-radius: 26px; min-height: 168px; padding-top: 1.6rem;
+  clip-path: polygon(0 9%, 100% 0, 100% 100%, 0 100%);
+  transition: transform .2s ease;
+}
+.servicios li:nth-child(even) .servicio { clip-path: polygon(0 0, 100% 9%, 100% 100%, 0 100%); }
+.servicio:active { transform: scale(.97); }
+.servicio strong { color: #fff; }
+/* La primera acción va en azul eléctrico para que se vea primero */
+.servicios li:first-child .servicio { background: var(--electrico); }
+.servicios li:first-child .servicio small { color: rgba(255, 255, 255, .9); }
+.servicios li:first-child .servicio-icono { background: rgba(255, 255, 255, .2); box-shadow: none; }
+
+/* Más opciones: lista de vidrio con íconos en baldosas */
+.mas { border-radius: 26px; padding: .35rem 0; }
+.mas li + li { border-top: 1px solid rgba(255, 255, 255, .06); }
+.mas-icono, .h-icono {
+  border-radius: 14px; color: var(--primario-fuerte);
+  background: linear-gradient(160deg, #3d4762 0%, #262d3f 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 6px 12px rgba(0, 0, 0, .3);
+}
+.mas a::after, .mas button::after { color: var(--primario-fuerte); }
+
+.consejo {
+  background: var(--electrico); border-radius: 26px; box-shadow: var(--sombra-boton);
+  position: relative; overflow: hidden;
+}
+.consejo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 55%, rgba(255, 255, 255, .14) 55%);
+}
+
+/* Botones */
+button, .boton-archivo, a.boton-principal, a.boton-secundario { border-radius: 16px; }
+.boton-principal { background: var(--electrico); color: #fff; box-shadow: var(--sombra-boton); }
+.boton-secundario, .boton-archivo, .sugerencias button {
+  background: linear-gradient(160deg, #3d4762 0%, #2a3145 100%); color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 8px 16px rgba(0, 0, 0, .3);
+}
+.volver {
+  border-radius: 14px; background: var(--electrico); color: #fff; box-shadow: var(--sombra-boton);
+  width: 48px; height: 48px;
+}
+.enlace-boton, a { color: var(--primario-fuerte); }
+
+/* Campos hundidos, como el del cupón en la referencia */
+textarea, .fila input, .formulario input:not([type="checkbox"]):not([type="radio"]), input[type="search"], input.campo, .campo-grande, select {
+  background: var(--campo); color: #fff; border-radius: 16px;
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, .45), inset 0 -1px 0 rgba(255, 255, 255, .05);
+}
+textarea:focus, .fila input:focus, .formulario input:focus, input[type="search"]:focus, input.campo:focus, .campo-grande:focus, select:focus {
+  background: var(--campo); border-color: var(--primario);
+}
+
+/* Selector de dos opciones: pestaña elevada sobre una canaleta hundida */
+.segmentos { background: var(--campo); box-shadow: inset 0 3px 8px rgba(0, 0, 0, .45); border-radius: 18px; }
+.segmentos label { border-radius: 14px; }
+.segmentos label:has(input:checked) {
+  background: linear-gradient(160deg, #3d4762 0%, #2a3145 100%); color: var(--primario-fuerte);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 8px 16px rgba(0, 0, 0, .4);
+}
+
+/* Barra inferior: la pestaña activa se levanta en azul eléctrico */
+.barra {
+  background: linear-gradient(180deg, #2b3346 0%, #1c2230 100%);
+  border-top: 0; box-shadow: 0 -12px 30px rgba(0, 0, 0, .35);
+  border-radius: 26px 26px 0 0;
+}
+.barra a { color: var(--texto-suave); }
+.barra a[aria-current] { color: #fff; }
+.barra svg { width: 58px; height: 42px; padding: 8px 15px; border-radius: 16px; transition: transform .2s ease; }
+.barra a[aria-current] svg {
+  background: var(--electrico); box-shadow: var(--sombra-boton);
+  transform: translateY(-10px) rotate(-6deg);
+}
+.barra a[aria-current] span { margin-top: -10px; }
+
+/* Estado del nivel y conversación */
+.estado { border-radius: 26px; overflow: hidden; }
+.nivel.sin-datos { background: linear-gradient(160deg, #3d4762 0%, #2a3145 100%); color: #fff; }
+.frase-texto { box-shadow: 0 6px 14px rgba(0, 0, 0, .25); }
+.frase[data-hablante="usuario"] .frase-texto, .frase[data-hablante="propio"] .frase-texto { background: var(--electrico); }
+.vacio, .consentimiento, .niveles li, .frase details ul { background: var(--campo); box-shadow: inset 0 2px 6px rgba(0, 0, 0, .35); }
+
+/* La estafa de la semana */
+.semana { border-radius: 26px; }
+
+/* Llamada: el fondo usa la franja eléctrica */
+.pantalla-llamada { box-shadow: var(--sombra); }
+
+/* Perfil */
+.avatar-anillo { background: var(--electrico); }
+
+/* Los avisos de riesgo conservan su color pleno: rojo, naranja, ámbar o verde. No se cambian por estética. */
+.alerta { box-shadow: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .servicio, .barra svg { transition: none; }
+  .barra a[aria-current] svg { transform: translateY(-10px); }
+}

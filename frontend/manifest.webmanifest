@@ -8,8 +8,8 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "background_color": "#1f2533",
+  "theme_color": "#1f2533",
   "categories": ["security", "utilities"],
   "share_target": {
     "action": "/compartir",
