@@ -1,0 +1,304 @@
+{
+  "semilla": 20261112,
+  "repeticiones": 2000,
+  "alfa": 0.05,
+  "parametros": {
+    "p_det_fragmento": 0.8,
+    "discordancia_inversa": 0.02,
+    "p_fa_fragmento": 0.05,
+    "fa_inversa": 0.02,
+    "tiempo_mediana_s": 6.0,
+    "tiempo_sigma_log": 0.5,
+    "tiempo_ruido_s": 1.0
+  },
+  "margen_wilson_80": {
+    "20": 0.16767988603777817,
+    "75": 0.08949567629232336,
+    "150": 0.06365025798388235,
+    "250": 0.049415983905589655
+  },
+  "escenarios": [
+    {
+      "n_riesgo": 20,
+      "n_legitimas": 20,
+      "delta": 0.0,
+      "delta_fa": 0.0,
+      "potencia": 0.0,
+      "potencia_ic": [
+        0,
+        0.0
+      ],
+      "concluye_preferible": 0.0,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 20,
+      "n_legitimas": 20,
+      "delta": 0.05,
+      "delta_fa": 0.0,
+      "potencia": 0.0005,
+      "potencia_ic": [
+        0,
+        0.0014797549693673414
+      ],
+      "concluye_preferible": 0.0005,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 20,
+      "n_legitimas": 20,
+      "delta": 0.1,
+      "delta_fa": 0.0,
+      "potencia": 0.005,
+      "potencia_ic": [
+        0.0019087251820648489,
+        0.008091274817935151
+      ],
+      "concluye_preferible": 0.005,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 20,
+      "n_legitimas": 20,
+      "delta": 0.15,
+      "delta_fa": 0.0,
+      "potencia": 0.0275,
+      "potencia_ic": [
+        0.02033275541089883,
+        0.03466724458910117
+      ],
+      "concluye_preferible": 0.0275,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 75,
+      "n_legitimas": 75,
+      "delta": 0.0,
+      "delta_fa": 0.0,
+      "potencia": 0.0,
+      "potencia_ic": [
+        0,
+        0.0
+      ],
+      "concluye_preferible": 0.0,
+      "error_direccion": 0.0005
+    },
+    {
+      "n_riesgo": 75,
+      "n_legitimas": 75,
+      "delta": 0.05,
+      "delta_fa": 0.0,
+      "potencia": 0.0765,
+      "potencia_ic": [
+        0.06485095719812138,
+        0.08814904280187862
+      ],
+      "concluye_preferible": 0.0765,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 75,
+      "n_legitimas": 75,
+      "delta": 0.1,
+      "delta_fa": 0.0,
+      "potencia": 0.367,
+      "potencia_ic": [
+        0.34587600963832826,
+        0.3881239903616717
+      ],
+      "concluye_preferible": 0.367,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 75,
+      "n_legitimas": 75,
+      "delta": 0.15,
+      "delta_fa": 0.0,
+      "potencia": 0.7135,
+      "potencia_ic": [
+        0.6936847126137419,
+        0.7333152873862582
+      ],
+      "concluye_preferible": 0.7135,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 150,
+      "n_legitimas": 150,
+      "delta": 0.0,
+      "delta_fa": 0.0,
+      "potencia": 0.002,
+      "potencia_ic": [
+        4.196098098122698e-05,
+        0.003958039019018773
+      ],
+      "concluye_preferible": 0.002,
+      "error_direccion": 0.0035
+    },
+    {
+      "n_riesgo": 150,
+      "n_legitimas": 150,
+      "delta": 0.05,
+      "delta_fa": 0.0,
+      "potencia": 0.274,
+      "potencia_ic": [
+        0.25445279510518193,
+        0.2935472048948181
+      ],
+      "concluye_preferible": 0.2735,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 150,
+      "n_legitimas": 150,
+      "delta": 0.1,
+      "delta_fa": 0.0,
+      "potencia": 0.813,
+      "potencia_ic": [
+        0.7959113738176528,
+        0.8300886261823471
+      ],
+      "concluye_preferible": 0.811,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 150,
+      "n_legitimas": 150,
+      "delta": 0.15,
+      "delta_fa": 0.0,
+      "potencia": 0.9825,
+      "potencia_ic": [
+        0.9767531961056601,
+        0.9882468038943399
+      ],
+      "concluye_preferible": 0.9795,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 250,
+      "n_legitimas": 250,
+      "delta": 0.0,
+      "delta_fa": 0.0,
+      "potencia": 0.0045,
+      "potencia_ic": [
+        0.0015666224586664604,
+        0.0074333775413335385
+      ],
+      "concluye_preferible": 0.0045,
+      "error_direccion": 0.005
+    },
+    {
+      "n_riesgo": 250,
+      "n_legitimas": 250,
+      "delta": 0.05,
+      "delta_fa": 0.0,
+      "potencia": 0.542,
+      "potencia_ic": [
+        0.5201639813885407,
+        0.5638360186114594
+      ],
+      "concluye_preferible": 0.537,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 250,
+      "n_legitimas": 250,
+      "delta": 0.1,
+      "delta_fa": 0.0,
+      "potencia": 0.9805,
+      "potencia_ic": [
+        0.9744398666846348,
+        0.9865601333153653
+      ],
+      "concluye_preferible": 0.9725,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 250,
+      "n_legitimas": 250,
+      "delta": 0.15,
+      "delta_fa": 0.0,
+      "potencia": 1.0,
+      "potencia_ic": [
+        1.0,
+        1
+      ],
+      "concluye_preferible": 0.9945,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 75,
+      "n_legitimas": 75,
+      "delta": 0.1,
+      "delta_fa": 0.05,
+      "potencia": 0.3825,
+      "potencia_ic": [
+        0.36120021232500193,
+        0.4037997876749981
+      ],
+      "concluye_preferible": 0.337,
+      "error_direccion": 0.0
+    },
+    {
+      "n_riesgo": 75,
+      "n_legitimas": 75,
+      "delta": 0.15,
+      "delta_fa": 0.05,
+      "potencia": 0.7245,
+      "potencia_ic": [
+        0.7049196220720846,
+        0.7440803779279155
+      ],
+      "concluye_preferible": 0.6485,
+      "error_direccion": 0.0
+    }
+  ],
+  "ejemplo": {
+    "frag": {
+      "deteccion": 59,
+      "falsas": 3,
+      "ic_det": [
+        0.681200341194856,
+        0.8641979886957789
+      ],
+      "ic_fa": [
+        0.013696064153575563,
+        0.11112987160331268
+      ]
+    },
+    "acum": {
+      "deteccion": 67,
+      "falsas": 2,
+      "ic_det": [
+        0.8033863706776092,
+        0.9449508726607037
+      ],
+      "ic_fa": [
+        0.007343688940032171,
+        0.09211488263589632
+      ]
+    },
+    "mcnemar": {
+      "p": 0.03857421875,
+      "solo_acumulacion": 10,
+      "solo_fragmento": 2
+    },
+    "mcnemar_falsas": {
+      "p": 1.0,
+      "solo_acumulacion": 1,
+      "solo_fragmento": 2
+    },
+    "dif_bootstrap": {
+      "estimada": 0.10666666666666669,
+      "ic95": [
+        0.026666666666666616,
+        0.19999999999999996
+      ]
+    },
+    "tiempo": {
+      "mediana_frag": 6.324912781774887,
+      "mediana_acum": 6.7138342686316825,
+      "wilcoxon_p": 0.21079941736579377
+    }
+  }
+}
