@@ -178,6 +178,7 @@ function ocupado(si) {
   // Los botones del aviso no se tocan: tienen su propia pausa y deben poder usarse mientras sigue el análisis
   for (const b of document.querySelectorAll("button")) if (!b.closest("#alerta")) b.disabled = si;
   $("#analizar-texto").textContent = si ? "Analizando…" : "Analizar frase";
+  $("#analizar").toggleAttribute("aria-busy", si);
   $("#analizando").classList.toggle("oculto", !si);
   $("#nivel").classList.toggle("escuchando", si); // el búho pone cara de atento mientras analiza
 }
@@ -563,17 +564,29 @@ function resumenDenuncia() {
   const frases = [...document.querySelectorAll("#conversacion > li")];
   const numero = $("#numero").value.trim();
   const perdida = $("#denuncia-perdida").checked;
+  const medio = document.querySelector('input[name="denuncia-medio"]:checked')?.value || "llamada";
+  const monto = $("#denuncia-monto").value.trim();
+  const via = $("#denuncia-via").value;
   const senales = new Set();
   const lineas = [
     "RESUMEN PARA DENUNCIA (preparado con Centinela, versión de prueba)",
     "",
     `Fecha y hora del resumen: ${FECHA_DENUNCIA.format(new Date())}`,
-    `Número que llamó: ${numero || "(no lo escribí)"} — el número en pantalla puede estar suplantado.`,
+    `Cómo me contactaron: ${medio === "mensaje" ? "por mensaje (SMS, WhatsApp o correo)" : "por llamada"}`,
+    `Número que ${medio === "mensaje" ? "escribió" : "llamó"}: ${numero || "(no lo escribí)"} — el número en pantalla puede estar suplantado.`,
     `¿Hubo pérdida de dinero o datos?: ${perdida ? "Sí" : "No"}`,
-    "",
-    "Lo que se dijo en la llamada:",
   ];
-  if (!frases.length) lineas.push("(No analicé la conversación en Centinela. Describe aquí lo que te dijeron.)");
+  if (perdida) {
+    lineas.push(`Monto: ${monto || "(agregar)"}`, `Medio: ${via || "(agregar: banco, cuenta, Nequi, Daviplata…)"}`);
+  }
+  const msj = estado.mensajeRevisado;
+  if (msj) {
+    lineas.push("", `Mensaje que recibí${msj.deCaptura ? " (leído de una captura de pantalla)" : ""}:`, `"${msj.texto}"`,
+      `Centinela lo marcó como riesgo ${ETIQUETAS[msj.nivel].toLowerCase()}: ${msj.mensaje}`);
+    for (const e of msj.enlaces) lineas.push(`- Enlace: ${e.dominio}${e.oficial ? " (página oficial)" : ""}${e.hallazgos.length ? ` — ${e.hallazgos.join("; ")}` : ""}`);
+  }
+  lineas.push("", "Lo que se dijo en la llamada:");
+  if (!frases.length) lineas.push(medio === "mensaje" ? "(No hubo llamada.)" : "(No analicé la conversación en Centinela. Describe aquí lo que te dijeron.)");
   for (const li of frases) {
     const quien = li.querySelector(".frase-quien")?.textContent || "Quien llama";
     const texto = li.querySelector(".frase-texto")?.textContent || "";
@@ -585,13 +598,17 @@ function resumenDenuncia() {
     lineas.push("", "Señales de estafa que detectó Centinela:");
     for (const s of senales) lineas.push(`- ${s}`);
   }
+  const pruebas = [...document.querySelectorAll("[data-prueba]:checked")].map((c) => c.dataset.prueba);
+  lineas.push("", "Pruebas que adjunto:");
+  if (pruebas.length) for (const prueba of pruebas) lineas.push(`- ${prueba}`);
+  else lineas.push("- (agregar las que tenga)");
   lineas.push(
     "",
     "Datos que debo agregar: mi nombre y documento, a dónde envié dinero (banco, cuenta, Nequi, Daviplata), montos, horas exactas y capturas de pantalla.",
     "Centinela es una herramienta de apoyo y puede equivocarse; este resumen no es una prueba por sí solo.",
   );
   // La línea 165 es para extorsión o amenazas contra la persona, no para "su cuenta será bloqueada"
-  const dicho = frases.map((li) => li.querySelector(".frase-texto")?.textContent || "").join(" ");
+  const dicho = [...frases.map((li) => li.querySelector(".frase-texto")?.textContent || ""), msj?.texto || ""].join(" ");
   const extorsion = /extors|vacuna|secuestr|le caemos|ubicad|le va a pasar|le va a ir mal|quem(ar|amos)|su familia|tenemos a/i.test(dicho);
   return { texto: lineas.join("\n"), extorsion };
 }
@@ -601,10 +618,35 @@ function prepararDenuncia() {
   $("#denuncia-texto").value = texto;
   $("#canal-165").classList.toggle("oculto", !extorsion);
   $("#canal-banco").classList.toggle("oculto", !$("#denuncia-perdida").checked);
+  $("#canal-superfinanciera").classList.toggle("oculto", !$("#denuncia-perdida").checked);
   $("#denuncia-lista").classList.remove("oculto");
+  irPasoDenuncia(3);
   $("#denuncia-estado").textContent = "";
   $("#denuncia-texto").focus();
   $("#denuncia-texto").scrollTop = 0;
+}
+
+// Un paso a la vez, como un asistente: qué pasó, pruebas, resumen
+function irPasoDenuncia(n) {
+  for (const paso of document.querySelectorAll("#denuncia [data-paso]")) paso.hidden = paso.dataset.paso !== String(n);
+  for (const li of document.querySelectorAll("#denuncia [data-paso-indicador]")) {
+    if (li.dataset.pasoIndicador === String(n)) li.setAttribute("aria-current", "step");
+    else li.removeAttribute("aria-current");
+    li.classList.toggle("hecho", Number(li.dataset.pasoIndicador) < n);
+  }
+  if (n === 2) pintarEvidenciaCentinela();
+  const foco = document.querySelector(`#denuncia [data-paso="${n}"]`)?.querySelector("textarea, input, select, button");
+  foco?.focus({ preventScroll: true });
+  $("#denuncia-titulo").scrollIntoView({ block: "start", behavior: "auto" });
+}
+
+function pintarEvidenciaCentinela() {
+  const msj = estado.mensajeRevisado;
+  const caja = $("#denuncia-evidencia-centinela");
+  caja.textContent = msj
+    ? `Se agrega solo: el mensaje que revisaste con Centinela${msj.deCaptura ? " desde una captura" : ""} (riesgo ${ETIQUETAS[msj.nivel].toLowerCase()}).`
+    : "";
+  caja.classList.toggle("oculto", !msj);
 }
 
 async function copiarDenuncia() {
@@ -627,7 +669,12 @@ function descargarDenuncia() {
   $("#denuncia-estado").textContent = "Descargado en tu celular. Adjúntalo en la denuncia.";
 }
 
-function pintarMensaje(r) {
+function pintarMensaje(r, texto, deCaptura = false) {
+  estado.mensajeRevisado = { texto, deCaptura, nivel: r.nivel, mensaje: r.mensaje, enlaces: r.enlaces };
+  $("#msj-leido").classList.toggle("oculto", !deCaptura);
+  $("#msj-leido-texto").textContent = deCaptura ? texto : "";
+  // Si hay algo de riesgo, ofrece llevarlo a la denuncia como prueba
+  $("#msj-denunciar").classList.toggle("oculto", !["alto", "critico"].includes(r.nivel));
   const caja = $("#msj-resultado");
   caja.dataset.nivel = r.nivel;
   $("#msj-nivel").textContent = `Riesgo ${ETIQUETAS[r.nivel].toLowerCase()}`;
@@ -678,6 +725,7 @@ async function chequear(ev) {
   error.textContent = "";
   const boton = $("#chequear");
   boton.disabled = true;
+  boton.setAttribute("aria-busy", "true");
   try {
     const r = await api("/chequeo", { method: "POST", body: JSON.stringify(respuestas) });
     const d = r.decision;
@@ -695,6 +743,42 @@ async function chequear(ev) {
     error.textContent = e.message;
   } finally {
     boton.disabled = false;
+    boton.removeAttribute("aria-busy");
+  }
+}
+
+const MAX_CAPTURA = 6 * 1024 * 1024;
+
+async function revisarCaptura(ev) {
+  const archivo = ev.target.files?.[0];
+  ev.target.value = ""; // para poder elegir la misma imagen otra vez
+  if (!archivo) return;
+  const error = $("#mensaje-error");
+  if (!/^image\/(png|jpeg|webp)$/.test(archivo.type)) { error.textContent = "Elige una captura en PNG, JPG o WebP."; return; }
+  if (archivo.size > MAX_CAPTURA) { error.textContent = "La imagen supera los 6 MB."; return; }
+  const boton = $("#boton-captura");
+  // Respuesta visible enseguida: leer una captura tarda unos segundos
+  boton.setAttribute("aria-busy", "true");
+  $("#captura-texto").textContent = "Leyendo la captura…";
+  error.textContent = "";
+  try {
+    const datos = new FormData();
+    datos.append("imagen", archivo);
+    let r;
+    try {
+      r = await fetch("/mensajes/captura", { method: "POST", body: datos });
+    } catch {
+      throw new Error("No pudimos conectar con Centinela. Revisa que el servidor esté encendido.");
+    }
+    const cuerpo = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(r.status === 429 ? "Espera un momento antes de subir otra captura." : (cuerpo.detail || "No pudimos leer la captura."));
+    pintarMensaje(cuerpo, cuerpo.texto_leido, true);
+    $("#msj-resultado").scrollIntoView({ block: "nearest", behavior: "auto" });
+  } catch (e) {
+    error.textContent = e.message;
+  } finally {
+    boton.removeAttribute("aria-busy");
+    $("#captura-texto").textContent = "Revisar una captura";
   }
 }
 
@@ -707,7 +791,7 @@ async function revisarMensaje(ev) {
   try {
     const r = await api("/mensajes/analizar", { method: "POST", body: JSON.stringify({ texto }) });
     $("#mensaje-error").textContent = "";
-    pintarMensaje(r);
+    pintarMensaje(r, texto);
   } catch (e) {
     $("#mensaje-error").textContent = e.status === 422 ? "El mensaje es demasiado largo (máximo 2000 caracteres)." : e.message;
   } finally {
@@ -784,9 +868,17 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarSugerencias();
   cargarCatalogo();
   $("#form-mensaje").addEventListener("submit", revisarMensaje);
-  $("#form-chequeo").addEventListener("submit", chequear);
+  $("#captura-mensaje")?.addEventListener("change", revisarCaptura);
+  // Del mensaje revisado a la denuncia: ya sabe que fue por mensaje
+  $("#msj-denunciar")?.addEventListener("click", () => {
+    document.querySelector('input[name="denuncia-medio"][value="mensaje"]').checked = true;
+    irPasoDenuncia(1);
+  });
+  for (const b of document.querySelectorAll("#denuncia [data-ir-paso]")) b.addEventListener("click", () => irPasoDenuncia(Number(b.dataset.irPaso)));
+  $("#denuncia-perdida")?.addEventListener("change", (e) => $("#denuncia-pago").classList.toggle("oculto", !e.target.checked));
+  $("#form-chequeo")?.addEventListener("submit", chequear);
   // Al cambiar una respuesta, el resultado anterior deja de valer
-  $("#form-chequeo").addEventListener("change", () => {
+  $("#form-chequeo")?.addEventListener("change", () => {
     $("#chequeo-resultado").classList.add("oculto");
     $("#chequeo-error").textContent = "";
   });

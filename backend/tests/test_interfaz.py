@@ -91,3 +91,16 @@ def test_revisar_un_mensaje_esta_en_la_pagina_principal():
     html = cliente.get("/").text
     assert 'id="form-mensaje"' in html and 'id="msj-resultado"' in html
     assert "/mensajes/analizar" in cliente.get("/app.js").text
+
+
+def test_revisar_una_captura_y_denunciar_por_pasos():
+    html = cliente.get("/").text
+    # La captura se lee en el equipo; solo acepta imágenes
+    assert 'id="captura-mensaje" accept="image/png,image/jpeg,image/webp"' in html
+    assert 'id="msj-denunciar"' in html
+    # La denuncia va en tres pasos y el mensaje revisado se agrega como prueba
+    for paso in ('data-paso="1"', 'data-paso="2"', 'data-paso="3"'):
+        assert paso in html
+    assert 'id="denuncia-evidencia-centinela"' in html and "data-prueba=" in html
+    js = cliente.get("/app.js").text
+    assert "estado.mensajeRevisado" in js and '"/mensajes/captura"' in js

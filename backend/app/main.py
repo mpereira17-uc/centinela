@@ -10,7 +10,7 @@ from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
-from . import asistente, base_guiones, chequeo, comunidad, cuentas, desenlaces, directorio, historial, instalacion, mensajes, metricas, practica, presentador, reportes, senalizacion, voz, voz_clonada
+from . import asistente, base_guiones, capturas, chequeo, comunidad, cuentas, desenlaces, directorio, historial, instalacion, mensajes, metricas, practica, presentador, reportes, senalizacion, voz, voz_clonada
 from .cuentas import LimitePorCliente, Sesion, sesion_opcional
 from .config import ajustes
 from .modelos import (
@@ -366,6 +366,7 @@ def _buscar(llamada_id: str, sesion: Sesion | None) -> Llamada:
 
 app.include_router(base_guiones.router)
 app.include_router(chequeo.router)
+app.include_router(capturas.router)
 app.include_router(comunidad.router)
 app.include_router(cuentas.router)
 app.include_router(desenlaces.router)

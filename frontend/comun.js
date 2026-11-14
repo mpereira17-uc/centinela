@@ -345,6 +345,11 @@
       clave.textContent = consejo || "";
       clave.classList.toggle("oculto", !consejo);
     }
+    // Como la protección familiar de Truecaller: sin contacto guardado, después de un aviso crítico se
+    // invita a elegir uno. Avisar sin que la persona toque no es posible: ni el navegador ni Android dejan
+    // que una app mande un WhatsApp o un SMS sola.
+    const invitar = alerta.querySelector(".alerta-sin-contacto");
+    if (invitar) invitar.classList.toggle("oculto", decision.nivel !== "critico" || Boolean(leerContacto()));
     const boton = alerta.querySelector(".alerta-contacto");
     if (boton) {
       const c = contactoParaAviso(decision.nivel, motivo);

@@ -365,6 +365,9 @@ main { max-width: var(--ancho); margin: 0 auto; padding: .5rem 1rem 1.5rem; }
 }
 /* En el banner no caben el enlace ni la pregunta: van en el resumen al colgar */
 .alerta-enlace, .alerta-pregunta { display: none; }
+/* Invitación a elegir un contacto: se ve en el aviso crítico y en el resumen al colgar */
+.alerta-sin-contacto { display: inline-block; margin-top: .35rem; color: inherit; font-weight: 700; text-decoration: underline; }
+.alerta-sin-contacto.oculto { display: none; }
 .alerta-decision { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; width: 100%; margin-top: .55rem; }
 .alerta .alerta-decision button { margin: 0; min-height: 52px; font-size: 1.02rem; }
 .alerta .alerta-cuelgo { background: #fff; color: var(--cs); }
@@ -794,6 +797,52 @@ details[open] > summary::after { transform: rotate(90deg); }
 .mas-opciones > summary::after { content: "Ver"; font-weight: 700; color: var(--primario-fuerte); padding: .6rem .2rem; }
 .mas-opciones[open] > summary::after { content: "Ocultar"; }
 .mas-opciones > summary:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+
+/* ---------- Denuncia por pasos ---------- */
+
+.pasos { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: .4rem; padding: 0; margin: 0 0 1rem; counter-reset: paso; }
+.pasos li {
+  counter-increment: paso; display: grid; justify-items: center; gap: .3rem; text-align: center;
+  font-size: .9rem; font-weight: 700; color: var(--texto-suave);
+}
+.pasos li::before {
+  content: counter(paso); display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%;
+  background: var(--campo); color: var(--texto-suave); font-weight: 800; border: 2px solid var(--borde);
+}
+.pasos li[aria-current="step"] { color: var(--texto); }
+.pasos li[aria-current="step"]::before { background: var(--primario); color: var(--primario-texto); border-color: var(--primario); }
+.pasos li.hecho::before { content: "✓"; background: var(--bajo-fondo); color: var(--bajo); border-color: var(--bajo); }
+[data-paso][hidden] { display: none; }
+/* Los pasos no heredan el estilo de tarjeta de otras listas, y caben en un celular angosto */
+#denuncia .pasos li {
+  display: flex; flex-direction: column; align-items: center; min-width: 0; padding: 0; margin: 0;
+  background: none; box-shadow: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; line-height: 1.2;
+}
+#denuncia .pasos li::after { display: none; }
+#denuncia .pasos li::before { position: static; inset: auto; order: -1; margin: 0 0 .3rem; transform: none; }
+#denuncia .pasos { margin-bottom: 1.2rem; }
+.lista-pruebas { list-style: none; padding: 0; margin: .5rem 0; display: grid; gap: .5rem; }
+.evidencia-centinela { margin: .75rem 0 0; padding: .7rem .9rem; border-radius: 14px; background: var(--bajo-fondo); color: var(--bajo); font-weight: 700; }
+.evidencia-centinela:empty { display: none; }
+.texto-leido { white-space: pre-wrap; margin: .5rem 0 0; padding: .7rem .9rem; border-radius: 14px; background: var(--campo); font-size: .95rem; }
+#msj-denunciar { display: flex; justify-content: center; margin-top: .75rem; }
+#msj-denunciar.oculto { display: none; }
+
+/* ---------- Respuesta visible en cada toque (adultos mayores tocan dos veces si no ven nada) ---------- */
+/* No depende de animaciones: también funciona con "reducir movimiento" */
+button:active:not(:disabled), a.boton-principal:active, a.boton-secundario:active, .boton-archivo:active,
+.servicio:active, .buscador:active, .mas a:active, .mas button:active, .segmentos label:active, [role="tab"]:active {
+  filter: brightness(.88);
+}
+button[aria-busy="true"], .boton-archivo[aria-busy="true"], button:disabled { cursor: progress; }
+button[aria-busy="true"]::after, .boton-archivo[aria-busy="true"]::after {
+  content: ""; display: inline-block; width: 1em; height: 1em; margin-left: .55em; vertical-align: -.15em;
+  border-radius: 50%; border: 3px solid currentColor; border-right-color: transparent;
+}
+@media (prefers-reduced-motion: no-preference) {
+  button[aria-busy="true"]::after, .boton-archivo[aria-busy="true"]::after { animation: girar .8s linear infinite; }
+  @keyframes girar { to { transform: rotate(360deg); } }
+}
 
 /* ---------- Ayuda: directorio, me estafaron, palabra clave y contacto ---------- */
 
