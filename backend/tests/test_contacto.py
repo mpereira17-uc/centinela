@@ -47,7 +47,7 @@ vm.runInContext(fs.readFileSync({json.dumps(str(COMUN))}, "utf8"), ctx);
 const C = ctx.window.Centinela;
 console.log(JSON.stringify({expresion}));
 """
-    salida = subprocess.run(["node", "-e", programa], capture_output=True, text=True, check=True).stdout
+    salida = subprocess.run(["node", "-e", programa], capture_output=True, text=True, encoding="utf-8", check=True).stdout
     return json.loads(salida)
 
 

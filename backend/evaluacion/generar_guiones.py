@@ -98,7 +98,8 @@ def main(argv=None):
         print("guiones-sinteticos.json está al día")
         return
     guiones.RUTA_SINTETICOS.write_text(texto, encoding="utf-8")
-    print(f"{texto.count('\"id\"')} guiones en {guiones.RUTA_SINTETICOS}")
+    cantidad = texto.count('"id"')
+    print(f"{cantidad} guiones en {guiones.RUTA_SINTETICOS}")
 
 
 if __name__ == "__main__":
