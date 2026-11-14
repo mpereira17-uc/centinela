@@ -1,6 +1,7 @@
 import logging
 import re
 import time
+from datetime import datetime, timezone
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -10,7 +11,7 @@ from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from . import asistente, base_guiones, chequeo, comunidad, cuentas, desenlaces, directorio, historial, instalacion, mensajes, metricas, practica, presentador, reportes, senalizacion, voz, voz_clonada
-from .cuentas import Sesion, sesion_opcional
+from .cuentas import LimitePorCliente, Sesion, sesion_opcional
 from .config import ajustes
 from .modelos import (
     MAX_FRAGMENTOS_POR_LLAMADA,
@@ -75,7 +76,27 @@ async def cabeceras_de_seguridad(request: Request, call_next):
 
 # Llamadas activas en memoria; las de personas que lo permiten se copian al historial en SQLite
 MAX_LLAMADAS = 1000
+# Una llamada en memoria vence a las 2 horas: las que se guardan ya están copiadas en el historial.
+# Antes nunca se borraban y, después de 1000 conversaciones, el servidor rechazaba todas las nuevas.
+VIDA_LLAMADA = 2 * 3600
 llamadas: dict[str, Llamada] = {}
+
+# Límites por cliente para lo que gasta CPU o memoria (modelo de amenazas, A6). Generosos para una
+# persona y para la sustentación, donde varios jurados comparten la misma dirección del túnel.
+limite_llamadas = LimitePorCliente(maximo=60, ventana=60)
+limite_fragmentos = LimitePorCliente(maximo=300, ventana=60)
+limite_audio = LimitePorCliente(maximo=40, ventana=60)
+limite_voz = LimitePorCliente(maximo=60, ventana=60)
+limite_asistente = LimitePorCliente(maximo=60, ventana=60)
+
+
+def _hacer_espacio():
+    """Borra las llamadas vencidas; si aún no cabe una, la más antigua (los dict guardan el orden)."""
+    ahora = datetime.now(timezone.utc)
+    for lid in [lid for lid, ll in llamadas.items() if (ahora - ll.creada).total_seconds() > VIDA_LLAMADA]:
+        del llamadas[lid]
+    while len(llamadas) >= MAX_LLAMADAS:
+        del llamadas[next(iter(llamadas))]
 
 
 def _respalda_reporte(llamada_id: str, usuario_id: str, ref: str) -> bool:
@@ -120,10 +141,9 @@ def catalogo_de_senales():
     return [{"id": s.id, "tipo": s.tipo, "descripcion": s.descripcion} for s in [*CATALOGO, NUMERO_REPORTADO, PATRON_APRENDIDO]]
 
 
-@app.post("/llamadas", response_model=Llamada, status_code=201)
+@app.post("/llamadas", response_model=Llamada, status_code=201, dependencies=[Depends(limite_llamadas)])
 def crear_llamada(entrada: NuevaLlamada | None = None, sesion: Sesion | None = Depends(sesion_opcional)):
-    if len(llamadas) >= MAX_LLAMADAS:
-        raise HTTPException(status_code=429, detail="Se alcanzó el máximo de llamadas en memoria")
+    _hacer_espacio()
     llamada = Llamada()
     if entrada and entrada.numero and entrada.numero.strip():
         # Se conserva la reputación y la referencia HMAC del número, no el número
@@ -147,7 +167,7 @@ def ver_llamada(llamada_id: str, sesion: Sesion | None = Depends(sesion_opcional
     return _buscar(llamada_id, sesion)
 
 
-@app.post("/llamadas/{llamada_id}/fragmentos")
+@app.post("/llamadas/{llamada_id}/fragmentos", dependencies=[Depends(limite_fragmentos)])
 def agregar_fragmento(llamada_id: str, entrada: FragmentoEntrada, sesion: Sesion | None = Depends(sesion_opcional)):
     inicio = time.perf_counter()
     llamada = _buscar(llamada_id, sesion)
@@ -179,7 +199,7 @@ MAX_AUDIO_BYTES = 10 * 1024 * 1024
 TIPOS_AUDIO = ("audio/", "video/webm", "video/mp4", "application/octet-stream")
 
 
-@app.post("/llamadas/{llamada_id}/audio")
+@app.post("/llamadas/{llamada_id}/audio", dependencies=[Depends(limite_audio)])
 async def agregar_audio(
     llamada_id: str,
     audio: UploadFile = File(...),
@@ -250,7 +270,7 @@ def comandos_del_asistente():
     return [{"id": c.id, "ejemplo": c.ejemplo} for c in asistente.COMANDOS if c.id != "accion_sensible"]
 
 
-@app.post("/asistente")
+@app.post("/asistente", dependencies=[Depends(limite_asistente)])
 def consultar_asistente(consulta: ConsultaAsistente, sesion: Sesion | None = Depends(sesion_opcional)):
     llamada = _buscar(consulta.llamada_id, sesion) if consulta.llamada_id else None
     r = asistente.responder(consulta.texto, llamada, ESTRATEGIA_VISIBLE)
@@ -258,7 +278,7 @@ def consultar_asistente(consulta: ConsultaAsistente, sesion: Sesion | None = Dep
     return {"intencion": r.intencion, "respuesta": r.texto, "requiere_confirmacion": r.requiere_confirmacion}
 
 
-@app.post("/asistente/voz")
+@app.post("/asistente/voz", dependencies=[Depends(limite_audio)])
 async def consultar_asistente_por_voz(
     audio: UploadFile = File(...),
     consentimiento: bool = Form(...),
@@ -278,7 +298,7 @@ async def consultar_asistente_por_voz(
             "requiere_confirmacion": r.requiere_confirmacion}
 
 
-@app.post("/voz")
+@app.post("/voz", dependencies=[Depends(limite_voz)])
 async def hablar(entrada: TextoParaVoz):
     """Convierte una respuesta en voz con Piper, en este equipo."""
     try:

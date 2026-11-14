@@ -18,10 +18,11 @@ from dataclasses import dataclass, field
 from typing import Literal
 from urllib.parse import urlparse
 
-from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel
 
 from .config import ajustes
+from .cuentas import LimitePorCliente
 
 log = logging.getLogger("centinela")
 
@@ -87,7 +88,11 @@ def _normalizar(codigo: str) -> str:
 router = APIRouter(tags=["llamada simulada"])
 
 
-@router.post("/salas", status_code=201)
+# Sin límite, un script podía abrir las 100 salas de golpe y dejar sin llamada de prueba a todos por 2 horas
+limite_salas = LimitePorCliente(maximo=20, ventana=60)
+
+
+@router.post("/salas", status_code=201, dependencies=[Depends(limite_salas)])
 async def crear_sala():
     async with _lock:
         _limpiar()

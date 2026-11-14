@@ -177,6 +177,49 @@
     });
   }
 
+  // ---- Pestañas: una sección a la vez, en vez de una página larga que hay que bajar ----
+  // Patrón de pestañas de WAI-ARIA: flechas para moverse, Inicio y Fin, y el panel con role="tabpanel".
+  // Lo que lleva data-con-pestana="id-del-panel" se muestra junto con ese panel (p. ej. "Eliminar mi cuenta").
+  function elegirPestana(tab, enfocar = false) {
+    const lista = tab.closest("[data-pestanas]");
+    for (const t of lista.querySelectorAll('[role="tab"]')) {
+      const activa = t === tab;
+      t.setAttribute("aria-selected", String(activa));
+      t.tabIndex = activa ? 0 : -1;
+      const panel = document.getElementById(t.getAttribute("aria-controls"));
+      if (panel) panel.hidden = !activa;
+      for (const extra of document.querySelectorAll(`[data-con-pestana="${t.getAttribute("aria-controls")}"]`)) extra.hidden = !activa;
+    }
+    if (enfocar) tab.focus();
+  }
+
+  function iniciarPestanas() {
+    for (const lista of document.querySelectorAll("[data-pestanas]")) {
+      const tabs = [...lista.querySelectorAll('[role="tab"]')];
+      lista.addEventListener("click", (e) => {
+        const tab = e.target.closest('[role="tab"]');
+        if (tab) elegirPestana(tab);
+      });
+      lista.addEventListener("keydown", (e) => {
+        const i = tabs.indexOf(document.activeElement);
+        if (i < 0) return;
+        const destino = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+        if (destino === undefined) return;
+        e.preventDefault();
+        elegirPestana(tabs[(destino + tabs.length) % tabs.length], true);
+      });
+    }
+    // Botones o enlaces que llevan a otra pestaña ("¿No tienes cuenta? Crear una")
+    for (const b of document.querySelectorAll("[data-ir-a]")) {
+      b.addEventListener("click", () => {
+        const tab = document.getElementById(b.dataset.irA);
+        if (!tab) return;
+        elegirPestana(tab, true);
+        tab.scrollIntoView({ block: "nearest", behavior: sinMovimiento.matches ? "auto" : "smooth" });
+      });
+    }
+  }
+
   // ---- Latido cuando cambia el nivel ----
   function iniciarNivel() {
     const nivel = $("#nivel");
@@ -589,6 +632,7 @@
     iniciarLetra();
     iniciarBienvenida();
     iniciarAlerta();
+    iniciarPestanas();
     iniciarNivel();
     iniciarConversaciones();
     iniciarAvisoVoz();

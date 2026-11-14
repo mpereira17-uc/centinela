@@ -603,10 +603,25 @@ details[open] > summary::after { transform: rotate(90deg); }
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
 }
 .pestanas::-webkit-scrollbar { display: none; }
-.pestanas a {
+.pestanas a, .pestanas [role="tab"] {
   display: inline-flex; align-items: center; min-height: 44px; padding: .3rem 1rem; border-radius: 999px; white-space: nowrap;
   background: var(--chip); color: var(--primario-fuerte); text-decoration: none; font-weight: 700; font-size: .95rem;
+  border: 0; box-shadow: none; margin: 0; width: auto; flex: none;
 }
+/* La pestaña elegida se distingue por color Y por el subrayado, no solo por color */
+.pestanas [role="tab"][aria-selected="true"] { background: var(--primario); color: var(--primario-texto); text-decoration: underline; text-underline-offset: .3em; }
+.pestanas [role="tab"]:focus-visible, .pestanas-control [role="tab"]:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+
+/* Entrar | Crear cuenta: un control grande de dos opciones, como en las apps de bancos */
+.pestanas-control { display: grid; grid-template-columns: 1fr 1fr; gap: .3rem; padding: .3rem; margin: 1rem 0; border-radius: 18px; background: var(--campo); }
+.pestanas-control [role="tab"] {
+  min-height: 52px; margin: 0; border: 0; border-radius: 14px; box-shadow: none;
+  background: transparent; color: var(--texto-suave); font-size: 1.05rem; font-weight: 800;
+}
+.pestanas-control [role="tab"][aria-selected="true"] { background: var(--superficie); color: var(--texto); box-shadow: var(--sombra); }
+.cambiar-pestana { margin: 1rem 0 0; text-align: center; color: var(--texto-suave); }
+.cambiar-pestana .enlace-boton { font-weight: 800; }
+[role="tabpanel"][hidden], [data-con-pestana][hidden] { display: none; }
 
 .lista { list-style: none; padding: 0; margin: .25rem 0 .5rem; }
 .lista > li {

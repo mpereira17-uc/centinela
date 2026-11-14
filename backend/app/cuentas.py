@@ -79,10 +79,19 @@ def exigir_cabecera(x_centinela: Annotated[str | None, Header()] = None):
 class LimitePorCliente:
     """Ventana deslizante en memoria por dirección IP (A6)."""
 
+    # Todos los límites creados, para poder reiniciarlos juntos (pruebas, reinicio del servidor)
+    todos: list["LimitePorCliente"] = []
+
     def __init__(self, maximo: int, ventana: float):
         self.maximo, self.ventana = maximo, ventana
         self._registros: dict[str, deque] = {}
         self._lock = threading.Lock()
+        LimitePorCliente.todos.append(self)
+
+    @classmethod
+    def reiniciar_todos(cls):
+        for limite in cls.todos:
+            limite.reiniciar()
 
     def __call__(self, request: Request):
         cliente = request.client.host if request.client else "desconocido"

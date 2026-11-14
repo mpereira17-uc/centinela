@@ -5,13 +5,15 @@ la persona responde tres preguntas con un toque. Cada respuesta "sí" equivale a
 catálogo y el nivel sale de las mismas reglas que usa el motor (calcular_nivel), para que el
 aviso diga lo mismo que diría si Centinela oyera la conversación. No se guarda nada.
 """
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 
+from .cuentas import LimitePorCliente
 from .modelos import Decision, SenalDetectada
 from .senales import CATALOGO, Nivel, Senal, Tipo, _p, calcular_nivel, mensaje
 
 router = APIRouter(tags=["chequeo"])
+limite_chequeo = LimitePorCliente(maximo=60, ventana=60)
 
 _POR_ID = {s.id: s for s in CATALOGO}
 
@@ -61,7 +63,7 @@ def evaluar(r: Respuestas) -> Decision:
     )
 
 
-@router.post("/chequeo", response_model=ResultadoChequeo)
+@router.post("/chequeo", response_model=ResultadoChequeo, dependencies=[Depends(limite_chequeo)])
 def chequeo(respuestas: Respuestas) -> ResultadoChequeo:
     decision = evaluar(respuestas)
     return ResultadoChequeo(decision=decision, mostrar_aviso=decision.alerta)
