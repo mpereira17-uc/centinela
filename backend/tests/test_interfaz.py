@@ -75,8 +75,13 @@ def test_script_comun_sin_html_dinamico_y_cargado_en_todas_las_pantallas():
 def test_la_denuncia_se_prepara_en_el_equipo_y_apunta_a_canales_oficiales():
     html = cliente.get("/").text
     assert 'id="preparar-denuncia"' in html
-    for canal in ("https://adenunciar.policia.gov.co/", "https://caivirtual.policia.gov.co/", 'href="tel:165"', 'href="tel:123"'):
+    for canal in ('href="https://adenunciar.policia.gov.co/Adenunciar/"', 'href="https://caivirtual.policia.gov.co/"',
+                  'href="tel:165"', 'href="tel:123"'):
         assert canal in html
+    # La raíz de ADenunciar responde con un error 500 del servidor; la denuncia está en /Adenunciar/
+    assert 'href="https://adenunciar.policia.gov.co/"' not in html
+    directorio = cliente.get("/directorio").text
+    assert "adenunciar.policia.gov.co/Adenunciar/" in directorio and 'adenunciar.policia.gov.co/"' not in directorio
     # Centinela no envía la denuncia a terceros: no hay peticiones a otros dominios
     js = cliente.get("/app.js").text
     assert 'fetch("http' not in js and "fetch(`http" not in js

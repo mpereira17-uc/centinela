@@ -1,4 +1,5 @@
 import logging
+import re
 import time
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -58,10 +59,17 @@ CABECERAS_SEGURIDAD = {
 }
 
 
+ES_INTERFAZ = re.compile(r"^/($|[\w-]+\.(html|css|js|webmanifest)$)")
+
+
 @app.middleware("http")
 async def cabeceras_de_seguridad(request: Request, call_next):
     respuesta = await call_next(request)
     respuesta.headers.update(CABECERAS_SEGURIDAD)
+    # La interfaz se revalida en cada carga (con ETag casi no cuesta). Sin esto, el navegador puede
+    # guardar un comun.js viejo por caché heurística y mezclarlo con un app.js nuevo, y la página se rompe.
+    if "cache-control" not in respuesta.headers and ES_INTERFAZ.search(request.url.path):
+        respuesta.headers["Cache-Control"] = "no-cache"
     return respuesta
 
 

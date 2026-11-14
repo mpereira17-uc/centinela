@@ -71,7 +71,7 @@ async function nuevaConversacion() {
   estado.ultimoFin = 0;
   $("#conversacion").replaceChildren();
   $("#conv-vacia").classList.remove("oculto");
-  $("#alerta").classList.add("oculto");
+  window.Centinela?.reiniciarEscalon();
   mostrarNivel(null);
 }
 
@@ -116,7 +116,8 @@ function mostrarAlerta(decision) {
   alerta.querySelector(".alerta-texto").textContent = resto.join(". ");
   window.Centinela?.completarAviso(alerta, decision, resto[0]);
   alerta.classList.remove("oculto");
-  alerta.focus();
+  // El banner no roba el foco a quien escribe; solo el crítico lo pide
+  if (decision.nivel === "critico") alerta.focus();
 }
 
 function agregarFrase(texto, hablante, respuesta) {
@@ -185,7 +186,8 @@ async function procesar(texto, hablante) {
   const r = await enviarFrase(texto, hablante);
   agregarFrase(texto, hablante, r);
   mostrarNivel(r.decision_visible);
-  if (r.mostrar_aviso) mostrarAlerta(r.decision_visible);
+  // Avisa cada vez que el nivel sube (precaución, alto, crítico), nunca repite el mismo
+  if (window.Centinela?.escalo(r.decision_visible)) mostrarAlerta(r.decision_visible);
 }
 
 async function alEnviar(evento) {
@@ -282,7 +284,7 @@ async function enviarAudio(blob, nombre) {
     for (const item of res.resultados) {
       agregarFrase(item.fragmento.texto, "audio", item);
       mostrarNivel(item.decision_visible);
-      if (item.mostrar_aviso) mostrarAlerta(item.decision_visible);
+      if (window.Centinela?.escalo(item.decision_visible)) mostrarAlerta(item.decision_visible);
     }
     estado.ultimoFin = res.resultados.at(-1).fragmento.fin;
     estadoAudio(`Listo: se analizaron ${res.resultados.length} fragmentos del audio. El audio ya se descartó.`);
@@ -685,7 +687,10 @@ async function chequear(ev) {
     // El mensaje sin el título en mayúsculas, que ya va en la cabeza
     $("#chequeo-texto").textContent = d.mensaje.split(". ").slice(1).join(". ");
     caja.classList.remove("oculto");
-    if (r.mostrar_aviso) mostrarAlerta(d);
+    if (r.mostrar_aviso) {
+      window.Centinela?.reiniciarEscalon();
+      if (window.Centinela?.escalo(d)) mostrarAlerta(d);
+    }
   } catch (e) {
     error.textContent = e.message;
   } finally {

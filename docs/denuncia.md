@@ -21,7 +21,7 @@ En la página principal, la tarjeta "Denunciar ante las autoridades":
 |---|---|---|
 | Línea 165 (GAULA) | Extorsión o amenazas | Si Centinela detectó amenaza |
 | El banco, por su línea oficial | Pérdida de dinero: bloquear y pedir la reversión | Si marcó que perdió algo |
-| [ADenunciar](https://adenunciar.policia.gov.co/) | Denuncia virtual por estafa o extorsión; permite adjuntar documentos | Siempre |
+| [ADenunciar](https://adenunciar.policia.gov.co/Adenunciar/) | Denuncia virtual por estafa o extorsión; permite adjuntar documentos | Siempre |
 | [CAI Virtual](https://caivirtual.policia.gov.co/) | Policía Nacional, delitos informáticos y fraudes | Siempre |
 | Línea 123 | Peligro inmediato | Siempre |
 

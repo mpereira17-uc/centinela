@@ -72,43 +72,53 @@
   }
 
   // ---- Aviso crítico que pide una decisión ----
-  // En riesgo crítico, en vez de "Entendido" la persona elige "Cuelgo y verifico" o "Sigo, sé lo que hago".
-  // Seguir se habilita después de una pausa corta: los avisos que piden decidir y la pausa ayudan más que
-  // un aviso que se cierra con un toque (revisión de la FTC sobre mensajes de prevención).
-  const PAUSA_PARA_SEGUIR = 5;
-  let relojDecision = null;
+  // ---- Avisos escalonados durante la llamada ----
+  // Como la detección de estafas de Pixel y Samsung: un banner arriba que no tapa la llamada.
+  // Precaución (ámbar) no suena; riesgo alto vibra una vez y ofrece colgar; crítico vibra largo, habla
+  // y no se cierra solo. Solo avisa cuando el nivel SUBE, nunca repite el mismo: un aviso repetido se
+  // deja de ver desde la segunda vez (estudios de habituación a advertencias, BYU, CHI 2015).
+  // La pantalla completa queda para después de "Cuelgo y verifico", cuando sí hay calma para leer.
+  const ORDEN_NIVEL = ["bajo", "moderado", "alto", "critico"];
+  const TITULO_AVISO = { moderado: "Ten cuidado", alto: "No lo hagas", critico: "Cuelga ahora" };
+  const VIBRACION = { alto: [220], critico: [450, 150, 450, 150, 450] };
+  let escalon = 0;
+
+  // ¿Este nivel merece un aviso nuevo? Solo si subió desde el último aviso de esta llamada
+  function escalo(decision) {
+    const n = ORDEN_NIVEL.indexOf(decision?.nivel);
+    if (n < 1 || n <= escalon) return false;
+    escalon = n;
+    return true;
+  }
+
+  function reiniciarEscalon() {
+    escalon = 0;
+    const alerta = $("#alerta");
+    if (alerta) {
+      alerta.classList.add("oculto");
+      alerta.classList.remove("verificando");
+    }
+    document.body.classList.remove("aviso-critico");
+  }
 
   function prepararDecision(alerta, pedir) {
     const caja = alerta.querySelector(".alerta-decision");
     const cerrar = alerta.querySelector("#cerrar-alerta");
     if (!caja || !cerrar) return;
-    clearInterval(relojDecision);
     alerta.classList.remove("verificando");
     alerta.classList.toggle("pide-decision", pedir);
     caja.classList.toggle("oculto", !pedir);
+    // La precaución se cierra con una X pequeña; los avisos fuertes, con sus dos acciones
     cerrar.classList.toggle("oculto", pedir);
     cerrar.textContent = "Entendido";
-    if (!pedir) return;
-    const sigo = caja.querySelector(".alerta-sigo");
-    let quedan = PAUSA_PARA_SEGUIR;
-    const pintar = () => {
-      sigo.disabled = quedan > 0;
-      sigo.textContent = quedan > 0 ? `Sigo, sé lo que hago (${quedan})` : "Sigo, sé lo que hago";
-    };
-    pintar();
-    relojDecision = setInterval(() => {
-      quedan -= 1;
-      pintar();
-      if (quedan <= 0) clearInterval(relojDecision);
-    }, 1000);
   }
 
   function iniciarDecision(alerta, cerrar) {
     const caja = alerta.querySelector(".alerta-decision");
     if (!caja) return;
     caja.querySelector(".alerta-cuelgo").addEventListener("click", () => {
-      clearInterval(relojDecision);
       alerta.classList.remove("pide-decision");
+      document.body.classList.remove("aviso-critico");
       alerta.classList.add("verificando");
       caja.classList.add("oculto");
       alerta.querySelector(".alerta-titulo").textContent = "Bien hecho";
@@ -121,10 +131,13 @@
       // Cada pantalla decide qué más hacer: la llamada por Centinela cuelga, el acompañante deja de escuchar
       alerta.dispatchEvent(new CustomEvent("centinela:decision", { detail: "cuelgo" }));
     });
+    // "No es estafa": como en Pixel. Calla los avisos de este nivel en esta llamada; si después aparece
+    // algo crítico (piden el código y apuran), sí vuelve a avisar.
     caja.querySelector(".alerta-sigo").addEventListener("click", () => {
-      clearInterval(relojDecision);
       alerta.classList.remove("pide-decision");
-      alerta.dispatchEvent(new CustomEvent("centinela:decision", { detail: "sigo" }));
+      document.body.classList.remove("aviso-critico");
+      escalon = Math.max(escalon, ORDEN_NIVEL.indexOf("alto"));
+      alerta.dispatchEvent(new CustomEvent("centinela:decision", { detail: "no_es_estafa" }));
       cerrar.click();
     });
   }
@@ -136,14 +149,12 @@
     if (!alerta || !cerrar) return;
     iniciarDecision(alerta, cerrar);
 
-    // Mientras pide una decisión, Escape y deslizar solo valen como "Sigo" y después de la pausa
+    // Escape y deslizar hacia arriba cierran la precaución. Un aviso fuerte no se va con un gesto:
+    // hay que elegir "Cuelgo y verifico" o "No es estafa".
     function cerrarConGesto() {
       if (!alerta.classList.contains("pide-decision")) cerrar.click();
-      else {
-        const sigo = alerta.querySelector(".alerta-sigo");
-        if (sigo && !sigo.disabled) sigo.click();
-      }
     }
+    cerrar.addEventListener("click", () => document.body.classList.remove("aviso-critico"));
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && !alerta.classList.contains("oculto")) cerrarConGesto();
@@ -153,7 +164,8 @@
     alerta.addEventListener("touchstart", (e) => { inicioY = e.touches[0].clientY; }, { passive: true });
     alerta.addEventListener("touchmove", (e) => {
       if (inicioY === null) return;
-      const dy = Math.max(0, e.touches[0].clientY - inicioY);
+      if (alerta.classList.contains("pide-decision") || alerta.classList.contains("verificando")) return;
+      const dy = Math.min(0, e.touches[0].clientY - inicioY);
       alerta.style.setProperty("--arrastre", `${dy}px`);
     }, { passive: true });
     alerta.addEventListener("touchend", (e) => {
@@ -161,15 +173,8 @@
       const dy = e.changedTouches[0].clientY - inicioY;
       inicioY = null;
       alerta.style.removeProperty("--arrastre");
-      if (dy > 90) cerrarConGesto();
+      if (dy < -50) cerrarConGesto();
     });
-
-    new MutationObserver(() => {
-      const visible = !alerta.classList.contains("oculto");
-      if (visible && ["alto", "critico"].includes(alerta.dataset.nivel) && navigator.vibrate) {
-        navigator.vibrate(alerta.dataset.nivel === "critico" ? [180, 90, 180, 90, 180] : [180, 90, 180]);
-      }
-    }).observe(alerta, { attributes: true, attributeFilter: ["class"] });
   }
 
   // ---- Latido cuando cambia el nivel ----
@@ -282,7 +287,15 @@
 
   // Completa lo que comparten los avisos de todas las pantallas: palabra clave y contacto de confianza
   function completarAviso(alerta, decision, motivo) {
-    prepararDecision(alerta, decision.nivel === "critico");
+    const fuerte = ["alto", "critico"].includes(decision.nivel);
+    prepararDecision(alerta, fuerte);
+    // Texto corto para el banner: qué hacer y el motivo concreto. Lo largo sigue en la tarjeta del nivel.
+    alerta.querySelector(".alerta-titulo").textContent = TITULO_AVISO[decision.nivel] || "Ten cuidado";
+    alerta.querySelector(".alerta-texto").textContent = motivo ? `${motivo}.` : "";
+    alerta.setAttribute("role", fuerte ? "alert" : "status");
+    alerta.setAttribute("aria-live", fuerte ? "assertive" : "polite");
+    document.body.classList.toggle("aviso-critico", decision.nivel === "critico");
+    if (VIBRACION[decision.nivel] && navigator.vibrate) navigator.vibrate(VIBRACION[decision.nivel]);
     const consejo = consejoFamiliar(decision.senales);
     const clave = alerta.querySelector(".alerta-clave");
     if (clave) {
@@ -486,7 +499,6 @@
     voz_sintetica: "tenía una voz que podría ser hecha por computador", voz_dudosa: "tenía una voz que podría ser imitada",
   };
   const ETIQUETA_NIVEL = { bajo: "bajo", moderado: "moderado", alto: "alto", critico: "crítico" };
-  const ORDEN_NIVEL = ["bajo", "moderado", "alto", "critico"];
 
   function minutos(segundos) {
     const s = Math.max(0, Math.round(Number(segundos) || 0));
@@ -559,7 +571,7 @@
   }
 
   window.Centinela = {
-    consejoFamiliar, completarAviso, normalizarCelular, textoParaContacto,
+    consejoFamiliar, completarAviso, escalo, reiniciarEscalon, normalizarCelular, textoParaContacto,
     decirAviso, fraseDeVoz, resumenDeLlamada, pintarResumen, textoDelResumen, quiereProyectar,
   };
 

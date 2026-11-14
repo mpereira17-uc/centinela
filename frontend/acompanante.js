@@ -166,7 +166,8 @@ function mostrarResultado(r) {
   $("#conversacion").append(li);
   $("#dicho-vacio").classList.add("oculto");
   mostrarNivel(d);
-  if (r.mostrar_aviso) mostrarAlerta(d);
+  // Avisa cada vez que el nivel sube (precaución, alto, crítico), nunca repite el mismo
+  if (window.Centinela?.escalo(d)) mostrarAlerta(d);
 }
 
 function mostrarNivel(d) {
@@ -186,7 +187,7 @@ function mostrarAlerta(d) {
   alerta.querySelector(".alerta-texto").textContent = resto.join(". ");
   window.Centinela?.completarAviso(alerta, d, resto[0]);
   alerta.classList.remove("oculto");
-  alerta.focus();
+  if (d.nivel === "critico") alerta.focus();
   // Lo dice en voz alta; mientras habla no se escucha, para no analizar su propia voz
   const ms = window.Centinela?.decirAviso(d) || 0;
   if (ms) estado.escucha?.silenciar(ms);

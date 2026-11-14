@@ -5,7 +5,7 @@
     {"nombre": "Policía: emergencias", "tipo": "emergencia", "telefono": "123", "para": "Si estás en peligro o quieres reportar un delito en curso."},
     {"nombre": "GAULA: extorsión y secuestro", "tipo": "emergencia", "telefono": "165", "para": "Si te amenazan, te piden una 'vacuna' o dicen tener a un familiar.", "web": "https://www.policia.gov.co"},
     {"nombre": "Fiscalía: denuncias", "tipo": "emergencia", "telefono": "122", "para": "Para denunciar una estafa o una extorsión.", "web": "https://www.fiscalia.gov.co"},
-    {"nombre": "Denuncia virtual de la Policía", "tipo": "emergencia", "para": "Denuncia por internet, sin ir a una estación.", "web": "https://adenunciar.policia.gov.co/"},
+    {"nombre": "Denuncia virtual de la Policía", "tipo": "emergencia", "para": "Denuncia por internet, sin ir a una estación.", "web": "https://adenunciar.policia.gov.co/Adenunciar/"},
     {"nombre": "CAI Virtual", "tipo": "emergencia", "para": "Delitos informáticos: enlaces falsos, cuentas robadas, suplantación.", "web": "https://caivirtual.policia.gov.co/"},
     {"nombre": "Superintendencia Financiera: entidades vigiladas", "tipo": "gobierno", "para": "Antes de invertir o pedir un crédito, revisa si la empresa está vigilada.", "web": "https://www.superfinanciera.gov.co/jsp/13067"},
     {"nombre": "DIAN", "tipo": "gobierno", "para": "La DIAN no cobra por teléfono ni pide pagos a cuentas personales.", "web": "https://www.dian.gov.co"},

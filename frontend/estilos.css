@@ -334,42 +334,73 @@ main { max-width: var(--ancho); margin: 0 auto; padding: .5rem 1rem 1.5rem; }
 .estado .ayuda { padding: 0 1.1rem .9rem; margin: 0; }
 .estado .ayuda:empty { display: none; }
 
-/* ---------- Aviso de pantalla completa con el color del nivel y el búho ---------- */
+/* ---------- Aviso escalonado: banner arriba durante la llamada ---------- */
+/* Como Pixel y Samsung: no tapa la llamada. Precaución en ámbar (sin sonido), alto en naranja y crítico en
+   rojo con borde en toda la pantalla. Después de "Colgar y verificar" se vuelve pantalla completa en azul. */
 
 .alerta {
-  position: fixed; inset: 0; z-index: 60;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1rem;
-  padding: calc(2rem + env(safe-area-inset-top)) max(1.5rem, calc((100% - 460px) / 2)) calc(1.5rem + env(safe-area-inset-bottom));
-  background: var(--cs, var(--primario)); color: #fff; overflow-y: auto;
-  transform: translateY(var(--arrastre, 0));
+  position: fixed; z-index: 60;
+  top: calc(.5rem + env(safe-area-inset-top)); left: 50%;
+  width: min(calc(100% - 1rem), 560px);
+  transform: translate(-50%, var(--arrastre, 0));
+  display: grid; grid-template-columns: auto 1fr; gap: .25rem .8rem; align-items: start;
+  padding: .85rem .95rem .9rem; border-radius: 22px; text-align: left;
+  background: var(--cs, var(--primario)); color: #fff;
+  box-shadow: 0 14px 34px rgba(10, 13, 22, .35);
+  max-height: calc(100vh - 1rem); overflow-y: auto;
 }
-.alerta::before {
-  content: ""; position: absolute; top: calc(.7rem + env(safe-area-inset-top)); left: 50%; width: 44px; height: 5px; margin-left: -22px;
-  border-radius: 999px; background: rgba(255, 255, 255, .5);
-}
-.alerta > div { display: grid; gap: .6rem; justify-items: center; width: 100%; }
+.alerta::before { display: none; }
+.alerta > div { display: grid; gap: .2rem; justify-items: start; width: 100%; }
 .alerta-icono {
-  position: relative; width: 9rem; height: 9rem; font-size: 0; color: transparent;
+  position: relative; width: 3.1rem; height: 3.1rem; font-size: 0; color: transparent; flex: none;
   border-radius: 50%; background-color: #fff; background-size: 82%; background-position: 50% 60%;
 }
-.alerta-icono::after { content: ""; position: absolute; inset: -10px; border-radius: 50%; border: 3px solid rgba(255, 255, 255, .55); }
-.alerta-titulo { color: #fff; font-size: 1.95rem; line-height: 1.15; font-weight: 800; margin: 0; }
-.alerta-texto { font-size: 1.2rem; max-width: 32ch; margin: 0; }
-.alerta-clave { margin: .55rem 0 0; padding: .7rem .9rem; border-radius: 16px; background: rgba(0, 0, 0, .18); color: #fff; font-weight: 700; width: 100%; }
+.alerta-titulo { color: inherit; font-size: 1.2rem; line-height: 1.2; font-weight: 800; margin: 0; }
+.alerta-texto { font-size: 1.02rem; line-height: 1.35; margin: 0; }
+.alerta-clave { margin: .35rem 0 0; padding: .5rem .7rem; border-radius: 12px; background: rgba(0, 0, 0, .18); font-weight: 700; width: 100%; font-size: .95rem; }
 .alerta-contacto {
-  display: flex; justify-content: center; align-items: center; width: 100%; margin-top: .7rem; min-height: 56px;
-  background: #fff; color: var(--cs); box-shadow: none; font-weight: 800; text-decoration: none; text-align: center;
+  display: flex; justify-content: center; align-items: center; width: 100%; margin-top: .45rem; min-height: 48px;
+  background: rgba(255, 255, 255, .16); color: inherit; border: 2px solid rgba(255, 255, 255, .75); box-shadow: none;
+  font-weight: 800; text-decoration: none; text-align: center;
 }
-.alerta-enlace { display: inline-block; margin-top: .35rem; color: #fff; font-weight: 700; }
-.alerta-decision { display: grid; gap: .7rem; width: 100%; margin-top: auto; }
-.alerta-pregunta { margin: 0; color: #fff; font-size: 1.2rem; font-weight: 800; }
-.alerta .alerta-decision button { margin-top: 0; }
+/* En el banner no caben el enlace ni la pregunta: van en el resumen al colgar */
+.alerta-enlace, .alerta-pregunta { display: none; }
+.alerta-decision { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; width: 100%; margin-top: .55rem; }
+.alerta .alerta-decision button { margin: 0; min-height: 52px; font-size: 1.02rem; }
+.alerta .alerta-cuelgo { background: #fff; color: var(--cs); }
 .alerta .alerta-sigo { background: transparent; color: #fff; border: 2px solid rgba(255, 255, 255, .8); box-shadow: none; }
-.alerta .alerta-sigo:disabled { opacity: .75; cursor: default; }
-/* Después de "Cuelgo y verifico": el azul de Centinela y el búho tranquilo, porque hizo lo correcto */
-.alerta.verificando { --cs: #1446b8; }
-.alerta.verificando .alerta-icono { background-image: url("/buho/tranquilo.svg"); }
-.alerta button, .alerta .boton-secundario { width: 100%; min-height: 60px; margin-top: auto; background: #fff; color: var(--cs); font-size: 1.15rem; font-weight: 800; }
+/* "Entendido" de la precaución: pequeño, a la derecha */
+.alerta #cerrar-alerta {
+  grid-column: 1 / -1; justify-self: end; width: auto; min-height: 44px; margin: .4rem 0 0; padding: .4rem 1rem;
+  background: transparent; color: inherit; border: 2px solid currentColor; box-shadow: none; font-size: .95rem; font-weight: 800;
+}
+
+/* Precaución: fondo suave y texto del nivel, para que no alarme */
+.alerta[data-nivel="moderado"] { background: var(--moderado-fondo); color: var(--moderado); border: 2px solid var(--moderado-solido); }
+.alerta[data-nivel="moderado"] .alerta-icono { background-color: var(--moderado-solido); }
+
+/* Crítico: borde rojo alrededor de toda la pantalla mientras el aviso sigue abierto */
+body.aviso-critico::after {
+  content: ""; position: fixed; inset: 0; z-index: 59; pointer-events: none;
+  box-shadow: inset 0 0 0 5px var(--critico-solido);
+}
+
+/* Después de "Colgar y verificar": pantalla completa en el azul de Centinela, con calma para leer */
+.alerta.verificando {
+  inset: 0; top: 0; left: 0; width: auto; transform: none; border-radius: 0; max-height: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1rem;
+  padding: calc(2rem + env(safe-area-inset-top)) max(1.5rem, calc((100% - 460px) / 2)) calc(1.5rem + env(safe-area-inset-bottom));
+  --cs: #1446b8; background: var(--cs); color: #fff; border: 0; box-shadow: none;
+}
+.alerta.verificando > div { justify-items: center; gap: .6rem; }
+.alerta.verificando .alerta-icono { width: 9rem; height: 9rem; background-image: url("/buho/tranquilo.svg"); }
+.alerta.verificando .alerta-titulo { font-size: 1.95rem; }
+.alerta.verificando .alerta-texto { font-size: 1.2rem; max-width: 32ch; }
+.alerta.verificando .alerta-enlace { display: inline-block; margin-top: .35rem; color: #fff; font-weight: 700; }
+.alerta.verificando #cerrar-alerta {
+  justify-self: auto; width: 100%; min-height: 60px; margin-top: auto; background: #fff; color: var(--cs);
+  border: 0; font-size: 1.15rem;
+}
 
 /* ---------- Formularios ---------- */
 
@@ -908,9 +939,13 @@ details[open] > summary::after { transform: rotate(90deg); }
   .nivel.latido .nivel-buho { animation: latido .5s cubic-bezier(.3, 1.6, .5, 1); }
   @keyframes latido { 0% { transform: scale(.7); } 100% { transform: scale(1); } }
 
-  .alerta:not(.oculto) { animation: tomar .4s ease-out; transition: transform .15s; }
-  @keyframes tomar { from { clip-path: circle(0% at 50% 50%); } to { clip-path: circle(150% at 50% 50%); } }
-  .alerta-icono::after { animation: onda 1.6s ease-out infinite; }
+  .alerta:not(.oculto) { animation: bajar .28s cubic-bezier(.2, .8, .2, 1); transition: transform .15s; }
+  @keyframes bajar { from { transform: translate(-50%, -24px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+  .alerta.verificando:not(.oculto) { animation: aparecer .25s ease-out; }
+  .alerta[data-nivel="critico"]:not(.verificando) .alerta-icono::after {
+    content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 3px solid rgba(255, 255, 255, .6);
+    animation: onda 1.6s ease-out infinite;
+  }
 
   .pulso::before { animation: onda 2s ease-out infinite; }
   .pulso::after { animation: onda 2s ease-out 1s infinite; }
