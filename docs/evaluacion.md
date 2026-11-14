@@ -21,10 +21,33 @@ Los de riesgo cubren suplantación de banco y entidades, familiar falso, soporte
 | Falsas alertas | Llamadas legítimas en las que aparece el aviso |
 | Precisión | De todos los avisos, cuántos fueron en llamadas de riesgo |
 | Tiempo de aviso | Desde que empieza el turno con la solicitud de riesgo hasta que termina el turno que dispara el aviso (más la transcripción, en modo audio) |
+| F1 | Media armónica de precisión y detección |
+| Demora | Desde que **termina** la primera petición riesgosa hasta el aviso, con el mismo reloj del audio. Puede ser negativa si avisa antes. Se resume con mediana y percentil 95, solo de las llamadas detectadas; las no detectadas se listan aparte |
+| Avisos tardíos | Demora mayor que la admisible, fijada en **5 s antes de probar** (`--demora-admisible`) |
 | Alertas anticipadas | Avisos antes del turno de riesgo anotado |
 | WER | Tasa de error de palabra de la transcripción frente al texto del guion, total y por voz |
 
 Cada tasa va con su intervalo de confianza del 95 % (Wilson), porque con 6 a 18 llamadas por grupo una diferencia de un caso mueve mucho el porcentaje. Solo se analizan los turnos de quien llama, como en la [llamada simulada](llamada.md).
+
+### Comparación llamada a llamada
+
+Las dos estrategias reciben los mismos fragmentos, así que se comparan sobre las mismas llamadas: el informe lista en cuáles avisa solo una y la diferencia en detección y falsas alertas, en puntos porcentuales, con un intervalo del 95 % por remuestreo. Se remuestrean **familias completas** (una plantilla con sus nueve regiones cuenta como una), porque las variantes regionales comparten la forma del engaño; contarlas como independientes daría una certeza falsa. Si el intervalo toca el cero, la diferencia no es concluyente.
+
+### Familias de indicios graduales
+
+La pregunta del proyecto solo se puede responder con llamadas donde ningún turno basta por sí solo. Por eso [plantillas.json](../datos/guiones/plantillas.json) incluye, solo para prueba (nunca para entrenar):
+
+- **6 engaños graduales** (`gradual_*`): el falso banco que manda al cajero, la falsa DIAN que cobra en un corresponsal, el sobrino accidentado, el premio de la transportadora, la inversión con cupos y el falso policía. Ninguno pide códigos ni transferencias; reparten entidad, amenaza, prisa y aislamiento en varios turnos.
+- **6 llamadas legítimas difíciles** (`dificil_*`): el banco que de verdad bloquea la tarjeta, el recordatorio real de la DIAN, el jefe con prisa y reserva, el papá varado, el regalo del operador y la clínica que avisa un accidente. Las tres primeras juntan tres indicios sueltos sin que haya engaño.
+
+Con ellas aparece la disyuntiva que estudia el proyecto (partición sintética de prueba, modo texto):
+
+| Estrategia | Detección | Falsas alertas | F1 |
+|---|---|---|---|
+| por_fragmento | 44/99 (44 %) | 0/99 (0 %) | 62 % |
+| acumulacion | 98/99 (99 %) | 27/99 (27 %) | 88 % |
+
+Acumular indicios detecta los engaños graduales que la decisión por fragmento deja pasar (+54,5 pp, IC 95 %: +27,3 a +81,8, por familias), a cambio de alertar en las llamadas legítimas que juntan varios indicios sueltos. Ese costo es el que hay que examinar antes de concluir que una estrategia es mejor en general.
 
 ## Cómo correrla
 

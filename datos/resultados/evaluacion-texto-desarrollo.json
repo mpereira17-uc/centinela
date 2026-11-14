@@ -1,6 +1,7 @@
 {
   "modo": "texto",
   "guiones": 24,
+  "demora_admisible": 5.0,
   "resumen": {
     "por_fragmento": {
       "llamadas_riesgo": 12,
@@ -18,6 +19,10 @@
         0.2425007574992425
       ],
       "precision": 1.0,
+      "f1": 0.9090909090909091,
+      "demora_mediana": 0.0,
+      "demora_p95": 0.0,
+      "avisos_tardios": 0,
       "alertas_anticipadas": 0,
       "segundos_hasta_aviso_mediana": 6.4,
       "segundos_hasta_aviso_max": 7.6,
@@ -43,6 +48,10 @@
         0.35388592179859524
       ],
       "precision": 0.9090909090909091,
+      "f1": 0.8695652173913043,
+      "demora_mediana": 0.0,
+      "demora_p95": 0.0,
+      "avisos_tardios": 0,
       "alertas_anticipadas": 0,
       "segundos_hasta_aviso_mediana": 6.4,
       "segundos_hasta_aviso_max": 7.6,
@@ -70,6 +79,10 @@
         0.2425007574992425
       ],
       "precision": 1.0,
+      "f1": 1.0,
+      "demora_mediana": 0.0,
+      "demora_p95": 0.0,
+      "avisos_tardios": 0,
       "alertas_anticipadas": 0,
       "segundos_hasta_aviso_mediana": 6.2,
       "segundos_hasta_aviso_max": 7.6,
@@ -92,6 +105,10 @@
         0.35388592179859524
       ],
       "precision": 0.9230769230769231,
+      "f1": 0.96,
+      "demora_mediana": 0.0,
+      "demora_p95": 0.0,
+      "avisos_tardios": 0,
       "alertas_anticipadas": 0,
       "segundos_hasta_aviso_mediana": 6.2,
       "segundos_hasta_aviso_max": 7.6,
@@ -101,59 +118,126 @@
       ]
     }
   },
+  "comparaciones": [
+    {
+      "a": "por_fragmento",
+      "b": "acumulacion",
+      "deteccion": {
+        "familias": 12,
+        "solo_a": [],
+        "solo_b": [],
+        "diferencia_ic95": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "falsas_alertas": {
+        "familias": 12,
+        "solo_a": [],
+        "solo_b": [
+          "l06"
+        ],
+        "diferencia_ic95": [
+          0.08333333333333333,
+          0.0,
+          0.25
+        ]
+      },
+      "b_antes": 0,
+      "a_antes": 0
+    },
+    {
+      "a": "clasificador",
+      "b": "hibrida",
+      "deteccion": {
+        "familias": 12,
+        "solo_a": [],
+        "solo_b": [],
+        "diferencia_ic95": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "falsas_alertas": {
+        "familias": 12,
+        "solo_a": [],
+        "solo_b": [
+          "l06"
+        ],
+        "diferencia_ic95": [
+          0.08333333333333333,
+          0.0,
+          0.25
+        ]
+      },
+      "b_antes": 0,
+      "a_antes": 0
+    }
+  ],
   "por_guion": [
     {
       "id": "r01",
       "etiqueta": "riesgo",
       "categoria": "suplanta_banco",
+      "familia": "r01",
       "estrategias": {
         "por_fragmento": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.8,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "moderado",
             "alto",
             "moderado"
-          ]
+          ],
+          "tardia": false
         },
         "acumulacion": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.8,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "moderado",
             "alto",
             "critico"
-          ]
+          ],
+          "tardia": false
         },
         "clasificador": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.8,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "hibrida": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.8,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "moderado",
             "alto",
             "critico"
-          ]
+          ],
+          "tardia": false
         }
       }
     },
@@ -161,54 +245,63 @@
       "id": "r02",
       "etiqueta": "riesgo",
       "categoria": "suplanta_banco",
+      "familia": "r02",
       "estrategias": {
         "por_fragmento": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 7.6,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "moderado"
-          ]
+          ],
+          "tardia": false
         },
         "acumulacion": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 7.6,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "critico"
-          ]
+          ],
+          "tardia": false
         },
         "clasificador": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 7.6,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         },
         "hibrida": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 7.6,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "critico"
-          ]
+          ],
+          "tardia": false
         }
       }
     },
@@ -216,54 +309,63 @@
       "id": "r03",
       "etiqueta": "riesgo",
       "categoria": "familiar_falso",
+      "familia": "r03",
       "estrategias": {
         "por_fragmento": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 7.6,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "moderado"
-          ]
+          ],
+          "tardia": false
         },
         "acumulacion": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 7.6,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "critico"
-          ]
+          ],
+          "tardia": false
         },
         "clasificador": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 7.6,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "hibrida": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 7.6,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "critico"
-          ]
+          ],
+          "tardia": false
         }
       }
     },
@@ -271,54 +373,63 @@
       "id": "r04",
       "etiqueta": "riesgo",
       "categoria": "soporte_falso",
+      "familia": "r04",
       "estrategias": {
         "por_fragmento": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 5.6,
+          "demora_aviso": 0.0,
           "niveles": [
             "moderado",
             "bajo",
             "alto",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "acumulacion": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 5.6,
+          "demora_aviso": 0.0,
           "niveles": [
             "moderado",
             "moderado",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         },
         "clasificador": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 5.6,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "hibrida": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 5.6,
+          "demora_aviso": 0.0,
           "niveles": [
             "moderado",
             "moderado",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         }
       }
     },
@@ -326,54 +437,63 @@
       "id": "r05",
       "etiqueta": "riesgo",
       "categoria": "premio_falso",
+      "familia": "r05",
       "estrategias": {
         "por_fragmento": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.4,
+          "demora_aviso": 0.0,
           "niveles": [
             "moderado",
             "bajo",
             "alto",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "acumulacion": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.4,
+          "demora_aviso": 0.0,
           "niveles": [
             "moderado",
             "moderado",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         },
         "clasificador": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.4,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "hibrida": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.4,
+          "demora_aviso": 0.0,
           "niveles": [
             "moderado",
             "moderado",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         }
       }
     },
@@ -381,50 +501,59 @@
       "id": "r06",
       "etiqueta": "riesgo",
       "categoria": "extorsion",
+      "familia": "r06",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "moderado",
             "bajo",
             "moderado"
-          ]
+          ],
+          "tardia": false
         },
         "acumulacion": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "moderado",
             "moderado",
             "moderado"
-          ]
+          ],
+          "tardia": false
         },
         "clasificador": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 6.0,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "alto",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "hibrida": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 6.0,
+          "demora_aviso": 0.0,
           "niveles": [
             "moderado",
             "critico",
             "critico"
-          ]
+          ],
+          "tardia": false
         }
       }
     },
@@ -432,54 +561,63 @@
       "id": "r07",
       "etiqueta": "riesgo",
       "categoria": "suplanta_entidad",
+      "familia": "r07",
       "estrategias": {
         "por_fragmento": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 6.0,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "acumulacion": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 6.0,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         },
         "clasificador": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 6.0,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "hibrida": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 6.0,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         }
       }
     },
@@ -487,54 +625,63 @@
       "id": "r08",
       "etiqueta": "riesgo",
       "categoria": "inversion_falsa",
+      "familia": "r08",
       "estrategias": {
         "por_fragmento": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.4,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "acumulacion": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.4,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         },
         "clasificador": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.4,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         },
         "hibrida": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.4,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         }
       }
     },
@@ -542,54 +689,63 @@
       "id": "r09",
       "etiqueta": "riesgo",
       "categoria": "suplanta_banco",
+      "familia": "r09",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo",
             "bajo",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "acumulacion": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo",
             "bajo",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "clasificador": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 5.2,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "hibrida": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 5.2,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         }
       }
     },
@@ -597,50 +753,59 @@
       "id": "r10",
       "etiqueta": "riesgo",
       "categoria": "envio_falso",
+      "familia": "r10",
       "estrategias": {
         "por_fragmento": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 6.0,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         },
         "acumulacion": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 6.0,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         },
         "clasificador": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 6.0,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         },
         "hibrida": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 6.0,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "alto",
             "alto"
-          ]
+          ],
+          "tardia": false
         }
       }
     },
@@ -648,50 +813,59 @@
       "id": "r11",
       "etiqueta": "riesgo",
       "categoria": "empleo_falso",
+      "familia": "r11",
       "estrategias": {
         "por_fragmento": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.8,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto"
-          ]
+          ],
+          "tardia": false
         },
         "acumulacion": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.8,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto"
-          ]
+          ],
+          "tardia": false
         },
         "clasificador": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.8,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto"
-          ]
+          ],
+          "tardia": false
         },
         "hibrida": {
           "alerta": true,
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": 6.8,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "bajo",
             "alto"
-          ]
+          ],
+          "tardia": false
         }
       }
     },
@@ -699,50 +873,59 @@
       "id": "r12",
       "etiqueta": "riesgo",
       "categoria": "suplanta_entidad",
+      "familia": "r12",
       "estrategias": {
         "por_fragmento": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 5.2,
+          "demora_aviso": 0.0,
           "niveles": [
             "moderado",
             "alto",
             "moderado"
-          ]
+          ],
+          "tardia": false
         },
         "acumulacion": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 5.2,
+          "demora_aviso": 0.0,
           "niveles": [
             "moderado",
             "critico",
             "critico"
-          ]
+          ],
+          "tardia": false
         },
         "clasificador": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 5.2,
+          "demora_aviso": 0.0,
           "niveles": [
             "bajo",
             "alto",
             "bajo"
-          ]
+          ],
+          "tardia": false
         },
         "hibrida": {
           "alerta": true,
           "turno_alerta": 2,
           "anticipada": false,
           "segundos_hasta_aviso": 5.2,
+          "demora_aviso": 0.0,
           "niveles": [
             "moderado",
             "critico",
             "critico"
-          ]
+          ],
+          "tardia": false
         }
       }
     },
@@ -750,12 +933,14 @@
       "id": "l01",
       "etiqueta": "legitima",
       "categoria": "banco_real",
+      "familia": "l01",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "moderado",
             "bajo"
@@ -766,6 +951,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "moderado",
             "moderado"
@@ -776,6 +962,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -786,6 +973,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "moderado",
             "moderado"
@@ -797,12 +985,14 @@
       "id": "l02",
       "etiqueta": "legitima",
       "categoria": "cita_medica",
+      "familia": "l02",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -813,6 +1003,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -823,6 +1014,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -833,6 +1025,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -844,12 +1037,14 @@
       "id": "l03",
       "etiqueta": "legitima",
       "categoria": "domicilio",
+      "familia": "l03",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -860,6 +1055,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -870,6 +1066,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -880,6 +1077,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -891,12 +1089,14 @@
       "id": "l04",
       "etiqueta": "legitima",
       "categoria": "familia",
+      "familia": "l04",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -907,6 +1107,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -917,6 +1118,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -927,6 +1129,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -938,12 +1141,14 @@
       "id": "l05",
       "etiqueta": "legitima",
       "categoria": "telefonia",
+      "familia": "l05",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -954,6 +1159,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -964,6 +1170,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -974,6 +1181,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -985,12 +1193,14 @@
       "id": "l06",
       "etiqueta": "legitima",
       "categoria": "banco_real",
+      "familia": "l06",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "moderado",
             "moderado",
@@ -1002,6 +1212,7 @@
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "moderado",
             "moderado",
@@ -1013,6 +1224,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo",
@@ -1024,6 +1236,7 @@
           "turno_alerta": 3,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "moderado",
             "moderado",
@@ -1036,12 +1249,14 @@
       "id": "l07",
       "etiqueta": "legitima",
       "categoria": "trabajo",
+      "familia": "l07",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1052,6 +1267,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1062,6 +1278,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1072,6 +1289,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1083,12 +1301,14 @@
       "id": "l08",
       "etiqueta": "legitima",
       "categoria": "encuesta",
+      "familia": "l08",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo",
@@ -1100,6 +1320,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo",
@@ -1111,6 +1332,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo",
@@ -1122,6 +1344,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo",
@@ -1134,12 +1357,14 @@
       "id": "l09",
       "etiqueta": "legitima",
       "categoria": "colegio",
+      "familia": "l09",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1150,6 +1375,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1160,6 +1386,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1170,6 +1397,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1181,12 +1409,14 @@
       "id": "l10",
       "etiqueta": "legitima",
       "categoria": "domicilio",
+      "familia": "l10",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1197,6 +1427,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1207,6 +1438,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1217,6 +1449,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1228,12 +1461,14 @@
       "id": "l11",
       "etiqueta": "legitima",
       "categoria": "amistad",
+      "familia": "l11",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1244,6 +1479,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1254,6 +1490,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1264,6 +1501,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo"
@@ -1275,12 +1513,14 @@
       "id": "l12",
       "etiqueta": "legitima",
       "categoria": "salud",
+      "familia": "l12",
       "estrategias": {
         "por_fragmento": {
           "alerta": false,
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "moderado",
             "moderado",
@@ -1292,6 +1532,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "moderado",
             "moderado",
@@ -1303,6 +1544,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "bajo",
             "bajo",
@@ -1314,6 +1556,7 @@
           "turno_alerta": null,
           "anticipada": false,
           "segundos_hasta_aviso": null,
+          "demora_aviso": null,
           "niveles": [
             "moderado",
             "moderado",
@@ -1323,6 +1566,6 @@
       }
     }
   ],
-  "fecha": "2026-10-15",
+  "fecha": "2026-11-14",
   "particion": "desarrollo"
 }

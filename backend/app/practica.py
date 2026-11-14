@@ -27,16 +27,16 @@ COLOMBIA = timezone(timedelta(hours=-5))  # sin horario de verano; no depende de
 NIVELES = (
     {"id": "premios", "nombre": "Premios y paquetes",
      "tactica": "Te ofrecen un premio o te retienen un paquete, y piden pagar primero.",
-     "estafas": ("premio_falso", "envio_falso"), "normales": ("comercio", "domicilio")},
+     "estafas": ("premio_falso", "envio_falso", "inversion_falsa"), "normales": ("comercio", "domicilio")},
     {"id": "familiar", "nombre": "Familiar en apuros",
      "tactica": "Dicen ser de tu familia, con número nuevo o en una emergencia, y piden plata ya.",
      "estafas": ("familiar_falso",), "normales": ("familia",)},
     {"id": "urgencia", "nombre": "Urgencia con tu banco o tu operador",
      "tactica": "Te asustan con un fraude o una falla y piden un código o instalar una app.",
-     "estafas": ("suplanta_banco", "soporte_falso"), "normales": ("banco", "banco_real", "servicios")},
+     "estafas": ("suplanta_banco", "soporte_falso"), "normales": ("banco", "banco_real", "servicios", "operador")},
     {"id": "autoridad", "nombre": "Autoridad y amenazas",
      "tactica": "Hablan como cobranza, juzgado o grupo armado, y te amenazan si no pagas.",
-     "estafas": ("extorsion", "suplanta_entidad"), "normales": ("salud", "colegio", "trabajo")},
+     "estafas": ("extorsion", "suplanta_entidad"), "normales": ("salud", "colegio", "trabajo", "entidad")},
 )
 NIVEL_POR_ID = {n["id"]: n for n in NIVELES}
 PATRON_NIVEL = "^(" + "|".join(NIVEL_POR_ID) + ")$"

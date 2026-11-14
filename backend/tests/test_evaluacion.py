@@ -47,7 +47,7 @@ def test_evaluacion_en_texto():
     res = evaluar.evaluar(guiones.cargar())
     assert set(res["resumen"]) == {"por_fragmento", "acumulacion", "clasificador", "hibrida"}
     for r in res["resumen"].values():
-        assert r["llamadas_riesgo"] == r["llamadas_legitimas"] == 132  # 18 originales, 6 regionales y 108 sintéticos
+        assert r["llamadas_riesgo"] == r["llamadas_legitimas"] == 186  # 18 originales, 6 regionales y 162 sintéticos
         assert 0 <= r["deteccion"] <= 1
         assert r["segundos_hasta_aviso_mediana"] > 0
     # Un guion claro siempre se detecta y una llamada familiar nunca alerta
@@ -92,3 +92,33 @@ def test_modo_audio_de_punta_a_punta_con_voz_y_transcripcion_simuladas(tmp_path)
     assert filas["r01"]["estrategias"]["acumulacion"]["alerta"]
     assert "transcripciones" in filas["r01"]
     assert not filas["l01"]["estrategias"]["acumulacion"]["alerta"]
+
+
+def test_metricas_nuevas():
+    from evaluacion.metricas import bootstrap_diferencia, f1, percentil
+
+    assert percentil([1, 2, 3, 4, 5], 50) == 3 and percentil([0, 10], 95) == 9.5 and percentil([], 95) is None
+    assert f1(9, 1, 1) == 0.9 and f1(0, 0, 0) is None
+    # B avisa en todas las llamadas de dos familias y A en ninguna: diferencia de +100 pp sin incertidumbre
+    assert bootstrap_diferencia([[(False, True)] * 9, [(False, True)] * 9]) == (1.0, 1.0, 1.0)
+    # Sin diferencias, el intervalo es cero
+    assert bootstrap_diferencia([[(True, True)], [(False, False)]]) == (0.0, 0.0, 0.0)
+    assert bootstrap_diferencia([]) is None
+
+
+def test_la_acumulacion_ve_el_engano_gradual_y_paga_con_falsas_alertas():
+    """Lo que estudia el proyecto: indicios repartidos en varios turnos, sin petición explícita."""
+    res = evaluar.evaluar(guiones.cargar(particion="sintetica_prueba"))
+    filas = {f["id"]: f["estrategias"] for f in res["por_guion"]}
+    gradual = filas["s-gradual_banco_cajero-bogota"]
+    assert gradual["acumulacion"]["alerta"] and not gradual["por_fragmento"]["alerta"]
+    assert gradual["acumulacion"]["turno_alerta"] == 4 and gradual["acumulacion"]["demora_aviso"] == 0
+    dificil = filas["s-dificil_banco_bloqueo_real-bogota"]
+    assert dificil["acumulacion"]["alerta"] and not dificil["por_fragmento"]["alerta"]
+    assert not filas["s-dificil_papa_varado-bogota"]["acumulacion"]["alerta"]
+    comp = next(c for c in res["comparaciones"] if c["a"] == "por_fragmento")
+    base, bajo, _ = comp["deteccion"]["diferencia_ic95"]
+    assert base > 0.3 and bajo > 0  # la ventaja en detección no es casualidad de estas familias
+    assert comp["deteccion"]["familias"] == 11
+    md = evaluar.informe(res, "sintetica_prueba")
+    assert "Comparación llamada a llamada" in md and "gradual_banco_cajero (9 regiones)" in md and "| F1 |" in md

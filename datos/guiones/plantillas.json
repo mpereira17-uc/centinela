@@ -390,6 +390,168 @@
         ["usuario", "Perfecto."],
         ["llamante", "{despedida}."]
       ]
+    },
+    {
+      "id": "gradual_banco_cajero", "uso": "prueba", "etiqueta": "riesgo", "categoria": "suplanta_banco",
+      "descripcion": "Falso empleado de fraudes manda a la persona al cajero sin pedir claves: entidad, bloqueo y luego prisa con aislamiento",
+      "turno_riesgo": 4,
+      "turnos": [
+        ["llamante", "{saludo}. Le hablo del área de fraudes de {banco}."],
+        ["usuario", "Sí, dígame."],
+        ["llamante", "{muletilla} su tarjeta quedó bloqueada por unos movimientos raros."],
+        ["usuario", "¿Y ahora qué hago?"],
+        ["llamante", "Vaya ya mismo al cajero más cercano y no cuelgue, yo lo voy guiando paso a paso, {trato}."],
+        ["usuario", "Bueno, ya voy saliendo."],
+        ["llamante", "Perfecto. Cuando esté frente al cajero me avisa y seguimos."]
+      ]
+    },
+    {
+      "id": "gradual_dian_corresponsal", "uso": "prueba", "etiqueta": "riesgo", "categoria": "suplanta_entidad",
+      "descripcion": "Falsa DIAN anuncia un embargo y pide pagar en un corresponsal con reserva, sin mencionar transferencias",
+      "turno_riesgo": 4,
+      "turnos": [
+        ["llamante", "{saludo}. Le hablamos de la DIAN, oficina de cobro."],
+        ["usuario", "¿Qué pasó?"],
+        ["llamante", "{muletilla} tiene un proceso de embargo abierto a su nombre por una deuda vieja."],
+        ["usuario", "Yo no sabía nada de eso."],
+        ["llamante", "Esto es confidencial. Para cerrarlo hoy acérquese a un corresponsal y le dicto la referencia que tiene que pagar."],
+        ["usuario", "¿Cuánto sería?"],
+        ["llamante", "Se lo digo cuando esté allá, {trato}."]
+      ]
+    },
+    {
+      "id": "gradual_sobrino_clinica", "uso": "prueba", "etiqueta": "riesgo", "categoria": "familiar_falso",
+      "descripcion": "Supuesto sobrino con número nuevo cuenta un accidente, pide reserva y al final pide ayuda con prisa",
+      "turno_riesgo": 6,
+      "turnos": [
+        ["llamante", "{saludo}, tía, soy yo, su sobrino. Cambié de número."],
+        ["usuario", "Ah, ¿cómo estás, mijo?"],
+        ["llamante", "Mal, tía. Tuve un accidente con la moto y me trajeron a la clínica."],
+        ["usuario", "¡Ay, Dios mío! ¿Pero estás bien?"],
+        ["llamante", "Sí, pero no le cuente a mi mamá, que ella se preocupa mucho."],
+        ["usuario", "Bueno, no le digo. ¿Qué necesitas?"],
+        ["llamante", "Necesito que me ayude urgente con lo de la clínica, ¿me presta para pagar la cuenta?"]
+      ]
+    },
+    {
+      "id": "gradual_paquete_premio", "uso": "prueba", "etiqueta": "riesgo", "categoria": "premio_falso",
+      "descripcion": "Falsa transportadora anuncia un premio y presiona a confirmar en secreto",
+      "turno_riesgo": 4,
+      "turnos": [
+        ["llamante", "{saludo}. Le hablo de Servientrega, área de clientes."],
+        ["usuario", "Sí, ¿con quién hablo?"],
+        ["llamante", "{muletilla} usted salió ganador en el sorteo de fin de año y el paquete ya está listo."],
+        ["usuario", "¿En serio? Yo no me acuerdo de haber participado."],
+        ["llamante", "Tiene que confirmar de inmediato o se le pierde, y no hable con nadie todavía para no dañar la sorpresa."],
+        ["usuario", "¿Y cómo confirmo?"],
+        ["llamante", "Ahorita le explico, {trato}, quédese en la línea."]
+      ]
+    },
+    {
+      "id": "gradual_inversion_cupos", "uso": "prueba", "etiqueta": "riesgo", "categoria": "inversion_falsa",
+      "descripcion": "Falsa inversión con reserva y cierre de cupos, que termina en un enlace de inscripción",
+      "turno_riesgo": 4,
+      "turnos": [
+        ["llamante", "{saludo}. Le cuento de una inversión garantizada que estamos abriendo."],
+        ["usuario", "¿Inversión en qué?"],
+        ["llamante", "{muletilla} esto es entre usted y yo, no se lo ofrecemos a todo el mundo."],
+        ["usuario", "Ajá, cuénteme."],
+        ["llamante", "Los cupos se cierran hoy, decídase rápido y le mando el enlace para que se inscriba."],
+        ["usuario", "Déjeme pensarlo."],
+        ["llamante", "No lo piense tanto, {trato}, que se le va la oportunidad."]
+      ]
+    },
+    {
+      "id": "gradual_policia_estacion", "uso": "prueba", "etiqueta": "riesgo", "categoria": "extorsion",
+      "descripcion": "Falso policía dice que el hijo está detenido y pide llevar efectivo en secreto",
+      "turno_riesgo": 4,
+      "turnos": [
+        ["llamante", "{saludo}. Le habla el patrullero Gómez de la Policía."],
+        ["usuario", "Sí, señor, ¿qué pasó?"],
+        ["llamante", "{muletilla} su hijo está detenido en la estación por una riña."],
+        ["usuario", "¿Cómo así? ¿Dónde está?"],
+        ["llamante", "Si quiere arreglarlo sin papeleo, traiga el efectivo ahora mismo y no le diga a nadie."],
+        ["usuario", "¿Cuánto tengo que llevar?"],
+        ["llamante", "Venga y aquí hablamos, {trato}."]
+      ]
+    },
+    {
+      "id": "dificil_banco_bloqueo_real", "uso": "prueba", "etiqueta": "legitima", "categoria": "banco",
+      "descripcion": "El banco avisa de verdad un bloqueo preventivo, no pide datos y manda a la oficina",
+      "turnos": [
+        ["llamante", "{saludo}. Le hablamos de la línea de servicio de {banco}."],
+        ["usuario", "Sí, dígame."],
+        ["llamante", "{muletilla} por seguridad bloqueamos su tarjeta por una compra que usted no reconoció ayer."],
+        ["usuario", "Ah, sí, yo fui la que llamé."],
+        ["llamante", "Exacto. Es urgente que no la use; la nueva le llega a la casa y no le vamos a pedir ningún dato por teléfono."],
+        ["usuario", "Listo, gracias."],
+        ["llamante", "{despedida}."]
+      ]
+    },
+    {
+      "id": "dificil_dian_recordatorio", "uso": "prueba", "etiqueta": "legitima", "categoria": "entidad",
+      "descripcion": "Recordatorio real de la DIAN sobre el vencimiento, que manda a la página oficial",
+      "turnos": [
+        ["llamante", "{saludo}. Le hablamos de la DIAN con un recordatorio."],
+        ["usuario", "¿Sobre qué?"],
+        ["llamante", "{muletilla} vence la declaración de renta y si no la presenta puede tener sanción o embargo."],
+        ["usuario", "Ay, se me había olvidado."],
+        ["llamante", "Hágala usted mismo en la página oficial, rápido antes de que cierre el plazo. Por aquí no le pedimos nada."],
+        ["usuario", "Bueno, hoy la reviso."],
+        ["llamante", "{despedida}."]
+      ]
+    },
+    {
+      "id": "dificil_jefe_informe", "uso": "prueba", "etiqueta": "legitima", "categoria": "trabajo",
+      "descripcion": "Un jefe pide con prisa y reserva un informe para un cliente molesto",
+      "turnos": [
+        ["llamante", "{saludo}, habla Carlos, de la oficina."],
+        ["usuario", "Hola, Carlos."],
+        ["llamante", "{muletilla} necesito el informe urgente para la reunión de las tres."],
+        ["usuario", "Ya casi lo tengo."],
+        ["llamante", "Y es confidencial, no lo reenvíe a nadie fuera del equipo."],
+        ["usuario", "Claro, tranquilo."],
+        ["llamante", "Es que si no llega hoy, el cliente nos demanda. {despedida}."]
+      ]
+    },
+    {
+      "id": "dificil_papa_varado", "uso": "prueba", "etiqueta": "legitima", "categoria": "familia",
+      "descripcion": "Un papá cuenta que quedó varado, pide no asustar a la mamá y ya resolvió con el seguro",
+      "turnos": [
+        ["llamante", "{saludo}, mija, soy su papá. Quedé varado en la vía."],
+        ["usuario", "¿Y está bien?"],
+        ["llamante", "Sí, sí. No le cuente a su mamá, que se asusta."],
+        ["usuario", "Bueno, papá."],
+        ["llamante", "Ya llamé la grúa del seguro, solo quería avisarle que llego tarde a la comida."],
+        ["usuario", "Listo, lo esperamos."],
+        ["llamante", "{despedida}."]
+      ]
+    },
+    {
+      "id": "dificil_operador_regalo", "uso": "prueba", "etiqueta": "legitima", "categoria": "operador",
+      "descripcion": "El operador avisa un beneficio que se activa solo, sin pedir nada",
+      "turnos": [
+        ["llamante", "{saludo}. Le hablo desde Claro, servicio al cliente."],
+        ["usuario", "Sí, dígame."],
+        ["llamante", "{muletilla} por ser cliente hace cinco años le dimos un premio: un mes de datos sin costo."],
+        ["usuario", "Ah, qué bien. ¿Qué tengo que hacer?"],
+        ["llamante", "Nada, se activa solo en la próxima factura."],
+        ["usuario", "Perfecto, gracias."],
+        ["llamante", "{despedida}."]
+      ]
+    },
+    {
+      "id": "dificil_clinica_accidente", "uso": "prueba", "etiqueta": "legitima", "categoria": "salud",
+      "descripcion": "La clínica avisa un accidente real y pide venir, aclarando que no cobra por teléfono",
+      "turnos": [
+        ["llamante", "{saludo}. Le hablo de la clínica; su papá tuvo un accidente de tránsito leve."],
+        ["usuario", "¡Dios mío! ¿Cómo está?"],
+        ["llamante", "Está estable, pero venga de inmediato porque hay que firmar unos papeles de ingreso."],
+        ["usuario", "Ya salgo para allá."],
+        ["llamante", "Pregunte en admisiones por el doctor Ramírez. Aquí no cobramos nada por teléfono."],
+        ["usuario", "Gracias, ya voy."],
+        ["llamante", "{despedida}."]
+      ]
     }
   ]
 }

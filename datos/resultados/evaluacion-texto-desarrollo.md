@@ -1,13 +1,30 @@
 # Evaluación en modo texto (desarrollo)
 
-Generado por `python -m evaluacion.evaluar` el 2026-10-15. 24 guiones de [datos/guiones/guiones.json](../guiones/guiones.json). Solo se analizan los turnos de quien llama, como en la llamada simulada.
+Generado por `python -m evaluacion.evaluar` el 2026-11-14. 24 guiones de [datos/guiones/guiones.json](../guiones/guiones.json). Solo se analizan los turnos de quien llama, como en la llamada simulada.
 
-| Estrategia | Detección | IC 95 % | Falsas alertas | IC 95 % | Precisión | Aviso (mediana) | Aviso (máx.) |
-|---|---|---|---|---|---|---|---|
-| por_fragmento | 10/12 (83 %) | 55–95 % | 0/12 (0 %) | 0–24 % | 100 % | 6,4 s | 7,6 s |
-| acumulacion | 10/12 (83 %) | 55–95 % | 1/12 (8 %) | 1–35 % | 91 % | 6,4 s | 7,6 s |
-| clasificador | 12/12 (100 %) | 76–100 % | 0/12 (0 %) | 0–24 % | 100 % | 6,2 s | 7,6 s |
-| hibrida | 12/12 (100 %) | 76–100 % | 1/12 (8 %) | 1–35 % | 92 % | 6,2 s | 7,6 s |
+| Estrategia | Detección | IC 95 % | Falsas alertas | IC 95 % | Precisión | F1 | Demora (mediana) | Demora (p95) | Tardías |
+|---|---|---|---|---|---|---|---|---|---|
+| por_fragmento | 10/12 (83 %) | 55–95 % | 0/12 (0 %) | 0–24 % | 100 % | 91 % | 0,0 s | 0,0 s | 0/10 |
+| acumulacion | 10/12 (83 %) | 55–95 % | 1/12 (8 %) | 1–35 % | 91 % | 87 % | 0,0 s | 0,0 s | 0/10 |
+| clasificador | 12/12 (100 %) | 76–100 % | 0/12 (0 %) | 0–24 % | 100 % | 100 % | 0,0 s | 0,0 s | 0/12 |
+| hibrida | 12/12 (100 %) | 76–100 % | 1/12 (8 %) | 1–35 % | 92 % | 96 % | 0,0 s | 0,0 s | 0/12 |
+
+## Comparación llamada a llamada
+
+Diferencia = segunda estrategia menos primera, en puntos porcentuales. El intervalo sale de remuestrear 2000 veces familias completas de llamadas (una plantilla con todas sus regiones cuenta como una sola), porque comparten la forma del engaño. Si el intervalo incluye el cero, la diferencia no es concluyente con estos guiones.
+
+**por_fragmento → acumulacion**
+
+- Detección (12 familias de riesgo): +0,0 pp (IC 95 %: +0,0 a +0,0). Solo acumulacion: ninguna; solo por_fragmento: ninguna.
+- Falsas alertas (12 familias legítimas): +8,3 pp (IC 95 %: +0,0 a +25,0). Solo acumulacion: l06; solo por_fragmento: ninguna.
+- Cuando ambas avisan: acumulacion avisa en un turno anterior en 0 llamadas y por_fragmento en 0.
+
+**clasificador → hibrida**
+
+- Detección (12 familias de riesgo): +0,0 pp (IC 95 %: +0,0 a +0,0). Solo hibrida: ninguna; solo clasificador: ninguna.
+- Falsas alertas (12 familias legítimas): +8,3 pp (IC 95 %: +0,0 a +25,0). Solo hibrida: l06; solo clasificador: ninguna.
+- Cuando ambas avisan: hibrida avisa en un turno anterior en 0 llamadas y clasificador en 0.
+
 
 ## Errores
 
@@ -47,7 +64,8 @@ Generado por `python -m evaluacion.evaluar` el 2026-10-15. 24 guiones de [datos/
 
 ## Cómo leerlo
 
-- Los tiempos se miden desde que empieza el turno con la solicitud de riesgo hasta que termina el turno que dispara el aviso; en modo texto, la duración de cada turno se estima a 2,5 palabras por segundo.
+- La demora va desde que termina la primera petición riesgosa hasta el aviso. Es negativa si el aviso llega antes; es tardía si pasa de 5,0 s, valor fijado antes de probar. La mediana y el percentil 95 solo cuentan las llamadas detectadas; las no detectadas se listan aparte.
+- Los tiempos de la tabla por guion se miden desde que empieza el turno con la solicitud de riesgo hasta que termina el turno que dispara el aviso; en modo texto, la duración de cada turno se estima a 2,5 palabras por segundo.
 - Una alerta anticipada ocurre antes del turno anotado como solicitud de riesgo.
 - Con tan pocos guiones los intervalos de confianza son anchos: sirven para comparar estrategias, no como cifra definitiva.
 - Los guiones los escribió el mismo equipo que escribió las reglas; por eso la partición reservada se usa solo para el informe final.

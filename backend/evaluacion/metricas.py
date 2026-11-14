@@ -41,3 +41,44 @@ def mediana(valores: list[float]) -> float | None:
     v = sorted(valores)
     medio = len(v) // 2
     return v[medio] if len(v) % 2 else (v[medio - 1] + v[medio]) / 2
+
+
+def percentil(valores: list[float], q: float) -> float | None:
+    """Percentil q (0 a 100) con interpolación lineal entre los dos valores vecinos."""
+    if not valores:
+        return None
+    v = sorted(valores)
+    pos = (len(v) - 1) * q / 100
+    bajo = int(pos)
+    alto = min(bajo + 1, len(v) - 1)
+    return v[bajo] + (v[alto] - v[bajo]) * (pos - bajo)
+
+
+def f1(vp: int, fp: int, fn: int) -> float | None:
+    """Media armónica de precisión y sensibilidad."""
+    return 2 * vp / (2 * vp + fp + fn) if vp + fp + fn else None
+
+
+def bootstrap_diferencia(grupos: list[list[tuple[bool, bool]]], repeticiones: int = 2000,
+                         semilla: int = 7) -> tuple[float, float, float] | None:
+    """Diferencia B - A en la proporción de llamadas con aviso y su intervalo del 95 %.
+
+    Cada par es (aviso de A, aviso de B) en la misma llamada completa. Se remuestrean
+    llamadas, no fragmentos, porque los turnos de una conversación no son independientes;
+    y las llamadas de una misma familia (una plantilla en varias regiones) se sacan juntas,
+    porque comparten la forma del engaño.
+    """
+    import random
+
+    grupos = [g for g in grupos if g]
+    if not grupos:
+        return None
+
+    def dif(muestra):
+        pares = [p for g in muestra for p in g]
+        return sum(b - a for a, b in pares) / len(pares)
+
+    k = len(grupos)
+    azar = random.Random(semilla)
+    difs = sorted(dif([grupos[azar.randrange(k)] for _ in range(k)]) for _ in range(repeticiones))
+    return dif(grupos), difs[int(0.025 * repeticiones)], difs[int(0.975 * repeticiones) - 1]
