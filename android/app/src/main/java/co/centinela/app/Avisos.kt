@@ -13,9 +13,20 @@ data class Reputacion(val estado: String, val mensaje: String, val reportes: Int
     }
 }
 
-/** El aviso que se muestra al entrar la llamada. */
-/** [alto]: la comunidad lo marca como estafa con varios reportes; la tarjeta sobre la llamada se pinta en ámbar. */
-data class Aviso(val titulo: String, val texto: String, val silenciar: Boolean, val alto: Boolean = false)
+/**
+ * Los mismos tres escalones que los avisos de la web: precaución (un reporte, publicidad, reportes en
+ * disputa), alto (varios reportes) y crítico (estafa confirmada). Cada uno tiene su color en la tarjeta.
+ */
+enum class Nivel { PRECAUCION, ALTO, CRITICO }
+
+/** El aviso que se muestra al entrar la llamada. [alto]: alto o crítico, con voz y vibración propia. */
+data class Aviso(
+    val titulo: String,
+    val texto: String,
+    val silenciar: Boolean,
+    val alto: Boolean = false,
+    val nivel: Nivel = if (alto) Nivel.ALTO else Nivel.PRECAUCION,
+)
 
 object Avisos {
     // Estados que cuentan como señal de estafa en el servidor (reportes.ESTADOS_CON_SENAL)
@@ -38,7 +49,12 @@ object Avisos {
             else -> "Número con reportes"
         }
         val alto = rep.estado in RIESGO_ALTO
-        return Aviso(titulo, rep.mensaje, silenciar = silenciarRiesgoAlto && alto, alto = alto)
+        val nivel = when (rep.estado) {
+            "estafa_confirmada" -> Nivel.CRITICO
+            "varios_reportes" -> Nivel.ALTO
+            else -> Nivel.PRECAUCION
+        }
+        return Aviso(titulo, rep.mensaje, silenciar = silenciarRiesgoAlto && alto, alto = alto, nivel = nivel)
     }
 }
 

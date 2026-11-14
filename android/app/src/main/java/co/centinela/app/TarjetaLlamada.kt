@@ -3,6 +3,7 @@ package co.centinela.app
 import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
+import android.graphics.drawable.GradientDrawable
 import android.media.AudioManager
 import android.os.Build
 import android.os.Handler
@@ -44,7 +45,14 @@ object TarjetaLlamada {
         tarjeta.findViewById<TextView>(R.id.tarjeta_titulo).text = aviso.titulo
         tarjeta.findViewById<TextView>(R.id.tarjeta_numero).text = numero
         tarjeta.findViewById<TextView>(R.id.tarjeta_texto).text = aviso.texto
-        tarjeta.findViewById<View>(R.id.tarjeta_franja).visibility = if (aviso.alto) View.VISIBLE else View.GONE
+        // Color por nivel, igual que el banner de la web: ámbar oscuro, naranja o rojo, siempre con texto blanco
+        tarjeta.background = GradientDrawable().apply {
+            setColor(colorDe(aviso.nivel))
+            cornerRadius = 20 * app.resources.displayMetrics.density
+            if (aviso.nivel == Nivel.PRECAUCION) setStroke((2 * app.resources.displayMetrics.density).toInt(), 0xFFF5A524.toInt())
+        }
+        // La franja dice de dónde sale el aviso: de los reportes de la comunidad, no de oír la llamada
+        tarjeta.findViewById<View>(R.id.tarjeta_franja).visibility = View.VISIBLE
         // Cerrar o tocar la tarjeta también calla el aviso hablado
         tarjeta.findViewById<View>(R.id.tarjeta_cerrar).setOnClickListener {
             AvisoHablado.detener()
@@ -93,6 +101,13 @@ object TarjetaLlamada {
             if ((vio && !enLlamada) || System.currentTimeMillis() - inicio > MAXIMO) quitar(app)
             else vigilarFin(app, inicio, vio)
         }, REVISAR_CADA)
+    }
+
+    /** Mismos colores que la web (--moderado-fondo, --alto-solido, --critico-solido): texto blanco con contraste AA. */
+    fun colorDe(nivel: Nivel): Int = when (nivel) {
+        Nivel.PRECAUCION -> 0xFF3A2F12.toInt()
+        Nivel.ALTO -> 0xFFB4480F.toInt()
+        Nivel.CRITICO -> 0xFFC42B2B.toInt()
     }
 
     fun quitar(context: Context) {

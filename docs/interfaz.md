@@ -116,3 +116,21 @@ En **riesgo crítico**, el aviso de pantalla completa ya no se cierra con "Enten
 - **Sigo, sé lo que hago** (botón de borde). Se habilita después de una pausa de 5 segundos, con la cuenta regresiva en el botón. Escape y deslizar hacia abajo solo valen como este botón y solo después de la pausa.
 
 Los avisos moderados y altos siguen con "Entendido", para no volver pesada cada alerta. El respaldo está en la revisión de la FTC sobre mensajes de prevención: los avisos que piden una decisión funcionan mejor que los que se cierran con un toque, y hacer una pausa se asocia con menos fraude (ver el documento de ideas). Los botones del aviso no se bloquean mientras sigue el análisis de la conversación. Capturas 69 y 70.
+
+## Avisos escalonados durante la llamada
+
+Desde noviembre de 2026 el aviso no tapa la pantalla. Sigue lo que hacen la detección de estafas de Pixel y de Samsung (One UI 8, sospecha en amarillo y advertencia en rojo), las guías de Material (un banner para lo que exige atención sin bloquear) y los estudios de habituación a advertencias (BYU, CHI 2015): un aviso repetido se deja de ver desde la segunda vez.
+
+| Nivel | Cómo se ve | Sonido y vibración | Acciones |
+|---|---|---|---|
+| Precaución | Banner ámbar arriba, título "Ten cuidado" | Ninguno | Entendido, o deslizar hacia arriba |
+| Alto | Banner naranja, "No lo hagas" | Una vibración y voz (si está activada) | Colgar y verificar · No es estafa |
+| Crítico | Banner rojo, "Cuelga ahora", borde rojo en toda la pantalla | Vibración larga y voz | Colgar y verificar · No es estafa · avisar al contacto |
+
+- Solo avisa cuando el nivel **sube**; nunca repite el mismo nivel en una llamada.
+- El texto dice el motivo concreto ("Te piden un código o una clave"), no un genérico.
+- **No es estafa** calla los avisos hasta el nivel alto; si después aparece algo crítico, vuelve a avisar.
+- La pantalla completa queda para después de **Colgar y verificar**: el resumen en azul con el búho tranquilo.
+- En Android, la tarjeta sobre la llamada entrante usa los mismos tres niveles y colores, a partir de los reportes de la comunidad (no oye la llamada).
+
+Android 14 solo deja mostrar notificaciones de pantalla completa a apps de llamadas y alarmas, así que un banner es además lo único que Centinela podría mostrar sobre una llamada real.

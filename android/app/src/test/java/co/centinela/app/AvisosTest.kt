@@ -33,7 +33,16 @@ class AvisosTest {
     }
 
     @Test
-    fun laFranjaAmbarEsSoloParaRiesgoAlto() {
+    fun tresNivelesComoEnLaWeb() {
+        assertEquals(Nivel.CRITICO, Avisos.para(rep("estafa_confirmada"), false)!!.nivel)
+        assertEquals(Nivel.ALTO, Avisos.para(rep("varios_reportes"), false)!!.nivel)
+        for (estado in listOf("reportado", "publicidad", "en_disputa", "en_revision")) {
+            assertEquals(estado, Nivel.PRECAUCION, Avisos.para(rep(estado), false)!!.nivel)
+        }
+    }
+
+    @Test
+    fun vozYVibracionSoloEnRiesgoAltoOCritico() {
         assertTrue(Avisos.para(rep("estafa_confirmada"), false)!!.alto)
         assertTrue(Avisos.para(rep("varios_reportes"), false)!!.alto)
         for (estado in listOf("reportado", "publicidad", "en_disputa", "en_revision")) {
