@@ -730,6 +730,25 @@ details[open] > summary::after { transform: rotate(90deg); }
 .enlaces > li[data-oficial="si"] > strong::after { content: " · página oficial"; font-weight: 500; color: var(--bajo); }
 .enlaces ul { margin: .3rem 0 0; padding-left: 1.1rem; }
 
+/* ---------- Chequeo rápido: tres preguntas de Sí o No durante cualquier llamada ---------- */
+
+.chequeo h3 { margin: 0 0 .25rem; font-size: 1.25rem; }
+.pregunta-chequeo { border: 0; padding: 0; margin: 1rem 0 0; }
+.pregunta-chequeo legend { font-weight: 700; font-size: 1.05rem; line-height: 1.35; margin-bottom: .5rem; padding: 0; }
+/* Botones de Sí y No anchos y altos: se tocan con el celular en la oreja o en altavoz */
+.si-no label { flex: 1; justify-content: center; min-height: 52px; font-size: 1.1rem; font-weight: 700; }
+.si-no label:first-child:has(input:checked) { background: var(--critico-solido); color: #fff; }
+.resultado-chequeo { margin-top: .9rem; padding: .9rem 1rem; border-radius: 20px; background: var(--superficie); box-shadow: inset 0 0 0 2px var(--cs, var(--borde)); }
+.resultado-chequeo p:last-child { margin-bottom: 0; }
+.chequeo-altavoz { margin: 1rem 0 0; }
+
+/* Más opciones del inicio: plegadas para que el inicio tenga solo lo principal */
+.mas-opciones > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; border-radius: 14px; }
+.mas-opciones > summary::-webkit-details-marker { display: none; }
+.mas-opciones > summary::after { content: "Ver"; font-weight: 700; color: var(--primario-fuerte); padding: .6rem .2rem; }
+.mas-opciones[open] > summary::after { content: "Ocultar"; }
+.mas-opciones > summary:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+
 /* ---------- Ayuda: directorio, me estafaron, palabra clave y contacto ---------- */
 
 .directorio { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
@@ -990,8 +1009,10 @@ details[open] > summary::after { transform: rotate(90deg); }
    de vidrio con brillo en el borde y botones con degradado de cian a azul.
    Lo que no se copió a propósito: la letra pequeña y las tarjetas giradas en 3D,
    porque la app también la usan personas mayores. Todo texto sigue con contraste 4,5:1.
-   Va al final para que gane sobre el modo claro y el oscuro anteriores.
+   Va al final para que gane sobre el modo oscuro anterior. Solo aplica cuando el celular está
+   en modo oscuro: en modo claro (de día, al sol) se ve el estilo blanco y azul del búho.
    ===================================================================== */
+@media (prefers-color-scheme: dark) {
 :root, :root:not(.x) {
   --fondo: #1f2533;
   --fondo-2: #2a3245;
@@ -1006,8 +1027,9 @@ details[open] > summary::after { transform: rotate(90deg); }
   --primario-texto: #0f1420;
   --celeste: #4fc3f7;
   --foco: #7dd6ff;
-  --electrico: linear-gradient(135deg, #34c8e8 0%, #4e4af2 100%);
-  --degradado: linear-gradient(135deg, #2bb3e0 0%, #3f5ff0 55%, #4e4af2 100%);
+  /* Texto blanco encima: el extremo claro era #34c8e8 (contraste 2:1). Con #1877ad pasa de 4,5:1 en todo el degradado */
+  --electrico: linear-gradient(135deg, #1877ad 0%, #4a45e6 100%);
+  --degradado: linear-gradient(135deg, #1877ad 0%, #3f5ff0 55%, #4a45e6 100%);
   --degradado-suave: linear-gradient(160deg, #353e55 0%, #232a3b 100%);
   --vidrio: linear-gradient(160deg, rgba(64, 74, 100, .92) 0%, rgba(36, 43, 60, .92) 100%);
   --vidrio-borde: linear-gradient(160deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, .02) 45%, rgba(0, 0, 0, .25));
@@ -1194,4 +1216,5 @@ textarea:focus, .fila input:focus, .formulario input:focus, input[type="search"]
 @media (prefers-reduced-motion: reduce) {
   .servicio, .barra svg { transition: none; }
   .barra a[aria-current] svg { transform: translateY(-10px); }
+}
 }

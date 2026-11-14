@@ -141,9 +141,13 @@ function agregarFrase(texto, hablante, respuesta) {
   icono.setAttribute("aria-hidden", "true");
   nivel.append(icono, `Riesgo ${ETIQUETAS[visible.nivel].toLowerCase()}`);
 
-  li.append(quien, p, nivel);
+  // Lo que dice la propia persona no lleva etiqueta de riesgo: parecería que la sospechosa es ella.
+  // El nivel de la conversación sigue arriba, en la tarjeta del búho.
+  const deQuienLlama = hablante !== "usuario";
+  li.append(quien, p);
+  if (deQuienLlama) li.append(nivel);
 
-  if (visible.senales.length) {
+  if (deQuienLlama && visible.senales.length) {
     const det = document.createElement("details");
     const sum = document.createElement("summary");
     sum.textContent = "¿Por qué?";
@@ -651,6 +655,44 @@ function pintarMensaje(r) {
   caja.classList.remove("oculto");
 }
 
+// ---- Chequeo rápido: tres preguntas de Sí o No para cualquier llamada, sin audio ----
+
+const PREGUNTAS_CHEQUEO = ["codigo", "plata", "presion"];
+
+async function chequear(ev) {
+  ev.preventDefault();
+  const form = $("#form-chequeo");
+  const error = $("#chequeo-error");
+  const respuestas = {};
+  for (const nombre of PREGUNTAS_CHEQUEO) {
+    const marcada = form.querySelector(`input[name="${nombre}"]:checked`);
+    if (!marcada) {
+      error.textContent = "Responde las tres preguntas. Si no sabes, toca No.";
+      form.querySelector(`input[name="${nombre}"]`).focus();
+      return;
+    }
+    respuestas[nombre] = marcada.value === "si";
+  }
+  error.textContent = "";
+  const boton = $("#chequear");
+  boton.disabled = true;
+  try {
+    const r = await api("/chequeo", { method: "POST", body: JSON.stringify(respuestas) });
+    const d = r.decision;
+    const caja = $("#chequeo-resultado");
+    caja.dataset.nivel = d.nivel;
+    $("#chequeo-nivel").textContent = d.nivel === "bajo" ? "Por ahora no veo señales" : `Riesgo ${ETIQUETAS[d.nivel].toLowerCase()}`;
+    // El mensaje sin el título en mayúsculas, que ya va en la cabeza
+    $("#chequeo-texto").textContent = d.mensaje.split(". ").slice(1).join(". ");
+    caja.classList.remove("oculto");
+    if (r.mostrar_aviso) mostrarAlerta(d);
+  } catch (e) {
+    error.textContent = e.message;
+  } finally {
+    boton.disabled = false;
+  }
+}
+
 async function revisarMensaje(ev) {
   ev.preventDefault();
   const texto = $("#texto-mensaje").value.trim();
@@ -737,6 +779,12 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarSugerencias();
   cargarCatalogo();
   $("#form-mensaje").addEventListener("submit", revisarMensaje);
+  $("#form-chequeo").addEventListener("submit", chequear);
+  // Al cambiar una respuesta, el resultado anterior deja de valer
+  $("#form-chequeo").addEventListener("change", () => {
+    $("#chequeo-resultado").classList.add("oculto");
+    $("#chequeo-error").textContent = "";
+  });
   $("#preparar-denuncia").addEventListener("click", prepararDenuncia);
   $("#copiar-denuncia").addEventListener("click", copiarDenuncia);
   $("#descargar-denuncia").addEventListener("click", descargarDenuncia);

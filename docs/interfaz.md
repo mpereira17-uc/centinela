@@ -2,7 +2,20 @@
 
 La interfaz se abre en el navegador del celular o del computador en `http://127.0.0.1:8000/` cuando el backend está encendido. Sirve para escribir una conversación frase por frase y ver el nivel de riesgo a medida que avanza. No escucha llamadas: solo analiza el texto que se escribe.
 
-![Ejemplo de estafa en el celular](capturas/movil-estafa.png)
+![Inicio en el celular](capturas/inicio-movil.png)
+
+## Chequeo de tres preguntas
+
+Android no deja que una app oiga una llamada telefónica del sistema, así que *Estoy en una llamada* empieza con tres preguntas de Sí o No que sirven con cualquier llamada, en el mismo celular y sin audio: si pidieron un código o datos de la tarjeta, si piden plata, ir al cajero o instalar algo, y si apuran, amenazan o piden secreto. `POST /chequeo` convierte cada "sí" en una señal del catálogo y calcula el nivel con las mismas reglas del motor (`calcular_nivel`); no guarda nada. Con riesgo alto o crítico aparece el mismo aviso de pantalla completa. Debajo siguen la opción de escribir frase por frase y el enlace al modo acompañante.
+
+![Chequeo durante una llamada](capturas/chequeo-movil.png)
+
+Otros ajustes de noviembre de 2026:
+
+- Las frases que dice la propia persona ya no llevan etiqueta de riesgo; el nivel de la conversación sigue en la tarjeta del búho.
+- El estilo Noche solo aplica con el celular en modo oscuro; en modo claro se ve el estilo blanco y azul.
+- El degradado eléctrico empieza en `#1877ad`: con `#34c8e8` el texto blanco tenía contraste 2:1; ahora pasa de 4,5:1 en todo el degradado.
+- *Más opciones* del inicio queda plegado, para que el inicio muestre solo lo principal.
 
 ## Qué tiene
 

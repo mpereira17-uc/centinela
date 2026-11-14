@@ -45,7 +45,7 @@
       <ul class="servicios">
         <li><a class="servicio" href="#conversar">
           <span class="servicio-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 15.5v2.6a1.8 1.8 0 0 1-2 1.8 17.6 17.6 0 0 1-7.6-2.7 17.3 17.3 0 0 1-5.3-5.3A17.6 17.6 0 0 1 2.4 4.2 1.8 1.8 0 0 1 4.2 2.4h2.6a1.8 1.8 0 0 1 1.8 1.5c.1.8.3 1.6.6 2.4a1.8 1.8 0 0 1-.4 1.9L7.7 9.3a14 14 0 0 0 5.3 5.3l1.1-1.1a1.8 1.8 0 0 1 1.9-.4c.8.3 1.6.5 2.4.6a1.8 1.8 0 0 1 1.6 1.8z"/><path d="M15 2.5a6.5 6.5 0 0 1 6.5 6.5M15 6a3 3 0 0 1 3 3"/></svg></span>
-          <strong>Estoy en una llamada</strong><small>Escribe lo que te dicen</small></a></li>
+          <strong>Estoy en una llamada</strong><small>3 preguntas, sin colgar</small></a></li>
         <li><a class="servicio" href="#mensaje">
           <span class="servicio-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.8A8 8 0 1 1 21 12z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></svg></span>
           <strong>Revisar un mensaje</strong><small>SMS, WhatsApp o correo</small></a></li>
@@ -70,7 +70,8 @@
         <a id="semana-inicio-practicar" class="boton-principal" href="/practica.html">Practicar esta</a>
       </section>
 
-      <h2 class="seccion-titulo">Más opciones</h2>
+      <details class="mas-opciones">
+      <summary><h2 class="seccion-titulo">Más opciones</h2></summary>
       <ul class="mas">
         <li><button type="button" data-ejemplo="estafa">
           <span class="mas-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span>
@@ -91,6 +92,7 @@
           <span class="mas-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></span>
           <span><strong>Instalar la app</strong><small>O pasarla a otra persona</small></span></a></li>
       </ul>
+      </details>
 
       <aside class="consejo" aria-label="Consejo">
         <img src="/buho/atento.svg" alt="" width="64" height="64">
@@ -122,6 +124,46 @@
         <a class="volver" href="#inicio" aria-label="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></a>
         <h2 id="conv-titulo" tabindex="-1">Estoy en una llamada</h2>
       </div>
+
+      <!-- Chequeo rápido: sirve con cualquier llamada, porque no necesita oír el audio -->
+      <section class="tarjeta chequeo" aria-labelledby="chequeo-titulo">
+        <h3 id="chequeo-titulo">Responde sin colgar</h3>
+        <p class="ayuda">Tres preguntas. Toca Sí o No según lo que te han dicho hasta ahora.</p>
+        <form id="form-chequeo" novalidate>
+          <fieldset class="pregunta-chequeo">
+            <legend>¿Te pidieron un código, una clave o datos de la tarjeta?</legend>
+            <div class="segmentos si-no">
+              <label><input type="radio" name="codigo" value="si"> Sí</label>
+              <label><input type="radio" name="codigo" value="no"> No</label>
+            </div>
+          </fieldset>
+          <fieldset class="pregunta-chequeo">
+            <legend>¿Te piden plata, ir al cajero o instalar una aplicación?</legend>
+            <div class="segmentos si-no">
+              <label><input type="radio" name="plata" value="si"> Sí</label>
+              <label><input type="radio" name="plata" value="no"> No</label>
+            </div>
+          </fieldset>
+          <fieldset class="pregunta-chequeo">
+            <legend>¿Te apuran, te amenazan o te piden no contarle a nadie?</legend>
+            <div class="segmentos si-no">
+              <label><input type="radio" name="presion" value="si"> Sí</label>
+              <label><input type="radio" name="presion" value="no"> No</label>
+            </div>
+          </fieldset>
+          <p id="chequeo-error" class="error" role="status"></p>
+          <div class="acciones">
+            <button type="submit" id="chequear" class="boton-principal boton-grande">Ver qué hago</button>
+          </div>
+        </form>
+        <div id="chequeo-resultado" class="resultado-chequeo oculto" role="status" aria-live="polite">
+          <p class="resultado-cabeza"><span class="nivel-icono" aria-hidden="true"></span><strong id="chequeo-nivel"></strong></p>
+          <p id="chequeo-texto"></p>
+        </div>
+        <p class="ayuda chequeo-altavoz">¿Tienes otro celular o un computador cerca? <a href="/acompanante.html">Que escuche la llamada por el altavoz</a>.</p>
+      </section>
+
+      <h3 class="seccion-titulo">O escribe lo que te dicen</h3>
 
       <section class="estado" aria-labelledby="estado-titulo">
         <h3 id="estado-titulo" class="visualmente-oculto">Nivel de riesgo actual</h3>

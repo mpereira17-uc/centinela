@@ -103,7 +103,18 @@ Los detalles y la decisión de usar la híbrida como estrategia visible están e
 
 ## Resultados en modo audio
 
-**Pendiente.** Este entorno no puede descargar los modelos de Whisper ni las voces de Piper, así que el modo audio se probó solo con voz y transcripción simuladas (`backend/tests/test_evaluacion.py`). Hay que correrlo en el portátil del proyecto con los comandos de arriba y agregar aquí la WER y los tiempos reales.
+Corrida del 14 de noviembre de 2026 en el portátil del proyecto, CPU, Whisper `base`, voz de quien llama `es_MX-claude-high` y de quien contesta `es_ES-davefx-medium`, las 372 llamadas ([informe](../datos/resultados/evaluacion-audio-todas-claude-high.md)). La síntesis tardó 5 minutos y la evaluación 15.
+
+| Estrategia | Detección texto | Detección audio | Falsas alertas audio | F1 audio |
+|---|---|---|---|---|
+| por_fragmento | 86 % | 35 % | 1 % | 52 % |
+| acumulacion | 93 % | 72 % | 4 % | 81 % |
+| clasificador | 100 % | 83 % | 1 % | 90 % |
+| hibrida | 100 % | 96 % | 5 % | 96 % |
+
+WER: **12,5 %**. La demora mediana es de 0,8 a 0,9 s después de la petición riesgosa.
+
+**Hallazgo:** los errores de transcripción caen justo en las palabras que buscan las reglas: "Nequi" sale "NECY", "Daviplata" sale "David Plata", "consignes" sale "consigues" y "dígitos" sale "tígitos". Por eso las reglas pierden mucho más que el clasificador, que no depende de una palabra exacta. Con audio la acumulación sigue superando a la decisión por fragmento (+36,0 pp en detección, IC 95 %: +18,0 a +53,6, por familias), y combinar reglas y clasificador (híbrida) es lo más robusto. Siguiente paso: darle a Whisper el vocabulario colombiano (bancos, billeteras, entidades) como `initial_prompt` o `hotwords`, validarlo solo con la partición de desarrollo y repetir la corrida, para no ajustar con los datos de prueba.
 
 ## Límites
 

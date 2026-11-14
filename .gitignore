@@ -16,3 +16,6 @@ modelos/
 
 .ipynb_checkpoints/
 .DS_Store
+
+# Voces de Piper descargadas (pesan ~60 MB cada una)
+backend/voces/

@@ -69,7 +69,7 @@ Para la sustentación, `python sustentacion.py` (desde la raíz) lo enciende con
 
 Abre http://localhost:8000/ para usar la interfaz, o http://localhost:8000/docs para probar la API directamente. Usa `localhost` y no `127.0.0.1`: las passkeys solo funcionan en el dominio configurado ([docs/registro.md](docs/registro.md)).
 
-![Centinela en el celular](docs/capturas/movil-estafa.png)
+<img src="docs/capturas/inicio-movil.png" alt="Inicio de Centinela" width="250"> <img src="docs/capturas/chequeo-movil.png" alt="Chequeo de tres preguntas durante una llamada" width="250"> <img src="docs/capturas/aviso-critico-movil.png" alt="Aviso crítico de pantalla completa" width="250">
 
 Para las pruebas:
 
