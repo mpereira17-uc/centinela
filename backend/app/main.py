@@ -1,11 +1,14 @@
 import logging
+import time
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, Response, UploadFile
 from fastapi.concurrency import run_in_threadpool
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
-from . import asistente, base_guiones, cuentas, desenlaces, directorio, historial, instalacion, mensajes, practica, reportes, senalizacion, voz, voz_clonada
+from . import asistente, base_guiones, comunidad, cuentas, desenlaces, directorio, historial, instalacion, mensajes, metricas, practica, presentador, reportes, senalizacion, voz, voz_clonada
 from .cuentas import Sesion, sesion_opcional
 from .config import ajustes
 from .modelos import (
@@ -25,7 +28,16 @@ from .transcripcion import whisper
 # Nunca se registra el texto de la conversación (modelo de amenazas, A8)
 log = logging.getLogger("centinela")
 
+@asynccontextmanager
+async def al_arrancar(_app: FastAPI):
+    # En la sustentación el modelo de voz se lee de una vez, para que la primera frase no espere
+    if ajustes.precargar_voz:
+        whisper.precargar_en_segundo_plano()
+    yield
+
+
 app = FastAPI(
+    lifespan=al_arrancar,
     title="Centinela",
     description="Prototipo de alertas de posible fraude conversacional en llamadas simuladas.",
     version="1.0.0",
@@ -83,6 +95,12 @@ def _categoria_de_llamada(llamada_id: str, usuario_id: str) -> str | None:
 reportes.categoria_de_llamada = _categoria_de_llamada
 
 
+@app.get("/transcripcion/estado")
+def estado_de_la_transcripcion():
+    """Si la voz está lista y cuánto tardó la última frase. No dice nada de lo que se dijo."""
+    return whisper.estado()
+
+
 @app.get("/salud")
 def salud():
     return {"estado": "ok", "estrategia_visible": ESTRATEGIA_VISIBLE}
@@ -106,6 +124,9 @@ def crear_llamada(entrada: NuevaLlamada | None = None, sesion: Sesion | None = D
         except reportes.NumeroInvalido as e:
             raise HTTPException(status_code=422, detail=str(e))
         llamada.numero_reportes, llamada.numero_estado, llamada.numero_ref = rep["reportes"], rep["estado"], rep["ref"]
+    if entrada and entrada.proyectar and presentador.activo():
+        llamada.proyectar, llamada.numero_en_pantalla = True, presentador.numerar()
+        presentador.publicar({"tipo": "inicio", "llamada": llamada.numero_en_pantalla, "modo": entrada.modo or "llamada"})
     if sesion and cuentas.tiene_permiso(sesion.usuario_id, "guardar_historial"):
         llamada.dueno, llamada.guardada = sesion.usuario_id, True
         historial.guardar_llamada(llamada)
@@ -120,7 +141,11 @@ def ver_llamada(llamada_id: str, sesion: Sesion | None = Depends(sesion_opcional
 
 @app.post("/llamadas/{llamada_id}/fragmentos")
 def agregar_fragmento(llamada_id: str, entrada: FragmentoEntrada, sesion: Sesion | None = Depends(sesion_opcional)):
-    return _procesar(_buscar(llamada_id, sesion), entrada)
+    inicio = time.perf_counter()
+    llamada = _buscar(llamada_id, sesion)
+    resultado = _procesar(llamada, entrada)
+    _medir(llamada, inicio, "texto", [resultado])
+    return resultado
 
 
 @app.post("/llamadas/{llamada_id}/desenlace", status_code=201)
@@ -132,6 +157,10 @@ def contar_desenlace(llamada_id: str, entrada: desenlaces.NuevoDesenlace, sesion
     nivel_max = desenlaces.nivel_maximo([d.nivel for d in visibles])
     llamada.desenlace = entrada.resultado
     desenlaces.guardar(nivel_max, llamada.aviso_visible, entrada.resultado)
+    if llamada.fragmentos:
+        metricas.contar_desenlace(llamada, entrada.resultado)
+    if llamada.proyectar:
+        presentador.publicar({"tipo": "desenlace", "llamada": llamada.numero_en_pantalla, "resultado": entrada.resultado})
     ids = {s.id for d in visibles for s in d.senales}
     return {"guardado": True, "nivel_max": nivel_max, "aviso": llamada.aviso_visible,
             "categoria_sugerida": desenlaces.categoria_por_senales(ids) if entrada.resultado in desenlaces.ES_ESTAFA else None}
@@ -154,6 +183,7 @@ async def agregar_audio(
 
     El audio se lee en memoria y se descarta al terminar; no se guarda.
     """
+    inicio = time.perf_counter()
     llamada = _buscar(llamada_id, sesion)
     segmentos = await _transcribir_subida(audio, consentimiento, llamada)
 
@@ -166,6 +196,8 @@ async def agregar_audio(
         )
         resultados.append(_procesar(llamada, entrada))
     log.info("llamada=%s audio_segmentos=%d", llamada.id, len(resultados))
+    if resultados:
+        _medir(llamada, inicio, "audio", resultados)
     return {"resultados": resultados, "mostrar_aviso": any(r["mostrar_aviso"] for r in resultados)}
 
 
@@ -278,6 +310,24 @@ def _procesar(llamada: Llamada, entrada: FragmentoEntrada) -> dict:
     return {"fragmento": fragmento, "mostrar_aviso": mostrar_aviso, "decision_visible": visible}
 
 
+def _medir(llamada: Llamada, inicio: float, origen: str, resultados: list[dict]):
+    """Cuánto tardó la respuesta, para las cifras del documento y la pantalla del presentador."""
+    segundos = round(time.perf_counter() - inicio, 3)
+    llamada.tiempos_respuesta.append(segundos)
+    try:
+        metricas.registrar(llamada, origen)
+    except Exception:  # las cifras nunca deben tumbar el análisis en vivo
+        log.warning("llamada=%s metricas=no_guardadas", llamada.id)
+    if llamada.proyectar:
+        for r in resultados:
+            f = r["fragmento"]
+            presentador.publicar({
+                "tipo": "frase", "llamada": llamada.numero_en_pantalla, "frase": len(llamada.fragmentos) - len(resultados) + resultados.index(r) + 1,
+                "texto": f.texto, "segundo": round(f.fin, 1), "respuesta": segundos, "aviso": r["mostrar_aviso"],
+                "decisiones": [{"estrategia": d.estrategia, "nivel": d.nivel, "alerta": d.alerta} for d in f.decisiones],
+            })
+
+
 def _buscar(llamada_id: str, sesion: Sesion | None) -> Llamada:
     llamada = llamadas.get(llamada_id)
     # Una llamada con dueño solo la ve su dueño; para los demás no existe (modelo de amenazas, A7)
@@ -287,15 +337,24 @@ def _buscar(llamada_id: str, sesion: Sesion | None) -> Llamada:
 
 
 app.include_router(base_guiones.router)
+app.include_router(comunidad.router)
 app.include_router(cuentas.router)
 app.include_router(desenlaces.router)
 app.include_router(directorio.router)
 app.include_router(historial.router)
 app.include_router(instalacion.router)
 app.include_router(mensajes.router)
+app.include_router(metricas.router)
 app.include_router(practica.router)
+app.include_router(presentador.router)
 app.include_router(reportes.router)
 app.include_router(senalizacion.router)
+
+
+@app.post("/compartir", include_in_schema=False)
+def compartir_sin_app():
+    """Destino de "Compartir con Centinela" cuando el service worker no lo atiende: no se lee el texto."""
+    return RedirectResponse("/?compartido=sin-texto#mensaje", status_code=303)
 
 
 # La interfaz se sirve al final para que las rutas de la API tengan prioridad

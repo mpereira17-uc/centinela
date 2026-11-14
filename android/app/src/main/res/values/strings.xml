@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Centinela</string>
+    <string name="ajustes_titulo">Ajustes de Centinela</string>
+    <string name="ajustes_intro">Centinela te avisa mientras el teléfono timbra si otras personas reportaron el número como estafa o como call center.</string>
+    <string name="servidor_titulo">Servidor de Centinela</string>
+    <string name="servidor_ejemplo">https://…trycloudflare.com</string>
+    <string name="servidor_ayuda">La dirección que aparece al encender Centinela, o la del enlace de la página de instalar. Debe empezar por https://.</string>
+    <string name="servidor_invalido">Escribe solo la dirección, empezando por https://</string>
+    <string name="servidor_sin_conexion">No pudimos conectar con esta dirección. Si reiniciaste el servidor, la dirección cambió: pega la dirección nueva y toca Guardar.</string>
+    <string name="guardar">Guardar</string>
+    <string name="filtro_titulo">Aviso de llamadas</string>
+    <string name="filtro_activo">Activo. Cuando te llame un número que no está en tus contactos, Centinela revisa sus reportes y te avisa si hay algo.</string>
+    <string name="filtro_inactivo">Inactivo. Actívalo y elige a Centinela como app de identificación de llamadas y spam.</string>
+    <string name="filtro_no_disponible">Este celular no permite apps de filtro de llamadas.</string>
+    <string name="activar_filtro">Activar el aviso de llamadas</string>
+    <string name="tarjeta_titulo">Tarjeta sobre la llamada</string>
+    <string name="tarjeta_activa">Activa. El aviso aparece encima de la pantalla de la llamada mientras timbra.</string>
+    <string name="tarjeta_inactiva">Para ver el aviso encima de la pantalla de la llamada, como un identificador de llamadas, permite que Centinela se muestre sobre otras apps. Sin esto, el aviso llega como notificación.</string>
+    <string name="activar_tarjeta">Permitir mostrar sobre la llamada</string>
+    <string name="tarjeta_franja">REPORTADO POR LA COMUNIDAD DE CENTINELA</string>
+    <string name="tarjeta_pie">Toca para ver detalles. Al colgar puedes contar cómo terminó.</string>
+    <string name="tarjeta_cerrar">Cerrar aviso</string>
+    <string name="aviso_hablado">Decir el aviso en voz alta y vibrar distinto</string>
+    <string name="aviso_hablado_ayuda">Si te llama un número que varias personas reportaron como estafa, el celular dice \"Cuidado: posible estafa\" mientras timbra y vibra con tres toques cortos. Con el celular en silencio o en No molestar no suena nada; en modo vibración solo vibra.</string>
+    <string name="silenciar">Silenciar el timbre de números con muchos reportes</string>
+    <string name="silenciar_ayuda">Esto no rechaza la llamada: sigue entrando y puedes contestar, porque un reporte puede estar equivocado.</string>
+    <string name="bloquear">Rechazar llamadas de estafas confirmadas</string>
+    <string name="bloquear_ayuda">Viene apagado. Si lo enciendes, Centinela rechaza las llamadas de números donde varias personas dicen que perdieron dinero o datos. Un solo reporte, la publicidad o los reportes que se contradicen nunca se rechazan. Cada llamada rechazada queda abajo para que la revises.</string>
+    <string name="bloquear_confirmar_titulo">¿Rechazar estas llamadas?</string>
+    <string name="bloquear_confirmar">Un reporte puede estar equivocado: si alguien que conoces llama desde un número reportado, su llamada no va a timbrar. Siempre puedes revisar las llamadas rechazadas y permitir el número.</string>
+    <string name="bloquear_si">Sí, rechazarlas</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="rechazadas_titulo">Llamadas rechazadas</string>
+    <string name="rechazadas_vacio">Todavía no se ha rechazado ninguna llamada.</string>
+    <string name="permitir">Permitir este número</string>
+    <string name="permitido">Permitido: sus llamadas vuelven a entrar.</string>
+    <string name="borrar_rechazadas">Borrar el registro</string>
+    <string name="limites_titulo">Lo que Centinela no hace</string>
+    <string name="limites">No oye tus llamadas telefónicas: Android no lo permite a ninguna app. Solo recibe el número de quien llama, y solo si no está en tus contactos. No lee tu agenda ni guarda tus llamadas.</string>
+    <string name="abrir">Abrir Centinela</string>
+    <string name="compartir">Revisar con Centinela</string>
+    <string name="atajo_ajustes">Ajustes</string>
+</resources>

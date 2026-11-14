@@ -1,0 +1,15 @@
+<!-- Silueta del búho para el ícono temático de Android 13+: los ojos van recortados -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:scaleX="0.75"
+        android:scaleY="0.75"
+        android:translateX="16.5"
+        android:translateY="16">
+        <path android:fillColor="#FFFFFFFF" android:fillType="evenOdd" android:pathData="M50,27C43,27 37,26 33,24Q30,22 28,17.5Q26.5,22 24.5,24Q22,19.5 19.5,14Q16,23 17,33Q15,47 17,61Q21,85 50,87Q79,85 83,61Q85,47 83,33Q84,23 80.5,14Q78,19.5 75.5,24Q73.5,22 72,17.5Q70,22 67,24C63,26 57,27 50,27ZM26,56a11.5,11.5 0,1 0,23 0a11.5,11.5 0,1 0,-23 0ZM51,56a11.5,11.5 0,1 0,23 0a11.5,11.5 0,1 0,-23 0Z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M31.3,56a6.2,6.2 0,1 0,12.4 0a6.2,6.2 0,1 0,-12.4 0ZM56.3,56a6.2,6.2 0,1 0,12.4 0a6.2,6.2 0,1 0,-12.4 0Z" />
+    </group>
+</vector>

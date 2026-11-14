@@ -15,4 +15,8 @@ Pantalla **Ayuda > Contacto de confianza**. La persona escoge a alguien (un hijo
 
 ## En la app Android
 
-Con la app instalada se podría ofrecer, con permiso explícito, una notificación al contacto que también tenga Centinela. Eso necesita un servidor de notificaciones y el consentimiento de los dos, y queda para después de la beta.
+El aviso de una llamada con varios reportes de estafa ("Posible estafa" o "Probable estafa") trae un botón **Llamar a …** con el contacto guardado. Abre el marcador del celular con el número escrito y la persona toca llamar: la app no pide permiso de llamadas ni llama sola. Así la persona puede no contestar, o colgar, y preguntarle a alguien de confianza antes de hacer nada.
+
+- La página le pasa el nombre y el número a la app por un canal que solo existe dentro de la app y solo para la dirección del servidor configurado (`CentinelaApp`, con `WebViewCompat.addWebMessageListener`). La app vuelve a validar el celular y recorta el nombre a 30 caracteres.
+- Quedan en las preferencias privadas de la app (sin copia de seguridad en la nube) y se borran al tocar **Quitar** en la página.
+- Avisarle al contacto con una notificación en su propio celular necesitaría un servidor de notificaciones y el consentimiento de los dos; queda para después de la beta.

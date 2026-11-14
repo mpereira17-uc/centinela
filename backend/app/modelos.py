@@ -71,10 +71,20 @@ class Llamada(BaseModel):
     desenlace: str | None = Field(default=None, exclude=True)
     # El detector acústico experimental marcó el audio; una vez marcado no se desmarca
     voz_sintetica: bool = Field(default=False, exclude=True)
+    # Se ve en la pantalla del presentador (solo si la persona lo marcó y la sustentación la activó)
+    proyectar: bool = Field(default=False, exclude=True)
+    numero_en_pantalla: int | None = Field(default=None, exclude=True)
+    # Fila de las cifras del documento: identificador aleatorio aparte, que no se une con el historial
+    metrica_id: str = Field(default_factory=lambda: uuid4().hex, exclude=True)
+    # Segundos que tardó el servidor en responder cada envío (transcripción y análisis)
+    tiempos_respuesta: list[float] = Field(default_factory=list, exclude=True)
 
 
 class NuevaLlamada(BaseModel):
     numero: str | None = Field(default=None, max_length=25)
+    proyectar: bool = False
+    # Para la pantalla del presentador: "acompanante" o "llamada"
+    modo: Literal["acompanante", "llamada"] | None = None
 
 
 class ConsultaAsistente(BaseModel):

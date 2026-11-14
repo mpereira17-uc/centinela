@@ -5,11 +5,10 @@
 
 const $ = (sel) => document.querySelector(sel);
 const ETIQUETAS = { bajo: "Bajo", moderado: "Moderado", alto: "Alto", critico: "Crítico" };
-const SEGUNDOS_POR_TROZO = 6;
 
 const estado = {
-  micro: null, llamadaId: null, numero: "", cola: Promise.resolve(), grabando: false, recorder: null,
-  pantalla: null, terminada: false,
+  micro: null, llamadaId: null, numero: "", cola: Promise.resolve(), grabando: false, escucha: null,
+  pantalla: null, terminada: false, oyendo: false, resultados: [],
 };
 
 function error(texto) {
@@ -27,7 +26,7 @@ async function json(r) {
 async function empezar() {
   error("");
   if (!$("#consentimiento").checked) { error("Marca la casilla de consentimiento para continuar."); $("#consentimiento").focus(); return; }
-  if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder !== "function") {
+  if (!navigator.mediaDevices?.getUserMedia || !window.CentinelaEscucha?.disponible()) {
     error("Este navegador no permite usar el micrófono. Prueba con Chrome o Safari actualizados.");
     return;
   }
@@ -51,6 +50,7 @@ async function empezar() {
   $("#preparar").classList.add("oculto");
   $("#en-llamada").classList.remove("oculto");
   $("#estado-llamada").textContent = "Escuchando. Deja este dispositivo cerca del altavoz.";
+  $("#nivel").classList.add("escuchando"); // el búho pone cara de atento mientras escucha
   mantenerPantalla();
   escuchar(estado.micro);
   $("#colgar").focus();
@@ -59,13 +59,14 @@ async function empezar() {
 async function crearLlamada() {
   const numero = $("#numero-llamada").value.trim();
   estado.numero = numero;
+  const base = { modo: "acompanante", proyectar: Boolean(window.Centinela?.quiereProyectar()) };
   let r = await fetch("/llamadas", {
-    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(numero ? { numero } : {}),
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(numero ? { ...base, numero } : base),
   });
   if (r.status === 422 && numero) {
     // Un número mal escrito no debe impedir escuchar
     estado.numero = "";
-    r = await fetch("/llamadas", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+    r = await fetch("/llamadas", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(base) });
   }
   const llamada = await json(r);
   estado.llamadaId = llamada.id;
@@ -73,10 +74,18 @@ async function crearLlamada() {
 }
 
 async function mantenerPantalla() {
-  // Que la pantalla no se apague mientras escucha
+  // Que la pantalla no se apague mientras escucha: si se apaga, el celular deja de oír
   try {
     estado.pantalla = await navigator.wakeLock?.request("screen");
-  } catch { /* sin bloqueo de pantalla; se sigue escuchando */ }
+  } catch { /* sin bloqueo de pantalla en el navegador; en la app de Android lo hace la app */ }
+  pantallaEnLaApp(true);
+}
+
+function pantallaEnLaApp(encendida) {
+  // Dentro de la app de Android, la página le pide a la app que no apague la pantalla mientras escucha
+  const app = window.CentinelaApp;
+  if (!app || typeof app.postMessage !== "function") return;
+  try { app.postMessage(JSON.stringify({ tipo: "pantalla", encendida })); } catch { /* sigue sin eso */ }
 }
 
 // ---- Escuchar por trozos ----
@@ -88,31 +97,30 @@ function encolar(tarea) {
 
 function escuchar(flujo) {
   estado.grabando = true;
-  $("#escucha").textContent = "Centinela analiza lo que oye por partes de unos segundos.";
-  const tipo = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4", "audio/ogg"].find((t) => MediaRecorder.isTypeSupported(t)) || "";
+  $("#escucha").textContent = "Centinela analiza cada frase apenas quien habla hace una pausa.";
+  estado.escucha = window.CentinelaEscucha.escuchar(flujo, {
+    alTrozo: (audio) => encolar(() => analizarAudio(audio)),
+    alVolumen: mostrarVolumen,
+    alCambiarModo: () => { $("#escucha").textContent = "Centinela analiza lo que oye por partes de unos segundos."; },
+  });
+}
 
-  // Se graba por trozos completos (parar y volver a empezar) para que cada uno sea un archivo válido
-  const grabarTrozo = () => {
-    if (!estado.grabando) return;
-    const partes = [];
-    const recorder = new MediaRecorder(flujo, tipo ? { mimeType: tipo } : undefined);
-    estado.recorder = recorder;
-    recorder.addEventListener("dataavailable", (e) => { if (e.data.size) partes.push(e.data); });
-    recorder.addEventListener("stop", () => {
-      const audio = new Blob(partes, { type: recorder.mimeType || "audio/webm" });
-      if (audio.size > 2000) encolar(() => analizarAudio(audio));
-      grabarTrozo();
-    });
-    recorder.start();
-    setTimeout(() => { if (recorder.state === "recording") recorder.stop(); }, SEGUNDOS_POR_TROZO * 1000);
-  };
-  grabarTrozo();
+function mostrarVolumen(volumen, hayVoz) {
+  // Muestra que el micrófono sí oye el altavoz; si la barra no se mueve, hay que acercarlo o subir el volumen
+  const medidor = $("#medidor");
+  medidor.style.setProperty("--volumen", volumen.toFixed(2));
+  medidor.classList.toggle("voz", hayVoz);
+  if (hayVoz && !estado.oyendo && !estado.terminada) {
+    // Se anuncia una sola vez, para no repetirlo en cada pausa
+    estado.oyendo = true;
+    $("#estado-llamada").textContent = "Oigo la llamada. Te aviso si algo suena a estafa.";
+  }
 }
 
 async function analizarAudio(audio) {
   if (!estado.grabando) return;
   const datos = new FormData();
-  datos.append("audio", audio, audio.type.includes("mp4") ? "trozo.mp4" : "trozo.webm");
+  datos.append("audio", audio, window.CentinelaEscucha.nombreDeArchivo(audio));
   datos.append("consentimiento", "true");
   datos.append("hablante", "altavoz");
   const r = await fetch(`/llamadas/${estado.llamadaId}/audio`, { method: "POST", body: datos });
@@ -128,14 +136,16 @@ async function analizarAudio(audio) {
 
 function detener() {
   estado.grabando = false;
-  if (estado.recorder && estado.recorder.state === "recording") estado.recorder.stop();
+  estado.escucha?.detener();
   if (estado.micro) for (const p of estado.micro.getTracks()) p.stop();
   estado.pantalla?.release().catch(() => {});
+  pantallaEnLaApp(false);
 }
 
 // ---- Mostrar lo que se oyó ----
 
 function mostrarResultado(r) {
+  estado.resultados.push(r);
   const d = r.decision_visible;
   const li = document.createElement("li");
   li.className = "frase";
@@ -177,6 +187,9 @@ function mostrarAlerta(d) {
   window.Centinela?.completarAviso(alerta, d, resto[0]);
   alerta.classList.remove("oculto");
   alerta.focus();
+  // Lo dice en voz alta; mientras habla no se escucha, para no analizar su propia voz
+  const ms = window.Centinela?.decirAviso(d) || 0;
+  if (ms) estado.escucha?.silenciar(ms);
 }
 
 // ---- Terminar ----
@@ -186,13 +199,15 @@ function terminar() {
   estado.terminada = true;
   detener();
   $("#estado-llamada").textContent = "Centinela dejó de escuchar.";
+  $("#nivel").classList.remove("escuchando");
   $("#colgar").classList.add("oculto");
   const otra = document.createElement("a");
   otra.href = "/acompanante.html";
   otra.textContent = "Escuchar otra llamada";
   $("#compartir").replaceChildren(otra);
+  window.Centinela?.pintarResumen($("#resumen"), estado.resultados);
   $("#desenlace").classList.remove("oculto");
-  $("#desenlace").scrollIntoView({ block: "start" });
+  $("#resumen").scrollIntoView({ block: "start" });
 }
 
 // ---- ¿Cómo terminó? (un toque al terminar) ----
@@ -247,9 +262,20 @@ async function reportarNumero(resultado, salida) {
   }
 }
 
+// La casilla de mostrar la llamada en el video beam solo aparece si la sustentación encendió esa pantalla
+async function ofrecerProyectar() {
+  try {
+    const r = await fetch("/presentador/estado");
+    if (r.ok && (await r.json()).activo) $("#caja-proyectar").classList.remove("oculto");
+  } catch { /* sin pantalla del presentador */ }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  ofrecerProyectar();
   $("#empezar").addEventListener("click", empezar);
   $("#colgar").addEventListener("click", terminar);
+  // "Cuelgo y verifico": la llamada se cuelga en el otro celular; aquí se deja de escuchar
+  $("#alerta").addEventListener("centinela:decision", (e) => { if (e.detail === "cuelgo") terminar(); });
   $("#cerrar-alerta").addEventListener("click", () => $("#alerta").classList.add("oculto"));
   document.querySelectorAll("#desenlace [data-resultado]").forEach((b) => b.addEventListener("click", () => contarDesenlace(b.dataset.resultado)));
   // Al volver a la app, el bloqueo de pantalla se pierde y se pide de nuevo

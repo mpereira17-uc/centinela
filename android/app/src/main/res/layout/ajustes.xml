@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/raiz"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/fondo"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            style="@style/Titulo"
+            android:text="@string/ajustes_titulo" />
+
+        <TextView
+            style="@style/Texto"
+            android:text="@string/ajustes_intro" />
+
+        <TextView
+            style="@style/Subtitulo"
+            android:text="@string/servidor_titulo" />
+
+        <EditText
+            android:id="@+id/servidor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/servidor_ejemplo"
+            android:importantForAutofill="no"
+            android:inputType="textUri"
+            android:minHeight="48dp" />
+
+        <TextView
+            style="@style/Ayuda"
+            android:text="@string/servidor_ayuda" />
+
+        <Button
+            android:id="@+id/guardar"
+            style="@style/Boton"
+            android:text="@string/guardar" />
+
+        <TextView
+            style="@style/Subtitulo"
+            android:text="@string/filtro_titulo" />
+
+        <TextView
+            android:id="@+id/estado_filtro"
+            style="@style/Texto" />
+
+        <Button
+            android:id="@+id/activar_filtro"
+            style="@style/Boton"
+            android:text="@string/activar_filtro" />
+
+        <TextView
+            style="@style/Subtitulo"
+            android:text="@string/tarjeta_titulo" />
+
+        <TextView
+            android:id="@+id/estado_tarjeta"
+            style="@style/Texto" />
+
+        <Button
+            android:id="@+id/activar_tarjeta"
+            style="@style/Boton"
+            android:text="@string/activar_tarjeta" />
+
+        <Switch
+            android:id="@+id/aviso_hablado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:minHeight="48dp"
+            android:text="@string/aviso_hablado"
+            android:textSize="16sp" />
+
+        <TextView
+            style="@style/Ayuda"
+            android:text="@string/aviso_hablado_ayuda" />
+
+        <Switch
+            android:id="@+id/silenciar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:minHeight="48dp"
+            android:text="@string/silenciar"
+            android:textSize="16sp" />
+
+        <TextView
+            style="@style/Ayuda"
+            android:text="@string/silenciar_ayuda" />
+
+        <Switch
+            android:id="@+id/bloquear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:minHeight="48dp"
+            android:text="@string/bloquear"
+            android:textSize="16sp" />
+
+        <TextView
+            style="@style/Ayuda"
+            android:text="@string/bloquear_ayuda" />
+
+        <LinearLayout
+            android:id="@+id/seccion_rechazadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Subtitulo"
+                android:text="@string/rechazadas_titulo" />
+
+            <TextView
+                android:id="@+id/rechazadas_vacio"
+                style="@style/Ayuda"
+                android:text="@string/rechazadas_vacio" />
+
+            <LinearLayout
+                android:id="@+id/lista_rechazadas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <Button
+                android:id="@+id/borrar_rechazadas"
+                style="@style/Boton"
+                android:text="@string/borrar_rechazadas" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/Subtitulo"
+            android:text="@string/limites_titulo" />
+
+        <TextView
+            style="@style/Texto"
+            android:text="@string/limites" />
+
+        <Button
+            android:id="@+id/abrir"
+            style="@style/Boton"
+            android:layout_marginTop="24dp"
+            android:text="@string/abrir" />
+    </LinearLayout>
+</ScrollView>

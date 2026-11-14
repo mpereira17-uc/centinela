@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Identidad de Centinela: blanco con azul; el ámbar solo para los avisos -->
+    <color name="marino">#0B2A5B</color>
+    <color name="primario">#1D5BD6</color>
+    <color name="ambar">#F5A524</color>
+    <color name="fondo">#FFFFFF</color>
+    <color name="texto">#0B2A5B</color>
+    <color name="texto_suave">#4B5F80</color>
+    <color name="celeste">#7FB0FF</color>
+    <!-- Estilo Noche de la interfaz web: barras del sistema en azul pizarra -->
+    <color name="barra">#1F2533</color>
+</resources>

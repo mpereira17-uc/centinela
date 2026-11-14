@@ -170,9 +170,11 @@ function mostrarError(texto) {
 
 function ocupado(si) {
   estado.ocupado = si;
-  for (const b of document.querySelectorAll("button")) b.disabled = si;
+  // Los botones del aviso no se tocan: tienen su propia pausa y deben poder usarse mientras sigue el análisis
+  for (const b of document.querySelectorAll("button")) if (!b.closest("#alerta")) b.disabled = si;
   $("#analizar-texto").textContent = si ? "Analizando…" : "Analizar frase";
   $("#analizando").classList.toggle("oculto", !si);
+  $("#nivel").classList.toggle("escuchando", si); // el búho pone cara de atento mientras analiza
 }
 
 async function procesar(texto, hablante) {
@@ -206,11 +208,12 @@ async function alEnviar(evento) {
   }
 }
 
-async function correrEjemplo(nombre) {
+async function correrEjemplo(nombre, boton) {
   if (estado.ocupado) return;
+  // El ejemplo se ve en la pantalla "Estoy en una llamada", aunque se pida desde el inicio
+  if (!$("#conversar").contains(boton)) location.hash = "conversar";
   mostrarError("");
   ocupado(true);
-  const boton = document.querySelector(`[data-ejemplo="${nombre}"]`);
   boton.classList.add("reproduciendo");
   try {
     await nuevaConversacion();
@@ -698,7 +701,7 @@ document.addEventListener("DOMContentLoaded", () => {
     $("#texto").focus();
   });
   for (const b of document.querySelectorAll("[data-ejemplo]")) {
-    b.addEventListener("click", () => correrEjemplo(b.dataset.ejemplo));
+    b.addEventListener("click", () => correrEjemplo(b.dataset.ejemplo, b));
   }
   $("#consultar-numero").addEventListener("click", consultarNumero);
   $("#form-reporte").addEventListener("submit", enviarReporte);
@@ -737,4 +740,99 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#preparar-denuncia").addEventListener("click", prepararDenuncia);
   $("#copiar-denuncia").addEventListener("click", copiarDenuncia);
   $("#descargar-denuncia").addEventListener("click", descargarDenuncia);
+  mostrarConsejo();
+  mostrarEstafaDeLaSemana();
+  abrirNumeroDeLaApp();
+  recibirCompartido();
 });
+
+// Un consejo corto distinto cada vez que se abre el inicio
+const CONSEJOS = [
+  "Ningún banco te pide códigos ni claves por teléfono. Si te los piden, cuelga.",
+  "Si te dicen que es urgente y que no cuelgues, desconfía: la prisa es parte de la estafa.",
+  "¿Dicen que son de una entidad? Cuelga y llama tú al número oficial.",
+  "Un familiar que pide plata con afán desde un número nuevo: llámalo al número de siempre.",
+  "No instales aplicaciones que te pidan por teléfono. Con ellas pueden ver tu celular.",
+];
+
+function mostrarConsejo() {
+  $("#consejo-texto").textContent = CONSEJOS[Math.floor(Math.random() * CONSEJOS.length)];
+}
+
+// La estafa de la semana: una modalidad real en tres líneas, con un botón para practicarla
+async function mostrarEstafaDeLaSemana() {
+  try {
+    const r = await fetch("/practica/semana");
+    if (!r.ok) return;
+    const s = await r.json();
+    $("#semana-inicio-titulo").textContent = s.titulo;
+    $("#semana-inicio-lineas").replaceChildren(...s.lineas.map((l) => {
+      const li = document.createElement("li");
+      li.textContent = l;
+      return li;
+    }));
+    const a = $("#semana-inicio-practicar");
+    a.href = `/practica.html?nivel=${encodeURIComponent(s.nivel)}`;
+    a.textContent = "Practicar esta";
+    $("#semana-inicio").classList.remove("oculto");
+  } catch { /* sin conexión: el inicio funciona igual sin la tarjeta */ }
+}
+
+// La app de Android abre /?numero=…#numero-titulo desde el aviso de una llamada entrante
+function abrirNumeroDeLaApp() {
+  const numero = new URLSearchParams(location.search).get("numero");
+  if (!numero) return;
+  if (!location.hash) location.hash = "numero-titulo";
+  $("#numero").value = numero.slice(0, 25);
+  $("#form-reporte").closest("details").open = true;
+  consultarNumero();
+}
+
+// Compartir con Centinela: un mensaje compartido desde WhatsApp, Mensajes o el correo llega a "Revisar un
+// mensaje" y se revisa solo. El texto nunca viaja en la dirección: la app de Android lo entrega por su canal
+// (?compartido=app) y la app instalable lo deja un momento en este celular (?compartido=1, ver sw.js).
+async function recibirCompartido() {
+  const origen = new URLSearchParams(location.search).get("compartido");
+  if (!origen) return;
+  // Que recargar o volver no lo pida de nuevo
+  history.replaceState(null, "", "/#mensaje");
+  const texto = (origen === "app" ? await pedirleALaApp() : origen === "1" ? await leerCompartido() : "").trim();
+  if (!texto) {
+    $("#mensaje-error").textContent = "No nos llegó el mensaje. Cópialo y pégalo aquí.";
+    return;
+  }
+  $("#texto-mensaje").value = texto.slice(0, 2000);
+  await revisarMensaje(new Event("submit"));
+  // Lo primero que se ve es la respuesta
+  const resultado = $("#msj-resultado");
+  if (!resultado.classList.contains("oculto")) resultado.scrollIntoView({ block: "start", behavior: "smooth" });
+}
+
+function pedirleALaApp() {
+  const app = window.CentinelaApp;
+  if (!app || typeof app.postMessage !== "function") return Promise.resolve("");
+  return new Promise((resolver) => {
+    const plazo = setTimeout(() => resolver(""), 3000);
+    function alRecibir(ev) {
+      let m;
+      try { m = JSON.parse(ev.data); } catch { return; }
+      if (!m || m.tipo !== "compartido") return;
+      clearTimeout(plazo);
+      app.removeEventListener("message", alRecibir);
+      resolver(typeof m.texto === "string" ? m.texto : "");
+    }
+    app.addEventListener("message", alRecibir);
+    app.postMessage(JSON.stringify({ tipo: "pedir-compartido" }));
+  });
+}
+
+async function leerCompartido() {
+  try {
+    const cache = await caches.open("centinela-compartido");
+    const r = await cache.match("/compartido");
+    await caches.delete("centinela-compartido");
+    return r ? await r.text() : "";
+  } catch {
+    return "";
+  }
+}
